@@ -24,8 +24,8 @@
 
     <!-- Navigation Bar-->
     <header id="topnav">
-        @include ('./layouts/topbar')
-        @include ('./layouts/navbar')
+        @include('./layouts/topbar')
+        @include('./layouts/navbar')
     </header>
     <!-- End Navigation Bar-->
 
@@ -64,6 +64,6 @@
     <script src="/js/jquery.slimscroll.js"></script>
     <script src="/js/jquery.nicescroll.js"></script>
     <script src="/js/jquery.scrollTo.min.js"></script>
-    <!-- <script src="/pages/dashborad.js"></script> -->
+    {{--<script src="/pages/dashborad.js"></script>--}}
 </body>
 </html>

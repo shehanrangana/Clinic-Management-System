@@ -11,27 +11,37 @@
 |
 */
 
+// Admin routes
 Route::get('/admin', function () {
-    return view('./admin/main');
+    return view('./admin/dashboard');
 });
 
+Route::get('/admin/user_register', function () {
+    return view('./admin/user_register');
+});
+
+// Reception routes
 Route::get('/recept', function() {
-    return view('./recept/main');
+    return view('./recept/dashboard');
 });
 
+// Doctor routes
 Route::get('/doctor', function() {
-    return view('./doctor/main');
+    return view('./doctor/dashboard');
 });
 
+// Nurse routes
 Route::get('/nurse', function() {
-    return view('./nurse/main');
+    return view('./nurse/dashboard');
 });
 
+// Lab assistant routes
 Route::get('/lab', function() {
-    return view('./lab/main');
+    return view('./lab/dashboard');
 });
 
+// Pharmacy routes
 Route::get('/pharmacy', function() {
-    return view('./pharmacy/main');
+    return view('./pharmacy/dashboard');
 });
 

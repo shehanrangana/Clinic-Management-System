@@ -58,12 +58,12 @@
     <!-- End Footer -->
 
     <!-- jQuery  -->
-    <script src="/js/jquery.min.js"></script>
+    <!-- <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.slimscroll.js"></script>
     <script src="/js/jquery.nicescroll.js"></script>
     <script src="/js/jquery.scrollTo.min.js"></script>
-    {{--<script src="/pages/dashborad.js"></script>--}}
+    <script src="/pages/dashborad.js"></script> -->
 </body>
 </html>

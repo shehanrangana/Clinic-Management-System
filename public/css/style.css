@@ -2470,12 +2470,13 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  text-align: center;
+  text-align: -webkit-center;
 }
 
 #topnav .navigation-menu > li {
-  display: inline-block;
+  display: table-cell;
   position: relative;
+  /* width: 250px; */
 }
 
 #topnav .navigation-menu > li > a {

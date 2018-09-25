@@ -45,3 +45,6 @@ Route::get('/pharmacy', function() {
     return view('./pharmacy/dashboard');
 });
 
+
+Route::post('/storeItem', 'MainController@storeItem');
+

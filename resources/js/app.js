@@ -16,7 +16,15 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('user-register', require('./components/User_Register.vue'));
 
-const app = new Vue({
-    el: '#app',
+// Components of admin
+const admin_dashboard = new Vue({
+    el: '#admin_dashboard',
 });
+
+const user_register = new Vue({
+    el: '#user_register',
+});
+
+

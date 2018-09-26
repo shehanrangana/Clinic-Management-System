@@ -47533,6 +47533,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -47541,16 +47570,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            newItem: { 'name': '', 'age': '', 'profession': '' },
-            hasError: true,
-            date: '',
+            newUser: { 'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': '' },
+
+            // setup calander
             lang: {
                 days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                 months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
                 placeholder: {
-                    date: 'Select Date',
-                    dateRange: 'Select Date Range'
+                    date: 'Select Date'
                 }
             }
         };
@@ -47561,9 +47589,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createItem: function createItem() {
             var input = this.newItem;
             if (input['name'] == '' || input['age'] == '' || input['profession'] == '') {
-                this.hasError = false;
+                // this.hasError = false
             } else {
-                this.hasError = true;
+                // this.hasError = true;
                 axios.post('/storeItem', input).then(function (response) {});
             }
         }
@@ -47584,28 +47612,99 @@ var render = function() {
     ]),
     _c("p"),
     _c("form", [
-      _vm._m(0),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newUser.name,
+              expression: "newUser.name"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "name",
+            name: "name",
+            placeholder: "Enter name"
+          },
+          domProps: { value: _vm.newUser.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.newUser, "name", $event.target.value)
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _vm._m(1),
+        _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "gender" } }, [_vm._v("Gender")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newUser.gender,
+                    expression: "newUser.gender"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "gender", name: "gender" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.newUser,
+                      "gender",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", [_vm._v("Male")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Female")])
+              ]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col" }, [
           _c(
             "div",
             { staticClass: "form-group" },
             [
-              _c("label", { attrs: { for: "name" } }, [_vm._v("Birthday")]),
+              _c("label", { attrs: { for: "birthday" } }, [_vm._v("Birthday")]),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
               _c("date-picker", {
-                attrs: { lang: _vm.lang },
+                attrs: { lang: _vm.lang, name: "birthday" },
                 model: {
-                  value: _vm.date,
+                  value: _vm.newUser.birthday,
                   callback: function($$v) {
-                    _vm.date = $$v
+                    _vm.$set(_vm.newUser, "birthday", $$v)
                   },
-                  expression: "date"
+                  expression: "newUser.birthday"
                 }
               })
             ],
@@ -47614,13 +47713,234 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(2),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "email" } }, [_vm._v("Email address")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newUser.email,
+              expression: "newUser.email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "email",
+            id: "email",
+            name: "email",
+            placeholder: "Enter email"
+          },
+          domProps: { value: _vm.newUser.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.newUser, "email", $event.target.value)
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
-      _vm._m(3),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "contact_no" } }, [
+          _vm._v("Contact number")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newUser.contact_no,
+              expression: "newUser.contact_no"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "tel",
+            id: "contact_no",
+            name: "contact_no",
+            placeholder: "Enter contact number"
+          },
+          domProps: { value: _vm.newUser.contact_no },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.newUser, "contact_no", $event.target.value)
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
-      _vm._m(4),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "user_role" } }, [_vm._v("Role")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newUser.user_role,
+                    expression: "newUser.user_role"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "user_role", name: "user_role" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.newUser,
+                      "user_role",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", [_vm._v("Admin")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Receptionist")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Doctor")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Nurse")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Lab Assistant")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Pharmacist")])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.newUser.user_role == "Admin" || _vm.newUser.user_role == "Doctor"
+          ? _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "slmc_number" } }, [
+                  _vm._v("SLMC Registration number")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newUser.slmc_number,
+                      expression: "newUser.slmc_number"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "slmc_number",
+                    name: "slmc_number",
+                    placeholder: "Enter SLMC reg. no"
+                  },
+                  domProps: { value: _vm.newUser.slmc_number },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.newUser, "slmc_number", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          : _vm._e()
+      ]),
       _vm._v(" "),
-      _vm._m(5),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "qualification" } }, [
+          _vm._v("Qualification")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newUser.qualification,
+                expression: "newUser.qualification"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { id: "qualification", name: "qualification" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.newUser,
+                  "qualification",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          [
+            _vm.newUser.user_role == "Admin" ||
+            _vm.newUser.user_role == "Doctor"
+              ? [
+                  _c("option", [_vm._v("MBBS")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("MD")])
+                ]
+              : _vm.newUser.user_role == "Receptionist"
+                ? [
+                    _c("option", [_vm._v("Receptionist qualification 1")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Receptionist qualification 2")])
+                  ]
+                : _vm.newUser.user_role == "Nurse"
+                  ? [
+                      _c("option", [_vm._v("Nurse qualification 1")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("Nurse qualification 2")])
+                    ]
+                  : _vm.newUser.user_role == "Lab Assistant"
+                    ? [
+                        _c("option", [_vm._v("Lab Assistant qualification 1")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("Lab Assistant qualification 2")])
+                      ]
+                    : _vm.newUser.user_role == "Pharmacist"
+                      ? [
+                          _c("option", [_vm._v("Pharmacist qualification 1")]),
+                          _vm._v(" "),
+                          _c("option", [_vm._v("Pharmacist qualification 2")])
+                        ]
+                      : _vm._e()
+          ],
+          2
+        )
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -47630,103 +47950,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", id: "name", placeholder: "Enter name" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "gender" } }, [_vm._v("Gender")]),
-        _vm._v(" "),
-        _c("select", { staticClass: "form-control", attrs: { id: "gender" } }, [
-          _c("option", [_vm._v("Male")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("Female")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "email" } }, [_vm._v("Email address")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "email", id: "email", placeholder: "Enter email" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "contact_no" } }, [_vm._v("Contact number")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "tel",
-          id: "contact_no",
-          placeholder: "Enter contact number"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "role" } }, [_vm._v("Role")]),
-      _vm._v(" "),
-      _c("select", { staticClass: "form-control", attrs: { id: "role" } }, [
-        _c("option", [_vm._v("Admin")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Receptionist")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Doctor")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Nurse")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Lab Assistant")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("Pharmacy")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "role" } }, [_vm._v("Degree")]),
-      _vm._v(" "),
-      _c("select", { staticClass: "form-control", attrs: { id: "role" } }, [
-        _c("option", [_vm._v("MBBS")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("MD")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

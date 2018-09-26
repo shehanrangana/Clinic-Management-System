@@ -1,4 +1,5 @@
 
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -26,5 +27,6 @@ const admin_dashboard = new Vue({
 const user_register = new Vue({
     el: '#user_register',
 });
+
 
 

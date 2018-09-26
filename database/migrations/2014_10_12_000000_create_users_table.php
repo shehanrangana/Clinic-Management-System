@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('contact_no', 10);
             $table->integer('user_role')->default(-1);
             $table->text('qualification');
+            $table->string('slmc_number', 30)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

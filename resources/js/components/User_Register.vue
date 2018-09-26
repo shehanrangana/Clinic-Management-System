@@ -4,13 +4,13 @@
         <form>
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Enter name">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" v-model="newUser.name">
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label for="gender">Gender</label>
-                        <select class="form-control" id="gender">
+                        <select class="form-control" id="gender" name="gender" v-model="newUser.gender">
                             <option>Male</option>
                             <option>Female</option>
                         </select>
@@ -18,36 +18,65 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Birthday</label>
+                        <label for="birthday">Birthday</label>
                         <br>
-                        <date-picker v-model="date" :lang="lang"></date-picker>
+                        <date-picker :lang="lang" name="birthday" v-model="newUser.birthday"></date-picker>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" v-model="newUser.email">
             </div>
             <div class="form-group">
                 <label for="contact_no">Contact number</label>
-                <input type="tel" class="form-control" id="contact_no" placeholder="Enter contact number">
+                <input type="tel" class="form-control" id="contact_no" name="contact_no" placeholder="Enter contact number" v-model="newUser.contact_no">
             </div>
-            <div class="form-group">
-                <label for="role">Role</label>
-                <select class="form-control" id="role">
-                    <option>Admin</option>
-                    <option>Receptionist</option>
-                    <option>Doctor</option>
-                    <option>Nurse</option>
-                    <option>Lab Assistant</option>
-                    <option>Pharmacy</option>
-                </select>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="user_role">Role</label>
+                        <select class="form-control" id="user_role" name="user_role" v-model="newUser.user_role">
+                            <option>Admin</option>
+                            <option>Receptionist</option>
+                            <option>Doctor</option>
+                            <option>Nurse</option>
+                            <option>Lab Assistant</option>
+                            <option>Pharmacist</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col" v-if="newUser.user_role=='Admin' || newUser.user_role=='Doctor'">
+                    <div class="form-group">
+                        <label for="slmc_number">SLMC Registration number</label>
+                        <input type="text" class="form-control" id="slmc_number" name="slmc_number" placeholder="Enter SLMC reg. no" v-model="newUser.slmc_number">
+                    </div>
+                </div>
             </div>
+            
             <div class="form-group">
-                <label for="role">Degree</label>
-                <select class="form-control" id="role">
-                    <option>MBBS</option>
-                    <option>MD</option>
+                <label for="qualification">Qualification</label>
+                <select class="form-control" id="qualification" name="qualification" v-model="newUser.qualification">
+                    <template v-if="newUser.user_role=='Admin' || newUser.user_role=='Doctor'">
+                        <option>MBBS</option>
+                        <option>MD</option>
+                    </template>
+                    <template v-else-if="newUser.user_role=='Receptionist'">
+                        <option>Receptionist qualification 1</option>
+                        <option>Receptionist qualification 2</option>
+                    </template>
+                    <template v-else-if="newUser.user_role=='Nurse'">
+                        <option>Nurse qualification 1</option>
+                        <option>Nurse qualification 2</option>
+                    </template>
+                    <template v-else-if="newUser.user_role=='Lab Assistant'">
+                        <option>Lab Assistant qualification 1</option>
+                        <option>Lab Assistant qualification 2</option>
+                    </template>
+                    <template v-else-if="newUser.user_role=='Pharmacist'">
+                        <option>Pharmacist qualification 1</option>
+                        <option>Pharmacist qualification 2</option>
+                    </template>
                 </select>
             </div>
 
@@ -64,18 +93,17 @@ import DatePicker from 'vue2-datepicker';
 
         data() {
             return {
-                newItem: {'name': '', 'age': '', 'profession': ''},
-                hasError: true,
-                date: '',
+                newUser: {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''},
+
+                // setup calander
                 lang: {
                     days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                     months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
                     placeholder: {
                         date: 'Select Date',
-                        dateRange: 'Select Date Range'
                     }
-                }
+                },
             }
         },
 
@@ -83,9 +111,9 @@ import DatePicker from 'vue2-datepicker';
             createItem: function createItem() {
                 var input = this.newItem;
                 if(input['name'] == '' || input['age'] == '' || input['profession'] == ''){
-                    this.hasError = false
+                    // this.hasError = false
                 }else{
-                    this.hasError = true;
+                    // this.hasError = true;
                     axios.post('/storeItem', input).then(function (response){
 
                     });

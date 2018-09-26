@@ -1,16 +1,15 @@
 <template>
     <div class="container">
-        <p v-bind:class="{invisible: hasError}">please fill all the fields<p>
-        <form>
+        <form @submit.prevent="registerUser()">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" v-model="newUser.name">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" v-model="newUser.name" required>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label for="gender">Gender</label>
-                        <select class="form-control" id="gender" name="gender" v-model="newUser.gender">
+                        <select class="form-control" id="gender" name="gender" v-model="newUser.gender" required>
                             <option>Male</option>
                             <option>Female</option>
                         </select>
@@ -20,23 +19,26 @@
                     <div class="form-group">
                         <label for="birthday">Birthday</label>
                         <br>
-                        <date-picker :lang="lang" name="birthday" v-model="newUser.birthday"></date-picker>
+                        <date-picker :lang="lang" name="birthday" :required="true" v-model="newUser.birthday"></date-picker>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" v-model="newUser.email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" v-model="newUser.email" required>
+                <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
+                    This email address is already in database
+                </div>
             </div>
             <div class="form-group">
                 <label for="contact_no">Contact number</label>
-                <input type="tel" class="form-control" id="contact_no" name="contact_no" placeholder="Enter contact number" v-model="newUser.contact_no">
+                <input type="tel" class="form-control" id="contact_no" name="contact_no" placeholder="Enter contact number" v-model="newUser.contact_no" required>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label for="user_role">Role</label>
-                        <select class="form-control" id="user_role" name="user_role" v-model="newUser.user_role">
+                        <select class="form-control" id="user_role" name="user_role" v-model="newUser.user_role" required>
                             <option>Admin</option>
                             <option>Receptionist</option>
                             <option>Doctor</option>
@@ -49,14 +51,14 @@
                 <div class="col" v-if="newUser.user_role=='Admin' || newUser.user_role=='Doctor'">
                     <div class="form-group">
                         <label for="slmc_number">SLMC Registration number</label>
-                        <input type="text" class="form-control" id="slmc_number" name="slmc_number" placeholder="Enter SLMC reg. no" v-model="newUser.slmc_number">
+                        <input type="text" class="form-control" id="slmc_number" name="slmc_number" placeholder="Enter SLMC reg. no" v-model="newUser.slmc_number" required>
                     </div>
                 </div>
             </div>
             
             <div class="form-group">
                 <label for="qualification">Qualification</label>
-                <select class="form-control" id="qualification" name="qualification" v-model="newUser.qualification">
+                <select class="form-control" id="qualification" name="qualification" v-model="newUser.qualification" required>
                     <template v-if="newUser.user_role=='Admin' || newUser.user_role=='Doctor'">
                         <option>MBBS</option>
                         <option>MD</option>
@@ -83,7 +85,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-</template>
+</template> 
 
 <script>
 import DatePicker from 'vue2-datepicker';
@@ -104,20 +106,19 @@ import DatePicker from 'vue2-datepicker';
                         date: 'Select Date',
                     }
                 },
+
+                hasError: false,
             }
         },
 
         methods: {
-            createItem: function createItem() {
-                var input = this.newItem;
-                if(input['name'] == '' || input['age'] == '' || input['profession'] == ''){
-                    // this.hasError = false
-                }else{
-                    // this.hasError = true;
-                    axios.post('/storeItem', input).then(function (response){
-
-                    });
-                }
+            registerUser: function registerUser() {
+                var input = this.newUser;
+                axios.post('/admin/user_register/storeItem', input).then(function (response){
+                    console.log(response);
+                }).catch(err => {
+                    this.hasError = true;
+                });
             }
         }
     }

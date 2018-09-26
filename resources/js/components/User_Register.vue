@@ -96,6 +96,7 @@ import DatePicker from 'vue2-datepicker';
         data() {
             return {
                 newUser: {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''},
+                users: [],
 
                 // setup calander
                 lang: {
@@ -111,11 +112,25 @@ import DatePicker from 'vue2-datepicker';
             }
         },
 
+        mounted: function mounted() {
+            this.getUsers();
+        },
+
         methods: {
+            getUsers: function getUsers() {
+                var _this = this;
+                axios.get('/admin/user_register/show').then(function (response){
+                    _this.users = response.data;
+                    // console.log(response.data);
+                })
+            },
+
             registerUser: function registerUser() {
                 var input = this.newUser;
-                axios.post('/admin/user_register/storeItem', input).then(function (response){
-                    console.log(response);
+                var output = this;
+                axios.post('/admin/user_register/store', input).then(function (response){
+                    output.newUser = {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''}
+                    output.getUsers();
                 }).catch(err => {
                     this.hasError = true;
                 });

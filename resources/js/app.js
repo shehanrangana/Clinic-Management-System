@@ -23,6 +23,7 @@ Vue.use(VeeValidate);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('user-register', require('./components/User_Register.vue'));
+Vue.component('users', require('./components/Users.vue'));
 
 // Components of admin
 const admin_dashboard = new Vue({
@@ -31,6 +32,10 @@ const admin_dashboard = new Vue({
 
 const user_register = new Vue({
     el: '#user_register',
+});
+
+const users = new Vue({
+    el: '#users',
 });
 
 

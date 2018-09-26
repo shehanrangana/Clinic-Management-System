@@ -20,6 +20,8 @@ Route::get('/admin/user_register', function () {
     return view('./admin/user_register');
 });
 
+Route::post('/admin/user_register/storeItem', 'UserController@store');
+
 // Reception routes
 Route::get('/recept', function() {
     return view('./recept/dashboard');
@@ -46,5 +48,5 @@ Route::get('/pharmacy', function() {
 });
 
 
-Route::post('/storeItem', 'MainController@storeItem');
+
 

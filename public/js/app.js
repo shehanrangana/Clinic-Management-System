@@ -14022,14 +14022,19 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vee_validate__["a" /* default */]);
 
 Vue.component('example-component', __webpack_require__(40));
 Vue.component('user-register', __webpack_require__(43));
+Vue.component('users', __webpack_require__(57));
 
 // Components of admin
 var admin_dashboard = new Vue({
-  el: '#admin_dashboard'
+    el: '#admin_dashboard'
 });
 
 var user_register = new Vue({
-  el: '#user_register'
+    el: '#user_register'
+});
+
+var users = new Vue({
+    el: '#users'
 });
 
 /***/ }),
@@ -47962,6 +47967,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             newUser: { 'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': '' },
+            users: [],
 
             // setup calander
             lang: {
@@ -47978,15 +47984,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
+    mounted: function mounted() {
+        this.getUsers();
+    },
+
     methods: {
-        registerUser: function registerUser() {
+        getUsers: function getUsers() {
             var _this = this;
+            axios.get('/admin/user_register/show').then(function (response) {
+                _this.users = response.data;
+                // console.log(response.data);
+            });
+        },
+
+        registerUser: function registerUser() {
+            var _this2 = this;
 
             var input = this.newUser;
-            axios.post('/admin/user_register/storeItem', input).then(function (response) {
-                console.log(response);
+            var output = this;
+            axios.post('/admin/user_register/store', input).then(function (response) {
+                output.newUser = { 'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': '' };
+                output.getUsers();
             }).catch(function (err) {
-                _this.hasError = true;
+                _this2.hasError = true;
             });
         }
     }
@@ -56355,6 +56375,196 @@ var index_esm = {
 /* harmony default export */ __webpack_exports__["a"] = (index_esm);
 
 
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(59)
+/* template */
+var __vue_template__ = __webpack_require__(58)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Users.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-30c27aa6", Component.options)
+  } else {
+    hotAPI.reload("data-v-30c27aa6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "table-responsive" }, [
+      _c("table", { staticClass: "table table-sm" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.users, function(user) {
+            return _c("tr", [
+              _c("td", [_vm._v(_vm._s(user.user_id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.gender))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.birthday))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.email))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.contact_no))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.user_role))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.qualification))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.slmc_number))])
+            ])
+          })
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("User ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Gender")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Birthday")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Contact number")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("User role")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Qualification")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("SLMC Reg. no")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-30c27aa6", module.exports)
+  }
+}
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            users: []
+        };
+    },
+
+
+    mounted: function mounted() {
+        this.getUsers();
+    },
+
+    methods: {
+        getUsers: function getUsers() {
+            var _this = this;
+            axios.get('/admin/users/show').then(function (response) {
+                _this.users = response.data;
+                // console.log(response.data);
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

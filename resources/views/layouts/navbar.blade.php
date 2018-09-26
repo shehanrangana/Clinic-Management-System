@@ -29,7 +29,7 @@
 
                 <li class="has-submenu" >
                     @if(Request::is(['admin', 'admin/*']))
-                        <a href="index.html"></i>Users</a>
+                        <a href="/admin/users"></i>Users</a>
                     @elseif(Request::is(['recept', 'recept/*']))
                         <a href="index.html"><i class="ti-home"></i>Patients</a>
                     @elseif(Request::is(['doctor', 'doctor/*']))

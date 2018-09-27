@@ -21,11 +21,13 @@ Route::get('/admin/user_register', function () {
 });
 
 Route::post('/admin/user_register/store', 'UserController@store');
-Route::get('/admin/users/show', 'UserController@index');
 
 Route::get('/admin/users', function () {
     return view('./admin/users');
 });
+
+Route::get('/admin/users/show', 'UserController@index');
+Route::post('/admin/users/remove/{user_id}', 'UserController@destroy');
 
 // Reception routes
 Route::get('/recept', function() {

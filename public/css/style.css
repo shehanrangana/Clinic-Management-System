@@ -1455,7 +1455,7 @@ th {
 }
 
 .table > tbody > tr > td, .table > tfoot > tr > td, .table > thead > tr > td {
-  padding: 15px 12px;
+  padding: none;
 }
 
 .table-hover tbody tr:hover, .table-striped tbody tr:nth-of-type(odd),
@@ -2470,7 +2470,6 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  text-align: -webkit-center;
 }
 
 #topnav .navigation-menu > li {

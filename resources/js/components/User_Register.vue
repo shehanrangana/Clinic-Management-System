@@ -112,16 +112,13 @@ import DatePicker from 'vue2-datepicker';
             }
         },
 
-        mounted: function mounted() {
-            this.getUsers();
-        },
-
         methods: {
             getUsers: function getUsers() {
                 var _this = this;
                 axios.get('/admin/user_register/show').then(function (response){
-                    _this.users = response.data;
-                    // console.log(response.data);
+                    // _this.users = response.data;
+                    console.log(response.data);
+                    
                 })
             },
 
@@ -130,7 +127,7 @@ import DatePicker from 'vue2-datepicker';
                 var output = this;
                 axios.post('/admin/user_register/store', input).then(function (response){
                     output.newUser = {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''}
-                    output.getUsers();
+                    // output.getUsers();
                 }).catch(err => {
                     this.hasError = true;
                 });

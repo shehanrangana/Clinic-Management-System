@@ -1,8 +1,8 @@
 <template>
     <div >
         <div class="table-responsive">
-            <table class="table table-sm">
-                <thead>
+            <table class="table table-sm table-bordered table-light">
+                <thead class="thead-light">
                     <tr>
                         <th scope="col">User ID</th>
                         <th scope="col">Name</th>
@@ -13,6 +13,7 @@
                         <th scope="col">User role</th>
                         <th scope="col">Qualification</th>
                         <th scope="col">SLMC Reg. no</th>
+                        <th scope="col">Option</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,7 @@
                         <td>{{ user.user_role }}</td>
                         <td>{{ user.qualification }}</td>
                         <td>{{ user.slmc_number }}</td>
+                        <td><button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="removeUser(user)">Remove</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -53,7 +55,20 @@
                     _this.users = response.data;
                     // console.log(response.data);
                 })
+            },
+
+            removeUser: function removeUser(user) {
+                var _this = this;
+                axios.post('/admin/users/remove/' + user.user_id).then(function (response){
+                    _this.getUsers();
+                })
             }
         }
     }
 </script>
+
+<style>
+    .table td, .table th {
+        vertical-align: inherit;
+    }
+</style>

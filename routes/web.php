@@ -49,8 +49,6 @@ Route::get('/lab', function() {
     return view('./lab/dashboard');
 });
 
-Route::get('/la' , 'LabController@store');
-
 // Pharmacy routes
 Route::get('/pharmacy', function() {
     return view('./pharmacy/dashboard');

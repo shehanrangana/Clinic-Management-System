@@ -18,5 +18,11 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "vee-validate": "^2.1.0-beta.9",
+        "vue-axios": "^2.1.3",
+        "vue2-datepicker": "^2.4.2",
+        "vuejs-datepicker": "^1.5.3"
     }
 }

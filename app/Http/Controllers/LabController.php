@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use  App\File;
+use Input;
+use Validator;
+use Redirect;
 
-class UserController extends Controller
+class LabController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return $user;
+        //
     }
 
     /**
@@ -35,38 +37,40 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
-        $flag = -1;
+    {
+        $file = Input::get('file');
 
-        if($request->user_role == "Admin"){
-            $flag = 0;
-        }else if($request->user_role == "Receptionist"){
-            $flag = 1;
-        }else if($request->user_role == "Doctor"){
-            $flag = 2;
-        }else if($request->user_role == "Nurse"){
-            $flag = 3;
-        }else if($request->user_role == "Lab Assisitant"){
-            $flag = 4;
-        }else if($request->user_role == "Pharmacist"){
-            $flag = 5;
+        $rules =  array(
+            'id' => 'required',
+            'name' => 'required',
+            'file' => 'file|required|max:20000|'
+             );
+
+        $validator = Validator::make(Input::all(),  $rules);
+
+        if ($validator->fails()) {
+            $msg = $validator->messages();
+            return redirect('/la')->with('error', 'Again check your filling form!!');
+        
+        } else if ($validator->passes()) {
+            $filename = $request->file('file')->getClientOriginalName();
+
+            $request->file->move($filename, '/files');
+
+            $file = new File;
+            $file->id = $request->input('id');
+            $file->name = $request->input('name');
+            $file->file =  $filename;
+            $file->save();
+
+            return redirect('/la')->with('success', 'File Upload Successfull!!');
         }
+        
 
-        $_birthday = substr($request->birthday, 0, -14);
+        
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->gender = $request->gender;
-        $user->birthday = $_birthday;
-        $user->email = $request->email;
-        $user->password = "test";
-        $user->contact_no = $request->contact_no;
-        $user->user_role = $flag;
-        $user->qualification = $request->qualification;
-        $user->slmc_number = $request->slmc_number;
-        $user->save();
-
-        return $user;
+        
+        
     }
 
     /**
@@ -111,6 +115,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        //
     }
 }

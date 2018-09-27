@@ -27,7 +27,7 @@
                     @endif
                 </li>
 
-                <li class="has-submenu" >
+                <li class="{{(Request::is(['admin/users']) ? 'has-submenu active' : '')}}">
                     @if(Request::is(['admin', 'admin/*']))
                         <a href="/admin/users"></i>Users</a>
                     @elseif(Request::is(['recept', 'recept/*']))

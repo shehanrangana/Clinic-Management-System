@@ -29,25 +29,43 @@ Route::get('/admin/users', function () {
 Route::get('/admin/users/show', 'UserController@index');
 Route::post('/admin/users/remove/{user_id}', 'UserController@destroy');
 
-// Reception routes
+Route::get('/admin/patients', function () {
+    return view('./admin/patients');
+});
+
+Route::get('/admin/patients/show', 'PatientController@index');
+Route::post('/admin/patients/remove/{nic}', 'PatientController@destroy');
+
+
+// Receptionist routes
 Route::get('/recept', function() {
     return view('./recept/dashboard');
 });
+
+Route::get('/recept/patient_register', function () {
+    return view('./recept/patient_register');
+});
+
+Route::post('/recept/patient_register/store', 'PatientController@store');
+
 
 // Doctor routes
 Route::get('/doctor', function() {
     return view('./doctor/dashboard');
 });
 
+
 // Nurse routes
 Route::get('/nurse', function() {
     return view('./nurse/dashboard');
 });
 
+
 // Lab assistant routes
 Route::get('/lab', function() {
     return view('./lab/dashboard');
 });
+
 
 // Pharmacy routes
 Route::get('/pharmacy', function() {

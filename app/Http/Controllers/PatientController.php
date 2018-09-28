@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Patient;
 
-class UserController extends Controller
+class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return $user;
+        $patient = Patient::all();
+        return $patient;
     }
 
     /**
@@ -35,38 +35,22 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
-        $flag = -1;
-
-        if($request->user_role == "Admin"){
-            $flag = 0;
-        }else if($request->user_role == "Receptionist"){
-            $flag = 1;
-        }else if($request->user_role == "Doctor"){
-            $flag = 2;
-        }else if($request->user_role == "Nurse"){
-            $flag = 3;
-        }else if($request->user_role == "Lab Assistant"){
-            $flag = 4;
-        }else if($request->user_role == "Pharmacist"){
-            $flag = 5;
-        }
-
+    {
         $_birthday = substr($request->birthday, 0, -14);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->gender = $request->gender;
-        $user->birthday = $_birthday;
-        $user->email = $request->email;
-        $user->password = "test";
-        $user->contact_no = $request->contact_no;
-        $user->user_role = $flag;
-        $user->qualification = $request->qualification;
-        $user->slmc_number = $request->slmc_number;
-        $user->save();
+        $patient = new Patient();
+        $patient->nic = $request->nic;
+        $patient->name = $request->name;
+        $patient->address_line_1 = $request->address_line_1;
+        $patient->address_line_2 = $request->address_line_2;
+        $patient->address_line_3 = $request->address_line_3;
+        $patient->gender = $request->gender;
+        $patient->birthday = $_birthday;
+        $patient->contact_no = $request->contact_no;
+        $patient->guardian_no = $request->guardian_no;
+        $patient->save();
 
-        return $user;
+        return $patient;
     }
 
     /**
@@ -111,6 +95,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        $patient = Patient::find($id)->delete();
     }
 }

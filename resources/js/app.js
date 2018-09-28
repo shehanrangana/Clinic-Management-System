@@ -22,10 +22,16 @@ Vue.use(VeeValidate);
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('user-register', require('./components/User_Register.vue'));
-Vue.component('users', require('./components/Users.vue'));
 
 // Components of admin
+Vue.component('user-register', require('./components/Admin/User_Register.vue'));
+Vue.component('users', require('./components/Admin/Users.vue'));
+Vue.component('patients', require('./components/Admin/Patients.vue'));
+
+// Components of receptionist
+Vue.component('patient-register', require('./components/Receptionist/Patient_Register.vue'));
+
+// Elements of admin
 const admin_dashboard = new Vue({
     el: '#admin_dashboard',
 });
@@ -36,6 +42,15 @@ const user_register = new Vue({
 
 const users = new Vue({
     el: '#users',
+});
+
+const patients = new Vue({
+    el: '#patients',
+});
+
+// Elements of receptionist
+const patient_register = new Vue({
+    el: '#patient_register',
 });
 
 

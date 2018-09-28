@@ -17,11 +17,11 @@
                     @endif
                 </li>
                 
-                <li class="{{(Request::is(['admin/user_register']) ? 'has-submenu active' : '')}}">
+                <li class="{{(Request::is(['admin/user_register', 'recept/patient_register']) ? 'has-submenu active' : '')}}">
                     @if(Request::is(['admin', 'admin/*']))
                         <a href="/admin/user_register"></i>User Registration</a>
                     @elseif(Request::is(['recept', 'recept/*']))
-                        <a href="#"><i class="ti-home"></i>Patient Registration</a>
+                        <a href="/recept/patient_register"><i class="ti-home"></i>Patient Registration</a>
                     @elseif(Request::is(['doctor', 'doctor/*']))
                         <a href="#"><i class="ti-home"></i>Patients</a>
                     @endif
@@ -37,9 +37,9 @@
                     @endif
                 </li>
 
-                <li class="has-submenu" >
+                <li class="{{(Request::is(['admin/patients']) ? 'has-submenu active' : '')}}">
                     @if(Request::is(['admin', 'admin/*']))
-                        <a href="index.html"></i>Patients</a>
+                        <a href="/admin/patients"></i>Patients</a>
                     @elseif(Request::is(['recept', 'recept/*']))
                         <a href="index.html"><i class="ti-home"></i>Appointments</a>
                     @elseif(Request::is(['doctor', 'doctor/*']))

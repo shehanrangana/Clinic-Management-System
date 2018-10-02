@@ -2,65 +2,66 @@
 <div class="navbar-custom">
     <div class="container-fluid">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav nav-pills nav-fill">
                     <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin">Dashboard</a>
+                            <a class="nav-link" href="/admin">DASHBOARD</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="/recept">Dashboard</a>
+                            <a class="nav-link" href="/recept">DASHBOARD</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="/doctor">Dashboard</a>
+                            <a class="nav-link" href="/doctor">DASHBOARD</a>
                         @else
                             <a><i></i></a>
                         @endif
                     </li>
                     <li class="nav-item {{(Request::is(['admin/user_register', 'recept/patient_register']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin/user_register"></i>User Registration</a>
+                            <a class="nav-link" href="/admin/user_register"></i>USER REGISTRATION</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="/recept/patient_register"><i class="ti-home"></i>Patient Registration</a>
+                            <a class="nav-link" href="/recept/patient_register"><i class="ti-home"></i>PATIENT REGISTRATION</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="#"><i class="ti-home"></i>Patients</a>
+                            <a class="nav-link" href="#"><i class="ti-home"></i>PATIENTS</a>
                         @endif
                     </li>
                     <li class="nav-item {{(Request::is(['admin/users', 'recept/patients']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin/users"></i>Users</a>
+                            <a class="nav-link" href="/admin/users"></i>USERS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="/recept/patients"><i class="ti-home"></i>Patients</a>
+                            <a class="nav-link" href="/recept/patients"><i class="ti-home"></i>PATIENTS</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="index.html"><i class="ti-home"></i>Pharmacy</a>
+                            <a class="nav-link" href="index.html"><i class="ti-home"></i>PHARMACY</a>
                         @endif
                     </li>
 
                     <li class="nav-item {{(Request::is(['admin/patients']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin/patients"></i>Patients</a>
+                            <a class="nav-link" href="/admin/patients"></i>PATIENTS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="index.html"><i class="ti-home"></i>Appointments</a>
+                            <a class="nav-link" href="index.html"><i class="ti-home"></i>APPOINTMENTS</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="index.html"><i class="ti-home"></i>Lab Reports</a>
+                            <a class="nav-link" href="index.html"><i class="ti-home"></i>LAB REPORTS</a>
                         @endif
                     </li>
 
-                    <li class="has-submenu" >
-                        @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="index.html"></i>Appointments</a>
-                        @endif
-                    </li>
+                    @if(Request::is(['admin', 'admin/*'])){
+                        <li class="nav-item {{(Request::is(['admin/appointments']) ? 'active' : '')}}">
+                            <a class="nav-link" href="#"></i>APPOINTMENTS</a>
+                        </li>
+                    }
+                    @endif
 
-                    <li class="has-submenu" >
-                        @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="index.html"></i>Pharmacy</a>
-                        @endif
+                    @if(Request::is(['admin', 'admin/*']))
+                    <li class="nav-item {{(Request::is(['admin/pharmacy']) ? 'active' : '')}}">    
+                        <a class="nav-link" href="#"></i>PHARMACY</a>
                     </li>
+                    @endif
                 </ul>
             </div>
 </nav>
@@ -135,25 +136,39 @@
             <!-- End navigation menu -->
         <!-- </div> end #navigation -->
     </div> <!-- end container -->
-</div> <!-- end navbar-custom -->
+</div> <!-- end navbar -->
 
 <style>
+.navbar {
+    padding: 0;
+}
+.bg-light {
+    background-color:#212121!important;
+}
+.navbar-custom .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+.navbar-dark .navbar-nav .nav-link {
+    padding: 15px 30px;
+}
+.nav-pills .nav-link {
+    transition:0.2s;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 18px;
+}
+.active {
+    background: #0064b7;
+}
 .nav-item::after{
     content:'';
     display:block;
     width:0px;
     height:2px;
-    background:#fec400;
+    background:#fff;
     transition: 0.2s;
 }
 .nav-item:hover::after{
     width:100%;
-}
-
-.nav-link{
-    padding:7px 5px;
-    transition:0.2s;
-    font-size: 18px;
-    font-family: sans-serif;
 }
 </style>

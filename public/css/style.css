@@ -30,15 +30,14 @@
 32. Menu
 33. Responsive
 */
-@import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
 /* ==============
   General
 ===================*/
 body {
   background: #ffffff;
-  font-family: "Arimo", sans-serif;
+  font-family: 'Roboto', sans-serif!important;
   margin: 0;
-  font-size: 15px;
+  font-size: 15px!important;
 }
 
 html {
@@ -2342,7 +2341,7 @@ body {
 }
 
 #topnav .topbar-main {
-  background-color: #000000;
+  background-color: #212121;
 }
 
 #topnav .topbar-main .logo {

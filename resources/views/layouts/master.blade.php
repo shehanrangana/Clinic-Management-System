@@ -12,11 +12,11 @@
     <!-- <link rel="shortcut icon" href="/images/favicon.ico"> -->
 
     <!-- App css -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
     <link href="/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
     <!-- Loader -->
@@ -30,7 +30,7 @@
     <!-- End Navigation Bar-->
 
     <!-- Wrapper -->
-    <div class="wrapper">
+    <div class="wrapper" id="app">
         <div class="container-fluid">
             <!-- Page-Title -->
             <div class="row">
@@ -56,14 +56,6 @@
         </div>
     </footer>
     <!-- End Footer -->
-
-    <!-- jQuery  -->
-    <!-- <script src="/js/jquery.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery.slimscroll.js"></script>
-    <script src="/js/jquery.nicescroll.js"></script>
-    <script src="/js/jquery.scrollTo.min.js"></script>
-    <script src="/pages/dashborad.js"></script> -->
+    <script type="text/javascript" src="/js/app.js"></script>
 </body>
 </html>

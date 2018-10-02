@@ -48,6 +48,10 @@ Route::get('/recept/patient_register', function () {
 
 Route::post('/recept/patient_register/store', 'PatientController@store');
 
+Route::get('/recept/patients', function () {
+    return view('./admin/patients');
+});
+
 
 // Doctor routes
 Route::get('/doctor', function() {

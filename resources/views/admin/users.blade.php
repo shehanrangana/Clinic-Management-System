@@ -3,9 +3,7 @@
 @section('title', 'User Registration')
 
 @section('content')
-    <div id="users">
+    <div>
         <users></users>
     </div>
-    
-    <script type="text/javascript" src="/js/app.js"></script>
 @endsection

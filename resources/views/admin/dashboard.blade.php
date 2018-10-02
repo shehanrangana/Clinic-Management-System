@@ -3,9 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <div id="admin_dashboard">
+    <div>
         
     </div>
-    
-    <script type="text/javascript" src="/js/app.js"></script>
 @endsection

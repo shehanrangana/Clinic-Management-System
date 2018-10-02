@@ -49,18 +49,16 @@
         },
 
         methods: {
-            getPatients: function getPatients() {
-                var _this = this;
-                axios.get('/admin/patients/show').then(function (response){
-                    _this.patients = response.data;
+            getPatients() {
+                axios.get('/admin/patients/show').then( (response)=>{
+                    this.patients = response.data;
                     // console.log(response.data);
                 })
             },
 
-            removePatient: function removePatient(patient) {
-                var _this = this;
-                axios.post('/admin/patients/remove/' + patient.nic).then(function (response){
-                    _this.getPatients();
+            removePatient(patient) {
+                axios.post('/admin/patients/remove/' + patient.nic).then((response)=>{
+                    this.getPatients();
                 })
             }
         }

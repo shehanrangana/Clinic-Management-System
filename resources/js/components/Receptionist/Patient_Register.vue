@@ -83,7 +83,6 @@ import DatePicker from 'vue2-datepicker';
                 axios.get('/recept/patient_register/show').then(function (response){
                     _this.users = response.data;
                     console.log(response.data);
-                    
                 })
             },
 

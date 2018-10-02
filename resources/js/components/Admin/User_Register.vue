@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="birthday">Birthday</label>
                         <br>
-                        <date-picker :lang="lang" name="birthday" :required="true" v-model="newUser.birthday"></date-picker>
+                        <date-picker :lang="lang" name="birthday" v-model="newUser.birthday" style="font-family: 'Roboto', sans-serif;"></date-picker>
                     </div>
                 </div>
             </div>

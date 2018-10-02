@@ -56083,7 +56083,8 @@ var render = function() {
                 _c("br"),
                 _vm._v(" "),
                 _c("date-picker", {
-                  attrs: { lang: _vm.lang, name: "birthday", required: true },
+                  staticStyle: { "font-family": "'Roboto', sans-serif" },
+                  attrs: { lang: _vm.lang, name: "birthday" },
                   model: {
                     value: _vm.newUser.birthday,
                     callback: function($$v) {

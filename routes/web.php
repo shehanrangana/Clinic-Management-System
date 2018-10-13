@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,11 +35,24 @@ Route::get('/admin/patients', function () {
 Route::get('/admin/patients/show', 'PatientController@index');
 Route::post('/admin/patients/remove/{nic}', 'PatientController@destroy');
 
+Route::get('/admin/patients/filter', 'PatientController@filter');
+
+Route::get('/admin/appointments', function () {
+    return view('./admin/appointments');
+});
 
 // Receptionist routes
 Route::get('/recept', function() {
     return view('./recept/dashboard');
 });
+
+Route::get('/recept/queue', function() {
+    return view('./recept/queue');
+});
+
+// Route::get('/recept/queue/search', 'PatientController@search');
+
+
 
 Route::get('/recept/patient_register', function () {
     return view('./recept/patient_register');

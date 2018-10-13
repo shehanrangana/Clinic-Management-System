@@ -34,17 +34,17 @@
   General
 ===================*/
 body {
-  background: #ffffff;
+  background: #eee!important;
   font-family: 'Roboto', sans-serif!important;
-  margin: 0;
-  font-size: 15px!important;
+  margin: 0 25px!important;
+  font-size: 14px!important;
 }
 
 html {
   overflow-x: hidden;
   position: relative;
   min-height: 100%;
-  background: #ffffff;
+  background: #eee;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -2292,21 +2292,12 @@ body {
 }
 
 .wrapper {
-  padding-top: 120px;
+  margin: 150px 0px 25px 0px;
 }
 
-.page-title-box {
-  padding: 22px 0;
-}
-
-.page-title-box .page-title {
-  font-size: 20px;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.page-title-box .breadcrumb .breadcrumb-item a {
-  color: #707070;
+.inner-div {
+  background: #fafafa;
+  padding: 30px;
 }
 
 #topnav {

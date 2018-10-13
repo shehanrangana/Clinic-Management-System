@@ -7,10 +7,10 @@
             <!--Upcube-->
             <!--</a>-->
             <!-- Image Logo -->
-            <a href="index.html" class="logo">
+            <!-- <a href="index.html" class="logo">
                 <img src="/images/logo-sm.png" alt="" height="22" class="logo-small">
                 <img src="/images/logo.png" alt="" height="24" class="logo-large">
-            </a>
+            </a> -->
         </div>
         <!-- End Logo container-->
 
@@ -27,17 +27,6 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#"><i class="dripicons-exit text-muted"></i> Logout</a>
                     </div>
-                </li>
-                <li class="menu-item list-inline-item">
-                    <!-- Mobile menu toggle-->
-                    <a class="navbar-toggle nav-link">
-                        <div class="lines">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </a>
-                    <!-- End mobile menu toggle-->
                 </li>
             </ul>
         </div>

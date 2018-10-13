@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Patient;
 
 class PatientController extends Controller
@@ -96,5 +97,25 @@ class PatientController extends Controller
     public function destroy($id)
     {
         $patient = Patient::find($id)->delete();
+    }
+
+    // Search patients for queue
+    public function search()
+    {
+        $query = Input::get('query');
+        $users = Patient::where('name','like','%'.$query.'%')->get();
+        return response()->json($users);
+    }
+
+    // Filter table
+    public function filter(Request $request)
+    {
+        dd($request->all());
+        // $search = $request->search;
+        // $patient = Patient::where('name', 'LIKE', "%$search%");
+
+        // return response()->json([
+        //     'model'=>$patient
+        // ]);
     }
 }

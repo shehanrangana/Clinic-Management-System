@@ -1,8 +1,8 @@
 <template>
-    <div >
+    <div>
         <div class="table-responsive">
-            <table class="table table-sm table-bordered table-light">
-                <thead class="thead-light">
+            <table class="table table-sm table-bordered table-light table-striped">
+                <thead class="thead-dark">
                     <tr>
                         <th scope="col">User ID</th>
                         <th scope="col">Name</th>
@@ -24,7 +24,24 @@
                         <td>{{ user.birthday }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.contact_no }}</td>
-                        <td>{{ user.user_role }}</td>
+                        <td v-if="user.user_role == 0">
+                            Admin
+                        </td>
+                        <td v-else-if="user.user_role == 1">
+                            Receptionist
+                        </td>
+                        <td v-else-if="user.user_role == 2">
+                            Doctor
+                        </td>
+                        <td v-else-if="user.user_role == 3">
+                            Nurse
+                        </td>
+                        <td v-else-if="user.user_role == 4">
+                            Lab Assistant
+                        </td>
+                        <td v-else-if="user.user_role == 5">
+                            Pharmacist
+                        </td>
                         <td>{{ user.qualification }}</td>
                         <td>{{ user.slmc_number }}</td>
                         <td><button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="removeUser(user)">Remove</button></td>
@@ -41,6 +58,7 @@
         data() {
             return {
                 users: [],
+                user_role_name: '',
             }
         },
 

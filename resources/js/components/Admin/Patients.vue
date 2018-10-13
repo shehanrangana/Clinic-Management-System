@@ -1,8 +1,9 @@
 <template>
     <div >
+        
         <div class="table-responsive">
-            <table class="table table-sm table-bordered table-light">
-                <thead class="thead-light">
+            <table class="table table-hover table-sm table-bordered">
+                <thead>
                     <tr>
                         <th scope="col">NIC</th>
                         <th scope="col">Name</th>
@@ -60,7 +61,8 @@
                 axios.post('/admin/patients/remove/' + patient.nic).then((response)=>{
                     this.getPatients();
                 })
-            }
+            },
+
         }
     }
 </script>

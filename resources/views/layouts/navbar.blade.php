@@ -10,24 +10,28 @@
 
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-pills nav-fill">
-                    <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor', 'nurse']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin">DASHBOARD</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept">DASHBOARD</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="/doctor">DASHBOARD</a>
+                        @elseif(Request::is(['nurse', 'nurse/*']))
+                            <a class="nav-link" href="/nurse">DASHBOARD</a>
                         @else
                             <a><i></i></a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/user_register', 'recept/queue']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/user_register', 'recept/queue', 'nurse/make_appointment']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/user_register"></i>USER REGISTRATION</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept/queue"><i class="ti-home"></i>QUEUE</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="#"><i class="ti-home"></i>PATIENTS</a>
+                        @elseif(Request::is(['nurse', 'nurse/*']))
+                            <a class="nav-link" href="/nurse/make_appointment"><i class="ti-home"></i>APPOINTMENTS</a>
                         @endif
                     </li>
                     <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register']) ? 'active' : '')}}">
@@ -79,25 +83,29 @@
             <!-- Navigation Menu-->
             <!-- <ul class="navigation-menu">
 
-                <li class="{{(Request::is(['admin', 'recept', 'doctor']) ? 'has-submenu active' : '')}}">
+                <li class="{{(Request::is(['admin', 'recept', 'doctor', 'nurse']) ? 'has-submenu active' : '')}}">
                     @if(Request::is(['admin', 'admin/*']))
                         <a href="/admin">Dashboard</a>
                     @elseif(Request::is(['recept', 'recept/*']))
                         <a href="/recept">Dashboard</a>
                     @elseif(Request::is(['doctor', 'doctor/*']))
                         <a href="/doctor">Dashboard</a>
+                    @elseif(Request::is(['nurse', 'nurse/*']))
+                        <a href="/nurse">Dashboard</a>
                     @else
                         <a><i></i></a>
                     @endif
                 </li>
                 
-                <li class="{{(Request::is(['admin/user_register', 'recept/patient_register']) ? 'has-submenu active' : '')}}">
+                <li class="{{(Request::is(['admin/user_register', 'recept/patient_register', 'nurse/make_appointment']) ? 'has-submenu active' : '')}}">
                     @if(Request::is(['admin', 'admin/*']))
                         <a href="/admin/user_register"></i>User Registration</a>
                     @elseif(Request::is(['recept', 'recept/*']))
                         <a href="/recept/patient_register"><i class="ti-home"></i>Patient Registration</a>
                     @elseif(Request::is(['doctor', 'doctor/*']))
                         <a href="#"><i class="ti-home"></i>Patients</a>
+                    @elseif(Request::is(['nurse', 'nurse/*']))
+                        <a href="/nurse/make_appointment"><i class="ti-home"></i>Appointments</a>
                     @endif
                 </li>
 

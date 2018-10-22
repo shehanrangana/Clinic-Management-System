@@ -18,11 +18,12 @@ class CreateQueuesTable extends Migration
             $table->integer('number');
             $table->integer('total');
             $table->integer('current');
-            $table->string('patient_nic', 13);
+            $table->integer('patient_id')->unsigned();
             $table->timestamps();
             $table->primary(['timeslot', 'number']);
-            $table->foreign('patient_nic')->references('patient_nic')->on('appointments');
+            $table->foreign('patient_id')->references('patient_id')->on('appointments');
         });
+        DB::statement('ALTER TABLE queues CHANGE patient_id patient_id INT(4) UNSIGNED ZEROFILL NOT NULL');
     }
 
     /**

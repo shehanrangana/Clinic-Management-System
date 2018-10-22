@@ -14,7 +14,8 @@ class CreatePatientsTable extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->string('nic', 13)->primary();
+            $table->increments('patient_id');
+            $table->string('nic', 13);
             $table->string('name', 60);
             $table->string('address_line_1', 30);
             $table->string('address_line_2', 30);
@@ -25,6 +26,7 @@ class CreatePatientsTable extends Migration
             $table->string('guardian_no', 10);
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE patients CHANGE patient_id patient_id INT(4) UNSIGNED ZEROFILL NOT NULL auto_increment');
     }
 
     /**

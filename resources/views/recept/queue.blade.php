@@ -4,6 +4,6 @@
 
 @section('content')
     <div>
-        
+        <queue></queue>
     </div>
 @endsection

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="inner-div">
         <div class="table-responsive">
             <table class="table table-sm table-bordered table-light table-striped">
                 <thead class="thead-dark">

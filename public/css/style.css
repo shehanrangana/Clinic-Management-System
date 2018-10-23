@@ -1454,7 +1454,8 @@ th {
 }
 
 .table > tbody > tr > td, .table > tfoot > tr > td, .table > thead > tr > td {
-  padding: none;
+  /* padding: 0.4rem; */
+  vertical-align: middle;
 }
 
 .table-hover tbody tr:hover, .table-striped tbody tr:nth-of-type(odd),
@@ -2297,7 +2298,8 @@ body {
 
 .inner-div {
   background: #fafafa;
-  padding: 30px;
+  padding: 20px 30px 20px 30px;
+  margin: 0px 0px 10px 0px;
 }
 
 #topnav {

@@ -31,6 +31,8 @@ Vue.component('patients', require('./components/Admin/Patients.vue'));
 Vue.component('patient-register', require('./components/Receptionist/Patient_Register.vue'));
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
 
+//Component of Lab Assistant
+Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Upload.vue'));
 // Elements of admin
 const app = new Vue({
     el: '#app',

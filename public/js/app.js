@@ -20290,6 +20290,8 @@ Vue.component('patients', __webpack_require__(123));
 Vue.component('patient-register', __webpack_require__(128));
 Vue.component('queue', __webpack_require__(133));
 
+//Component of Lab Assistant
+Vue.component('upload-report', __webpack_require__(248));
 // Elements of admin
 var app = new Vue({
   el: '#app'
@@ -66327,6 +66329,263 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 247 */,
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(249)
+/* template */
+var __vue_template__ = __webpack_require__(250)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/LabAssistant/Lab_Report_Upload.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7ec89087", Component.options)
+  } else {
+    hotAPI.reload("data-v-7ec89087", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 249 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      form: {
+
+        patient_id: '',
+        test: null,
+        file: ''
+      },
+      reports: [{ text: 'Select One', value: null }, 'Diabetes and the Fasting Plasma Glucose Test', 'The Casual Plasma Glucose Test', 'The Oral Glucose Tolerance Test', 'Diabetes and the Hemoglobin A1C Test', 'Other Diabetes Test'],
+      show: true
+    };
+  },
+
+  methods: {
+    onSubmit: function onSubmit(evt) {
+      evt.preventDefault();
+      alert(JSON.stringify(this.form));
+    },
+    onReset: function onReset(evt) {
+      var _this = this;
+
+      evt.preventDefault();
+      /* Reset our form values */
+
+      this.form.patient_id = '';
+      this.form.test = null;
+      this.form.file = '';
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false;
+      this.$nextTick(function () {
+        _this.show = true;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.show
+        ? _c(
+            "b-form",
+            { on: { submit: _vm.onSubmit, reset: _vm.onReset } },
+            [
+              _c(
+                "b-form-group",
+                {
+                  attrs: {
+                    id: "patientId",
+                    label: "Patient Id:",
+                    "label-for": "patientId"
+                  }
+                },
+                [
+                  _c("b-form-input", {
+                    attrs: { id: "patientId", type: "text", required: "" },
+                    model: {
+                      value: _vm.form.patient_id,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "patient_id", $$v)
+                      },
+                      expression: "form.patient_id"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-form-group",
+                {
+                  attrs: {
+                    id: "filename",
+                    label: "Choose a file :",
+                    "label-for": "filename"
+                  }
+                },
+                [
+                  _c("b-form-select", {
+                    attrs: {
+                      id: "filename",
+                      options: _vm.reports,
+                      required: ""
+                    },
+                    model: {
+                      value: _vm.form.test,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "test", $$v)
+                      },
+                      expression: "form.test"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c("b-form-file", {
+                    staticClass: "mt-3",
+                    attrs: { plain: "" },
+                    model: {
+                      value: _vm.form.file,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "file", $$v)
+                      },
+                      expression: "form.file"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mt-3" }, [
+                    _vm._v(
+                      "Selected file: " + _vm._s(_vm.file && _vm.file.name)
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                { attrs: { type: "submit", variant: "primary" } },
+                [_vm._v("Submit")]
+              ),
+              _vm._v(" "),
+              _c("b-button", { attrs: { type: "reset", variant: "danger" } }, [
+                _vm._v("Reset")
+              ])
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7ec89087", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Dashboard')
+@section('title', 'Lab Report')
 
 @section('content')
     <div>
-    	<viewreport></viewreport>
+    	<upload-report></upload-report>
     </div>
 @endsection

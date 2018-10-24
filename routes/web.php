@@ -76,12 +76,16 @@ Route::get('/nurse', function() {
 });
 
 
-// Lab assistant routes
+// // Lab assistant routes
 Route::get('/lab', function() {
     return view('./lab/dashboard');
 });
 
+Route::get('/lab/upload' , function(){
+    return view('./lab/reportupload');
+});
 
+Route::post('/lab/upload/store' , 'LabController@store');
 // Pharmacy routes
 Route::get('/pharmacy', function() {
     return view('./pharmacy/dashboard');

@@ -67,18 +67,16 @@
         },
 
         methods: {
-            getUsers: function getUsers() {
-                var _this = this;
-                axios.get('/admin/users/show').then(function (response){
-                    _this.users = response.data;
+            getUsers() {
+                axios.get('/admin/users/show').then((response) =>{
+                    this.users = response.data;
                     // console.log(response.data);
                 })
             },
 
-            removeUser: function removeUser(user) {
-                var _this = this;
-                axios.post('/admin/users/remove/' + user.user_id).then(function (response){
-                    _this.getUsers();
+            removeUser(user) {
+                axios.post('/admin/users/remove/' + user.user_id).then((response) =>{
+                    this.getUsers();
                 })
             }
         }

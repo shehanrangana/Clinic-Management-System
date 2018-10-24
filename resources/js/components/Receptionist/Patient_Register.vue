@@ -3,6 +3,10 @@
         <div class="container">
             <form @submit.prevent="registerPatient()">
                 <div class="form-group">
+                  <label for="patient_id">Patient ID</label>
+                  <input type="text" class="form-control" id="patient_id" name="patient_id" v-bind="{ placeholder: pHolder }" v-model="newPatient.patient_id" required>
+                </div>
+                <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" v-model="newPatient.name" required>
                 </div>
@@ -62,7 +66,8 @@ import DatePicker from 'vue2-datepicker';
 
         data() {
             return {
-                newPatient: {'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': ''},
+                // Patient object
+                newPatient: {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': ''},
                 patients: [],
 
                 // setup calander
@@ -76,27 +81,32 @@ import DatePicker from 'vue2-datepicker';
                 },
 
                 hasError: false,
+
+                // Placeholder of ID field
+                pHolder: '',
             }
         },
 
-        methods: {
-            getPatients: function getPatients() {
-                var _this = this;
-                axios.get('/recept/patient_register/show').then(function (response){
-                    _this.users = response.data;
-                    console.log(response.data);
-                })
-            },
+        mounted() {
+            this.getLastId();
+        },
 
-            registerPatient: function registerPatient() {
+        methods: {
+            registerPatient() {
                 var input = this.newPatient;
-                var output = this;
-                axios.post('/recept/patient_register/store', input).then(function (response){
-                    output.newPatient = {'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': ''}
-                    // output.getPatients();
+                axios.post('/recept/patient_register/store', input).then( (response) => {
+                    this.newPatient = {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': ''};
+                    this.getLastId();
+                    // console.log("awa");
                 }).catch(err => {
                     this.hasError = true;
                 });
+            },
+
+            getLastId() {
+                axios.get('/recept/patient_register/get_last').then( (response)=>{
+                    this.pHolder = "Recently added " + response.data;
+                })
             }
         }
     }

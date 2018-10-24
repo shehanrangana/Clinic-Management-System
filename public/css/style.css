@@ -1616,6 +1616,7 @@ table.focus-on tbody tr.focused td {
 ===================*/
 label {
   font-weight: 700;
+  /* display: block!important; */
 }
 
 .form-control {
@@ -2299,7 +2300,7 @@ body {
 .inner-div {
   background: #fafafa;
   padding: 20px 30px 20px 30px;
-  margin: 0px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
 }
 
 #topnav {

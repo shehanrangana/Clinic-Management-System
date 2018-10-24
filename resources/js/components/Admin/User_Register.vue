@@ -115,21 +115,10 @@ import DatePicker from 'vue2-datepicker';
         },
 
         methods: {
-            getUsers: function getUsers() {
-                var _this = this;
-                axios.get('/admin/user_register/show').then(function (response){
-                    // _this.users = response.data;
-                    console.log(response.data);
-                    
-                })
-            },
-
-            registerUser: function registerUser() {
+            registerUser() {
                 var input = this.newUser;
-                var output = this;
-                axios.post('/admin/user_register/store', input).then(function (response){
-                    output.newUser = {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''}
-                    // output.getUsers();
+                axios.post('/admin/user_register/store', input).then((response) =>{
+                    this.newUser = {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''}
                 }).catch(err => {
                     this.hasError = true;
                 });

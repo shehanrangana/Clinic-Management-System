@@ -14,7 +14,7 @@ class CreatePrescriptionsTable extends Migration
     public function up()
     {
         Schema::create('prescriptions', function (Blueprint $table) {
-            $table->integer('patient_id')->unsigned();
+            $table->string('patient_id', 5);
             $table->string('date', 10);
             $table->string('drug_name', 50);
             $table->integer('quantity');
@@ -23,8 +23,8 @@ class CreatePrescriptionsTable extends Migration
             $table->foreign('patient_id')->references('patient_id')->on('patients');
             $table->foreign('drug_name')->references('name')->on('drugs');
         });
-        DB::statement('ALTER TABLE prescriptions CHANGE patient_id patient_id INT(4) UNSIGNED ZEROFILL NOT NULL');
-        DB::unprepared('ALTER TABLE `prescriptions` DROP PRIMARY KEY, ADD PRIMARY KEY (  `patient_id` ,  `date`, `drug_name` )');
+        // DB::statement('ALTER TABLE prescriptions CHANGE patient_id patient_id INT(4) UNSIGNED ZEROFILL NOT NULL');
+        // DB::unprepared('ALTER TABLE `prescriptions` DROP PRIMARY KEY, ADD PRIMARY KEY (  `patient_id` ,  `date`, `drug_name` )');
     }
 
     /**

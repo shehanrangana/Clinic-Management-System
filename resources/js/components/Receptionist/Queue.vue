@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!-- appointment table -->
     <div class="inner-div">
       <b-row>
@@ -79,7 +78,7 @@ export default {
       fields: [
         { key: 'date', sortable: true },
         { key: 'timeslot', sortable: true },
-        { key: 'patient_nic', sortable: true },
+        { key: 'patient_id', sortable: true },
         { key: 'options', sortable: false },
         'options'
       ],
@@ -103,6 +102,7 @@ export default {
     fetch() {
       return axios.get('/recept/queue/today-list').then((response) => {
         this.items = response.data;
+        // console.log(response.data);
       })
     },
 

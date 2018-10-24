@@ -30,6 +30,7 @@ Vue.component('patients', require('./components/Admin/Patients.vue'));
 // Components of receptionist
 Vue.component('patient-register', require('./components/Receptionist/Patient_Register.vue'));
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
+Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));
 
 // Elements of admin
 const app = new Vue({

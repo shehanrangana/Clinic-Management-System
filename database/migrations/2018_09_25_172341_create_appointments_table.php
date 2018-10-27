@@ -16,11 +16,13 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->string('date', 10);
             $table->string('timeslot', 5);
-            $table->string('patient_nic', 13);
+            $table->string('patient_id', 5);
             $table->timestamps();
-            $table->primary(['date', 'timeslot', 'patient_nic']);
-            $table->foreign('patient_nic')->references('nic')->on('patients');
+            $table->primary(['date', 'patient_id']);
+            $table->foreign('patient_id')->references('patient_id')->on('patients');
         });
+        // DB::statement('ALTER TABLE appointments CHANGE patient_id patient_id INT(4) UNSIGNED ZEROFILL NOT NULL');
+        // DB::unprepared('ALTER TABLE `appointments` DROP PRIMARY KEY, ADD PRIMARY KEY (  `date` ,  `patient_id` )');
     }
 
     /**

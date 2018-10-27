@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="nic">NIC</label>
-                        <input type="text" class="form-control" id="nic" name="nic" placeholder="Enter patient id" v-model="newAppointment.nic" required>
+                        <label for="nic">Patient id</label>
+                        <input type="text" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient id" v-model="newAppointment.patient_id" required>
                     </div>
                 </div>
                 <div class="col">
@@ -40,7 +40,7 @@ import DatePicker from 'vue2-datepicker';
 
         data() {
             return {
-                newAppointment: {'nic': '', 'date': '', 'timeslot': '8-9'},
+                newAppointment: {'patient_id': '', 'date': '', 'timeslot': '8-9'},
                 appointments: [],
 
                 // setup calander
@@ -70,7 +70,7 @@ import DatePicker from 'vue2-datepicker';
                 var input = this.newAppointment;
                 var output = this;
                 axios.post('/nurse/make_appointment/add', input).then(function (response){
-                    output.newAppointment = {'nic': '', 'date': '', 'timeslot': '8-9'}
+                    output.newAppointment = {'patient_id': '', 'date': '', 'timeslot': '8-9'}
                     // output.getPatients();
                 }).catch(err => {
                     this.hasError = true;

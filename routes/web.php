@@ -41,6 +41,7 @@ Route::get('/admin/appointments', function () {
     return view('./admin/appointments');
 });
 
+
 // Receptionist routes
 Route::get('/recept', function() {
     return view('./recept/dashboard');
@@ -50,15 +51,15 @@ Route::get('/recept/queue', function() {
     return view('./recept/queue');
 });
 
-// Route::get('/recept/queue/search', 'PatientController@search');
-
-
+Route::get('/recept/queue/today-list', 'AppointmentController@getTodayList'); 
 
 Route::get('/recept/patient_register', function () {
     return view('./recept/patient_register');
 });
 
 Route::post('/recept/patient_register/store', 'PatientController@store');
+
+Route::get('/recept/patient_register/get_last', 'PatientController@getLastId');
 
 Route::get('/recept/patients', function () {
     return view('./admin/patients');

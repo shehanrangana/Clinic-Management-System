@@ -32,9 +32,9 @@
     <!-- Wrapper -->
     <div class="wrapper" id="app">
         <div class="container">
-            <div class="inner-div">
+            <!-- <div class="inner-div"> -->
                 @yield('content')
-            </div>
+            <!-- </div> -->
         </div>
     </div>
     <!-- End wrapper -->

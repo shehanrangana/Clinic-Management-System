@@ -1,6 +1,5 @@
 <template>
-    <div >
-        
+    <div class="inner-div">
         <div class="table-responsive">
             <table class="table table-hover table-sm table-bordered">
                 <thead>
@@ -19,7 +18,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="patient in patients">
-                        <td>{{ patient.nic }}</td>
+                        <td>{{ patient.patient_id }}</td>
                         <td>{{ patient.name }}</td>
                         <td>{{ patient.address_line_1 }}</td>
                         <td>{{ patient.address_line_2 }}</td>
@@ -58,7 +57,7 @@
             },
 
             removePatient(patient) {
-                axios.post('/admin/patients/remove/' + patient.nic).then((response)=>{
+                axios.post('/admin/patients/remove/' + patient.patient_id).then((response)=>{
                     this.getPatients();
                 })
             },

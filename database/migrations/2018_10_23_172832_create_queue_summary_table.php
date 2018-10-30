@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQueuesTable extends Migration
+class CreateQueueSummaryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateQueuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('queues', function (Blueprint $table) {
-            $table->string('timeslot', 5);
-            $table->integer('number');
+        Schema::create('queue_summary', function (Blueprint $table) {
+            $table->string('timeslot', 5)->primary();
             $table->integer('total');
             $table->integer('current');
-            $table->string('patient_nic', 13);
             $table->timestamps();
-            $table->primary(['timeslot', 'number']);
-            $table->foreign('patient_nic')->references('patient_nic')->on('appointments');
         });
     }
 
@@ -32,6 +28,6 @@ class CreateQueuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('queues');
+        Schema::dropIfExists('queue_summary');
     }
 }

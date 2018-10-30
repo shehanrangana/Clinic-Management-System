@@ -15,8 +15,8 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patient = Patient::all();
-        return $patient;
+        $patients = Patient::all();
+        return $patients;
     }
 
     /**
@@ -40,11 +40,12 @@ class PatientController extends Controller
         $_birthday = substr($request->birthday, 0, -14);
 
         $patient = new Patient();
-        $patient->nic = $request->nic;
+        $patient->patient_id = $request->patient_id;
         $patient->name = $request->name;
         $patient->address_line_1 = $request->address_line_1;
         $patient->address_line_2 = $request->address_line_2;
         $patient->address_line_3 = $request->address_line_3;
+        $patient->nic = $request->nic;
         $patient->gender = $request->gender;
         $patient->birthday = $_birthday;
         $patient->contact_no = $request->contact_no;
@@ -94,9 +95,9 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($patient_id)
     {
-        $patient = Patient::find($id)->delete();
+        $patient = Patient::find($patient_id)->delete();
     }
 
     // Search patients for queue
@@ -117,5 +118,14 @@ class PatientController extends Controller
         // return response()->json([
         //     'model'=>$patient
         // ]);
+    }
+
+    // Get patient id of the last registered
+    public function getLastId() 
+    {
+        if(!Patient::all() -> isEmpty()){
+            $recentId = Patient::orderBy('patient_id', 'desc')->first()->patient_id;
+            return $recentId;
+        }
     }
 }

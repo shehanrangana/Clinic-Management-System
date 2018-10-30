@@ -97,7 +97,6 @@ import DatePicker from 'vue2-datepicker';
                 axios.post('/recept/patient_register/store', input).then( (response) => {
                     this.newPatient = {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': ''};
                     this.getLastId();
-                    // console.log("awa");
                 }).catch(err => {
                     this.hasError = true;
                 });
@@ -105,8 +104,12 @@ import DatePicker from 'vue2-datepicker';
 
             getLastId() {
                 axios.get('/recept/patient_register/get_last').then( (response)=>{
-                    this.pHolder = "Recently added " + response.data;
-                })
+                    if(response.data != ""){
+                        this.pHolder = "Recently added " + response.data;
+                    }else{
+                        this.pHolder = "use 0001";
+                    }
+                });
             }
         }
     }

@@ -20,6 +20,7 @@
         </b-col>
       </b-row>
 
+      <!-- table-sorting.vue -->
       <b-table responsive hover 
               :sort-by.sync="sortBy"
               :sort-desc.sync="sortDesc"
@@ -31,18 +32,20 @@
               :filter="filter"
               @filtered="onFiltered"
       >
-        <template slot="options" slot-scope="data">
-          <!-- <b-button size="sm" @click.stop="">
-
-          </b-button> -->
-          <b-dropdown id="ddown-left" size="sm" left text="Add to..." variant="primary" class="m-2">
-            <b-dropdown-item href="#">09-10</b-dropdown-item>
-            <b-dropdown-item href="#">10-11</b-dropdown-item>
-            <b-dropdown-item href="#">11-12</b-dropdown-item>
-          </b-dropdown>
+        <template slot="actions" slot-scope="row">
+          <b-button v-b-modal.modal-center size="sm" @click.stop="openModal(row.item)" class="mr-2">ADD</b-button>
         </template>
 
       </b-table>
+
+      <!-- modal-center -->
+      <b-modal id="modal-center" centered title= "Add to the queue" hide-footer >
+        <b-form inline>
+          <b-form-input v-model="queue.number" type="number" placeholder="List number"></b-form-input>
+          <b-form-select v-model="queue.timeslot" :options="timeslots" />
+          <b-button variant="primary" @click.stop="addQueue()" :value="queue.timeslot">Save</b-button>
+        </b-form>
+      </b-modal>
 
       <b-row>
         <b-col md="6" class="my-1">
@@ -79,8 +82,18 @@ export default {
         { key: 'date', sortable: true },
         { key: 'timeslot', sortable: true },
         { key: 'patient_id', sortable: true },
-        { key: 'options', sortable: false },
-        'options'
+        { key: 'actions', sortable: false },
+        'actions'
+      ],
+
+      // modal data
+      queue: {'date': '', 'timeslot': '', 'patient_id': '', 'number': ''},
+      selected: '',
+      timeslots: [
+        { value: '08-09', text: '08 - 09' },
+        { value: '09-10', text: '09 - 10' },
+        { value: '10-11', text: '10 - 11' },
+        { value: '11-12', text: '11 - 12' }
       ],
     }
   },
@@ -99,6 +112,7 @@ export default {
   },
 
   methods: {
+    // To fetch each days appointment list
     fetch() {
       return axios.get('/recept/queue/today-list').then((response) => {
         this.items = response.data;
@@ -106,19 +120,57 @@ export default {
       })
     },
 
+    // Filter appointment table
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
+    },
+
+    // Set data used in modal
+    openModal(item) {
+      this.queue.date = item.date;
+      this.queue.timeslot = item.timeslot;
+      this.queue.patient_id = item.patient_id;
+
+      this.getRecentNumber();
+    },
+
+    getRecentNumber() {
+      axios.get('/recept/queue/get_recent', {params: {timeslot: this.queue.timeslot}}).then( (response)=>{
+        
+          if(response.data != -1){
+              this.queue.number = response.data + 1;
+          }else{
+              this.queue.number = 1;
+          }
+      });
+    },
+
+    // This method will call when a patient added to the queue
+    addQueue(){
+      axios.post('/recept/queue/add', this.queue).then((response) => {
+
+      });
+      this.$root.$emit('bv::hide::modal','modal-center');
+      this.added = true;
     }
   }
 }
 </script>
 
-<!-- table-sorting.vue -->
+
 
 <style>
-  .m-2 {
-    margin: 0rem!important;
+  body {
+    /* this is why modal uses dynamic padding-right */
+    padding-right: 0px!important;
+  }
+  .form-inline input, select {
+    width: 140px!important;
+    margin-right: 20px!important;
+  }
+  .form-inline button {
+    width: 140px!important;
   }
 </style>

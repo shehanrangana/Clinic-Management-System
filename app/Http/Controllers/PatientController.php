@@ -123,7 +123,9 @@ class PatientController extends Controller
     // Get patient id of the last registered
     public function getLastId() 
     {
-        $recentId = Patient::orderBy('patient_id', 'desc')->first()->patient_id;
-        return $recentId;
+        if(!Patient::all() -> isEmpty()){
+            $recentId = Patient::orderBy('patient_id', 'desc')->first()->patient_id;
+            return $recentId;
+        }
     }
 }

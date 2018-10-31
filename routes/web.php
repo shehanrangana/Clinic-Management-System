@@ -53,6 +53,10 @@ Route::get('/recept/queue', function() {
 
 Route::get('/recept/queue/today-list', 'AppointmentController@getTodayList'); 
 
+Route::post('/recept/queue/add', 'QueueController@store'); 
+
+Route::get('/recept/queue/get_recent', 'QueueController@getRecentNumber');
+
 Route::get('/recept/patient_register', function () {
     return view('./recept/patient_register');
 });

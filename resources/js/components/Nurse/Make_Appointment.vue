@@ -65,13 +65,21 @@ import DatePicker from 'vue2-datepicker';
                     console.log(response.data);
                 })
             },
+            registerPatient() {
+                var input = this.newPatient;
+                axios.post('/recept/patient_register/store', input).then( (response) => {
+                    this.newPatient = {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': ''};
+                    this.getLastId();
+                }).catch(err => {
+                    this.hasError = true;
+                });
+            },
 
-            makeAppointment: function makeAppointment() {
+            makeAppointment() {
                 var input = this.newAppointment;
-                var output = this;
-                axios.post('/nurse/make_appointment/add', input).then(function (response){
-                    output.newAppointment = {'patient_id': '', 'date': '', 'timeslot': '8-9'}
-                    // output.getPatients();
+                axios.post('/nurse/make_appointment/add', input).then((response)=>{
+                    this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
+                    
                 }).catch(err => {
                     this.hasError = true;
                 });

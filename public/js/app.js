@@ -55569,7 +55569,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/recept/patient_register/store', input).then(function (response) {
                 _this.newPatient = { 'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '', 'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': '' };
                 _this.getLastId();
-                // console.log("awa");
             }).catch(function (err) {
                 _this.hasError = true;
             });
@@ -55578,7 +55577,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             axios.get('/recept/patient_register/get_last').then(function (response) {
-                _this2.pHolder = "Recently added " + response.data;
+                if (response.data != "") {
+                    _this2.pHolder = "Recently added " + response.data;
+                } else {
+                    _this2.pHolder = "use 0001";
+                }
             });
         }
     }
@@ -56076,7 +56079,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.m-2 {\n  margin: 0rem!important;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  /* this is why modal uses dynamic padding-right */\n  padding-right: 0px!important;\n}\n.form-inline input, select {\n  width: 140px!important;\n  margin-right: 20px!important;\n}\n.form-inline button {\n  width: 140px!important;\n}\n", ""]);
 
 // exports
 
@@ -56088,6 +56091,9 @@ exports.push([module.i, "\n.m-2 {\n  margin: 0rem!important;\n}\n", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(137);
+//
+//
+//
 //
 //
 //
@@ -56165,7 +56171,12 @@ var items = [];
       totalRows: items.length,
       pageOptions: [5, 10, 15],
       filter: null,
-      fields: [{ key: 'date', sortable: true }, { key: 'timeslot', sortable: true }, { key: 'patient_id', sortable: true }, { key: 'options', sortable: false }, 'options']
+      fields: [{ key: 'date', sortable: true }, { key: 'timeslot', sortable: true }, { key: 'patient_id', sortable: true }, { key: 'actions', sortable: false }, 'actions'],
+
+      // modal data
+      queue: { 'date': '', 'timeslot': '', 'patient_id': '', 'number': '' },
+      selected: '',
+      timeslots: [{ value: '08-09', text: '08 - 09' }, { value: '09-10', text: '09 - 10' }, { value: '10-11', text: '10 - 11' }, { value: '11-12', text: '11 - 12' }]
     };
   },
   mounted: function mounted() {
@@ -56185,6 +56196,7 @@ var items = [];
   },
 
   methods: {
+    // To fetch each days appointment list
     fetch: function fetch() {
       var _this = this;
 
@@ -56193,10 +56205,43 @@ var items = [];
         // console.log(response.data);
       });
     },
+
+
+    // Filter appointment table
     onFiltered: function onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+    },
+
+
+    // Set data used in modal
+    openModal: function openModal(item) {
+      this.queue.date = item.date;
+      this.queue.timeslot = item.timeslot;
+      this.queue.patient_id = item.patient_id;
+
+      this.getRecentNumber();
+    },
+    getRecentNumber: function getRecentNumber() {
+      var _this2 = this;
+
+      axios.get('/recept/queue/get_recent', { params: { timeslot: this.queue.timeslot } }).then(function (response) {
+
+        if (response.data != -1) {
+          _this2.queue.number = response.data + 1;
+        } else {
+          _this2.queue.number = 1;
+        }
+      });
+    },
+
+
+    // This method will call when a patient added to the queue
+    addQueue: function addQueue() {
+      axios.post('/recept/queue/add', this.queue).then(function (response) {});
+      this.$root.$emit('bv::hide::modal', 'modal-center');
+      this.added = true;
     }
   }
 });
@@ -66285,41 +66330,92 @@ var render = function() {
           },
           scopedSlots: _vm._u([
             {
-              key: "options",
-              fn: function(data) {
+              key: "actions",
+              fn: function(row) {
                 return [
                   _c(
-                    "b-dropdown",
+                    "b-button",
                     {
-                      staticClass: "m-2",
-                      attrs: {
-                        id: "ddown-left",
-                        size: "sm",
-                        left: "",
-                        text: "Add to...",
-                        variant: "primary"
+                      directives: [
+                        {
+                          name: "b-modal",
+                          rawName: "v-b-modal.modal-center",
+                          modifiers: { "modal-center": true }
+                        }
+                      ],
+                      staticClass: "mr-2",
+                      attrs: { size: "sm" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.openModal(row.item)
+                        }
                       }
                     },
-                    [
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("09-10")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("10-11")
-                      ]),
-                      _vm._v(" "),
-                      _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                        _vm._v("11-12")
-                      ])
-                    ],
-                    1
+                    [_vm._v("ADD")]
                   )
                 ]
               }
             }
           ])
         }),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            attrs: {
+              id: "modal-center",
+              centered: "",
+              title: "Add to the queue",
+              "hide-footer": ""
+            }
+          },
+          [
+            _c(
+              "b-form",
+              { attrs: { inline: "" } },
+              [
+                _c("b-form-input", {
+                  attrs: { type: "number", placeholder: "List number" },
+                  model: {
+                    value: _vm.queue.number,
+                    callback: function($$v) {
+                      _vm.$set(_vm.queue, "number", $$v)
+                    },
+                    expression: "queue.number"
+                  }
+                }),
+                _vm._v(" "),
+                _c("b-form-select", {
+                  attrs: { options: _vm.timeslots },
+                  model: {
+                    value: _vm.queue.timeslot,
+                    callback: function($$v) {
+                      _vm.$set(_vm.queue, "timeslot", $$v)
+                    },
+                    expression: "queue.timeslot"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "b-button",
+                  {
+                    attrs: { variant: "primary", value: _vm.queue.timeslot },
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        _vm.addQueue()
+                      }
+                    }
+                  },
+                  [_vm._v("Save")]
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
         _c(
           "b-row",
@@ -66802,18 +66898,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(response.data);
             });
         },
-
-        makeAppointment: function makeAppointment() {
+        registerPatient: function registerPatient() {
             var _this2 = this;
 
-            var input = this.newAppointment;
-            var output = this;
-            axios.post('/nurse/make_appointment/add', input).then(function (response) {
-                output.newAppointment = { 'patient_id': '', 'date': '', 'timeslot': '8-9'
-                    // output.getPatients();
-                };
+            var input = this.newPatient;
+            axios.post('/recept/patient_register/store', input).then(function (response) {
+                _this2.newPatient = { 'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '', 'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': '' };
+                _this2.getLastId();
             }).catch(function (err) {
                 _this2.hasError = true;
+            });
+        },
+        makeAppointment: function makeAppointment() {
+            var _this3 = this;
+
+            var input = this.newAppointment;
+            axios.post('/nurse/make_appointment/add', input).then(function (response) {
+                _this3.newAppointment = { 'date': '', 'timeslot': '8-9', 'patient_id': '' };
+            }).catch(function (err) {
+                _this3.hasError = true;
             });
         }
     }

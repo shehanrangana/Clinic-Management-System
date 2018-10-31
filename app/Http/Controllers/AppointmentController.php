@@ -27,7 +27,7 @@ class AppointmentController extends Controller
         $appointment->patient_id = $request->patient_id;
         $appointment->save();
         
-        return appointment();
+        return $appointment;
     }
     /**
      * Show the form for creating a new resource.

@@ -19,7 +19,7 @@ class CreatePatientsTable extends Migration
             $table->string('address_line_1', 30);
             $table->string('address_line_2', 30);
             $table->string('address_line_3', 50);
-            $table->string('nic', 13);
+            $table->string('nic', 13)->unique();
             $table->string('gender', 6);
             $table->string('birthday', 10);
             $table->string('contact_no', 10);

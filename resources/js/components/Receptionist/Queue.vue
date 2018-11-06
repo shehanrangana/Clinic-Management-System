@@ -25,7 +25,7 @@
               :sort-by.sync="sortBy"
               :sort-desc.sync="sortDesc"
               :items="items"
-              :items-provider="fetch"
+              
               :fields="fields"
               :current-page="currentPage"
               :per-page="perPage"
@@ -42,11 +42,12 @@
       <b-modal id="modal-center" centered title= "Add to the queue" hide-footer >
         <b-form inline>
           <b-form-input v-model="queue.number" type="number" placeholder="List number"></b-form-input>
-          <b-form-select v-model="queue.timeslot" :options="timeslots" />
+          <b-form-select id="timeslot" v-model="queue.timeslot" :options="timeslots" />
           <b-button variant="primary" @click.stop="addQueue()" :value="queue.timeslot">Save</b-button>
         </b-form>
       </b-modal>
 
+      <!-- pagination -->
       <b-row>
         <b-col md="6" class="my-1">
           <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
@@ -56,7 +57,6 @@
         Sorting By: <b>{{ sortBy }}</b>,
         Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
       </p>
-
     </div>
   </div>
 </template>
@@ -65,17 +65,15 @@
 import { Table } from 'bootstrap-vue/es/components';
 Vue.use(Table);
 
-const items = [];
-
 export default {
   data () {
     return {
-      items: items,
+      items: [],
       sortBy: 'date',
       sortDesc: false,
       currentPage: 1,
       perPage: 5,
-      totalRows: items.length,
+      totalRows: 0,
       pageOptions: [ 5, 10, 15 ],
       filter: null,
       fields: [
@@ -99,7 +97,8 @@ export default {
   },
 
   mounted() {
-      this.fetch();
+    this.totalRows = this.items.length;
+    this.fetch();
   },
 
   computed: {
@@ -108,13 +107,13 @@ export default {
       return this.fields
         .filter(f => f.sortable)
         .map(f => { return { text: f.label, value: f.key } })
-    }
+    },
   },
 
   methods: {
     // To fetch each days appointment list
     fetch() {
-      return axios.get('/recept/queue/today-list').then((response) => {
+      axios.get('/recept/queue/today-list').then((response) => {
         this.items = response.data;
         // console.log(response.data);
       })
@@ -129,6 +128,7 @@ export default {
 
     // Set data used in modal
     openModal(item) {
+      // console.log(item);
       this.queue.date = item.date;
       this.queue.timeslot = item.timeslot;
       this.queue.patient_id = item.patient_id;
@@ -136,6 +136,7 @@ export default {
       this.getRecentNumber();
     },
 
+    // Get recently added patient number
     getRecentNumber() {
       axios.get('/recept/queue/get_recent', {params: {timeslot: this.queue.timeslot}}).then( (response)=>{
         
@@ -150,23 +151,24 @@ export default {
     // This method will call when a patient added to the queue
     addQueue(){
       axios.post('/recept/queue/add', this.queue).then((response) => {
-
+        Event.$emit('queuePushed', response.data, this.queue.timeslot); // commiunicate with 'Queue_tables' 
+        this.items = this.items.filter(function(el) {
+          return el.patient_id != response.data.patient_id; 
+        });
       });
+      
       this.$root.$emit('bv::hide::modal','modal-center');
-      this.added = true;
-    }
+    },
   }
 }
 </script>
-
-
 
 <style>
   body {
     /* this is why modal uses dynamic padding-right */
     padding-right: 0px!important;
   }
-  .form-inline input, select {
+  .form-inline input, #timeslot {
     width: 140px!important;
     margin-right: 20px!important;
   }

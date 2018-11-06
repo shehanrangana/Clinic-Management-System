@@ -85,7 +85,7 @@ class AppointmentController extends Controller
 
     public function getTodayList()
     {
-        $appointment = Appointment::all();
+        $appointment = Appointment::where('flag', 0)->get();
         return $appointment;
     }
 }

@@ -37,22 +37,5 @@ const app = new Vue({
     el: '#app',
 });
 
-// const user_register = new Vue({
-//     el: '#user_register',
-// });
-
-// const users = new Vue({
-//     el: '#users',
-// });
-
-// const patients = new Vue({
-//     el: '#patients',
-// });
-
-// Elements of receptionist
-// const patient_register = new Vue({
-//     el: '#patient_register',
-// });
-
 
 

@@ -87,6 +87,12 @@ Route::get('/nurse/make_appointment', function () {
     return view('./nurse/make_appointment');
 });
 
+Route::get('/nurse/appointment_list', function () {
+    return view('./nurse/appointment_list');
+});
+
+Route::get('/nurse/appointment_list/show', 'AppointmentController@index');
+
 Route::post('/nurse/make_appointment/add', 'AppointmentController@add');
 
 // Lab assistant routes

@@ -34,6 +34,8 @@ Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vu
 
 // Components of nurse
 Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
+Vue.component('appointment-count', require('./components/Nurse/Appointment_Count.vue'));
+Vue.component('appointment-list', require('./components/Nurse/Appointment_List.vue'));
 
 // Elements of admin
 const app = new Vue({

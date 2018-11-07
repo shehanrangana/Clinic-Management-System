@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="inner-div">
         <form @submit.prevent="makeAppointment()">
             <div class="row">
                 <div class="col">

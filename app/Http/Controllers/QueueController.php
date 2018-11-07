@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Appointment;
 use App\Queue1;
 use App\Queue2;
 use App\Queue3;
@@ -17,7 +18,11 @@ class QueueController extends Controller
      */
     public function index()
     {
-        //
+        $queue1 = Queue1::all();
+        $queue2 = Queue2::all();
+        $queue3 = Queue3::all();
+        $queue4 = Queue4::all();
+        return [$queue1, $queue2, $queue3, $queue4];
     }
 
     /**
@@ -38,6 +43,7 @@ class QueueController extends Controller
      */
     public function store(Request $request)
     {
+        // Save queue data
         if($request->timeslot == "08-09"){
             $queue = new Queue1(); 
         }else if($request->timeslot == "09-10"){
@@ -51,6 +57,10 @@ class QueueController extends Controller
         $queue->number = $request->number;
         $queue->patient_id = $request->patient_id;
         $queue->save();
+
+        // Set flag in appointment table
+        Appointment::where('patient_id', $request->patient_id)->where('date', $request->date)->update(['flag' => 1]);
+
         return $queue;
     }
 

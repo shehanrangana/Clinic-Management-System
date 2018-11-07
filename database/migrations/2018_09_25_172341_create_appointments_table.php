@@ -17,6 +17,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('date', 10);
             $table->string('timeslot', 5);
             $table->string('patient_id', 5);
+            $table->boolean('flag')->default(0);
             $table->timestamps();
             $table->primary(['date', 'patient_id']);
             $table->foreign('patient_id')->references('patient_id')->on('patients');

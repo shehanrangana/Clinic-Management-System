@@ -20299,23 +20299,6 @@ var app = new Vue({
   el: '#app'
 });
 
-// const user_register = new Vue({
-//     el: '#user_register',
-// });
-
-// const users = new Vue({
-//     el: '#users',
-// });
-
-// const patients = new Vue({
-//     el: '#patients',
-// });
-
-// Elements of receptionist
-// const patient_register = new Vue({
-//     el: '#patient_register',
-// });
-
 /***/ }),
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -20376,6 +20359,10 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+// Create custom event for component communications
+window.Vue = __webpack_require__(98);
+window.Event = new Vue();
 
 /***/ }),
 /* 76 */
@@ -56079,7 +56066,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\nbody {\n  /* this is why modal uses dynamic padding-right */\n  padding-right: 0px!important;\n}\n.form-inline input, select {\n  width: 140px!important;\n  margin-right: 20px!important;\n}\n.form-inline button {\n  width: 140px!important;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  /* this is why modal uses dynamic padding-right */\n  padding-right: 0px!important;\n}\n.form-inline input, #timeslot {\n  width: 140px!important;\n  margin-right: 20px!important;\n}\n.form-inline button {\n  width: 140px!important;\n}\n", ""]);
 
 // exports
 
@@ -56158,17 +56145,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table */]);
 
-var items = [];
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      items: items,
+      items: [],
       sortBy: 'date',
       sortDesc: false,
       currentPage: 1,
       perPage: 5,
-      totalRows: items.length,
+      totalRows: 0,
       pageOptions: [5, 10, 15],
       filter: null,
       fields: [{ key: 'date', sortable: true }, { key: 'timeslot', sortable: true }, { key: 'patient_id', sortable: true }, { key: 'actions', sortable: false }, 'actions'],
@@ -56180,6 +56165,7 @@ var items = [];
     };
   },
   mounted: function mounted() {
+    this.totalRows = this.items.length;
     this.fetch();
   },
 
@@ -56200,7 +56186,7 @@ var items = [];
     fetch: function fetch() {
       var _this = this;
 
-      return axios.get('/recept/queue/today-list').then(function (response) {
+      axios.get('/recept/queue/today-list').then(function (response) {
         _this.items = response.data;
         // console.log(response.data);
       });
@@ -56217,12 +56203,16 @@ var items = [];
 
     // Set data used in modal
     openModal: function openModal(item) {
+      // console.log(item);
       this.queue.date = item.date;
       this.queue.timeslot = item.timeslot;
       this.queue.patient_id = item.patient_id;
 
       this.getRecentNumber();
     },
+
+
+    // Get recently added patient number
     getRecentNumber: function getRecentNumber() {
       var _this2 = this;
 
@@ -56239,9 +56229,16 @@ var items = [];
 
     // This method will call when a patient added to the queue
     addQueue: function addQueue() {
-      axios.post('/recept/queue/add', this.queue).then(function (response) {});
+      var _this3 = this;
+
+      axios.post('/recept/queue/add', this.queue).then(function (response) {
+        Event.$emit('queuePushed', response.data, _this3.queue.timeslot); // commiunicate with 'Queue_tables' 
+        _this3.items = _this3.items.filter(function (el) {
+          return el.patient_id != response.data.patient_id;
+        });
+      });
+
       this.$root.$emit('bv::hide::modal', 'modal-center');
-      this.added = true;
     }
   }
 });
@@ -66313,7 +66310,6 @@ var render = function() {
             "sort-by": _vm.sortBy,
             "sort-desc": _vm.sortDesc,
             items: _vm.items,
-            "items-provider": _vm.fetch,
             fields: _vm.fields,
             "current-page": _vm.currentPage,
             "per-page": _vm.perPage,
@@ -66387,7 +66383,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("b-form-select", {
-                  attrs: { options: _vm.timeslots },
+                  attrs: { id: "timeslot", options: _vm.timeslots },
                   model: {
                     value: _vm.queue.timeslot,
                     callback: function($$v) {
@@ -66589,22 +66585,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var items = [{ Number: 1, ID: "0001" }, { Number: 2, ID: "0002" }, { Number: 3, ID: "0004" }, { Number: 4, ID: "0010" }];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      items: items
+      list0809: [],
+      list0910: [],
+      list1011: [],
+      list1112: [],
+      fields: [{ key: 'number' }, { key: 'patient_id' }]
     };
   },
 
 
+  // This will fire with 'queuePushed' event
+  created: function created() {
+    var _this = this;
+
+    Event.$on('queuePushed', function (addedPatient, timeslot) {
+      if (timeslot == '08-09') {
+        _this.list0809.push(addedPatient);
+      } else if (timeslot == '09-10') {
+        _this.list0910.push(addedPatient);
+      } else if (timeslot == '10-11') {
+        _this.list1011.push(addedPatient);
+      } else if (timeslot == '11-12') {
+        _this.list1112.push(addedPatient);
+      }
+    });
+  },
+  mounted: function mounted() {
+    this.fetch();
+  },
+
+
   methods: {
+    // Double click event
     myRowClickHandler: function myRowClickHandler(record, index) {
       // 'record' will be the row data from items
       // `index` will be the visible row number (available in the v-model 'shownItems')
       // console.log(record, index);
       alert("Row clicked");
+    },
+
+
+    // This method will return queue details
+    fetch: function fetch() {
+      var _this2 = this;
+
+      return axios.get('/recept/queue/numbers').then(function (response) {
+        _this2.list0809 = response.data[0];
+        _this2.list0910 = response.data[1];
+        _this2.list1011 = response.data[2];
+        _this2.list1112 = response.data[3];
+      });
     }
   }
 });
@@ -66639,9 +66673,10 @@ var render = function() {
                     attrs: {
                       responsive: "",
                       small: "",
+                      fields: _vm.fields,
                       striped: "",
                       hover: "",
-                      items: _vm.items
+                      items: _vm.list0809
                     },
                     on: { "row-dblclicked": _vm.myRowClickHandler }
                   })
@@ -66661,10 +66696,12 @@ var render = function() {
                     attrs: {
                       responsive: "",
                       small: "",
+                      fields: _vm.fields,
                       striped: "",
                       hover: "",
-                      items: _vm.items
-                    }
+                      items: _vm.list0910
+                    },
+                    on: { "row-dblclicked": _vm.myRowClickHandler }
                   })
                 ],
                 1
@@ -66682,10 +66719,12 @@ var render = function() {
                     attrs: {
                       responsive: "",
                       small: "",
+                      fields: _vm.fields,
                       striped: "",
                       hover: "",
-                      items: _vm.items
-                    }
+                      items: _vm.list1011
+                    },
+                    on: { "row-dblclicked": _vm.myRowClickHandler }
                   })
                 ],
                 1
@@ -66703,10 +66742,12 @@ var render = function() {
                     attrs: {
                       responsive: "",
                       small: "",
+                      fields: _vm.fields,
                       striped: "",
                       hover: "",
-                      items: _vm.items
-                    }
+                      items: _vm.list1112
+                    },
+                    on: { "row-dblclicked": _vm.myRowClickHandler }
                   })
                 ],
                 1

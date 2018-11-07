@@ -54,3 +54,7 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+// Create custom event for component communications
+window.Vue = require('vue');
+window.Event = new Vue();

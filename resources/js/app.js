@@ -30,6 +30,7 @@ Vue.component('patients', require('./components/Admin/Patients.vue'));
 // Components of receptionist
 Vue.component('patient-register', require('./components/Receptionist/Patient_Register.vue'));
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
+Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));
 
 //Component of Lab Assistant
 Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Upload.vue'));
@@ -37,23 +38,6 @@ Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Up
 const app = new Vue({
     el: '#app',
 });
-
-// const user_register = new Vue({
-//     el: '#user_register',
-// });
-
-// const users = new Vue({
-//     el: '#users',
-// });
-
-// const patients = new Vue({
-//     el: '#patients',
-// });
-
-// Elements of receptionist
-// const patient_register = new Vue({
-//     el: '#patient_register',
-// });
 
 
 

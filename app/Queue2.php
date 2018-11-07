@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Appointment extends Model
+class Queue2 extends Model
 {
-    protected $fillable = ['flag'];
+    protected $table = "queue2";
 }

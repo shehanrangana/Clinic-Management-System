@@ -53,11 +53,19 @@ Route::get('/recept/queue', function() {
 
 Route::get('/recept/queue/today-list', 'AppointmentController@getTodayList'); 
 
+Route::post('/recept/queue/add', 'QueueController@store'); 
+
+Route::get('/recept/queue/get_recent', 'QueueController@getRecentNumber');
+
+Route::get('/recept/queue/numbers', 'QueueController@index');
+
 Route::get('/recept/patient_register', function () {
     return view('./recept/patient_register');
 });
 
 Route::post('/recept/patient_register/store', 'PatientController@store');
+
+Route::get('/recept/patient_register/get_last', 'PatientController@getLastId');
 
 Route::get('/recept/patients', function () {
     return view('./admin/patients');

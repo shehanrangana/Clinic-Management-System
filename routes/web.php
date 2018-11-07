@@ -85,9 +85,13 @@ Route::get('/lab/upload' , function(){
     return view('./lab/reportupload');
 });
 
-Route::post('/lab/upload/store' , 'LabController@store');
+Route::post('/lab/upload/store' , 'LabReportController@store')->name("hhh");
 // Pharmacy routes
 Route::get('/pharmacy', function() {
     return view('./pharmacy/dashboard');
+});
+
+Route::get('/test', function () {
+    return asset('uploads/1MztetsHpGOO6AgB1mvxaQNxKZBTmGz3EthpuU3K.pdf');
 });
 

@@ -22,23 +22,36 @@ class LabReportController extends BaseController
 
         //$file = Input::get('file');
 
-         $filename = $request->file('file')->getClientOriginalName();
+            // $filename = $request->file('file')->getClientOriginalName();
+            // $request->file(key:'file')->getClientOriginalExtension();
+            // $request->file(key:'file')->move(directory:base_path().'/public/uploads' , $filename);
 
-            $request->file->move($filename, '/lab_reports');
+            // return $filename;
+            // $request->file->move($filename, '/lab_reports');
 
-            $file = new LabReport;
+            // $file = new LabReport;
             
-            $file->patient_nic = $request->patient_id;
-            $file->test = $request->test;
-            //$file->file =  $filename;
-            $file->save();
+            // $file->patient_nic = $request->patient_id;
+            // $file->test = $request->test;
+            // $file->file =  $filename;
+            // $file->save();
 
-            $filename = $file->report_id.'.'.
-            $request->file('resum_link')->getClientOriginalExtension();
-            $request->file('resum_link')->move(bath_path().'/public/uploads' , $filename);
-            $file->resum_link = $filename;
+            // $filename = $file->report_id.'.'.
+           
+            // $file->file = $filename;
 
-            
+        // $request->validate([
+            // 'file' => 'requ'])
+
+        $file = new LabReport;
+        $file->patient_id = $request->patient_id;
+        $file->test = $request->test;
+        $file->file =  $request->file('file')->store('/uploads', 'public');
+        $file->save();
+
+        return $file;
+
+
 
 
             return redirect('/lab');

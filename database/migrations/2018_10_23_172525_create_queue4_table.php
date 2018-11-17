@@ -16,6 +16,7 @@ class CreateQueue4Table extends Migration
         Schema::create('queue4', function (Blueprint $table) {
             $table->integer('number');
             $table->string('patient_id', 5);
+            $table->boolean('checked')->default(0);
             $table->timestamps();
             $table->primary(['number']);
             $table->foreign('patient_id')->references('patient_id')->on('appointments');

@@ -60,7 +60,7 @@ class UserController extends Controller
         $user->birthday = $_birthday;
         $user->email = $request->email;
         $user->password = "test";
-        $user->contact_no = $request->contact_no;
+        $user->contact_number = $request->contact_number;
         $user->user_role = $flag;
         $user->qualification = $request->qualification;
         $user->slmc_number = $request->slmc_number;

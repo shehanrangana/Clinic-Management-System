@@ -25,7 +25,7 @@ Vue.component('autocomplete',require('./components/Autocomplete.vue'));
 Vue.component('admin-dashboard', require('./components/Admin/Dashboard.vue'));
 Vue.component('user-register', require('./components/Admin/User_Register.vue'));
 Vue.component('users', require('./components/Admin/Users.vue'));
-Vue.component('patients', require('./components/Admin/Patients.vue'));
+Vue.component('patients', require('./components/Admin/Patients.vue')); 
 
 // Components of receptionist
 Vue.component('patient-register', require('./components/Receptionist/Patient_Register.vue'));

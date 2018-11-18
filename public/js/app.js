@@ -54898,7 +54898,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table *
             sortBy: 'date',
             sortDesc: false,
             currentPage: 1,
-            perPage: 5,
+            perPage: 10,
             totalRows: 0,
             pageOptions: [5, 10, 15],
             filter: null,

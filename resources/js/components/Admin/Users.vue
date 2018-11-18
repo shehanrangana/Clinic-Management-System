@@ -77,7 +77,7 @@ export default{
             sortBy: 'date',
             sortDesc: false,
             currentPage: 1,
-            perPage: 5,
+            perPage: 10,
             totalRows: 0,
             pageOptions: [ 5, 10, 15 ],
             filter: null,

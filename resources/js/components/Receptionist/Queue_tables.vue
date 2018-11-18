@@ -84,17 +84,24 @@ export default {
 .b-col {
   margin: 5px 5px 5px 0px;
   background: #fafafa;
-  /* border-radius: 10px; */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 .b-col-end {
   margin: 5px 0px 5px 0px;
   background: #fafafa;
-  /* border-radius: 10px; */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 label {
   display: block;
+  /* background-color:#0064b7; */
+  font-size: 24px;
+  color: #13aa4d;
   text-align: center;
-  padding-top: 10px;
+  margin-top: 10px;
+  /* border-radius: 8px; */
+  /* border: 2px solid red; */
 }
 </style>
 

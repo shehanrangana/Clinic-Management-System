@@ -71,6 +71,10 @@ Route::get('/recept/patients', function () {
     return view('./admin/patients');
 });
 
+Route::get('/recept/appointments', function () {
+    return view('./recept/appointments');
+});
+
 
 // Doctor routes
 Route::get('/doctor', function() {

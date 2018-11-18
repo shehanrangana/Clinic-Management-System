@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('birthday', 10);
             $table->string('email', 100)->unique();
             $table->string('password');
-            $table->string('contact_no', 10);
+            $table->string('contact_number', 10);
             $table->integer('user_role')->default(-1);
             $table->text('qualification');
             $table->string('slmc_number', 30)->nullable();

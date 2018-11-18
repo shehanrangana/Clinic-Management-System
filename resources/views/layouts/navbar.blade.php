@@ -50,11 +50,11 @@
                         @endif
                     </li>
 
-                    <li class="nav-item {{(Request::is(['admin/appointments']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/appointments', 'recept/appointments']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin/appointments""></i>APPOINTMENTS</a>
+                            <a class="nav-link" href="/admin/appointments"></i>APPOINTMENTS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="#"><i class="ti-home"></i>APPOINTMENTS</a>
+                            <a class="nav-link" href="/recept/appointments"><i class="ti-home"></i>APPOINTMENTS</a>
                         @endif
                     </li>
 

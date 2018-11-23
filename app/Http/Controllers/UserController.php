@@ -7,6 +7,37 @@ use App\User;
 
 class UserController extends Controller
 {
+    public function admin()
+    {
+        return view('./admin/dashboard')->withMessage("Admin");
+    }
+
+    public function receptionist()
+    {
+        return view('./recept/dashboard');
+    }
+
+    public function doctor()
+    {
+        return view('./doctor/dashboard');
+    }
+
+    public function nurse()
+    {
+        return view('./nurse/dashboard');
+    }
+
+    public function lab_assistant()
+    {
+        return view('./lab/dashboard');
+    }
+
+    public function pharmacist()
+    {
+        return view('./pharmacy/dashboard');
+    }
+
+
     /**
      * Display a listing of the resource.
      *

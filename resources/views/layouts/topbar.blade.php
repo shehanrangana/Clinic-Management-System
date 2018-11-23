@@ -3,14 +3,14 @@
         <!-- Logo container-->
         <div class="logo">
             <!-- Text Logo -->
-            <!--<a href="index.html" class="logo">-->
+            <a href="index.html" class="logo">
             <!--Upcube-->
-            <!--</a>-->
+            </a>
             <!-- Image Logo -->
-            <!-- <a href="index.html" class="logo">
+            <a href="index.html" class="logo">
                 <img src="/images/logo-sm.png" alt="" height="22" class="logo-small">
-                <img src="/images/logo.png" alt="" height="24" class="logo-large">
-            </a> -->
+                <!-- <img src="/images/logo.png" alt="" height="24" class="logo-large"> -->
+            </a>
         </div>
         <!-- End Logo container-->
 

@@ -32,7 +32,10 @@ Vue.component('patient-register', require('./components/Receptionist/Patient_Reg
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
 Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));
 
-// Elements of admin
+// Components of doctor
+Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
+
+// Vue instant
 const app = new Vue({
     el: '#app',
 });

@@ -10,92 +10,119 @@
 |
 */
 
+Auth::routes();
+
+Route::get('/', function() { 
+    return view('welcome');  // this is default welcome page
+});
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 // Admin routes
-Route::get('/admin', function () {
-    return view('./admin/dashboard');
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
+    Route::prefix('admin')->group(function(){
+        Route::get('/', 'UserController@admin');
+    
+        Route::get('/user_register', function () {
+            return view('./admin/user_register');
+        });
+
+        Route::post('/user_register/store', 'UserController@store');
+
+        Route::get('/users', function () {
+            return view('./admin/users');
+        });
+
+        Route::get('/users/show', 'UserController@index');
+
+        Route::post('/users/remove/{user_id}', 'UserController@destroy');
+
+        Route::get('/patients', function () {
+            return view('./admin/patients');
+        });
+
+        Route::get('/patients/show', 'PatientController@index');
+        Route::post('/patients/remove/{nic}', 'PatientController@destroy');
+
+        Route::get('/patients/filter', 'PatientController@filter');
+
+        Route::get('/appointments', function () {
+            return view('./admin/appointments');
+        });
+
+        Route::get('/logout', 'Auth\LoginController@logout');
+    });
 });
-
-Route::get('/admin/user_register', function () {
-    return view('./admin/user_register');
-});
-
-Route::post('/admin/user_register/store', 'UserController@store');
-
-Route::get('/admin/users', function () {
-    return view('./admin/users');
-});
-
-Route::get('/admin/users/show', 'UserController@index');
-Route::post('/admin/users/remove/{user_id}', 'UserController@destroy');
-
-Route::get('/admin/patients', function () {
-    return view('./admin/patients');
-});
-
-Route::get('/admin/patients/show', 'PatientController@index');
-Route::post('/admin/patients/remove/{nic}', 'PatientController@destroy');
-
-Route::get('/admin/patients/filter', 'PatientController@filter');
-
-Route::get('/admin/appointments', function () {
-    return view('./admin/appointments');
-});
-
 
 // Receptionist routes
-Route::get('/recept', function() {
-    return view('./recept/dashboard');
+Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], function() {
+    Route::prefix('recept')->group(function(){
+        Route::get('/', 'UserController@receptionist');
+    
+        Route::get('/queue', function() {
+            return view('./recept/queue');
+        });
+
+        Route::get('/queue/today-list', 'AppointmentController@getTodayList'); 
+
+        Route::post('/queue/add', 'QueueController@store'); 
+
+        Route::get('/queue/get_recent', 'QueueController@getRecentNumber');
+
+        Route::get('/queue/numbers', 'QueueController@index');
+
+        Route::get('/patient_register', function () {
+            return view('./recept/patient_register');
+        });
+
+        Route::post('/patient_register/store', 'PatientController@store');
+
+        Route::get('/patient_register/get_last', 'PatientController@getLastId');
+
+        Route::get('/patients', function () {
+            return view('./admin/patients');
+        });
+
+        Route::get('/appointments', function () {
+            return view('./recept/appointments');
+        });
+
+        Route::get('/logout', 'Auth\LoginController@logout');
+    });
 });
-
-Route::get('/recept/queue', function() {
-    return view('./recept/queue');
-});
-
-Route::get('/recept/queue/today-list', 'AppointmentController@getTodayList'); 
-
-Route::post('/recept/queue/add', 'QueueController@store'); 
-
-Route::get('/recept/queue/get_recent', 'QueueController@getRecentNumber');
-
-Route::get('/recept/queue/numbers', 'QueueController@index');
-
-Route::get('/recept/patient_register', function () {
-    return view('./recept/patient_register');
-});
-
-Route::post('/recept/patient_register/store', 'PatientController@store');
-
-Route::get('/recept/patient_register/get_last', 'PatientController@getLastId');
-
-Route::get('/recept/patients', function () {
-    return view('./admin/patients');
-});
-
-Route::get('/recept/appointments', function () {
-    return view('./recept/appointments');
-});
-
 
 // Doctor routes
-Route::get('/doctor', function() {
-    return view('./doctor/dashboard');
-});
+Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function() {
+    Route::prefix('doctor')->group(function(){
+        Route::get('/', 'UserController@doctor');
 
+        Route::get('/logout', 'Auth\LoginController@logout');
+    });
+});
 
 // Nurse routes
-Route::get('/nurse', function() {
-    return view('./nurse/dashboard');
-});
+Route::group(['middleware' => 'App\Http\Middleware\NurseMiddleware'], function() {
+    Route::prefix('nurse')->group(function(){
+        Route::get('/', 'UserController@nurse');
 
+        Route::get('/logout', 'Auth\LoginController@logout');
+    });
+});
 
 // Lab assistant routes
-Route::get('/lab', function() {
-    return view('./lab/dashboard');
+Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], function() {
+    Route::prefix('lab')->group(function(){
+        Route::get('/', 'UserController@lab_assistant');
+
+        Route::get('/logout', 'Auth\LoginController@logout');
+    });
 });
 
+// Pharmacist routes
+Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], function() {
+    Route::prefix('pharmacy')->group(function(){
+        Route::get('/', 'UserController@pharmacist');
 
-// Pharmacy routes
-Route::get('/pharmacy', function() {
-    return view('./pharmacy/dashboard');
+        Route::get('/logout', 'Auth\LoginController@logout');
+    });
 });
-

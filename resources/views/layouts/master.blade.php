@@ -13,7 +13,7 @@
 
     <!-- App css -->
     <!-- <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
-    <link href="/css/icons.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="/css/icons.css" rel="stylesheet" type="text/css" /> -->
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed:400,700|Yantramanav" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -24,7 +24,7 @@
 
     <!-- Navigation Bar-->
     <header id="topnav">
-        @include('./layouts/topbar')
+        @include('./layouts/topbar2')
         @include('./layouts/navbar')
     </header>
     <!-- End Navigation Bar-->

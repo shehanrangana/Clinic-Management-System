@@ -1,10 +1,10 @@
-<div class="topbar">
+<div class="topbar" id="clock">
     <div class="row">
         <div class="col-sm" id="left-col">
-            One of three columns
+            System Logo
         </div>
-        <div class="col-sm">
-            One of three columns
+        <div class="col-sm" id="middle-col">
+            <clock></clock>
         </div>
         <div class="col-sm" id="right-col">
             <div class="dropdown float-right">
@@ -52,12 +52,16 @@
     color: #fff;
 }
 .col-sm {
-    /* text-align: center; */
     height: auto;
     margin: auto;
 }
 #left-col {
     margin-left: 30px;
+}
+#middle-col {
+    text-align: center;
+    font-size: 28px;
+    font-family: 'Roboto Condensed';
 }
 #right-col {
     margin-right: 30px;

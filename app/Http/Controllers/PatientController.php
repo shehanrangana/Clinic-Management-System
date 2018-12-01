@@ -8,6 +8,11 @@ use App\Patient;
 
 class PatientController extends Controller
 {
+    // public function __construct()
+    // {   
+    //     $this->middleware('auth', ['except' => 'recept/patients']);
+    // }
+
     /**
      * Display a listing of the resource.
      *

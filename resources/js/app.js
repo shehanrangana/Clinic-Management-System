@@ -19,7 +19,8 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 // General componenets
-Vue.component('autocomplete',require('./components/Autocomplete.vue'));
+Vue.component('clock',require('./components/Clock.vue'));
+
 
 // Components of admin
 Vue.component('admin-dashboard', require('./components/Admin/Dashboard.vue'));
@@ -35,9 +36,14 @@ Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vu
 // Components of doctor
 Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
 
-// Vue instant
+// Vue primary instant
 const app = new Vue({
     el: '#app',
+});
+
+// Vue clock instant
+const clock = new Vue({
+    el: '#clock',
 });
 
 

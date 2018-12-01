@@ -18,7 +18,6 @@ class AdminMiddleware
     {  
         if (!\Auth::check() || $request->user() && $request->user()->user_role != 0){
             return back();
-            //dd(\Auth::check());
         }
         return $next($request);
     }

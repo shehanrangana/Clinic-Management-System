@@ -12,6 +12,7 @@
     <body>
         <div id="app">
             <example-component></example-component>
+            <clock></clock>
         </div>
 
         <script type="text/javascript" src="/js/app.js"></script>

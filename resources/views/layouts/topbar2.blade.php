@@ -9,7 +9,7 @@
         <div class="col-sm" id="right-col">
             <div class="dropdown float-right">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="/images/users/avatar-3.jpg" alt="user" class="rounded-circle">
+                    <img src="/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                     <!-- Dynamically set route to profile and logout -->

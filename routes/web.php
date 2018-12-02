@@ -81,7 +81,7 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
 
         Route::get('/patients', function () {
             return view('./admin/patients');
-        });
+        })->name('recept.patients');  
 
         Route::get('/appointments', function () {
             return view('./recept/appointments');

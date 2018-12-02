@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function admin()
     {
-        return view('./admin/dashboard')->withMessage("Admin");
+        return view('./admin/dashboard');
     }
 
     public function receptionist()

@@ -66476,7 +66476,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table */]);
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -66489,7 +66488,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table *
       pageOptions: [5, 10, 15],
       filter: null,
       fields: [{ key: 'date', sortable: true }, { key: 'timeslot', sortable: true }, { key: 'patient_id', sortable: true }, { key: 'actions', sortable: false }, 'actions'],
-
       // modal data
       queue: { 'date': '', 'timeslot': '', 'patient_id': '', 'number': '' },
       selected: '',
@@ -66501,7 +66499,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table *
     this.fetch();
   },
 
-
   computed: {
     sortOptions: function sortOptions() {
       // Create an options list from our fields
@@ -66512,7 +66509,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table *
       });
     }
   },
-
   methods: {
     // To fetch each days appointment list
     fetch: function fetch() {
@@ -66524,7 +66520,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table *
       });
     },
 
-
     // Filter appointment table
     onFiltered: function onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
@@ -66532,17 +66527,14 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table *
       this.currentPage = 1;
     },
 
-
     // Set data used in modal
     openModal: function openModal(item) {
       // console.log(item);
       this.queue.date = item.date;
       this.queue.timeslot = item.timeslot;
       this.queue.patient_id = item.patient_id;
-
       this.getRecentNumber();
     },
-
 
     // Get recently added patient number
     getRecentNumber: function getRecentNumber() {
@@ -66557,7 +66549,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Table *
         }
       });
     },
-
 
     // This method will call when a patient added to the queue
     addQueue: function addQueue() {

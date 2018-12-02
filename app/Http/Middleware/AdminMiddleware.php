@@ -17,17 +17,14 @@ class AdminMiddleware
     
     public function handle($request, Closure $next)
     {  
-        // dd($request->route()->uri());
         if (!\Auth::check() || $request->user() && $request->user()->user_role == 0){
             return $next($request);
         }else if(!\Auth::check() || $request->user() && $request->user()->user_role == 1){ // Also receptionist can manage patients table
             if($request->is(['admin/patients/show', 'admin/patients/remove/*'])){
                 return $next($request);
             }
-            // else if($request->is('admin/patients/remove/*')){
-            //     return $next($request);
-            // }
-        }
-        return back();
+        }else{
+            return back();
+        }  
     }
 }

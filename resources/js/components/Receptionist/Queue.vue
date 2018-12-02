@@ -46,7 +46,7 @@
           <b-button variant="primary" @click.stop="addQueue()" :value="queue.timeslot">Save</b-button>
         </b-form>
       </b-modal>
-
+      
       <!-- pagination -->
       <b-row>
         <b-col md="6" class="my-1">
@@ -64,7 +64,6 @@
 <script>
 import { Table } from 'bootstrap-vue/es/components';
 Vue.use(Table);
-
 export default {
   data () {
     return {
@@ -83,7 +82,6 @@ export default {
         { key: 'actions', sortable: false },
         'actions'
       ],
-
       // modal data
       queue: {'date': '', 'timeslot': '', 'patient_id': '', 'number': ''},
       selected: '',
@@ -95,12 +93,10 @@ export default {
       ],
     }
   },
-
   mounted() {
     this.totalRows = this.items.length;
     this.fetch();
   },
-
   computed: {
     sortOptions () {
       // Create an options list from our fields
@@ -109,7 +105,6 @@ export default {
         .map(f => { return { text: f.label, value: f.key } })
     },
   },
-
   methods: {
     // To fetch each days appointment list
     fetch() {
@@ -118,24 +113,20 @@ export default {
         // console.log(response.data);
       })
     },
-
     // Filter appointment table
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
     },
-
     // Set data used in modal
     openModal(item) {
       // console.log(item);
       this.queue.date = item.date;
       this.queue.timeslot = item.timeslot;
       this.queue.patient_id = item.patient_id;
-
       this.getRecentNumber();
     },
-
     // Get recently added patient number
     getRecentNumber() {
       axios.get('/recept/queue/get_recent', {params: {timeslot: this.queue.timeslot}}).then( (response)=>{
@@ -147,7 +138,6 @@ export default {
           }
       });
     },
-
     // This method will call when a patient added to the queue
     addQueue(){
       axios.post('/recept/queue/add', this.queue).then((response) => {

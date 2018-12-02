@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Mail\Password;
+use Hash;
 
 class UserController extends Controller
 {
@@ -84,18 +86,22 @@ class UserController extends Controller
         }
 
         $_birthday = substr($request->birthday, 0, -14);
+        $random_password = str_random(8);; // Generate random password
 
         $user = new User();
         $user->name = $request->name;
         $user->gender = $request->gender;
         $user->birthday = $_birthday;
         $user->email = $request->email;
-        $user->password = "test";
+        $user->password = Hash::make($random_password);
         $user->contact_number = $request->contact_number;
         $user->user_role = $flag;
         $user->qualification = $request->qualification;
         $user->slmc_number = $request->slmc_number;
         $user->save();
+
+        // Sent password to registered user by an email
+        \Mail::to($user)->send(new Password($user, $random_password));
 
         return $user;
     }

@@ -16,7 +16,9 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//  Welcome page components
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('welcome', require('./components/Welcome.vue'));
 
 // General componenets
 Vue.component('clock',require('./components/Clock.vue'));

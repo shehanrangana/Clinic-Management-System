@@ -13,7 +13,7 @@
 Auth::routes();
 
 Route::get('/', function() { 
-    return view('welcome');  // this is default welcome page
+    return view('welcome2');  // this is default welcome page
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

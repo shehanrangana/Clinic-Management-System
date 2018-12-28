@@ -96,6 +96,8 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
     Route::prefix('doctor')->group(function(){
         Route::get('/', 'UserController@doctor');
 
+        Route::get('/dashboard/get_queue', 'QueueController@getCurrentQueue');
+
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });

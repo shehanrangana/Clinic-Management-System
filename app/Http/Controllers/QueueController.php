@@ -136,12 +136,12 @@ class QueueController extends Controller
     }
 
     // Get patient list of current queue (This method related to doctor role)
-    protected function getCurrentQueue() {
+    public function getCurrentQueue() {
         // Get active queue 
         $activeQueueDetails = QueueSummary::where('status', 1)->get();
         
         if($activeQueueDetails->isEmpty()){
-            return "Currently there is no active queue";
+            return -1;
         }
         $activeQueue = $activeQueueDetails[0]->timeslot;
 
@@ -164,6 +164,70 @@ class QueueController extends Controller
 
         // Get patients data using query builder (join 'patients' table and one of queue table)
         return DB::table($queueNo)->join('patients', 'patients.patient_id', "$queueNo.patient_id")->get();
-        
+    }
+
+    // This method will return active queue 
+    public function getActiveQueue() {
+        $activeQueue = QueueSummary::where('status', '1')->get();
+        if($activeQueue->isEmpty()){
+            return -1;
+        }
+        switch ($activeQueue[0]->timeslot) {
+            case '08-09':
+                return 0;
+            case '09-10':
+                return 1;
+            case '10-11':
+                return 2;
+            case '11-12':
+                return 3;
+        }
+        return $activeQueue;
+    }
+
+    // start queue [queue_summary -> status=1]
+    public function startQueue(Request $request) {
+        $timeslot = "";
+        switch ($request[0]) {
+            case 0:
+                $timeslot = "08-09";
+                break;
+            case 1:
+                $timeslot = "09-10";
+                break;
+            case 2:
+                $timeslot = "10-11";
+                break;
+            case 3:
+                $timeslot = "11-12";
+                break;
+        }
+        $queueSummary = new QueueSummary();
+        $queueSummary->timeslot = $timeslot;
+        $queueSummary->total = $request[1];
+        $queueSummary->current = $request[2];
+        $queueSummary->status = $request[3];
+        $queueSummary->save();
+        return $queueSummary;
+    }
+
+    // stop queue [queue_summary -> status=0]
+    public function stopQueue(Request $request) {
+        $timeslot = "";
+        switch ($request[0]) {
+            case 0:
+                $timeslot = "08-09";
+                break;
+            case 1:
+                $timeslot = "09-10";
+                break;
+            case 2:
+                $timeslot = "10-11";
+                break;
+            case 3:
+                $timeslot = "11-12";
+                break;
+        }
+        DB::table('queue_summary')->where('timeslot', $timeslot)->update(['status' => 0]); 
     }
 }

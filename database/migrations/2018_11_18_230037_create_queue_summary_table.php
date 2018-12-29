@@ -17,6 +17,7 @@ class CreateQueueSummaryTable extends Migration
             $table->string('timeslot', 5)->primary();
             $table->integer('total');
             $table->integer('current');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

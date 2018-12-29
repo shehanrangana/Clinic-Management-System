@@ -3,5 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <p>This is doctor</p>
+    <div>
+        <doctor-dashboard></doctor-dashboard>
+    </div>
 @endsection

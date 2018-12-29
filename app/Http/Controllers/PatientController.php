@@ -8,6 +8,11 @@ use App\Patient;
 
 class PatientController extends Controller
 {
+    // public function __construct()
+    // {   
+    //     $this->middleware('auth', ['except' => 'recept/patients']);
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,8 +53,8 @@ class PatientController extends Controller
         $patient->nic = $request->nic;
         $patient->gender = $request->gender;
         $patient->birthday = $_birthday;
-        $patient->contact_no = $request->contact_no;
-        $patient->guardian_no = $request->guardian_no;
+        $patient->contact_number = $request->contact_number;
+        $patient->guardian_number = $request->guardian_number;
         $patient->save();
 
         return $patient;

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Appointment;
 use App\Queue1;
 use App\Queue2;
 use App\Queue3;
 use App\Queue4;
+use App\QueueSummary;
 
 class QueueController extends Controller
 {
@@ -131,6 +133,37 @@ class QueueController extends Controller
             }
         }
         return $recentNumber;
+    }
+
+    // Get patient list of current queue (This method related to doctor role)
+    protected function getCurrentQueue() {
+        // Get active queue 
+        $activeQueueDetails = QueueSummary::where('status', 1)->get();
+        
+        if($activeQueueDetails->isEmpty()){
+            return "Currently there is no active queue";
+        }
+        $activeQueue = $activeQueueDetails[0]->timeslot;
+
+        // Get data from selected queue
+        $queueNo;
+        switch ($activeQueue) {
+            case '08-09':
+                $queueNo = 'queue1';
+                break;
+            case '09-10':
+                $queueNo = 'queue2';
+                break;
+            case '10-11':
+                $queueNo = 'queue3';
+                break;
+            case '11-12':
+                $queueNo = 'queue4';
+                break;
+        }
+
+        // Get patients data using query builder (join 'patients' table and one of queue table)
+        return DB::table($queueNo)->join('patients', 'patients.patient_id', "$queueNo.patient_id")->get();
         
     }
 }

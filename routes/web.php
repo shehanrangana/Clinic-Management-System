@@ -67,6 +67,12 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
 
         Route::post('/queue/add', 'QueueController@store'); 
 
+        Route::get('/queue/active-queue', 'QueueController@getActiveQueue');
+
+        Route::post('/queue/start', 'QueueController@startQueue');
+
+        Route::post('/queue/stop', 'QueueController@stopQueue');
+
         Route::get('/queue/get_recent', 'QueueController@getRecentNumber');
 
         Route::get('/queue/numbers', 'QueueController@index');

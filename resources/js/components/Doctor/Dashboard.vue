@@ -24,10 +24,12 @@ export default {
     },
 
     methods: {
+        // Get patient list of current queue
         getQueueList() {
             axios.get('/doctor/dashboard/get_queue').then( (response)=>{
-                this.patientList = response.data;
-                // console.log(response.data);
+                if(response.data != -1){
+                    this.patientList = response.data;
+                }
             })
         },
     }

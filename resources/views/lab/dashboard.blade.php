@@ -4,6 +4,6 @@
 
 @section('content')
     <div>
-    	<viewreport></viewreport>
+    	<dashboard></dashboard>
     </div>
 @endsection

@@ -16,13 +16,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="report in lab_reports">
+                    <tr v-for="report in reports">
 
                         <td>{{ report.report_id }}</td>
                         <td>{{ report.patient_id }}</td>
                         <td>{{ report.test }}</td>
-                        <!-- <td>{{ report.file }}</td> -->
-                        <td><a href="{{asset('storage/uploads/{{ report.file }}')}}">report<a></td>
+                        <td>{{ report.file }}</td>
+                        <!-- <td><a href="{{asset('storage/uploads/{{ report.file }}')}}">report<a></td> -->
                         <td>{{ report.created_at }}</td>
                         <td>{{ report.updated_at }}</td>
                         

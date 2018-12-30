@@ -18,8 +18,14 @@ export default {
         }
     },
 
+    created() {
+        // This will fire whenever receptionist update queue
+        window.Echo.channel('queue-channel').listen('.queue-started', event =>{
+            this.getQueueList();
+        });
+    },
+
     mounted() {
-        console.log("App mounted");
         this.getQueueList();
     },
 

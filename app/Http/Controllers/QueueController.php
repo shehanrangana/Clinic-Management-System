@@ -10,6 +10,7 @@ use App\Queue2;
 use App\Queue3;
 use App\Queue4;
 use App\QueueSummary;
+use App\Events\QueueStarted;
 
 class QueueController extends Controller
 {
@@ -45,6 +46,7 @@ class QueueController extends Controller
      */
     public function store(Request $request)
     {
+        $queue;
         // Save queue data
         if($request->timeslot == "08-09"){
             $queue = new Queue1(); 
@@ -63,6 +65,7 @@ class QueueController extends Controller
         // Set flag in appointment table
         Appointment::where('patient_id', $request->patient_id)->where('date', $request->date)->update(['flag' => 1]);
 
+        event(new QueueStarted()); // update doctor's dashboard(patient list) using pusher
         return $queue;
     }
 
@@ -208,6 +211,8 @@ class QueueController extends Controller
         $queueSummary->current = $request[2];
         $queueSummary->status = $request[3];
         $queueSummary->save();
+
+        event(new QueueStarted()); // update doctor's dashboard(patient list) using pusher
         return $queueSummary;
     }
 

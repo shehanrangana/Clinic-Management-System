@@ -61,12 +61,13 @@
                         @endif
                     </li>
 
-                    @if(Request::is(['admin', 'admin/*']))
-                    <li class="nav-item {{(Request::is(['admin/pharmacy']) ? 'active' : '')}}">    
-                        <a class="nav-link" href="#"></i>PHARMACY</a>
-                    </li>
-                    @endif
+                    
+                    <li class="nav-item {{(Request::is(['admin/pharmacy']) ? 'active' : '')}}">    @if(Request::is(['admin', 'admin/*']))
+                            <a class="nav-link" href="/admin/pharmacy"></i>PHARMACY</a>
+                        @endif
 
+                    </li>
+                    
                     <li class="nav-item {{(Request::is(['lab/upload']) ? 'active' : '')}}">
                         @if(Request::is(['lab', 'lab/*']))
                             <a class="nav-link" href="/lab/upload""></i>LAB REPORT</a>

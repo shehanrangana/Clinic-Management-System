@@ -41,14 +41,11 @@ class LabReportController extends BaseController
     }
     public function getReport() 
     {
-        // if(!LabReport::all() -> isEmpty()){
-        //     $report = DB::table('lab_reports')->get()->toArray();
-        //     return $report;
-        // }
-        if(!LabReport::all() -> isEmpty()){
-                $users = LabReport::where('file')->get();
-                return response()->json($users);
-        }
+    
+        $roles = DB::table('lab_reports')->pluck('patient_id' ,'file');
+
+        return $roles;
+
     }
 
  

@@ -10,13 +10,15 @@
 
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-pills nav-fill">
-                    <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor' ,'lab']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin">DASHBOARD</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept">DASHBOARD</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="/doctor">DASHBOARD</a>
+                        @elseif(Request::is(['lab', 'lab/*']))
+                            <a class="nav-link" href="/lab">DASHBOARD</a>
                         @else
                             <a><i></i></a>
                         @endif
@@ -28,6 +30,7 @@
                             <a class="nav-link" href="/recept/queue"><i class="ti-home"></i>QUEUE</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="#"><i class="ti-home"></i>PATIENTS</a>
+                        
                         @endif
                     </li>
                     <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register']) ? 'active' : '')}}">
@@ -63,6 +66,30 @@
                         <a class="nav-link" href="#"></i>PHARMACY</a>
                     </li>
                     @endif
+
+                    <li class="nav-item {{(Request::is(['lab/upload']) ? 'active' : '')}}">
+                        @if(Request::is(['lab', 'lab/*']))
+                            <a class="nav-link" href="/lab/upload""></i>LAB REPORT</a>
+                            
+                        
+                        @endif
+                    </li>
+                    <li class="nav-item {{(Request::is(['lab/upload/show']) ? 'active' : '')}}">
+                        @if(Request::is(['lab', 'lab/*']))
+                            <a class="nav-link" href="/lab/upload/show""></i>DETAILS OF REPORT</a>
+                            
+
+                        @endif
+                    </li>
+                    <li class="nav-item {{(Request::is(['lab/upload/getReport']) ? 'active' : '')}}">
+                        @if(Request::is(['lab', 'lab/*']))
+                            <a class="nav-link" href="/lab/upload/getReport""></i>DETAILS OF PDF</a>
+                            
+
+                        @endif
+                    </li>
+
+
                 </ul>
             </div>
 </nav>

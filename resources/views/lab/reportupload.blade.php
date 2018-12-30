@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Lab Report')
+@section('title', 'Lab Report Upload')
 
 @section('content')
     <div>

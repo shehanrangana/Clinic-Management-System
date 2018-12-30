@@ -18,6 +18,15 @@ class AppointmentController extends Controller
         return $appointments;
     }
 
+    public function getCount(){
+        $count1=Appointment::where('timeslot','8-9')->count();
+        $count2=Appointment::where('timeslot','9-10')->count();
+        $count3=Appointment::where('timeslot','10-11')->count();
+        $count4=Appointment::where('timeslot','11-12')->count();
+        $count= array($count1,$count2,$count3,$count4);
+        return $count;
+    }
+
     public function add(Request $request)
     {
         $_date = substr($request->date, 0, -14);

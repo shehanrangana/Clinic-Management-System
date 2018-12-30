@@ -12,22 +12,22 @@
                 <tbody>
                     <tr>
                         <td>8-9</td>
-                        <td></td>
+                        <td>{{ counts[0] }}</td>
                         <td></td>    
                     </tr>
                     <tr>
                         <td>9-10</td>
-                        <td></td>
+                        <td>{{ counts[1] }}</td>
                         <td></td>    
                     </tr>
                     <tr>
                         <td>10-11</td>
-                        <td></td>
+                        <td>{{ counts[2] }}</td>
                         <td></td>    
                     </tr>
                     <tr>
                         <td>11-12</td>
-                        <td></td>
+                        <td>{{ counts[3] }}</td>
                         <td></td>    
                     </tr>
                 </tbody>
@@ -37,7 +37,30 @@
 </template>
 
 <script>
-    
+    export default {
+
+        data() {
+            return {
+                counts: [],
+            }
+        },
+
+        mounted: function mounted() {
+            this.getCounts();
+        },
+
+        methods: {
+            getCounts() {
+                axios.get('/nurse/make_appointment/count').then( (response)=>{
+                    this.counts = response.data;
+                    //console.log(response.data);
+                })
+            }
+
+            
+
+        }
+    }
 </script>
 
 <style>

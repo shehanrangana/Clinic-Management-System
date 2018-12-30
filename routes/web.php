@@ -120,6 +120,8 @@ Route::get('/nurse/appointment_list/show', 'AppointmentController@index');
 
 Route::post('/nurse/make_appointment/add', 'AppointmentController@add');
 
+Route::get('/nurse/make_appointment/count', 'AppointmentController@getCount');
+
 //
 // Nurse routes
 Route::group(['middleware' => 'App\Http\Middleware\NurseMiddleware'], function() {

@@ -1,17 +1,8 @@
 <template>
-  <div>
+  <div class="inner-div">
+    <div class="container">
     <b-form   @reset="onReset" v-if="show" enctype="multipart/form-data">
-      <!-- <b-form-group id="reportId"
-                    label="Report Id :"
-                    label-for="reportId"
-                    >
-        <b-form-input id="reportId"
-                      type="text"
-                      v-model="form.report_id"
-                      required
-                      >
-        </b-form-input>
-      </b-form-group> -->
+      
       <b-form-group id="patientId"
                     label="Patient Id:"
                     label-for="patientId">
@@ -41,6 +32,7 @@
       <b-button type="submit" @click.prevent="onSubmit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
+  </div>
   </div>
 </template>
 

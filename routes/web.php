@@ -92,6 +92,10 @@ Route::get('/lab', function() {
 Route::get('/lab/upload' , function(){
     return view('./lab/reportupload');
 });
+Route::get('/lab/upload/show', 'LabReportController@index');
+Route::get('/lab/upload/getReport', 'LabReportController@getReport');
+
+
 
 Route::post('/lab/upload/store' , 'LabReportController@store')->name("hhh");
 // Pharmacy routes

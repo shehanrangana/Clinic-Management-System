@@ -54312,6 +54312,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -66862,14 +66863,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66938,101 +66931,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.show
-        ? _c(
-            "b-form",
-            {
-              attrs: { enctype: "multipart/form-data" },
-              on: { reset: _vm.onReset }
-            },
-            [
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "patientId",
-                    label: "Patient Id:",
-                    "label-for": "patientId"
-                  }
-                },
-                [
-                  _c("b-form-input", {
-                    attrs: { id: "patientId", type: "text", required: "" },
-                    model: {
-                      value: _vm.form.patient_id,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "patient_id", $$v)
-                      },
-                      expression: "form.patient_id"
+  return _c("div", { staticClass: "inner-div" }, [
+    _c(
+      "div",
+      { staticClass: "container" },
+      [
+        _vm.show
+          ? _c(
+              "b-form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: { reset: _vm.onReset }
+              },
+              [
+                _c(
+                  "b-form-group",
+                  {
+                    attrs: {
+                      id: "patientId",
+                      label: "Patient Id:",
+                      "label-for": "patientId"
                     }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "file",
-                    label: "Choose a file :",
-                    "label-for": "filename"
-                  }
-                },
-                [
-                  _c("b-form-select", {
-                    attrs: { name: "file", id: "file", options: _vm.reports },
-                    model: {
-                      value: _vm.form.test,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "test", $$v)
-                      },
-                      expression: "form.test"
+                  },
+                  [
+                    _c("b-form-input", {
+                      attrs: { id: "patientId", type: "text", required: "" },
+                      model: {
+                        value: _vm.form.patient_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "patient_id", $$v)
+                        },
+                        expression: "form.patient_id"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-form-group",
+                  {
+                    attrs: {
+                      id: "file",
+                      label: "Choose a file :",
+                      "label-for": "filename"
                     }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                [
-                  _c("b-form-file", {
-                    staticClass: "mt-3",
-                    attrs: { plain: "" },
-                    on: { change: _vm.onFileLoaded }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-button",
-                {
-                  attrs: { type: "submit", variant: "primary" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.onSubmit($event)
+                  },
+                  [
+                    _c("b-form-select", {
+                      attrs: { name: "file", id: "file", options: _vm.reports },
+                      model: {
+                        value: _vm.form.test,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "test", $$v)
+                        },
+                        expression: "form.test"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  [
+                    _c("b-form-file", {
+                      staticClass: "mt-3",
+                      attrs: { plain: "" },
+                      on: { change: _vm.onFileLoaded }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-button",
+                  {
+                    attrs: { type: "submit", variant: "primary" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.onSubmit($event)
+                      }
                     }
-                  }
-                },
-                [_vm._v("Submit")]
-              ),
-              _vm._v(" "),
-              _c("b-button", { attrs: { type: "reset", variant: "danger" } }, [
-                _vm._v("Reset")
-              ])
-            ],
-            1
-          )
-        : _vm._e()
-    ],
-    1
-  )
+                  },
+                  [_vm._v("Submit")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-button",
+                  { attrs: { type: "reset", variant: "danger" } },
+                  [_vm._v("Reset")]
+                )
+              ],
+              1
+            )
+          : _vm._e()
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

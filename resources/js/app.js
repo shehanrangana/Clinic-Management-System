@@ -16,16 +16,19 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//  Welcome page components
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('welcome', require('./components/Welcome.vue'));
 
 // General componenets
-Vue.component('autocomplete',require('./components/Autocomplete.vue'));
+Vue.component('clock',require('./components/Clock.vue'));
+
 
 // Components of admin
 Vue.component('admin-dashboard', require('./components/Admin/Dashboard.vue'));
 Vue.component('user-register', require('./components/Admin/User_Register.vue'));
 Vue.component('users', require('./components/Admin/Users.vue'));
-Vue.component('patients', require('./components/Admin/Patients.vue'));
+Vue.component('patients', require('./components/Admin/Patients.vue')); 
 
 // Components of receptionist
 Vue.component('patient-register', require('./components/Receptionist/Patient_Register.vue'));
@@ -39,8 +42,19 @@ Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Up
 Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
 
 // Elements of admin
+
+// Components of doctor
+Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
+
+// Vue primary instant
+
 const app = new Vue({
     el: '#app',
+});
+
+// Vue clock instant
+const clock = new Vue({
+    el: '#clock',
 });
 
 

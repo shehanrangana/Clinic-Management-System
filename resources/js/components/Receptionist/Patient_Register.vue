@@ -41,16 +41,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="contact_no">NIC</label>
+                    <label for="contact_number">NIC</label>
                     <input type="tel" class="form-control" id="nic" name="nic" placeholder="Enter NIC number" v-model="newPatient.nic" required>
                 </div>
                 <div class="form-group">
-                    <label for="contact_no">Contact number</label>
-                    <input type="tel" class="form-control" id="contact_no" name="contact_no" placeholder="Enter contact number" v-model="newPatient.contact_no" required>
+                    <label for="contact_number">Contact number</label>
+                    <input type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="Enter contact number" v-model="newPatient.contact_number" required>
                 </div>
                 <div class="form-group">
-                    <label for="guardian_no">Guardian's contact number</label>
-                    <input type="tel" class="form-control" id="guardian_no" name="guardian_no" placeholder="Enter guardian's contact number" v-model="newPatient.guardian_no" required>
+                    <label for="guardian_number">Guardian's contact number</label>
+                    <input type="tel" class="form-control" id="guardian_number" name="guardian_number" placeholder="Enter guardian's contact number" v-model="newPatient.guardian_number" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -67,7 +67,7 @@ import DatePicker from 'vue2-datepicker';
         data() {
             return {
                 // Patient object
-                newPatient: {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': ''},
+                newPatient: {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_number': '', 'guardian_number': ''},
                 patients: [],
 
                 // setup calander
@@ -95,7 +95,7 @@ import DatePicker from 'vue2-datepicker';
             registerPatient() {
                 var input = this.newPatient;
                 axios.post('/recept/patient_register/store', input).then( (response) => {
-                    this.newPatient = {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_no': '', 'guardian_no': ''};
+                    this.newPatient = {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_number': '', 'guardian_number': ''};
                     this.getLastId();
                 }).catch(err => {
                     this.hasError = true;

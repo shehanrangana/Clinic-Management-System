@@ -32,8 +32,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="contact_no">Contact number</label>
-                    <input type="tel" class="form-control" id="contact_no" name="contact_no" placeholder="Enter contact number" v-model="newUser.contact_no" required>
+                    <label for="contact_number">Contact number</label>
+                    <input type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="Enter contact number" v-model="newUser.contact_number" required>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -98,7 +98,7 @@ import DatePicker from 'vue2-datepicker';
 
         data() {
             return {
-                newUser: {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''},
+                newUser: {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_number': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''},
                 users: [],
 
                 // setup calander
@@ -119,7 +119,7 @@ import DatePicker from 'vue2-datepicker';
             registerUser() {
                 var input = this.newUser;
                 axios.post('/admin/user_register/store', input).then((response) =>{
-                    this.newUser = {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_no': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''}
+                    this.newUser = {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_number': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''}
                 }).catch(err => {
                     this.hasError = true;
                 });

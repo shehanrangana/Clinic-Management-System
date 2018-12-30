@@ -22,8 +22,8 @@ class CreatePatientsTable extends Migration
             $table->string('nic', 13)->unique();
             $table->string('gender', 6);
             $table->string('birthday', 10);
-            $table->string('contact_no', 10);
-            $table->string('guardian_no', 10);
+            $table->string('contact_number', 10);
+            $table->string('guardian_number', 10);
             $table->timestamps();
         });
         // DB::statement('ALTER TABLE patients CHANGE patient_id patient_id INT(4) UNSIGNED ZEROFILL NOT NULL auto_increment');

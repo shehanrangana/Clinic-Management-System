@@ -68917,6 +68917,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -68925,7 +68926,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            newDrug: { 'name': '', 'quantity': '', 'brand': 'NMRA', 'expireDate': '', 'email': '' },
+            newDrug: { 'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' },
             drugs: [],
 
             // setup calander
@@ -68948,8 +68949,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             var input = this.newDrug;
-            axios.post('/pharmacy/a/store', input).then(function (response) {
-                _this.newUser = { 'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_number': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': '' };
+            axios.post('/pharmacy/addDrugs/store', input).then(function (response) {
+                _this.newDrugs = { 'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' };
             }).catch(function (err) {
                 _this.hasError = true;
             });
@@ -69112,13 +69113,13 @@ var render = function() {
                   _vm._v(" "),
                   _c("date-picker", {
                     staticStyle: { "font-family": "'Roboto', sans-serif" },
-                    attrs: { lang: _vm.lang, name: "expireDate" },
+                    attrs: { lang: _vm.lang, name: "expire_date" },
                     model: {
-                      value: _vm.newDrug.expireDate,
+                      value: _vm.newDrug.expire_date,
                       callback: function($$v) {
-                        _vm.$set(_vm.newDrug, "expireDate", $$v)
+                        _vm.$set(_vm.newDrug, "expire_date", $$v)
                       },
-                      expression: "newDrug.expireDate"
+                      expression: "newDrug.expire_date"
                     }
                   })
                 ],
@@ -69137,42 +69138,28 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.newDrug.email,
-                  expression: "newDrug.email"
+                  value: _vm.newDrug.supplier_email,
+                  expression: "newDrug.supplier_email"
                 }
               ],
               staticClass: "form-control",
               attrs: {
                 type: "email",
-                id: "email",
-                name: "email",
+                id: "supplier_email",
+                name: "supplier_email",
                 placeholder: "Enter supplier email",
                 required: ""
               },
-              domProps: { value: _vm.newDrug.email },
+              domProps: { value: _vm.newDrug.supplier_email },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.newDrug, "email", $event.target.value)
+                  _vm.$set(_vm.newDrug, "supplier_email", $event.target.value)
                 }
               }
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "alert alert-danger",
-                class: { "d-none": !_vm.hasError },
-                attrs: { role: "alert" }
-              },
-              [
-                _vm._v(
-                  "\n                    This email address is already in database\n                "
-                )
-              ]
-            )
+            })
           ]),
           _vm._v(" "),
           _c(

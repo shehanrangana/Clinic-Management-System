@@ -21,22 +21,23 @@
                                 <option>MLSLA</option>
                                 <option>SLI</option>
                             </select>
+
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="expireDate">Expire Date</label>
                             <br>
-                            <date-picker :lang="lang" name="expireDate" v-model="newDrug.expireDate" style="font-family: 'Roboto', sans-serif;"></date-picker>
+                            <date-picker :lang="lang" name="expire_date" v-model="newDrug.expire_date" style="font-family: 'Roboto', sans-serif;"></date-picker>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Supplier Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter supplier email" v-model="newDrug.email" required>
-                    <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
+                    <input type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter supplier email" v-model="newDrug.supplier_email" required>
+                    <!-- <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
                         This email address is already in database
-                    </div>
+                    </div> -->
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -53,7 +54,7 @@ import DatePicker from 'vue2-datepicker';
 
         data() {
             return {
-                newDrug: {'name': '', 'quantity': '', 'brand': 'NMRA', 'expireDate': '', 'email': ''},
+                newDrug: {'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': ''},
                 drugs: [],
 
                 // setup calander
@@ -73,8 +74,8 @@ import DatePicker from 'vue2-datepicker';
         methods: {
             addDrugs() {
                 var input = this.newDrug;
-                axios.post('/pharmacy/a/store', input).then((response) =>{
-                    this.newUser = {'name': '', 'gender': 'Male', 'birthday': '', 'email': '', 'contact_number': '', 'user_role': 'Admin', 'slmc_number': '', 'qualification': ''}
+                axios.post('/pharmacy/addDrugs/store', input).then((response) =>{
+                    this.newDrugs = {'name': '','quantity':'' , 'brand': 'NMRA', 'expire_date': '', 'supplier_email':''}
                 }).catch(err => {
                     this.hasError = true;
                 });

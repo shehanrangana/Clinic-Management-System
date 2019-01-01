@@ -14,26 +14,27 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                     <!-- Dynamically set route to profile and logout -->
                     <?php 
+                        $user_id = Session::get('user'); // set current user id
                         $route_profile = "#";
                         $route_logout = "#";
                         if(Request::is(['admin', 'admin/*'])){
                             $route_logout = "/admin/logout";
-                            $route_profile = "/admin/profile";
+                            $route_profile = "/admin/profile/".$user_id;
                         }else if(Request::is(['recept', 'recept/*'])){
                             $route_logout = "/recept/logout";
-                            $route_profile = "/recept/profile";
+                            $route_profile = "/recept/profile/".$user_id;
                         }else if(Request::is(['doctor', 'doctor/*'])){
                             $route_logout = "/doctor/logout";
-                            $route_profile = "/doctor/profile";
+                            $route_profile = "/doctor/profile/".$user_id;
                         }else if(Request::is(['nurse', 'nurse/*'])){
                             $route_logout = "/nurse/logout";
-                            $route_profile = "/nurse/profile";
+                            $route_profile = "/nurse/profile/".$user_id;
                         }else if(Request::is(['lab', 'lab/*'])){
                             $route_logout = "/lab/logout";
-                            $route_profile = "/lab/profile";
+                            $route_profile = "/lab/profile/".$user_id;
                         }else if(Request::is(['pharmacy', 'pharmacy/*'])){
                             $route_logout = "/pharmacy/logout";
-                            $route_profile = "/pharmacy/profile";
+                            $route_profile = "/pharmacy/profile/".$user_id;
                         }
                         
                     ?>

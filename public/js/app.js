@@ -68514,25 +68514,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            counts: []
+            countStatus: []
+
         };
     },
 
 
     mounted: function mounted() {
-        this.getCounts();
+        this.getCountStatus();
     },
 
     methods: {
-        getCounts: function getCounts() {
+        getCountStatus: function getCountStatus() {
             var _this = this;
 
             axios.get('/nurse/make_appointment/count').then(function (response) {
-                _this.counts = response.data;
+                _this.countStatus = response.data;
                 //console.log(response.data);
             });
         }
     }
+
 });
 
 /***/ }),
@@ -68555,33 +68557,33 @@ var render = function() {
             _c("tr", [
               _c("td", [_vm._v("8-9")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.counts[0]))]),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[0]))]),
               _vm._v(" "),
-              _c("td")
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[1]))])
             ]),
             _vm._v(" "),
             _c("tr", [
               _c("td", [_vm._v("9-10")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.counts[1]))]),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[2]))]),
               _vm._v(" "),
-              _c("td")
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[3]))])
             ]),
             _vm._v(" "),
             _c("tr", [
               _c("td", [_vm._v("10-11")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.counts[2]))]),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[4]))]),
               _vm._v(" "),
-              _c("td")
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[5]))])
             ]),
             _vm._v(" "),
             _c("tr", [
               _c("td", [_vm._v("11-12")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.counts[3]))]),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[6]))]),
               _vm._v(" "),
-              _c("td")
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[7]))])
             ])
           ])
         ]

@@ -18,13 +18,26 @@ class AppointmentController extends Controller
         return $appointments;
     }
 
-    public function getCount(){
+    public function getCountStatus(){
         $count1=Appointment::where('timeslot','8-9')->count();
         $count2=Appointment::where('timeslot','9-10')->count();
         $count3=Appointment::where('timeslot','10-11')->count();
         $count4=Appointment::where('timeslot','11-12')->count();
-        $count= array($count1,$count2,$count3,$count4);
+        $status1= $this->getStatus($count1);
+        $status2= $this->getStatus($count2);
+        $status3= $this->getStatus($count3);
+        $status4= $this->getStatus($count4);
+        $count= array($count1,$status1,$count2,$status2,$count3,$status3,$count4,$status4);
         return $count;
+    }
+
+    public function getStatus($count){
+        if($count>=20){
+            $status="Full";
+        }else{
+            $status="Not Full";
+        }
+        return $status;
     }
 
     public function add(Request $request)

@@ -22,6 +22,7 @@ Vue.component('welcome', require('./components/Welcome.vue'));
 
 // General componenets
 Vue.component('clock',require('./components/Clock.vue'));
+Vue.component('profile',require('./components/Profile.vue'));
 
 
 // Components of admin
@@ -31,6 +32,7 @@ Vue.component('users', require('./components/Admin/Users.vue'));
 Vue.component('patients', require('./components/Admin/Patients.vue')); 
 
 // Components of receptionist
+Vue.component('recept-dashboard', require('./components/Receptionist/Dashboard.vue'));
 Vue.component('patient-register', require('./components/Receptionist/Patient_Register.vue'));
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
 Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));

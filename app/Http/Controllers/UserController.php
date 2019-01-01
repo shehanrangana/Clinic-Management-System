@@ -3,12 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Mail\Password;
 use Hash;
+use Session;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {   
+        $this->middleware(function ($request, $next) {
+            $this->user = \Auth::user();
+            session(['user' => $this->user->user_id]); // set current user id as a session variable
+            return $next($request);
+        });
+    }
+
     public function admin()
     {
         return view('./admin/dashboard');
@@ -39,6 +50,19 @@ class UserController extends Controller
         return view('./pharmacy/dashboard');
     }
 
+    // Retrieve logged user data
+    public function loadProfile($id)
+    {   
+        $user = User::where('user_id', $id)->get(); 
+        return view('./profile')->with('user', $user);
+    }
+
+    // Update user profile
+    public function updateProfile(Request $request) 
+    {
+        return DB::table('users')->where('user_id', $request[0])
+        ->update(['email'=> $request[1], 'contact_number' => $request[2], 'qualification'=> $request[3]]);
+    }
 
     /**
      * Display a listing of the resource.

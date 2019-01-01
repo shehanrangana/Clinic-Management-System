@@ -90,15 +90,13 @@ Route::group(['middleware' => 'App\Http\Middleware\NurseMiddleware'], function()
 Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], function() {
     Route::prefix('lab')->group(function(){
         Route::get('/', 'UserController@lab_assistant');
-        Route::get('/lab', function() {
-            return view('./lab/dashboard');
-        });
-        Route::get('/lab/upload' , function(){
+        
+        Route::get('/upload' , function(){
              return view('./lab/reportupload');
         });
-        Route::get('/lab/upload/show', 'LabReportController@index');
-        Route::get('/lab/upload/getReport', 'LabReportController@getReport');
-        Route::post('/lab/upload/store' , 'LabReportController@store')->name("hhh");
+        Route::get('/upload/show', 'LabReportController@index');
+        Route::get('/upload/getReport', 'LabReportController@getReport');
+        Route::post('/upload/store' , 'LabReportController@store')->name("hhh");
         Route::get('/test', function () {
             return asset('uploads/1MztetsHpGOO6AgB1mvxaQNxKZBTmGz3EthpuU3K.pdf');
         });
@@ -110,6 +108,10 @@ Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], fun
 Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], function() {
     Route::prefix('pharmacy')->group(function(){
         Route::get('/', 'UserController@pharmacist');
+        
+        Route::get('/addDrugs', function() {
+            return view('./pharmacy/addingdrugs');
+        });
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });

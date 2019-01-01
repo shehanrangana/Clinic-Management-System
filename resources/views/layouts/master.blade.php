@@ -14,6 +14,8 @@
     <!-- App css -->
     <!-- <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
     <!-- <link href="/css/icons.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}"> -->
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed:400,700|Yantramanav" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">

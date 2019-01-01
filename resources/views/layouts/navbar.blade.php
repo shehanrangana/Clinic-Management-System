@@ -10,7 +10,7 @@
 
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-pills nav-fill">
-                    <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor' ,'lab']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor' ,'lab' ,'pharmacy']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin">DASHBOARD</a>
                         @elseif(Request::is(['recept', 'recept/*']))
@@ -19,66 +19,70 @@
                             <a class="nav-link" href="/doctor">DASHBOARD</a>
                         @elseif(Request::is(['lab', 'lab/*']))
                             <a class="nav-link" href="/lab">DASHBOARD</a>
+                        @elseif(Request::is(['pharmacy', 'pharmacy/*']))
+                            <a class="nav-link" href="/pharmacy">DASHBOARD</a>
                         @else
                             <a><i></i></a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/user_register', 'recept/queue']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/user_register', 'recept/queue' ,'lab/upload','pharmacy/addItem']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin/user_register">USER REGISTRATION</a>
+                            <a class="nav-link" href="/admin/user_register"></i>USER REGISTRATION</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="/recept/queue">QUEUE</a>
+                            <a class="nav-link" href="/recept/queue"><i class="ti-home"></i>QUEUE</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-
                             <a class="nav-link" href="#"><i class="ti-home"></i>PATIENTS</a>
-                        
-
-                            <a class="nav-link" href="#">PATIENTS</a>
-
+                        @elseif(Request::is(['lab', 'lab/*']))
+                            <a class="nav-link" href="/lab/upload"><i class="ti-home"></i>LAB REPORT</a>
+                        @elseif(Request::is(['pharmacy', 'pharmacy/*']))
+                            <a class="nav-link" href="/pharmacy/addItem"><i class="ti-home"></i>ADD DRUG</a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register' ,'lab/upload/show','pharmacy/searchPrescription']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin/users">USERS</a>
+                            <a class="nav-link" href="/admin/users"></i>USERS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="/recept/patient_register">PATIENT REGISTRATION</a>
+                            <a class="nav-link" href="/recept/patient_register"><i class="ti-home"></i>PATIENT REGISTRATION</a>
+                        @elseif(Request::is(['lab', 'lab/*']))
+                            <a class="nav-link" href="/lab/upload/show"><i class="ti-home"></i>DETAILS OF REPORT</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="#">PHARMACY</a>
+                            <a class="nav-link" href="#"><i class="ti-home"></i>PHARMACY</a>
+                        @elseif(Request::is(['pharmacy', 'pharmacy/*']))
+                            <a class="nav-link" href="/pharmacy/searchPrescription"><i class="ti-home"></i>SEARCH PRESCRIPTION</a>
                         @endif
                     </li>
 
-                    <li class="nav-item {{(Request::is(['admin/patients', 'recept/patients']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/patients', 'recept/patients','lab/upload/getReport','pharmacy/viewdrugs']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin/patients">PATIENTS</a>
+                            <a class="nav-link" href="/admin/patients"></i>PATIENTS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="/recept/patients">PATIENTS</a>
+                            <a class="nav-link" href="/recept/patients"><i class="ti-home"></i>PATIENTS</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="#">LAB REPORTS</a>
+                            <a class="nav-link" href="#"><i class="ti-home"></i>LAB REPORTS</a>
+                        @elseif(Request::is(['lab', 'lab/*']))
+                            <a class="nav-link" href="/lab/upload/getReport"><i class="ti-home"></i>DETAILS OF PDF</a>
+                        @elseif(Request::is(['pharmacy', 'pharmacy/*']))
+                            <a class="nav-link" href="/pharmacy/viewdrugs"><i class="ti-home"></i>DETAIL OF DRUGS</a>
                         @endif
                     </li>
 
-                    <li class="nav-item {{(Request::is(['admin/appointments', 'recept/appointments']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/appointments']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
-                            <a class="nav-link" href="/admin/appointments">APPOINTMENTS</a>
+                            <a class="nav-link" href="/admin/appointments""></i>APPOINTMENTS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
-                            <a class="nav-link" href="/recept/appointments">APPOINTMENTS</a>
+                            <a class="nav-link" href="#"><i class="ti-home"></i>APPOINTMENTS</a>
                         @endif
                     </li>
-
 
                     
-                    <li class="nav-item {{(Request::is(['admin/pharmacy']) ? 'active' : '')}}">    @if(Request::is(['admin', 'admin/*']))
+                    <!-- <li class="nav-item {{(Request::is(['admin/pharmacy']) ? 'active' : '')}}">    
+                        @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/pharmacy"></i>PHARMACY</a>
                         @endif
 
-
-                    @if(Request::is(['admin', 'admin/*']))
-                    <li class="nav-item {{(Request::is(['admin/pharmacy']) ? 'active' : '')}}">    
-                        <a class="nav-link" href="#">PHARMACY</a>
-
-                    </li>
+                    </li> -->
                     
-                    <li class="nav-item {{(Request::is(['lab/upload']) ? 'active' : '')}}">
+                    <!-- <li class="nav-item {{(Request::is(['lab/upload']) ? 'active' : '')}}">
                         @if(Request::is(['lab', 'lab/*']))
                             <a class="nav-link" href="/lab/upload""></i>LAB REPORT</a>
                             
@@ -99,7 +103,7 @@
 
                         @endif
                     </li>
-
+ -->
 
                 </ul>
             </div>

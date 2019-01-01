@@ -41,6 +41,7 @@ Vue.component('dashboard' , require('./components/LabAssistant/Dashboard.vue'));
 Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Upload.vue'));
 Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
 
+
 // Elements of admin
 
 // Components of doctor

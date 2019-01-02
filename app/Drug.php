@@ -10,7 +10,7 @@ class Drug extends Model
     protected $primaryKey = 'drug_id';
 
     protected $fillable = [
-        'name', 'brand', 'quantity', 'expire_date', 'supplier_email'
+        'drug_name', 'brand', 'quantity', 'expire_date', 'supplier_email'
     ];
 
 }

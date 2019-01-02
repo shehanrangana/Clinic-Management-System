@@ -68918,13 +68918,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             form: {
 
-                name: '',
+                drug_name: '',
                 quantity: '',
                 brand: null,
                 expire_date: '',
                 supplier_email: ''
             },
-            newDrug: { 'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' },
+            newDrug: { 'drug_name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' },
             drugs: [],
 
             // setup calander
@@ -68948,7 +68948,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var input = this.newDrug;
             axios.post('/pharmacy/addDrugs/store', input).then(function (response) {
-                _this.newDrugs = { 'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' };
+                _this.newDrugs = { 'drug_name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' };
             }).catch(function (err) {
                 _this.hasError = true;
             });
@@ -68958,7 +68958,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         var data = new FormData();
 
-        data.append('name', this.form.name);
+        data.append('drug_name', this.form.drug_name);
         data.append('quantity', this.form.quantity);
         data.append('brand', this.form.brand);
         data.append('expire_date', this.form.expire_date);
@@ -68992,32 +68992,34 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "name" } }, [_vm._v("Drugs Name")]),
+            _c("label", { attrs: { for: "drug_name" } }, [
+              _vm._v("Drugs Name")
+            ]),
             _vm._v(" "),
             _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.newDrug.name,
-                  expression: "newDrug.name"
+                  value: _vm.newDrug.drug_name,
+                  expression: "newDrug.drug_name"
                 }
               ],
               staticClass: "form-control",
               attrs: {
                 type: "text",
-                id: "name",
-                name: "name",
+                id: "drug_name",
+                name: "drug_name",
                 placeholder: "Enter drug name",
                 required: ""
               },
-              domProps: { value: _vm.newDrug.name },
+              domProps: { value: _vm.newDrug.drug_name },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.newDrug, "name", $event.target.value)
+                  _vm.$set(_vm.newDrug, "drug_name", $event.target.value)
                 }
               }
             })
@@ -69228,11 +69230,12 @@ if (false) {
 /* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(275)
 /* template */
-var __vue_template__ = null
+var __vue_template__ = __webpack_require__(276)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69250,6 +69253,22 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/js/components/Pharmacy/View_Prescription.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0af297c3", Component.options)
+  } else {
+    hotAPI.reload("data-v-0af297c3", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
 
 module.exports = Component.exports
 
@@ -69693,6 +69712,395 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-218f8cf6", module.exports)
+  }
+}
+
+/***/ }),
+/* 275 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(21);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["b" /* Table */]);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            users: [],
+            user_role_name: '',
+            sortBy: 'date',
+            sortDesc: false,
+            currentPage: 1,
+            perPage: 10,
+            totalRows: 0,
+            pageOptions: [5, 10, 15],
+            filter: null,
+            fields: [{ key: 'name', sortable: true }, { key: 'gender', sortable: false }, { key: 'email', sortable: false }, { key: 'contact_number', sortable: false }, { key: 'user_role', sortable: true }, { key: 'actions', sortable: false }]
+        };
+    },
+    mounted: function mounted() {
+        this.getUsers();
+    },
+
+
+    computed: {
+        sortOptions: function sortOptions() {
+            // Create an options list from our fields
+            return this.fields.filter(function (f) {
+                return f.sortable;
+            }).map(function (f) {
+                return { text: f.label, value: f.key };
+            });
+        }
+    },
+
+    methods: {
+        getUsers: function getUsers() {
+            var _this = this;
+
+            axios.get('/admin/users/show').then(function (response) {
+                // console.log(response.data);
+                for (var i = 0; i < response.data.length; i++) {
+                    if (response.data[i].user_role == 0) {
+                        response.data[i].user_role = "Admin";
+                    } else if (response.data[i].user_role == 1) {
+                        response.data[i].user_role = "Receptionist";
+                    } else if (response.data[i].user_role == 2) {
+                        response.data[i].user_role = "Doctor";
+                    } else if (response.data[i].user_role == 3) {
+                        response.data[i].user_role = "Nurse";
+                    } else if (response.data[i].user_role == 4) {
+                        response.data[i].user_role = "Lab Assistant";
+                    } else if (response.data[i].user_role == 5) {
+                        response.data[i].user_role = "Pharmacist";
+                    }
+                }
+                _this.users = response.data;
+            });
+        },
+        removeUser: function removeUser(user) {
+            var _this2 = this;
+
+            // console.log(user);
+            axios.post('/admin/users/remove/' + user.user_id).then(function (response) {
+                _this2.getUsers();
+            });
+        },
+
+
+        // Filter appointment table
+        onFiltered: function onFiltered(filteredItems) {
+            // Trigger pagination to update the number of buttons/pages due to filtering
+            this.totalRows = filteredItems.length;
+            this.currentPage = 1;
+        }
+    }
+});
+
+/***/ }),
+/* 276 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "inner-div" },
+      [
+        _c(
+          "b-row",
+          [
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c(
+                  "b-form-group",
+                  {
+                    staticClass: "mb-0",
+                    attrs: { horizontal: "", label: "Filter" }
+                  },
+                  [
+                    _c(
+                      "b-input-group",
+                      [
+                        _c("b-form-input", {
+                          attrs: { placeholder: "Type to Search" },
+                          model: {
+                            value: _vm.filter,
+                            callback: function($$v) {
+                              _vm.filter = $$v
+                            },
+                            expression: "filter"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "b-input-group-append",
+                          [
+                            _c(
+                              "b-btn",
+                              {
+                                attrs: { disabled: !_vm.filter },
+                                on: {
+                                  click: function($event) {
+                                    _vm.filter = ""
+                                  }
+                                }
+                              },
+                              [_vm._v("Clear")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c(
+                  "b-form-group",
+                  {
+                    staticClass: "mb-0",
+                    attrs: { horizontal: "", label: "Per page" }
+                  },
+                  [
+                    _c("b-form-select", {
+                      attrs: { options: _vm.pageOptions },
+                      model: {
+                        value: _vm.perPage,
+                        callback: function($$v) {
+                          _vm.perPage = $$v
+                        },
+                        expression: "perPage"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("b-table", {
+          attrs: {
+            responsive: "",
+            hover: "",
+            "sort-by": _vm.sortBy,
+            "sort-desc": _vm.sortDesc,
+            items: _vm.users,
+            fields: _vm.fields,
+            "current-page": _vm.currentPage,
+            "per-page": _vm.perPage,
+            filter: _vm.filter
+          },
+          on: {
+            "update:sortBy": function($event) {
+              _vm.sortBy = $event
+            },
+            "update:sortDesc": function($event) {
+              _vm.sortDesc = $event
+            },
+            filtered: _vm.onFiltered
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "actions",
+              fn: function(row) {
+                return [
+                  _c(
+                    "b-button",
+                    {
+                      attrs: { size: "sm" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          return row.toggleDetails($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n              " +
+                          _vm._s(row.detailsShowing ? "Hide" : "Show") +
+                          " Details\n          "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "mr-2",
+                      attrs: { size: "sm", variant: "danger" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.removeUser(row.item)
+                        }
+                      }
+                    },
+                    [_vm._v("Remove")]
+                  )
+                ]
+              }
+            },
+            {
+              key: "row-details",
+              fn: function(row) {
+                return [
+                  _c("b-card", [
+                    _c("li", [
+                      _vm._v("Birthday : " + _vm._s(row.item.birthday))
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _vm._v(
+                        "Qulifications : " + _vm._s(row.item.qualification)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _vm._v("SLMC Number : " + _vm._s(row.item.slmc_number))
+                    ])
+                  ])
+                ]
+              }
+            }
+          ])
+        }),
+        _vm._v(" "),
+        _c(
+          "b-row",
+          [
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c("b-pagination", {
+                  staticClass: "my-0",
+                  attrs: {
+                    "total-rows": _vm.totalRows,
+                    "per-page": _vm.perPage
+                  },
+                  model: {
+                    value: _vm.currentPage,
+                    callback: function($$v) {
+                      _vm.currentPage = $$v
+                    },
+                    expression: "currentPage"
+                  }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("\n      Sorting By: "),
+          _c("b", [_vm._v(_vm._s(_vm.sortBy))]),
+          _vm._v(",\n      Sort Direction: "),
+          _c("b", [_vm._v(_vm._s(_vm.sortDesc ? "Descending" : "Ascending"))])
+        ])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0af297c3", module.exports)
   }
 }
 

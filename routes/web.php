@@ -76,6 +76,7 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
         Route::get('/enterprescription' , function(){
              return view('./doctor/enterprescription');
         });
+        Route::post('/enterprescription/store', 'DoctorController@store');
         Route::get('/dashboard/get_queue', 'QueueController@getCurrentQueue');
         Route::get('/logout', 'Auth\LoginController@logout');
     });

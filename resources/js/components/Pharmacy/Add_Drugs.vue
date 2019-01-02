@@ -3,8 +3,8 @@
         <div class="container">
             <form @submit.prevent="addDrugs()">
                 <div class="form-group">
-                  <label for="name">Drugs Name</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter drug name" v-model="newDrug.name" required>
+                  <label for="drug_name">Drugs Name</label>
+                  <input type="text" class="form-control" id="drug_name" name="drug_name" placeholder="Enter drug name" v-model="newDrug.drug_name" required>
                 </div>
                 <div class="form-group">
                   <label for="quantity">Quantity of Drugs</label>
@@ -56,13 +56,13 @@ import DatePicker from 'vue2-datepicker';
             return {
                 form: {
         
-                    name: '',
+                    drug_name: '',
                     quantity:'',
                     brand: null,
                     expire_date:'',
                     supplier_email:'',
                 },
-                newDrug: {'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': ''},
+                newDrug: {'drug_name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': ''},
                 drugs: [],
 
                 // setup calander
@@ -83,7 +83,7 @@ import DatePicker from 'vue2-datepicker';
             addDrugs() {
                 var input = this.newDrug;
                 axios.post('/pharmacy/addDrugs/store', input).then((response) =>{
-                    this.newDrugs = {'name': '','quantity':'' , 'brand': 'NMRA', 'expire_date': '', 'supplier_email':''}
+                    this.newDrugs = {'drug_name': '','quantity':'' , 'brand': 'NMRA', 'expire_date': '', 'supplier_email':''}
                 }).catch(err => {
                     this.hasError = true;
                 });
@@ -94,7 +94,7 @@ import DatePicker from 'vue2-datepicker';
 
               let data = new FormData()
 
-              data.append('name', this.form.name)
+              data.append('drug_name', this.form.drug_name)
               data.append('quantity', this.form.quantity)
               data.append('brand', this.form.brand)
               data.append('expire_date', this.form.expire_date)

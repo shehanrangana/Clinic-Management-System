@@ -35,12 +35,12 @@
                 <div class="form-group">
                     <label for="email">Supplier Email address</label>
                     <input type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter supplier email" v-model="newDrug.supplier_email" required>
-                    <!-- <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
-                        This email address is already in database
-                    </div> -->
+                    
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
+                        This email address is already in database
+                </div>
+                <button type="submit"  @click.prevent="onSubmit"  class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
@@ -54,6 +54,14 @@ import DatePicker from 'vue2-datepicker';
 
         data() {
             return {
+                form: {
+        
+                    name: '',
+                    quantity:'',
+                    brand: null,
+                    expire_date:'',
+                    supplier_email:'',
+                },
                 newDrug: {'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': ''},
                 drugs: [],
 
@@ -80,6 +88,23 @@ import DatePicker from 'vue2-datepicker';
                     this.hasError = true;
                 });
             }
+        },
+        onSubmit (evt) {
+      
+
+              let data = new FormData()
+
+              data.append('name', this.form.name)
+              data.append('quantity', this.form.quantity)
+              data.append('brand', this.form.brand)
+              data.append('expire_date', this.form.expire_date)
+              
+              // console.log(data, this.form.file)
+              axios.post('/pharmacy/addDrugs/store', data)
+                .then(res => {
+                  console.log(res)
+                })
+        
         }
     }
 </script>

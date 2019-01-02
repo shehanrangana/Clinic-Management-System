@@ -73,6 +73,9 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
 Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function() {
     Route::prefix('doctor')->group(function(){
         Route::get('/', 'UserController@doctor');
+        Route::get('/enterprescription' , function(){
+             return view('./doctor/enterprescription');
+        });
         Route::get('/dashboard/get_queue', 'QueueController@getCurrentQueue');
         Route::get('/logout', 'Auth\LoginController@logout');
     });
@@ -111,6 +114,10 @@ Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], funct
         
         Route::get('/addDrugs', function() {
             return view('./pharmacy/addingdrugs');
+        });
+        Route::post('/addDrugs/store', 'PharmacyController@store');
+        Route::get('/viewPrescription', function () {
+            return view('./pharmacy/viewprescription');
         });
         Route::get('/logout', 'Auth\LoginController@logout');
     });

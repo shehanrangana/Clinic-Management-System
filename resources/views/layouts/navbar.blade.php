@@ -25,13 +25,13 @@
                             <a><i></i></a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/user_register', 'recept/queue' ,'lab/upload','pharmacy/addDrugs']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/user_register', 'recept/queue' ,'lab/upload','pharmacy/addDrugs','doctor/enterprescription']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/user_register"></i>USER REGISTRATION</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept/queue"><i class="ti-home"></i>QUEUE</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="#"><i class="ti-home"></i>PATIENTS</a>
+                            <a class="nav-link" href="doctor/enterprescription"><i class="ti-home"></i>Enter Prescription</a>
                         @elseif(Request::is(['lab', 'lab/*']))
                             <a class="nav-link" href="/lab/upload"><i class="ti-home"></i>LAB REPORT</a>
                         @elseif(Request::is(['pharmacy', 'pharmacy/*']))

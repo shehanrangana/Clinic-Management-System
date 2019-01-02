@@ -46,10 +46,12 @@ Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
 
 // Components of doctor
 Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
+Vue.component('enter-prescription', require('./components/Doctor/Enter_Prescription.vue'));
 
 // Vue primary instant
 Vue.component('dashboard', require('./components/Pharmacy/Dashboard.vue'));
 Vue.component('add-drugs', require('./components/Pharmacy/Add_Drugs.vue'));
+Vue.component('view-prescription', require('./components/Pharmacy/View_Prescription.vue'));
 
 const app = new Vue({
     el: '#app',

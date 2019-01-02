@@ -31376,6 +31376,7 @@ Vue.component('queue', __webpack_require__(238));
 Vue.component('queue-tables', __webpack_require__(243));
 
 // Components of nurse
+//Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
 Vue.component('make-appointment', __webpack_require__(249));
 Vue.component('appointment-count', __webpack_require__(254));
 Vue.component('appointment-list', __webpack_require__(259));
@@ -68061,7 +68062,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/Nurse/Make_Appointment.vue"
+Component.options.__file = "resources/js/components/Nurse/Make_Appointment_New.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -68070,9 +68071,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0dc15bab", Component.options)
+    hotAPI.createRecord("data-v-56269b28", Component.options)
   } else {
-    hotAPI.reload("data-v-0dc15bab", Component.options)
+    hotAPI.reload("data-v-56269b28", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -68093,13 +68094,13 @@ var content = __webpack_require__(251);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(11)("9e390e1e", content, false, {});
+var update = __webpack_require__(11)("175c7d2d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0dc15bab\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Make_Appointment.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0dc15bab\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Make_Appointment.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-56269b28\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Make_Appointment_New.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-56269b28\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Make_Appointment_New.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -68117,7 +68118,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n@media (min-width: 1200px) {\n.container{\n        max-width: 750px;\n}\n}\n.mx-datepicker {\n    width: 100%;\n}\n.mx-datepicker-popup {\n    z-index: 2000; /*bring datepicker to the front*/\n}\n.mx-input {\n    -webkit-box-shadow:none;\n    box-shadow: none;\n    height: 38px;\n}\n", ""]);
+exports.push([module.i, "\n@media (min-width: 1200px) {\n.container{\n        max-width: 750px;\n}\n}\n.mx-datepicker {\n    width: 100%;\n}\n.mx-datepicker-popup {\n    z-index: 2000; /*bring datepicker to the front*/\n}\n.mx-input {\n    -webkit-box-shadow:none;\n    box-shadow: none;\n    height: 38px;\n}\n.table td, .table th {\n    vertical-align: inherit;\n}\n\n", ""]);
 
 // exports
 
@@ -68164,6 +68165,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -68174,6 +68209,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             newAppointment: { 'patient_id': '', 'date': '', 'timeslot': '8-9' },
             appointments: [],
+            countStatus: [],
 
             // setup calander
             lang: {
@@ -68189,6 +68225,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+
+    mounted: function mounted() {
+        this.getCountStatus();
+    },
 
     methods: {
         getPatients: function getPatients() {
@@ -68218,6 +68258,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (err) {
                 _this3.hasError = true;
             });
+        },
+        getCountStatus: function getCountStatus() {
+            var _this4 = this;
+
+            axios.get('/nurse/make_appointment/count').then(function (response) {
+                _this4.countStatus = response.data;
+                //console.log(response.data);
+            });
         }
     }
 });
@@ -68231,12 +68279,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "inner-div" }, [
+    _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-sm table-bordered" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("8-9")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[0]))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[1]))])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("9-10")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[2]))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[3]))])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("10-11")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[4]))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[5]))])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("11-12")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[6]))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.countStatus[7]))])
+            ])
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "form",
       {
         on: {
           submit: function($event) {
-            $event.preventDefault()
             _vm.makeAppointment()
           }
         }
@@ -68365,13 +68456,28 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No of appointments")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0dc15bab", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-56269b28", module.exports)
   }
 }
 

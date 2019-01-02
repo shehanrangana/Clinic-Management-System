@@ -24,7 +24,7 @@
       <b-table responsive hover 
               :sort-by.sync="sortBy"
               :sort-desc.sync="sortDesc"
-              :items="users"
+              :items="drugs"
               :fields="fields"
               :current-page="currentPage"
               :per-page="perPage"
@@ -39,13 +39,13 @@
             </b-button>
 
             <!-- Remove patient button -->
-            <b-button size="sm" variant="danger" @click.stop="removeUser(row.item)" class="mr-2">Remove</b-button>
+            
         </template>
         <template slot="row-details" slot-scope="row">
             <b-card>
-                <li>Birthday : {{ row.item.birthday }}</li>
-                <li>Qulifications : {{ row.item.qualification }}</li>
-                <li>SLMC Number : {{ row.item.slmc_number }}</li>
+                <li>Quantity : {{ row.item.quantity }}</li>
+                <li>Expire Date : {{ row.item.expire_date }}</li>
+                <li>Supplier Email : {{ row.item.supplier_email }}</li>
             </b-card>
         </template>
 
@@ -72,8 +72,8 @@ Vue.use(Table);
 export default{
     data () {
         return {
-            users: [],
-            user_role_name: '',
+            drugs: [],
+            //user_role_name: '',
             sortBy: 'date',
             sortDesc: false,
             currentPage: 1,
@@ -82,18 +82,18 @@ export default{
             pageOptions: [ 5, 10, 15 ],
             filter: null,
             fields: [
-              { key: 'name', sortable: true },
-              { key: 'gender', sortable: false },
-              { key: 'email', sortable: false },
-              { key: 'contact_number', sortable: false },
-              { key: 'user_role', sortable: true },
-              { key: 'actions', sortable: false },
+              { key: 'drug_name', sortable: true },
+              { key: 'brand', sortable: false },
+              { key: 'quantity', sortable: false },
+              { key: 'expire_date', sortable: true },
+              { key: 'supplier_email', sortable: false },
+              
             ],
         }
     },
   
     mounted() {
-        this.getUsers();
+        this.getDrugs();
     },
 
     computed: {
@@ -106,34 +106,36 @@ export default{
     },
 
     methods: {
-        getUsers() {
-            axios.get('/admin/users/show').then((response) =>{
+        getDrugs() {
+            axios.get('/pharmacy/addDrugs/show').then((response) =>{
                 // console.log(response.data);
                 for(var i=0; i<response.data.length; i++){
-                    if(response.data[i].user_role == 0){
-                        response.data[i].user_role = "Admin"
-                    }else if(response.data[i].user_role == 1){
-                        response.data[i].user_role = "Receptionist"
-                    }else if(response.data[i].user_role == 2){
-                        response.data[i].user_role = "Doctor"
-                    }else if(response.data[i].user_role == 3){
-                        response.data[i].user_role = "Nurse"
-                    }else if(response.data[i].user_role == 4){
-                        response.data[i].user_role = "Lab Assistant"
-                    }else if(response.data[i].user_role == 5){
-                        response.data[i].user_role = "Pharmacist"
-                    }
+                    // if(response.data[i].user_role == 0){
+                    //     response.data[i].user_role = "Admin"
+                    // }else if(response.data[i].user_role == 1){
+                    //     response.data[i].user_role = "Receptionist"
+                    // }else if(response.data[i].user_role == 2){
+                    //     response.data[i].user_role = "Doctor"
+                    // }else if(response.data[i].user_role == 3){
+                    //     response.data[i].user_role = "Nurse"
+                    // }else if(response.data[i].user_role == 4){
+                    //     response.data[i].user_role = "Lab Assistant"
+                    // }else if(response.data[i].user_role == 5){
+                    //     response.data[i].user_role = "Pharmacist"
+                    // }
+                    response.data[i];
+
                 }
-                this.users = response.data;  
+                this.drugs = response.data;  
             })
         },
 
-        removeUser(user) {
-            // console.log(user);
-            axios.post('/admin/users/remove/' + user.user_id).then((response) =>{
-                this.getUsers();
-            })
-        },
+        // removeUser(user) {
+        //     // console.log(user);
+        //     axios.post('/admin/users/remove/' + user.user_id).then((response) =>{
+        //         this.getUsers();
+        //     })
+        // },
 
         // Filter appointment table
         onFiltered (filteredItems) {

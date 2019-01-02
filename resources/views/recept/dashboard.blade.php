@@ -4,6 +4,6 @@
 
 @section('content')
     <div>
-        <admin-dashboard></admin-dashboard>
+        <recept-dashboard></recept-dashboard>
     </div>
 @endsection

@@ -39,7 +39,7 @@
             </b-button>
 
             <!-- Remove patient button -->
-            
+            <b-button size="sm" variant="danger" @click.stop="removeDrug(row.item)" class="mr-2">Remove</b-button>
         </template>
         <template slot="row-details" slot-scope="row">
             <b-card>
@@ -110,19 +110,6 @@ export default{
             axios.get('/pharmacy/addDrugs/show').then((response) =>{
                 // console.log(response.data);
                 for(var i=0; i<response.data.length; i++){
-                    // if(response.data[i].user_role == 0){
-                    //     response.data[i].user_role = "Admin"
-                    // }else if(response.data[i].user_role == 1){
-                    //     response.data[i].user_role = "Receptionist"
-                    // }else if(response.data[i].user_role == 2){
-                    //     response.data[i].user_role = "Doctor"
-                    // }else if(response.data[i].user_role == 3){
-                    //     response.data[i].user_role = "Nurse"
-                    // }else if(response.data[i].user_role == 4){
-                    //     response.data[i].user_role = "Lab Assistant"
-                    // }else if(response.data[i].user_role == 5){
-                    //     response.data[i].user_role = "Pharmacist"
-                    // }
                     response.data[i];
 
                 }
@@ -130,12 +117,12 @@ export default{
             })
         },
 
-        // removeUser(user) {
-        //     // console.log(user);
-        //     axios.post('/admin/users/remove/' + user.user_id).then((response) =>{
-        //         this.getUsers();
-        //     })
-        // },
+        removeDrug(drugs) {
+            // console.log(user);
+            axios.post('/pharmacy/addDrugs/remove/' + drugs.drug_id).then((response) =>{
+                this.getDrugs();
+            })
+        },
 
         // Filter appointment table
         onFiltered (filteredItems) {

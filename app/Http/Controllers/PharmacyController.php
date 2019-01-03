@@ -36,6 +36,9 @@ class PharmacyController extends Controller
         return $drug;
         return redirect('/pharmacy/addingdrugs');
     }
-
+    public function destroy($id)
+    {
+        $drugs = Drug::find($id)->delete();
+    }
 
 }

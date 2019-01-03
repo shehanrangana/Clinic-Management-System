@@ -69824,32 +69824,20 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["b" /* Table *
             axios.get('/pharmacy/addDrugs/show').then(function (response) {
                 // console.log(response.data);
                 for (var i = 0; i < response.data.length; i++) {
-                    // if(response.data[i].user_role == 0){
-                    //     response.data[i].user_role = "Admin"
-                    // }else if(response.data[i].user_role == 1){
-                    //     response.data[i].user_role = "Receptionist"
-                    // }else if(response.data[i].user_role == 2){
-                    //     response.data[i].user_role = "Doctor"
-                    // }else if(response.data[i].user_role == 3){
-                    //     response.data[i].user_role = "Nurse"
-                    // }else if(response.data[i].user_role == 4){
-                    //     response.data[i].user_role = "Lab Assistant"
-                    // }else if(response.data[i].user_role == 5){
-                    //     response.data[i].user_role = "Pharmacist"
-                    // }
                     response.data[i];
                 }
                 _this.drugs = response.data;
             });
         },
+        removeDrug: function removeDrug(drugs) {
+            var _this2 = this;
 
+            // console.log(user);
+            axios.post('/pharmacy/addDrugs/remove/' + drugs.drug_id).then(function (response) {
+                _this2.getDrugs();
+            });
+        },
 
-        // removeUser(user) {
-        //     // console.log(user);
-        //     axios.post('/admin/users/remove/' + user.user_id).then((response) =>{
-        //         this.getUsers();
-        //     })
-        // },
 
         // Filter appointment table
         onFiltered: function onFiltered(filteredItems) {
@@ -70004,6 +69992,21 @@ var render = function() {
                           " Details\n          "
                       )
                     ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "mr-2",
+                      attrs: { size: "sm", variant: "danger" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.removeDrug(row.item)
+                        }
+                      }
+                    },
+                    [_vm._v("Remove")]
                   )
                 ]
               }

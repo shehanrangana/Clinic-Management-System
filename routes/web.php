@@ -121,6 +121,7 @@ Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], funct
             return view('./pharmacy/viewprescription');
         });
         Route::get('/addDrugs/show', 'PharmacyController@index');
+        Route::post('/addDrugs/remove/{drug_id}', 'PharmacyController@destroy');
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });

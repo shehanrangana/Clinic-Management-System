@@ -37,6 +37,9 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
         Route::get('/appointments', function () {
             return view('./admin/appointments');
         });
+        
+        Route::get('/profile/{id}', 'UserController@loadProfile');
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });
@@ -66,6 +69,9 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
         Route::get('/appointments', function () {
             return view('./recept/appointments');
         });
+
+        Route::get('/profile/{id}', 'UserController@loadProfile');
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });
@@ -78,6 +84,11 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
         });
         Route::post('/enterprescription/store', 'DoctorController@store');
         Route::get('/dashboard/get_queue', 'QueueController@getCurrentQueue');
+
+        Route::get('/dashboard/patient_history', 'PatientController@getPatientHistory');
+
+        Route::get('/profile/{id}', 'UserController@loadProfile');
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });
@@ -85,6 +96,9 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
 Route::group(['middleware' => 'App\Http\Middleware\NurseMiddleware'], function() {
     Route::prefix('nurse')->group(function(){
         Route::get('/', 'UserController@nurse');
+
+        Route::get('/profile/{id}', 'UserController@loadProfile');
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });
@@ -104,6 +118,9 @@ Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], fun
         Route::get('/test', function () {
             return asset('uploads/1MztetsHpGOO6AgB1mvxaQNxKZBTmGz3EthpuU3K.pdf');
         });
+
+        Route::get('/profile/{id}', 'UserController@loadProfile');
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });
@@ -122,6 +139,9 @@ Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], funct
         });
         Route::get('/addDrugs/show', 'PharmacyController@index');
         Route::post('/addDrugs/remove/{drug_id}', 'PharmacyController@destroy');
+
+        Route::get('/profile/{id}', 'UserController@loadProfile');
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });

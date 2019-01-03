@@ -105,7 +105,7 @@
               <div class="icon">
                 <i class="lnr lnr-pencil"></i>
               </div>
-              <h4>Content Writing</h4>
+              <h4>Computerized database</h4>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.</p>
             </div>
           </div>
@@ -114,7 +114,7 @@
               <div class="icon">
                 <i class="lnr lnr-code"></i>
               </div>
-              <h4>Web Development</h4>
+              <h4>Visual notifications</h4>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.</p>
             </div>
           </div>
@@ -123,7 +123,7 @@
               <div class="icon">
                 <i class="lnr lnr-mustache"></i>
               </div>
-              <h4>Business Consultancy</h4>
+              <h4>SMS notifications</h4>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.</p>
             </div>
           </div>

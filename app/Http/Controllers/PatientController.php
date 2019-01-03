@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Patient;
+use App\Prescription;
 
 class PatientController extends Controller
 {
@@ -132,5 +133,16 @@ class PatientController extends Controller
             $recentId = Patient::orderBy('patient_id', 'desc')->first()->patient_id;
             return $recentId;
         }
+    }
+
+    // Get patient medical history
+    public function getPatientHistory(Request $request)
+    {
+        $categorizedArray = array();
+        $patientHistory = Prescription::where('patient_id', $request->patient_id)->orderBy('date', 'desc')->get()->groupBy('date');
+        foreach ($patientHistory as $oneDay) {
+            array_push($categorizedArray, $oneDay);
+        }
+        return $categorizedArray;
     }
 }

@@ -11,6 +11,9 @@
     <!-- App Icons -->
     <!-- <link rel="shortcut icon" href="/images/favicon.ico"> -->
 
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
     <!-- App css -->
     <!-- <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
     <!-- <link href="/css/icons.css" rel="stylesheet" type="text/css" /> -->

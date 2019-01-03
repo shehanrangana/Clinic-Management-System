@@ -108,6 +108,8 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
 
         Route::get('/dashboard/get_queue', 'QueueController@getCurrentQueue');
 
+        Route::get('/dashboard/patient_history', 'PatientController@getPatientHistory');
+
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');

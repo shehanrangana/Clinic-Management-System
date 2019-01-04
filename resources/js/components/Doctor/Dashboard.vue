@@ -145,7 +145,6 @@ export default {
       axios.get("/doctor/dashboard/get_queue").then(response => {
         if (response.data != -1) {
           this.patientList = response.data;
-          // console.log(response.data);
         }
       });
     },
@@ -155,7 +154,7 @@ export default {
       this.selectedPatient = patient;
       axios.get("/doctor/dashboard/patient_history", {params: { patient_id: patient.patient_id }}).then(response => {
         this.patientHistory = response.data;
-        console.log(response.data);
+        // console.log(response.data);
       });
     },
 
@@ -172,10 +171,10 @@ export default {
     onSubmit() {
       this.prescriptionText = '';
       axios.post('/doctor/dashboard/prescription_store', [this.selectedPatient.patient_id, this.prescription, this.comment]).then((response) =>{
-        
+        this.patientHistory.unshift(response.data); // add new element beginning of the array
       }).catch(err => {
-        // this.hasError = true;
-        alert("sdsdsf");
+        // console.log(err);
+        alert("erro!");
       });
       this.prescription = [];
       this.comment = '';

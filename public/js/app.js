@@ -1770,29 +1770,6 @@ module.exports = g;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/*
- * Key Codes (events)
- */
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  SPACE: 32,
-  ENTER: 13,
-  ESC: 27,
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  PAGEUP: 33,
-  PAGEDOWN: 34,
-  HOME: 36,
-  END: 35
-});
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__alert__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__badge__ = __webpack_require__(121);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__breadcrumb__ = __webpack_require__(123);
@@ -1840,20 +1817,20 @@ module.exports = g;
 /* unused harmony reexport Collapse */
 /* unused harmony reexport Dropdown */
 /* unused harmony reexport Embed */
-/* unused harmony reexport Form */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_13__form__["a"]; });
 /* unused harmony reexport FormGroup */
 /* unused harmony reexport FormInput */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_18__form_textarea__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_18__form_textarea__["a"]; });
 /* unused harmony reexport FormFile */
 /* unused harmony reexport FormCheckbox */
 /* unused harmony reexport FormRadio */
 /* unused harmony reexport FormSelect */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_21__image__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_21__image__["a"]; });
 /* unused harmony reexport InputGroup */
 /* unused harmony reexport Jumbotron */
 /* unused harmony reexport Layout */
 /* unused harmony reexport Link */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_24__list_group__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_24__list_group__["a"]; });
 /* unused harmony reexport Media */
 /* unused harmony reexport Modal */
 /* unused harmony reexport Nav */
@@ -1862,7 +1839,7 @@ module.exports = g;
 /* unused harmony reexport PaginationNav */
 /* unused harmony reexport Popover */
 /* unused harmony reexport Progress */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_33__table__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_33__table__["a"]; });
 /* unused harmony reexport Tabs */
 /* unused harmony reexport Tooltip */
 
@@ -1903,6 +1880,29 @@ module.exports = g;
 
 
 
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/*
+ * Key Codes (events)
+ */
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  SPACE: 32,
+  ENTER: 13,
+  ESC: 27,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  PAGEUP: 33,
+  PAGEDOWN: 34,
+  HOME: 36,
+  END: 35
+});
 
 /***/ }),
 /* 17 */
@@ -28213,7 +28213,7 @@ var unbindTargets = function unbindTargets(vnode, binding, listenTypes) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__listen_on_root__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_array__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_object__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_key_codes__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_key_codes__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_bv_event_class__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_warn__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_dom__ = __webpack_require__(5);
@@ -29323,7 +29323,7 @@ Object(__WEBPACK_IMPORTED_MODULE_6__utils_plugins__["c" /* vueUse */])(VuePlugin
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_range__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_link_link__ = __webpack_require__(9);
 /*
@@ -64197,7 +64197,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(15);
 //
 //
 //
@@ -64269,10 +64269,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["b" /* Image */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["c" /* Image */]);
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* FormTextarea */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["b" /* FormTextarea */]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -64930,7 +64930,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__utils_plugins__["c" /* vueUse */])(VuePlugin
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_dom__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(16);
 
 
 
@@ -65416,7 +65416,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__utils_plugins__["c" /* vueUse */])(VuePlugin
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_observe_dom__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_key_codes__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_id__ = __webpack_require__(4);
 
@@ -67017,7 +67017,7 @@ var VuePlugin = {
 
 Object(__WEBPACK_IMPORTED_MODULE_5__utils_plugins__["c" /* vueUse */])(VuePlugin);
 
-/* unused harmony default export */ var _unused_webpack_default_export = (VuePlugin);
+/* harmony default export */ __webpack_exports__["a"] = (VuePlugin);
 
 /***/ }),
 /* 159 */
@@ -69128,7 +69128,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__utils_plugins__["c" /* vueUse */])(VuePlugin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_listen_on_root__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_observe_dom__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warn__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_key_codes__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_key_codes__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_bv_event_class__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_dom__ = __webpack_require__(5);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -71014,7 +71014,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__utils_plugins__["c" /* vueUse */])(VuePlugin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_get___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_get__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_loose_equal__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_stable_sort__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_key_codes__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_key_codes__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warn__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_object__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_array__ = __webpack_require__(3);
@@ -73591,7 +73591,7 @@ Object(__WEBPACK_IMPORTED_MODULE_2__utils_plugins__["c" /* vueUse */])(VuePlugin
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_key_codes__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_key_codes__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_observe_dom__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_id__ = __webpack_require__(4);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -75419,7 +75419,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(15);
 //
 //
 //
@@ -75489,7 +75489,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* Table */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table */]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -75855,7 +75855,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(15);
 //
 //
 //
@@ -75927,7 +75927,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* Table */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table */]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -77197,7 +77197,7 @@ exports.push([module.i, "\nbody {\n  /* this is why modal uses dynamic padding-r
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(15);
 //
 //
 //
@@ -77263,7 +77263,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* Table */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table */]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -78986,7 +78986,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n.inner-div {\r\n    padding: 10px 10px 10px 10px;\n}\n.col-4 {\r\n    padding-left: 0px;\r\n    padding-right: 0px;\n}\n.col-8 {\r\n    padding-right: 0px;\n}\n.card {\r\n    margin-bottom: 10px;\n}\n.badge {\r\n    /* padding: 0.75em; */\r\n    border-radius: 1rem;\r\n    margin-right: 1em;\n}\n.list-group-item {\r\n    padding: 5px 10px 5px 10px!important;\n}\r\n", ""]);
+exports.push([module.i, "\n.inner-div {\r\n  padding: 10px 10px 10px 10px;\n}\n.col-4 {\r\n  padding-left: 0px;\r\n  padding-right: 0px;\n}\n.col-8 {\r\n  padding-right: 0px;\n}\n.card {\r\n  margin-bottom: 10px;\n}\n.badge {\r\n  /* padding: 0.75em; */\r\n  border-radius: 1rem;\r\n  margin-right: 1em;\n}\n.list-group-item {\r\n  padding: 5px 10px 5px 10px !important;\n}\nselect {\r\n  width: 50%!important;\r\n  margin-right: auto;\n}\ninput {\r\n  width: 20%!important;\r\n  margin-right: auto;\n}\n.custom-control {\r\n  margin-right: auto;\n}\ntextarea {\r\n  width: 100%!important;\r\n  margin: 5px 0px 5px 0px;\n}\n#btn-submit {\r\n  width: 20%;\r\n  margin-right: auto;\n}\n#btn-reset {\r\n  width: 20%;\n}\n.p-id-name {\r\n  background:deepskyblue;\r\n  padding: 10px;\n}\n.text-center {\r\n  margin-bottom: 50px!important;\n}\r\n", ""]);
 
 // exports
 
@@ -78997,7 +78997,64 @@ exports.push([module.i, "\n.inner-div {\r\n    padding: 10px 10px 10px 10px;\n}\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(15);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -79034,51 +79091,114 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["c" /* ListGroup */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* ListGroup */]);
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            patientList: [],
-            patientHistory: []
-        };
-    },
-    created: function created() {
-        var _this = this;
+  data: function data() {
+    return {
+      patientList: [],
+      selectedPatient: [],
+      patientHistory: [],
+      drugList: [{ text: 'Select One', value: null }],
+      form: {
+        drug: "",
+        quantity: 0,
+        isLiquid: false
+      },
+      prescriptionText: '',
+      comment: '',
+      prescription: [],
+      today: ''
+    };
+  },
 
-        // This will fire whenever receptionist update queue
-        window.Echo.channel('queue-channel').listen('.queue-started', function (event) {
-            _this.getQueueList();
+
+  computed: {
+    // Get drug list
+    getDrugList: function getDrugList() {
+      var _this = this;
+
+      axios.get("/doctor/dashboard/get_drug_list").then(function (response) {
+        response.data.forEach(function (element) {
+          _this.drugList.push(element.name);
         });
-    },
-    mounted: function mounted() {
-        this.getQueueList();
-    },
-
-
-    methods: {
-        // Get patient list of current queue
-        getQueueList: function getQueueList() {
-            var _this2 = this;
-
-            axios.get('/doctor/dashboard/get_queue').then(function (response) {
-                if (response.data != -1) {
-                    _this2.patientList = response.data;
-                }
-            });
-        },
-
-
-        // Expand patient profile
-        expand: function expand(patient) {
-            var _this3 = this;
-
-            axios.get('/doctor/dashboard/patient_history', { params: { patient_id: patient.patient_id } }).then(function (response) {
-                _this3.patientHistory = response.data;
-                console.log(response.data);
-            });
-        }
+      });
     }
+  },
+
+  created: function created() {
+    var _this2 = this;
+
+    // This will fire whenever receptionist update queue
+    window.Echo.channel("queue-channel").listen(".queue-started", function (event) {
+      _this2.getQueueList();
+    });
+  },
+  mounted: function mounted() {
+    this.getQueueList();
+    this.getDrugList;
+    this.today = new Date();
+  },
+
+
+  methods: {
+    // Get patient list of current queue
+    getQueueList: function getQueueList() {
+      var _this3 = this;
+
+      axios.get("/doctor/dashboard/get_queue").then(function (response) {
+        if (response.data != -1) {
+          _this3.patientList = response.data;
+          // console.log(response.data);
+        }
+      });
+    },
+
+
+    // Expand patient medical history
+    expand: function expand(patient) {
+      var _this4 = this;
+
+      this.selectedPatient = patient;
+      axios.get("/doctor/dashboard/patient_history", { params: { patient_id: patient.patient_id } }).then(function (response) {
+        _this4.patientHistory = response.data;
+        console.log(response.data);
+      });
+    },
+
+
+    // Add drug to array one by one
+    addDrug: function addDrug() {
+      if (this.form.drug != '' && this.form.quantity != 0) {
+        this.prescriptionText += this.form.drug + "; ";
+        this.prescription.push(this.form);
+        this.form = { drug: "", quantity: 0, isLiquid: false };
+      }
+    },
+
+
+    // Submit form
+    onSubmit: function onSubmit() {
+      this.prescriptionText = '';
+      axios.post('/doctor/dashboard/prescription_store', [this.selectedPatient.patient_id, this.prescription, this.comment]).then(function (response) {}).catch(function (err) {
+        // this.hasError = true;
+        alert("sdsdsf");
+      });
+      this.prescription = [];
+      this.comment = '';
+    },
+
+
+    // Reset form
+    onReset: function onReset() {
+      this.form = { drug: "", quantity: 0, isLiquid: false };
+      this.prescriptionText = '';
+      this.comment = '';
+    }
+  }
 });
 
 /***/ }),
@@ -79092,99 +79212,316 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "b-row",
-        [
-          _c("b-col", { attrs: { cols: "3" } }, [
-            _c("h5", [_vm._v("Queue List")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "inner-div" },
-              [
+      this.selectedPatient != ""
+        ? _c(
+            "div",
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "b-row",
+                { staticClass: "text-center" },
+                [
+                  _c("b-col", [
+                    _c("h5", { staticClass: "p-id-name" }, [
+                      _vm._v(_vm._s(this.selectedPatient.name))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("b-col", [
+                    _c("h5", { staticClass: "p-id-name" }, [
+                      _c("strong", [_vm._v("ID : ")]),
+                      _vm._v(_vm._s(this.selectedPatient.patient_id))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("b-col", [
+                    _c("h5", { staticClass: "p-id-name" }, [
+                      _c("strong", [_vm._v("Birthday: ")]),
+                      _vm._v(_vm._s(this.selectedPatient.birthday))
+                    ])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      this.patientList != ""
+        ? _c(
+            "b-row",
+            [
+              _c("b-col", { attrs: { cols: "3" } }, [
+                _c("h5", [_c("b", [_vm._v("Queue List")])]),
+                _vm._v(" "),
                 _c(
-                  "b-list-group",
-                  _vm._l(_vm.patientList, function(patient) {
-                    return _c(
-                      "b-list-group-item",
-                      {
-                        key: patient.index,
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            _vm.expand(patient)
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "h6",
-                          [
-                            _c(
-                              "b-badge",
-                              { attrs: { variant: "info", pil: "" } },
-                              [_vm._v(_vm._s(patient.number))]
-                            ),
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(patient.name)
-                            )
-                          ],
-                          1
-                        )
-                      ]
-                    )
-                  })
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("b-col", { attrs: { cols: "9" } }, [
-            _c("h5", [_vm._v("Patient Medical History")]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "inner-div" },
-              _vm._l(_vm.patientHistory, function(oneDay) {
-                return _c(
                   "div",
-                  { key: oneDay.index },
+                  { staticClass: "inner-div" },
                   [
                     _c(
-                      "b-card",
-                      { attrs: { "sub-title": oneDay[0].date } },
-                      _vm._l(oneDay, function(item) {
-                        return _c("p", { key: item.index }, [
-                          _c("b", [
-                            _vm._v(
-                              _vm._s(item.drug_name) +
-                                " " +
-                                _vm._s(item.quantity)
+                      "b-list-group",
+                      _vm._l(_vm.patientList, function(patient) {
+                        return _c(
+                          "b-list-group-item",
+                          {
+                            key: patient.index,
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                _vm.expand(patient)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "h6",
+                              [
+                                _c(
+                                  "b-badge",
+                                  { attrs: { variant: "info", pil: "" } },
+                                  [_vm._v(_vm._s(patient.number))]
+                                ),
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(patient.name) +
+                                    "\n            "
+                                )
+                              ],
+                              1
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("i", [_vm._v(_vm._s(item.comments))])
-                        ])
+                          ]
+                        )
                       })
                     )
                   ],
                   1
                 )
-              })
-            )
-          ])
-        ],
-        1
-      )
+              ]),
+              _vm._v(" "),
+              _c(
+                "b-col",
+                { attrs: { cols: "9" } },
+                [
+                  _c(
+                    "b-row",
+                    [
+                      _c("b-col", [
+                        _c("h5", [_c("b", [_vm._v("Form")])]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "inner-div" },
+                          [
+                            _c(
+                              "b-form",
+                              {
+                                attrs: { inline: "" },
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    _vm.onSubmit()
+                                  },
+                                  reset: function($event) {
+                                    $event.preventDefault()
+                                    _vm.onReset()
+                                  }
+                                }
+                              },
+                              [
+                                _c("b-form-select", {
+                                  attrs: { options: _vm.drugList },
+                                  model: {
+                                    value: _vm.form.drug,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.form, "drug", $$v)
+                                    },
+                                    expression: "form.drug"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("b-input", {
+                                  attrs: {
+                                    type: "number",
+                                    placeholder: "Quantity"
+                                  },
+                                  model: {
+                                    value: _vm.form.quantity,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.form, "quantity", $$v)
+                                    },
+                                    expression: "form.quantity"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "b-form-checkbox",
+                                  {
+                                    model: {
+                                      value: _vm.form.isLiquid,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.form, "isLiquid", $$v)
+                                      },
+                                      expression: "form.isLiquid"
+                                    }
+                                  },
+                                  [_vm._v("Liquid")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-button",
+                                  {
+                                    attrs: { variant: "info", size: "sm" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.addDrug()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Add")]
+                                ),
+                                _vm._v(" "),
+                                _c("b-form-textarea", {
+                                  attrs: {
+                                    disabled: "",
+                                    rows: 2,
+                                    "max-rows": 6
+                                  },
+                                  model: {
+                                    value: _vm.prescriptionText,
+                                    callback: function($$v) {
+                                      _vm.prescriptionText = $$v
+                                    },
+                                    expression: "prescriptionText"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("label", [_vm._v("Comment")]),
+                                _vm._v(" "),
+                                _c("b-form-textarea", {
+                                  attrs: { rows: 2, "max-rows": 6 },
+                                  model: {
+                                    value: _vm.comment,
+                                    callback: function($$v) {
+                                      _vm.comment = $$v
+                                    },
+                                    expression: "comment"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                this.selectedPatient != ""
+                                  ? _c(
+                                      "b-button",
+                                      {
+                                        attrs: {
+                                          id: "btn-submit",
+                                          type: "submit",
+                                          size: "sm",
+                                          variant: "success"
+                                        }
+                                      },
+                                      [_vm._v("Submit")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                this.selectedPatient != ""
+                                  ? _c(
+                                      "b-button",
+                                      {
+                                        attrs: {
+                                          id: "btn-reset",
+                                          type: "reset",
+                                          size: "sm",
+                                          variant: "danger"
+                                        }
+                                      },
+                                      [_vm._v("Reset")]
+                                    )
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-row",
+                    [
+                      _c("b-col", [
+                        this.patientHistory != ""
+                          ? _c(
+                              "div",
+                              { staticClass: "inner-div" },
+                              [
+                                _c("h5", [
+                                  _c("b", [_vm._v("Patient Medical History")])
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.patientHistory, function(oneDay) {
+                                  return _c(
+                                    "div",
+                                    { key: oneDay.index },
+                                    [
+                                      _c(
+                                        "b-card",
+                                        {
+                                          attrs: { "sub-title": oneDay[0].date }
+                                        },
+                                        _vm._l(oneDay, function(item) {
+                                          return _c("p", { key: item.index }, [
+                                            _c("b", [
+                                              _vm._v(
+                                                _vm._s(item.drug_name) +
+                                                  " : " +
+                                                  _vm._s(item.quantity)
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("br"),
+                                            _vm._v(" "),
+                                            _c("i", [
+                                              _vm._v(_vm._s(item.comments))
+                                            ])
+                                          ])
+                                        })
+                                      )
+                                    ],
+                                    1
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          : _vm._e()
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _c("b-row", [_vm._v("THERE ARE NO ACTIVE QUEUE")])
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", [_c("b", [_vm._v("Current Patient")])])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

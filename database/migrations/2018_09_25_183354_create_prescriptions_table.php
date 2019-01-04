@@ -18,6 +18,7 @@ class CreatePrescriptionsTable extends Migration
             $table->string('date', 10);
             $table->string('drug_name', 50);
             $table->integer('quantity');
+            $table->boolean('unit')->default(0); // 0-tablet 1-liquid
             $table->string('comments', 255)->nullable();;
             $table->timestamps();
             $table->primary(['patient_id', 'date', 'drug_name']);

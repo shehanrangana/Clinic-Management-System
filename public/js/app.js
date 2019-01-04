@@ -79165,7 +79165,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */
       axios.get("/doctor/dashboard/get_queue").then(function (response) {
         if (response.data != -1) {
           _this3.patientList = response.data;
-          // console.log(response.data);
         }
       });
     },
@@ -79178,7 +79177,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */
       this.selectedPatient = patient;
       axios.get("/doctor/dashboard/patient_history", { params: { patient_id: patient.patient_id } }).then(function (response) {
         _this4.patientHistory = response.data;
-        console.log(response.data);
+        // console.log(response.data);
       });
     },
 
@@ -79195,10 +79194,14 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */
 
     // Submit form
     onSubmit: function onSubmit() {
+      var _this5 = this;
+
       this.prescriptionText = '';
-      axios.post('/doctor/dashboard/prescription_store', [this.selectedPatient.patient_id, this.prescription, this.comment]).then(function (response) {}).catch(function (err) {
-        // this.hasError = true;
-        alert("sdsdsf");
+      axios.post('/doctor/dashboard/prescription_store', [this.selectedPatient.patient_id, this.prescription, this.comment]).then(function (response) {
+        _this5.patientHistory.unshift(response.data); // add new element beginning of the array
+      }).catch(function (err) {
+        // console.log(err);
+        alert("erro!");
       });
       this.prescription = [];
       this.comment = '';

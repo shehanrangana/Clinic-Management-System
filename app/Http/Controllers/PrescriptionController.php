@@ -39,7 +39,7 @@ class PrescriptionController extends Controller
     {
         $patient_id = $request[0];
         $isFirstTime = true;
-        $categorizedArray = array();
+        $recentPrescription = array();
         foreach ($request[1] as $drug) {
             if(!empty($drug['drug'])){ // insert into prescription if $drug is not null
                 $prescription = new Prescription();
@@ -49,7 +49,7 @@ class PrescriptionController extends Controller
                 $prescription->quantity = $drug['quantity'];
                 $prescription->unit = $drug['isLiquid'];
                 $prescription->save();
-                array_push($categorizedArray, $prescription);
+                array_push($recentPrescription, $prescription);
             }
             // This execute only first time
             if($isFirstTime) {
@@ -58,7 +58,7 @@ class PrescriptionController extends Controller
             }
             $isFirstTime = false;
         }
-        return $categorizedArray;
+        return $recentPrescription;
         
     }
 

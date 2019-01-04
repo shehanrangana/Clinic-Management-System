@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- Patient details -->
-    <div v-if="this.selectedPatient != ''">
-      <h5><b>Current Patient</b></h5>
+    <div v-if="this.selectedPatient != '' && this.currentPatient != 0">
+      <h5><b>Current Patient</b></h5><hr>
       <b-row class="text-center">
         <b-col>
           <h5 class="p-id-name">{{this.selectedPatient.name}}</h5>
@@ -17,15 +17,15 @@
     </div>
     <b-row v-if="this.patientList != ''">
       <b-col cols="3">
-        <h5>
-          <b>Queue List</b>
-        </h5>
+        <h5><b>Queue List</b></h5><hr>
+        <div v-if="patientList[currentPatient]">
+          <b-button id="btn-queue-start" @click="expand(patientList[currentPatient])" size="sm">Call</b-button>  <!-- queue calling button -->
+          <hr>
+        </div>
         <div class="inner-div">
           <!-- Queue list -->
           <b-list-group>
             <b-list-group-item
-              href="#"
-              @click="expand(patient)"
               v-for="patient in patientList"
               :key="patient.index"
             >
@@ -40,8 +40,8 @@
       <b-col cols="9">
         <b-row>
           <b-col>
-            
             <h5><b>Form</b></h5>
+            <hr>
             <div class="inner-div">
               <!-- Prescription entering form -->
               <b-form inline @submit.prevent="onSubmit()" @reset.prevent="onReset()">
@@ -101,6 +101,7 @@ export default {
     return {
       patientList: [],
       selectedPatient: [],
+      currentPatient: 0,
       patientHistory: [],
       drugList: [{ text: 'Select One', value: null },],
       form: {
@@ -140,11 +141,14 @@ export default {
   },
 
   methods: {
+
     // Get patient list of current queue
     getQueueList() {
       axios.get("/doctor/dashboard/get_queue").then(response => {
         if (response.data != -1) {
-          this.patientList = response.data;
+          this.patientList = response.data.queue; // set patient queue
+          this.currentPatient = response.data.current; // set current number of the queue
+          this.selectedPatient = this.patientList[this.currentPatient-1]; // set selected patient
         }
       });
     },
@@ -153,9 +157,11 @@ export default {
     expand(patient) {
       this.selectedPatient = patient;
       axios.get("/doctor/dashboard/patient_history", {params: { patient_id: patient.patient_id }}).then(response => {
-        this.patientHistory = response.data;
-        // console.log(response.data);
+        this.patientHistory = response.data.patient_history;
+        this.currentPatient = response.data.current;
+        // console.log(response.data.current);
       });
+      
     },
 
     // Add drug to array one by one
@@ -240,5 +246,10 @@ textarea {
 }
 .text-center {
   margin-bottom: 50px!important;
+}
+#btn-queue-start {
+  width: 100%;
+  background: steelblue;
+  border-color: steelblue;
 }
 </style>

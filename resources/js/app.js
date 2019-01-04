@@ -37,10 +37,23 @@ Vue.component('patient-register', require('./components/Receptionist/Patient_Reg
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
 Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));
 
+//Component of Lab Assistant
+Vue.component('dashboard' , require('./components/LabAssistant/Dashboard.vue'));
+
+Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Upload.vue'));
+Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
+
+
+// Elements of admin
+
 // Components of doctor
 Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
 
 // Vue primary instant
+Vue.component('dashboard', require('./components/Pharmacy/Dashboard.vue'));
+Vue.component('add-drugs', require('./components/Pharmacy/Add_Drugs.vue'));
+Vue.component('view-prescription', require('./components/Pharmacy/View_Prescription.vue'));
+
 const app = new Vue({
     el: '#app',
 });

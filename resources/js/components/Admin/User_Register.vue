@@ -57,6 +57,7 @@
                     </div>
                 </div>
 
+
                 <div class="form-group">
                     <label for="qualification">Qualification</label>
                     <select class="form-control" id="qualification" name="qualification" v-model="newUser.qualification" required>

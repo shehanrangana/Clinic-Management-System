@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use App\Patient;
 use App\Prescription;
 
@@ -138,11 +139,18 @@ class PatientController extends Controller
     // Get patient medical history
     public function getPatientHistory(Request $request)
     {
+        // Get particular patient's medical history
         $categorizedArray = array();
         $patientHistory = Prescription::where('patient_id', $request->patient_id)->orderBy('date', 'desc')->get()->groupBy('date');
         foreach ($patientHistory as $oneDay) {
             array_push($categorizedArray, $oneDay);
         }
-        return $categorizedArray;
+
+        // Update queue_summary table to update current number
+        DB::table('queue_summary')->where('status', 1)->update(['current'=> DB::raw('current+1')]);
+        // Get current number from the active queue
+        $current = DB::table('queue_summary')->where('status', 1)->select('current')->get();
+
+        return ['patient_history'=>$categorizedArray, 'current'=> $current[0]->current];
     }
 }

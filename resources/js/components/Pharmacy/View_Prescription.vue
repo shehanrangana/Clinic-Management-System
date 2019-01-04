@@ -33,21 +33,12 @@
       >
 
         <template slot="actions" slot-scope="row">
-            <!-- Show details button -->
-            <b-button size="sm" @click.stop="row.toggleDetails">
-                {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-            </b-button>
+          
 
             <!-- Remove patient button -->
             <b-button size="sm" variant="danger" @click.stop="removeDrug(row.item)" class="mr-2">Remove</b-button>
         </template>
-        <template slot="row-details" slot-scope="row">
-            <b-card>
-                <li>Quantity : {{ row.item.quantity }}</li>
-                <li>Expire Date : {{ row.item.expire_date }}</li>
-                <li>Supplier Email : {{ row.item.supplier_email }}</li>
-            </b-card>
-        </template>
+        
 
       </b-table>
 
@@ -82,11 +73,12 @@ export default{
             pageOptions: [ 5, 10, 15 ],
             filter: null,
             fields: [
-              { key: 'drug_name', sortable: true },
+              { key: 'name', sortable: true },
               { key: 'brand', sortable: false },
               { key: 'quantity', sortable: false },
               { key: 'expire_date', sortable: true },
               { key: 'supplier_email', sortable: false },
+              { key: 'actions', sortable: false },
               
             ],
         }
@@ -108,11 +100,11 @@ export default{
     methods: {
         getDrugs() {
             axios.get('/pharmacy/addDrugs/show').then((response) =>{
-                // console.log(response.data);
-                for(var i=0; i<response.data.length; i++){
-                    response.data[i];
+                console.log(response.data);
+                // for(var i=0; i<response.data.length; i++){
+                //     response.data[i];
 
-                }
+                // }
                 this.drugs = response.data;  
             })
         },

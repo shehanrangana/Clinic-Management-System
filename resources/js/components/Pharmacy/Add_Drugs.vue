@@ -2,45 +2,50 @@
     <div class="inner-div">
         <div class="container">
             <form @submit.prevent="addDrugs()">
-                <div class="form-group">
-                  <label for="drug_name">Drugs Name</label>
-                  <input type="text" class="form-control" id="drug_name" name="drug_name" placeholder="Enter drug name" v-model="newDrug.drug_name" required>
-                </div>
-                <div class="form-group">
-                  <label for="quantity">Quantity of Drugs</label>
-                  <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter drug quantity" v-model="newDrug.quantity" required>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                          <label for="name">Drug Name</label>
+                          <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" v-model="newDrugs.name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Quantity of Drugs</label>
+                            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity of drugs" v-model="newDrugs.quantity" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="brand">Brand of Drug</label>
-                            <select class="form-control" id="brand" name="brand" v-model="newDrug.brand" required>
+                            <label for="brand">Brand of Drugs</label>
+                            <select class="form-control" id="brand" name="brand" v-model="newDrugs.brand" required>
                                 <option>NMRA</option>
                                 <option>SLMA</option>
                                 <option>MDMA</option>
                                 <option>MLSLA</option>
                                 <option>SLI</option>
-                            </select>
 
+                            </select>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="expireDate">Expire Date</label>
+                            <label for="expire_date">Expire Date</label>
                             <br>
-                            <date-picker :lang="lang" name="expire_date" v-model="newDrug.expire_date" style="font-family: 'Roboto', sans-serif;"></date-picker>
+                            <date-picker :lang="lang" name="expire_date" v-model="newDrugs.expire_date" style="font-family: 'Roboto', sans-serif;"></date-picker>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email">Supplier Email address</label>
-                    <input type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter supplier email" v-model="newDrug.supplier_email" required>
-                    
-                </div>
-                <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
+                    <label for="email">Supplier email address</label>
+                    <input type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter email" v-model="newDrugs.supplier_email" required>
+                    <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
                         This email address is already in database
+                    </div>
                 </div>
-                <button type="submit"  @click.prevent="onSubmit"  class="btn btn-primary">Submit</button>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
@@ -54,15 +59,7 @@ import DatePicker from 'vue2-datepicker';
 
         data() {
             return {
-                form: {
-        
-                    drug_name: '',
-                    quantity:'',
-                    brand: null,
-                    expire_date:'',
-                    supplier_email:'',
-                },
-                newDrug: {'drug_name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': ''},
+                newDrugs: {'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': ''},
                 drugs: [],
 
                 // setup calander
@@ -81,30 +78,13 @@ import DatePicker from 'vue2-datepicker';
 
         methods: {
             addDrugs() {
-                var input = this.newDrug;
+                var input = this.newDrugs;
                 axios.post('/pharmacy/addDrugs/store', input).then((response) =>{
-                    this.newDrugs = {'drug_name': '','quantity':'' , 'brand': 'NMRA', 'expire_date': '', 'supplier_email':''}
+                    this.newDrugs = {'name': '','quantity':'' , 'brand': 'NMRA', 'expire_date': '', 'supplier_email':''}
                 }).catch(err => {
                     this.hasError = true;
                 });
             }
-        },
-        onSubmit (evt) {
-      
-
-              let data = new FormData()
-
-              data.append('drug_name', this.form.drug_name)
-              data.append('quantity', this.form.quantity)
-              data.append('brand', this.form.brand)
-              data.append('expire_date', this.form.expire_date)
-              
-              // console.log(data, this.form.file)
-              axios.post('/pharmacy/addDrugs/store', data)
-                .then(res => {
-                  console.log(res)
-                })
-        
         }
     }
 </script>

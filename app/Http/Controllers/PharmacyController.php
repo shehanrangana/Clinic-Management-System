@@ -23,7 +23,7 @@ class PharmacyController extends Controller
        
 
         $drug = new Drug();
-        $drug->drug_name = $request->drug_name;
+        $drug->name = $request->name;
         $drug->brand = $request->brand;
         $drug->quantity = $request->quantity;
         $drug->expire_date = $_expiredate;

@@ -111,11 +111,7 @@ export default{
         },
 
         getPdf(report_id) {
-            // console.log(user);
-            // axios.get('/lab/upload/getReport', {params: {report_id: report_id}}).then((response) =>{
-            //     this.getReport();
-            // })
-            // console.log(report_id);
+           
             this.url = report_id;
         },
 

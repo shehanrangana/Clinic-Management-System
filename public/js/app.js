@@ -68510,11 +68510,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* Table *
             });
         },
         getPdf: function getPdf(report_id) {
-            // console.log(user);
-            // axios.get('/lab/upload/getReport', {params: {report_id: report_id}}).then((response) =>{
-            //     this.getReport();
-            // })
-            // console.log(report_id);
+
             this.url = report_id;
         },
 
@@ -69170,6 +69166,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -69178,15 +69179,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            form: {
-
-                drug_name: '',
-                quantity: '',
-                brand: null,
-                expire_date: '',
-                supplier_email: ''
-            },
-            newDrug: { 'drug_name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' },
+            newDrugs: { 'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' },
             drugs: [],
 
             // setup calander
@@ -69208,27 +69201,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addDrugs: function addDrugs() {
             var _this = this;
 
-            var input = this.newDrug;
+            var input = this.newDrugs;
             axios.post('/pharmacy/addDrugs/store', input).then(function (response) {
-                _this.newDrugs = { 'drug_name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' };
+                _this.newDrugs = { 'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' };
             }).catch(function (err) {
                 _this.hasError = true;
             });
         }
-    },
-    onSubmit: function onSubmit(evt) {
-
-        var data = new FormData();
-
-        data.append('drug_name', this.form.drug_name);
-        data.append('quantity', this.form.quantity);
-        data.append('brand', this.form.brand);
-        data.append('expire_date', this.form.expire_date);
-
-        // console.log(data, this.form.file)
-        axios.post('/pharmacy/addDrugs/store', data).then(function (res) {
-            console.log(res);
-        });
     }
 });
 
@@ -69253,79 +69232,81 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "drug_name" } }, [
-              _vm._v("Drugs Name")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.newDrug.drug_name,
-                  expression: "newDrug.drug_name"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "drug_name",
-                name: "drug_name",
-                placeholder: "Enter drug name",
-                required: ""
-              },
-              domProps: { value: _vm.newDrug.drug_name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("Drug Name")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newDrugs.name,
+                      expression: "newDrugs.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "name",
+                    name: "name",
+                    placeholder: "Enter name",
+                    required: ""
+                  },
+                  domProps: { value: _vm.newDrugs.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.newDrugs, "name", $event.target.value)
+                    }
                   }
-                  _vm.$set(_vm.newDrug, "drug_name", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "quantity" } }, [
-              _vm._v("Quantity of Drugs")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.newDrug.quantity,
-                  expression: "newDrug.quantity"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "quantity",
-                name: "quantity",
-                placeholder: "Enter drug quantity",
-                required: ""
-              },
-              domProps: { value: _vm.newDrug.quantity },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "quantity" } }, [
+                  _vm._v("Quantity of Drugs")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newDrugs.quantity,
+                      expression: "newDrugs.quantity"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "quantity",
+                    name: "quantity",
+                    placeholder: "Enter quantity of drugs",
+                    required: ""
+                  },
+                  domProps: { value: _vm.newDrugs.quantity },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.newDrugs, "quantity", $event.target.value)
+                    }
                   }
-                  _vm.$set(_vm.newDrug, "quantity", $event.target.value)
-                }
-              }
-            })
+                })
+              ])
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col" }, [
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "brand" } }, [
-                  _vm._v("Brand of Drug")
+                  _vm._v("Brand of Drugs")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -69335,8 +69316,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.newDrug.brand,
-                        expression: "newDrug.brand"
+                        value: _vm.newDrugs.brand,
+                        expression: "newDrugs.brand"
                       }
                     ],
                     staticClass: "form-control",
@@ -69352,7 +69333,7 @@ var render = function() {
                             return val
                           })
                         _vm.$set(
-                          _vm.newDrug,
+                          _vm.newDrugs,
                           "brand",
                           $event.target.multiple
                             ? $$selectedVal
@@ -69381,7 +69362,7 @@ var render = function() {
                 "div",
                 { staticClass: "form-group" },
                 [
-                  _c("label", { attrs: { for: "expireDate" } }, [
+                  _c("label", { attrs: { for: "expire_date" } }, [
                     _vm._v("Expire Date")
                   ]),
                   _vm._v(" "),
@@ -69391,11 +69372,11 @@ var render = function() {
                     staticStyle: { "font-family": "'Roboto', sans-serif" },
                     attrs: { lang: _vm.lang, name: "expire_date" },
                     model: {
-                      value: _vm.newDrug.expire_date,
+                      value: _vm.newDrugs.expire_date,
                       callback: function($$v) {
-                        _vm.$set(_vm.newDrug, "expire_date", $$v)
+                        _vm.$set(_vm.newDrugs, "expire_date", $$v)
                       },
-                      expression: "newDrug.expire_date"
+                      expression: "newDrugs.expire_date"
                     }
                   })
                 ],
@@ -69406,7 +69387,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "email" } }, [
-              _vm._v("Supplier Email address")
+              _vm._v("Supplier email address")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -69414,8 +69395,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.newDrug.supplier_email,
-                  expression: "newDrug.supplier_email"
+                  value: _vm.newDrugs.supplier_email,
+                  expression: "newDrugs.supplier_email"
                 }
               ],
               staticClass: "form-control",
@@ -69423,47 +69404,38 @@ var render = function() {
                 type: "email",
                 id: "supplier_email",
                 name: "supplier_email",
-                placeholder: "Enter supplier email",
+                placeholder: "Enter email",
                 required: ""
               },
-              domProps: { value: _vm.newDrug.supplier_email },
+              domProps: { value: _vm.newDrugs.supplier_email },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.newDrug, "supplier_email", $event.target.value)
+                  _vm.$set(_vm.newDrugs, "supplier_email", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "alert alert-danger",
+                class: { "d-none": !_vm.hasError },
+                attrs: { role: "alert" }
+              },
+              [
+                _vm._v(
+                  "\n                    This email address is already in database\n                "
+                )
+              ]
+            )
           ]),
           _vm._v(" "),
           _c(
-            "div",
-            {
-              staticClass: "alert alert-danger",
-              class: { "d-none": !_vm.hasError },
-              attrs: { role: "alert" }
-            },
-            [
-              _vm._v(
-                "\n                    This email address is already in database\n            "
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
             "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "submit" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.onSubmit($event)
-                }
-              }
-            },
+            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
             [_vm._v("Submit")]
           )
         ]
@@ -69593,15 +69565,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* Table */]);
@@ -69618,7 +69581,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* Table *
             totalRows: 0,
             pageOptions: [5, 10, 15],
             filter: null,
-            fields: [{ key: 'drug_name', sortable: true }, { key: 'brand', sortable: false }, { key: 'quantity', sortable: false }, { key: 'expire_date', sortable: true }, { key: 'supplier_email', sortable: false }]
+            fields: [{ key: 'name', sortable: true }, { key: 'brand', sortable: false }, { key: 'quantity', sortable: false }, { key: 'expire_date', sortable: true }, { key: 'supplier_email', sortable: false }, { key: 'actions', sortable: false }]
         };
     },
     mounted: function mounted() {
@@ -69642,10 +69605,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* Table *
             var _this = this;
 
             axios.get('/pharmacy/addDrugs/show').then(function (response) {
-                // console.log(response.data);
-                for (var i = 0; i < response.data.length; i++) {
-                    response.data[i];
-                }
+                console.log(response.data);
+                // for(var i=0; i<response.data.length; i++){
+                //     response.data[i];
+
+                // }
                 _this.drugs = response.data;
             });
         },
@@ -69797,26 +69761,6 @@ var render = function() {
                   _c(
                     "b-button",
                     {
-                      attrs: { size: "sm" },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          return row.toggleDetails($event)
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(row.detailsShowing ? "Hide" : "Show") +
-                          " Details\n          "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-button",
-                    {
                       staticClass: "mr-2",
                       attrs: { size: "sm", variant: "danger" },
                       on: {
@@ -69828,28 +69772,6 @@ var render = function() {
                     },
                     [_vm._v("Remove")]
                   )
-                ]
-              }
-            },
-            {
-              key: "row-details",
-              fn: function(row) {
-                return [
-                  _c("b-card", [
-                    _c("li", [
-                      _vm._v("Quantity : " + _vm._s(row.item.quantity))
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _vm._v("Expire Date : " + _vm._s(row.item.expire_date))
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _vm._v(
-                        "Supplier Email : " + _vm._s(row.item.supplier_email)
-                      )
-                    ])
-                  ])
                 ]
               }
             }

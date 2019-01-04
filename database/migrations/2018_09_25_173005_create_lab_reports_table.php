@@ -16,8 +16,8 @@ class CreateLabReportsTable extends Migration
         Schema::create('lab_reports', function (Blueprint $table) {
             $table->increments('report_id');
             $table->string('patient_id', 5);
-            $table->string('test', 30);
-            $table->string('file', 30);
+            $table->string('test', 60);
+            $table->string('file', 255);
             $table->timestamps();
             $table->foreign('patient_id')->references('patient_id')->on('patients');
         });

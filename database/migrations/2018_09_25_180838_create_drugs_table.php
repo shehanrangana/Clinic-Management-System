@@ -15,7 +15,7 @@ class CreateDrugsTable extends Migration
     {
         Schema::create('drugs', function (Blueprint $table) {
             $table->increments('drug_id');
-            $table->string('drug_name', 50)->index();
+            $table->string('name', 50)->index();
             $table->string('brand', 30);
             $table->integer('quantity');
             $table->timestamps();

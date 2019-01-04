@@ -37,7 +37,7 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
         Route::get('/appointments', function () {
             return view('./admin/appointments');
         });
-        
+
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
@@ -79,10 +79,7 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
 Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function() {
     Route::prefix('doctor')->group(function(){
         Route::get('/', 'UserController@doctor');
-        Route::get('/enterprescription' , function(){
-             return view('./doctor/enterprescription');
-        });
-        Route::post('/enterprescription/store', 'DoctorController@store');
+
         Route::get('/dashboard/get_queue', 'QueueController@getCurrentQueue');
 
         Route::get('/dashboard/patient_history', 'PatientController@getPatientHistory');
@@ -112,8 +109,13 @@ Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], fun
         Route::get('/upload' , function(){
              return view('./lab/reportupload');
         });
+
+        Route::get('/upload/view', function () {
+            return view('./lab/reportview');
+        });
         Route::get('/upload/show', 'LabReportController@index');
         Route::get('/upload/getReport', 'LabReportController@getReport');
+        Route::post('/upload/remove/{report_id}', 'LabReportController@destroy');
         Route::post('/upload/store' , 'LabReportController@store')->name("hhh");
         Route::get('/test', function () {
             return asset('uploads/1MztetsHpGOO6AgB1mvxaQNxKZBTmGz3EthpuU3K.pdf');

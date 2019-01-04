@@ -38,13 +38,13 @@
                             <a class="nav-link" href="/pharmacy/addDrugs"><i class="ti-home"></i>ADD DRUG</a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register' ,'lab/upload/show','pharmacy/searchPrescription']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register' ,'lab/upload/view','pharmacy/searchPrescription']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/users"></i>USERS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept/patient_register"><i class="ti-home"></i>PATIENT REGISTRATION</a>
                         @elseif(Request::is(['lab', 'lab/*']))
-                            <a class="nav-link" href="/lab/upload/show"><i class="ti-home"></i>DETAILS OF REPORT</a>
+                            <a class="nav-link" href="/lab/upload/view"><i class="ti-home"></i>DETAILS OF REPORT</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="#"><i class="ti-home"></i>PHARMACY</a>
                         @elseif(Request::is(['pharmacy', 'pharmacy/*']))
@@ -52,15 +52,14 @@
                         @endif
                     </li>
 
-                    <li class="nav-item {{(Request::is(['admin/patients', 'recept/patients','lab/upload/getReport','pharmacy/viewdrugs']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/patients', 'recept/patients','pharmacy/viewdrugs']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/patients"></i>PATIENTS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept/patients"><i class="ti-home"></i>PATIENTS</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="#"><i class="ti-home"></i>LAB REPORTS</a>
-                        @elseif(Request::is(['lab', 'lab/*']))
-                            <a class="nav-link" href="/lab/upload/getReport"><i class="ti-home"></i>DETAILS OF PDF</a>
+                        
                         @elseif(Request::is(['pharmacy', 'pharmacy/*']))
                             <a class="nav-link" href="/pharmacy/viewdrugs"><i class="ti-home"></i>DETAIL OF DRUGS</a>
                         @endif

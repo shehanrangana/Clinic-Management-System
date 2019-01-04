@@ -1,73 +1,130 @@
 <template>
+  <div>
+    <!-- Users table -->
     <div class="inner-div">
-        <div class="table-responsive">
-            <table class="table table-sm table-bordered table-light table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Report ID</th>
-                        <th scope="col">Patient ID</th>
-                        <th scope="col">File Version</th>
-                        <th scope="col">File Name</th>
-                        
-                        <th scope="col">Create Date</th>
-                        <th scope="col">Update Date</th>
-                        <th scope="col">Print</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="report in reports">
+      <b-row>
+        <b-col md="6" class="my-1">
+          <b-form-group horizontal label="Filter" class="mb-0">
+            <b-input-group>
+              <b-form-input v-model="filter" placeholder="Type to Search" />
+              <b-input-group-append>
+                <b-btn :disabled="!filter" @click="filter = ''">Clear</b-btn>
+              </b-input-group-append>
+            </b-input-group>
+          </b-form-group>
+        </b-col>
+        <b-col md="6" class="my-1">
+          <b-form-group horizontal label="Per page" class="mb-0">
+            <b-form-select :options="pageOptions" v-model="perPage" />
+          </b-form-group>
+        </b-col>
+      </b-row>
 
-                        <td>{{ report.report_id }}</td>
-                        <td>{{ report.patient_id }}</td>
-                        <td>{{ report.test }}</td>
-                        <td>{{ report.file }}</td>
-                        <!-- <td><a href="{{asset('storage/uploads/{{ report.file }}')}}">report<a></td> -->
-                        <td>{{ report.created_at }}</td>
-                        <td>{{ report.updated_at }}</td>
-                        
-                        
-                        <td><button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="getpdf(report_id)">Print</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <!-- table-sorting.vue -->
+      <b-table responsive hover 
+              :sort-by.sync="sortBy"
+              :sort-desc.sync="sortDesc"
+              :items="lab_reports"
+              :fields="fields"
+              :current-page="currentPage"
+              :per-page="perPage"
+              :filter="filter"
+              @filtered="onFiltered"
+      >
+
+        <template slot="actions" slot-scope="row">
+            
+            <b-button type="button" :href="'/storage/' + row.item.file">View</b-button>
+            <b-button size="sm" variant="danger" @click.stop="removeReport(row.item)" class="mr-2">Remove</b-button>
+        </template>
+        
+      </b-table>
+
+      <!-- pagination -->
+      <b-row>
+        <b-col md="6" class="my-1">
+          <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
+        </b-col>
+      </b-row>
+      <p>
+        Sorting By: <b>{{ sortBy }}</b>,
+        Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
+      </p>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
+import { Table } from 'bootstrap-vue/es/components';
+Vue.use(Table);
 
-        data() {
-            return {
-                reports: [],
-                //user_role_name: '',
-            }
-        },
+export default{
+    data () {
+        return {
+            lab_reports: [],
+           
+            sortBy: 'date',
+            sortDesc: false,
+            currentPage: 1,
+            perPage: 10,
+            totalRows: 0,
+            pageOptions: [ 5, 10, 15 ],
+            filter: null,
+            fields: [
+              { key: 'patient_id', sortable: true },
+              { key: 'test', sortable: false },
+              
 
-        mounted() {
-            this.getReport();
-        },
-
-        methods: {
-            getReport() {
-                axios.get('/lab/upload/show').then((response) =>{
-                    this.reports = response.data;
-                    // console.log(response.data);
-                })
-            },
-
-            getpdf(report_id) {
-                axios.get('/lab/upload/getReport' + reports.report_id).then( (response)=>{
-                     this.getReport();
-                })
-            }
+              { key: 'actions', sortable: false },
+              
+            ],
+            url: '',
         }
-    }
-</script>
+    },
+  
+    mounted() {
+        this.getReport();
+    },
 
-<style>
-    .table td, .table th {
-        vertical-align: inherit;
+    computed: {
+        sortOptions () {
+          // Create an options list from our fields
+          return this.fields
+            .filter(f => f.sortable)
+            .map(f => { return { text: f.label, value: f.key } })
+        },
+    },
+
+    methods: {
+        getReport() {
+            axios.get('/lab/upload/show').then((response) =>{
+                this.lab_reports = response.data;  
+                console.log(this.lab_reports);
+            })
+        },
+
+        removeReport(lab_reports) {
+            // console.log(user);
+            axios.post('/lab/upload/remove/' + lab_reports.report_id).then((response) =>{
+                this.getReport();
+            })
+        },
+
+        getPdf(report_id) {
+            // console.log(user);
+            // axios.get('/lab/upload/getReport', {params: {report_id: report_id}}).then((response) =>{
+            //     this.getReport();
+            // })
+            // console.log(report_id);
+            this.url = report_id;
+        },
+
+        // Filter appointment table
+        onFiltered (filteredItems) {
+            // Trigger pagination to update the number of buttons/pages due to filtering
+            this.totalRows = filteredItems.length
+            this.currentPage = 1
+        },
     }
-</style>
+}
+</script>

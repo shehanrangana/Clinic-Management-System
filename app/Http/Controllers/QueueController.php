@@ -166,7 +166,7 @@ class QueueController extends Controller
         }
 
         // Get patients data using query builder (join 'patients' table and one of queue table) & pass current queue number
-        return ['queue'=> DB::table($queueNo)->join('patients', 'patients.patient_id', "$queueNo.patient_id")->get(), 'current'=> $activeQueueDetails[0]->current];
+        return ['queue'=> DB::table($queueNo)->join('patients', 'patients.patient_id', "$queueNo.patient_id")->get(), 'active'=> $activeQueueDetails[0]];
     }
 
     // This method will return active queue 

@@ -85,6 +85,16 @@ class UserController extends Controller
         //
     }
 
+    // Check whether entered email exist or not
+    public function checkEmail(Request $request)
+    {   
+        if (User::where('email', $request->email)->exists()) {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -126,8 +136,6 @@ class UserController extends Controller
 
         // Sent password to registered user by an email
         \Mail::to($user)->send(new Password($user, $random_password));
-
-        return $user;
     }
 
     /**

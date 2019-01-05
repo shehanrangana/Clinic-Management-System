@@ -10,6 +10,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// use Vee-validate
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate, {
+    events: 'input|change|blur',
+    fieldsBagName: 'formFields' // to avoid 'field' prop conflict
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

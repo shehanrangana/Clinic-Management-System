@@ -145,4 +145,6 @@ class PatientController extends Controller
         }
         return $categorizedArray;
     }
+    
+
 }

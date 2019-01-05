@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Drug;
+use App\Prescription;
 use DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Routing\Controller as BaseController;
@@ -14,6 +15,23 @@ class PharmacyController extends Controller
     {
         $drugs = Drug::all();
         return $drugs;
+    }
+    public function prescription()
+    {
+        
+        $prescription = Prescription::where('date', date("Y-m-d"))->get();
+        return $prescription;
+    }
+
+    public function updatequantity(Request $request){
+        $old = DB::table('drugs')->where('name',$request->drug_name)->first();
+        $new = $old->quantity - $request->quantity;
+        DB::table('drugs')->where('name',$request->drug_name)->update(['quantity'=>$new]);
+        $a=$request->drug_name;
+
+        if($new<=950){
+            return view('pharmacy/View_Prescription',compact('a','new'));
+        }
     }
 
     public function store(Request $request)

@@ -117,9 +117,9 @@ Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], fun
         Route::get('/upload/getReport', 'LabReportController@getReport');
         Route::post('/upload/remove/{report_id}', 'LabReportController@destroy');
         Route::post('/upload/store' , 'LabReportController@store')->name("hhh");
-        Route::get('/test', function () {
-            return asset('uploads/1MztetsHpGOO6AgB1mvxaQNxKZBTmGz3EthpuU3K.pdf');
-        });
+        // Route::get('/test', function () {
+        //     return asset('uploads/1MztetsHpGOO6AgB1mvxaQNxKZBTmGz3EthpuU3K.pdf');
+        // });
 
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
@@ -140,8 +140,12 @@ Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], funct
             return view('./pharmacy/viewprescription');
         });
         Route::get('/addDrugs/show', 'PharmacyController@index');
-        Route::post('/addDrugs/remove/{drug_id}', 'PharmacyController@destroy');
+        Route::get('/dashboard/getPrescription' ,'PharmacyController@prescription');
+        Route::get('/dashboard/patient_history', 'PatientController@getPatientHistory');
+        Route::post('/dashboard/updateQuantity' ,'PharmacyController@updatequantity');
 
+        Route::post('/addDrugs/remove/{drug_id}', 'PharmacyController@destroy');
+        Route::get('/abc','PharmacyController@query_date');
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');

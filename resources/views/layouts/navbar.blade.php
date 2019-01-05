@@ -38,7 +38,7 @@
                             <a class="nav-link" href="/pharmacy/addDrugs"><i class="ti-home"></i>ADD DRUG</a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register' ,'lab/upload/view','pharmacy/searchPrescription']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register' ,'lab/upload/view']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/users"></i>USERS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
@@ -47,8 +47,7 @@
                             <a class="nav-link" href="/lab/upload/view"><i class="ti-home"></i>DETAILS OF REPORT</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="#"><i class="ti-home"></i>PHARMACY</a>
-                        @elseif(Request::is(['pharmacy', 'pharmacy/*']))
-                            <a class="nav-link" href="/pharmacy/searchPrescription"><i class="ti-home"></i>SEARCH PRESCRIPTION</a>
+                        
                         @endif
                     </li>
 

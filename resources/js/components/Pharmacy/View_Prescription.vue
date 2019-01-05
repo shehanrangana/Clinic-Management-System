@@ -12,6 +12,8 @@
               </b-input-group-append>
             </b-input-group>
           </b-form-group>
+          
+          
         </b-col>
         <b-col md="6" class="my-1">
           <b-form-group horizontal label="Per page" class="mb-0">
@@ -19,7 +21,7 @@
           </b-form-group>
         </b-col>
       </b-row>
-
+      
       <!-- table-sorting.vue -->
       <b-table responsive hover 
               :sort-by.sync="sortBy"
@@ -54,6 +56,8 @@
       </p>
     </div>
   </div>
+
+   
 </template>
 
 <script>
@@ -124,4 +128,7 @@ export default{
         },
     }
 }
+
+
+
 </script>

@@ -161,7 +161,7 @@ export default {
           this.currentPatient = response.data.active.current; // set current number of the queue
           this.activeQueue = response.data.active.timeslot; // set active queue
           this.selectedPatient = this.patientList[this.currentPatient-1]; // set selected patient
-          // this.patientHistory = this.patientList[this.currentPatient-1]; // important >> to show history
+          // this.patientHistory = this.patientList[this.currentPatient-1]; // to show hostory when page refreshed
         }
       });
     },

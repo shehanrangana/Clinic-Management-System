@@ -88883,7 +88883,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */
           _this3.currentPatient = response.data.active.current; // set current number of the queue
           _this3.activeQueue = response.data.active.timeslot; // set active queue
           _this3.selectedPatient = _this3.patientList[_this3.currentPatient - 1]; // set selected patient
-          // this.patientHistory = this.patientList[this.currentPatient-1]; // important >> to show history
+          // this.patientHistory = this.patientList[this.currentPatient-1]; // to show hostory when page refreshed
         }
       });
     },

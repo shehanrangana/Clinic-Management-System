@@ -18,6 +18,10 @@ class CreateQueueSummaryTable extends Migration
             $table->integer('total');
             $table->integer('current');
             $table->boolean('status')->default(0);
+            $table->integer('panel_1')->default(0);
+            $table->integer('panel_2')->default(0);
+            $table->integer('panel_3')->default(0);
+            $table->integer('panel_4')->default(0);
             $table->timestamps();
         });
     }

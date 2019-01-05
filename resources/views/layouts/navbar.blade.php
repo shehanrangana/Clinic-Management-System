@@ -17,7 +17,7 @@
                             <a class="nav-link" href="/recept">DASHBOARD</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="/doctor">DASHBOARD</a>
-                         @elseif(Request::is(['lab', 'lab/*']))
+                        @elseif(Request::is(['lab', 'lab/*']))
                             <a class="nav-link" href="/lab">DASHBOARD</a>
                         @elseif(Request::is(['pharmacy', 'pharmacy/*']))
                             <a class="nav-link" href="/pharmacy">DASHBOARD</a>
@@ -25,7 +25,7 @@
                             <a><i></i></a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/user_register', 'recept/queue' ,'lab/upload','pharmacy/addDrugs']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/user_register', 'recept/queue','lab/upload','pharmacy/addDrugs']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/user_register">USER REGISTRATION</a>
                         @elseif(Request::is(['recept', 'recept/*']))
@@ -38,7 +38,7 @@
                             <a class="nav-link" href="/pharmacy/addDrugs"><i class="ti-home"></i>ADD DRUG</a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register', 'lab/upload/view', 'doctor/drug', 'pharmacy/searchPrescription']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register','lab/upload/view','pharmacy/searchPrescription']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/users">USERS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
@@ -46,20 +46,21 @@
                         @elseif(Request::is(['lab', 'lab/*']))
                             <a class="nav-link" href="/lab/upload/view"><i class="ti-home"></i>DETAILS OF REPORT</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="#"><i class="ti-home"></i>PHARMACY</a>
+                            <a class="nav-link" href="#">PHARMACY</a>
+                        @elseif(Request::is(['lab', 'lab/*']))
+                            <a class="nav-link" href="/lab/upload/view"><i class="ti-home"></i>DETAILS OF REPORT</a>
                         @elseif(Request::is(['pharmacy', 'pharmacy/*']))
                             <a class="nav-link" href="/pharmacy/searchPrescription"><i class="ti-home"></i>SEARCH PRESCRIPTION</a>
                         @endif
                     </li>
 
-                    <li class="nav-item {{(Request::is(['admin/patients', 'recept/patients', 'doctor/labreports','pharmacy/viewdrugs']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/patients', 'recept/patients','pharmacy/viewdrugs']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/patients">PATIENTS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept/patients">PATIENTS</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="/doctor/labreports">LAB REPORTS</a>
-
+                            <a class="nav-link" href="#">LAB REPORTS</a>
                         @elseif(Request::is(['pharmacy', 'pharmacy/*']))
                             <a class="nav-link" href="/pharmacy/viewdrugs"><i class="ti-home"></i>DETAIL OF DRUGS</a>
                         @endif

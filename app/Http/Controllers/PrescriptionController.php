@@ -58,6 +58,24 @@ class PrescriptionController extends Controller
             }
             $isFirstTime = false;
         }
+
+        // Set 'checked' to 1 in queue tables[notify patient is checked]
+        $queue_table;
+        switch ($request[3]) {
+            case '08-09':
+                $queue_table = 'queue1';
+                break;  
+            case '09-10':
+                $queue_table = 'queue2';
+                break;
+            case '10-11':
+                $queue_table = 'queue3';
+                break;
+            case '11-12':
+                $queue_table = 'queue4';
+                break;
+        }
+        DB::table($queue_table)->where('patient_id', $patient_id)->update(['checked' => true]); 
         return $recentPrescription;
         
     }

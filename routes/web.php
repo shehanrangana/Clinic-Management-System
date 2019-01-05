@@ -22,6 +22,7 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
         Route::get('/user_register', function () {
             return view('./admin/user_register');
         });
+        Route::get('/user_register/checkEmail', 'UserController@checkEmail'); // check already exits
         Route::post('/user_register/store', 'UserController@store');
         Route::get('/users', function () {
             return view('./admin/users');
@@ -53,11 +54,17 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
         });
         Route::get('/queue/today-list', 'AppointmentController@getTodayList'); 
         Route::post('/queue/add', 'QueueController@store'); 
+
         Route::get('/queue/active-queue', 'QueueController@getActiveQueue');
+
         Route::post('/queue/start', 'QueueController@startQueue');
+
         Route::post('/queue/stop', 'QueueController@stopQueue');
+
         Route::get('/queue/get_recent', 'QueueController@getRecentNumber');
+
         Route::get('/queue/numbers', 'QueueController@index');
+
         Route::get('/patient_register', function () {
             return view('./recept/patient_register');
         });

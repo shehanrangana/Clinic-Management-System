@@ -1,26 +1,38 @@
 <template>
     <div class="inner-div">
         <div class="container">
-            <form @submit.prevent="registerPatient()">
+            <form @submit="registerPatient()">
                 <div class="form-group">
                   <label for="patient_id">Patient ID</label>
-                  <input type="text" class="form-control" id="patient_id" name="patient_id" v-bind="{ placeholder: pHolder }" v-model="newPatient.patient_id" required>
+                  <input v-validate="'required|digits:4'" autofocus type="text" class="form-control" id="patient_id" name="patient_id" v-bind="{ placeholder: pHolder }" v-model="newPatient.patient_id" required>
+                  <div class="error-feedback">
+                    <span>{{ errors.first('patient_id') }}</span>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" v-model="newPatient.name" required>
+                  <input v-validate="'required'" autofocus type="text" class="form-control" id="name" name="name" placeholder="Enter name" v-model="newPatient.name" required>
+                  <div class="error-feedback">
+                    <span>{{ errors.first('name') }}</span>
+                  </div>
                 </div>
                 <div class="form-group">
-                    <label for="addressLine1">Address Line 1</label>
-                    <input type="text" class="form-control" id="address_line_1" name="address_line_1" placeholder="Address Line 1" v-model="newPatient.address_line_1" required>
+                  <label for="address_line_1">Address Line 1</label>
+                  <input v-validate="'required'" autofocus type="text" class="form-control" id="address_line_1" name="address_line_1" placeholder="Address Line 1" v-model="newPatient.address_line_1" required>
+                  <div class="error-feedback">
+                    <span>{{ errors.first('address_line_1') }}</span>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label for="addressLine1">Address Line 2</label>
-                  <input type="text" class="form-control" id="address_line_2" name="address_line_2" placeholder="Address Line 2" v-model="newPatient.address_line_2" required>
+                  <label for="address_line_2">Address Line 2</label>
+                  <input v-validate="'required'" autofocus type="text" class="form-control" id="address_line_2" name="address_line_2" placeholder="Address Line 2" v-model="newPatient.address_line_2" required>
+                  <div class="error-feedback">
+                    <span>{{ errors.first('address_line_2') }}</span>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="addressLine3">Address Line 3</label>
-                  <input type="text" class="form-control" id="address_line_3" name="address_line_3" placeholder="Address Line 3" v-model="newPatient.address_line_3" required>
+                  <input type="text" class="form-control" id="address_line_3" name="address_line_3" placeholder="Address Line 3" v-model="newPatient.address_line_3" >
                 </div>
                 <div class="row">
                     <div class="col">
@@ -36,23 +48,35 @@
                         <div class="form-group">
                             <label for="birthday">Birthday</label>
                             <br>
-                            <date-picker :lang="lang" name="birthday" :required="true" v-model="newPatient.birthday"></date-picker>
+                            <date-picker v-validate="'required|date_format:YYYY-MM-DD'" autofocus :lang="lang" name="birthday" :required="true" v-model="newPatient.birthday"></date-picker>
+                            <div class="error-feedback">
+                              <span>{{ errors.first('birthday') }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="contact_number">NIC</label>
-                    <input type="tel" class="form-control" id="nic" name="nic" placeholder="Enter NIC number" v-model="newPatient.nic" required>
+                  <label for="contact_number">NIC</label>
+                  <input v-validate="{ required: true, length:10, regex:/^([0-9]+[v,V])$/ }" autofocus type="text" class="form-control" id="nic" name="nic" placeholder="Enter NIC number" v-model="newPatient.nic" required>
+                  <div class="error-feedback">
+                    <span>{{ errors.first('nic') }}</span>
+                  </div>
                 </div>
                 <div class="form-group">
-                    <label for="contact_number">Contact number</label>
-                    <input type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="Enter contact number" v-model="newPatient.contact_number" required>
+                  <label for="contact_number">Contact number</label>
+                  <input v-validate="'required|digits:10'" autofocus type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="Enter contact number" v-model="newPatient.contact_number" required>
+                  <div class="error-feedback">
+                    <span>{{ errors.first('contact_number') }}</span>
+                  </div>
                 </div>
                 <div class="form-group">
-                    <label for="guardian_number">Guardian's contact number</label>
-                    <input type="tel" class="form-control" id="guardian_number" name="guardian_number" placeholder="Enter guardian's contact number" v-model="newPatient.guardian_number" required>
+                  <label for="guardian_number">Guardian's contact number</label>
+                  <input v-validate="'required|digits:10'" autofocus type="tel" class="form-control" id="guardian_number" name="guardian_number" placeholder="Enter guardian's contact number" v-model="newPatient.guardian_number">
+                  <div class="error-feedback">
+                    <span>{{ errors.first('guardian_number') }}</span>
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Register</button>
             </form>
         </div>
     </div>
@@ -95,7 +119,6 @@ import DatePicker from 'vue2-datepicker';
             registerPatient() {
                 var input = this.newPatient;
                 axios.post('/recept/patient_register/store', input).then( (response) => {
-                    this.newPatient = {'patient_id': '', 'name': '', 'address_line_1': '', 'address_line_2': '', 'address_line_3': '',  'gender': 'Male', 'birthday': '', 'nic': '', 'contact_number': '', 'guardian_number': ''};
                     this.getLastId();
                 }).catch(err => {
                     this.hasError = true;

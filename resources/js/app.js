@@ -48,6 +48,7 @@ Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
 
 // Components of doctor
 Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
+Vue.component('doctor-report' , require('./components/Doctor/View_Report.vue'));
 
 // Vue primary instant
 Vue.component('dashboard', require('./components/Pharmacy/Dashboard.vue'));

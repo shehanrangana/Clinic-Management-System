@@ -42,12 +42,13 @@ class LabReportController extends BaseController
     public function getReport(Request $request) 
     {
     
-        // $roles = DB::table('lab_reports')->where('report_id','file')->get();
+        $roles = DB::table('lab_reports')->where('report_id','file')->get();
         
-        // return $roles;
+        return $roles;
         dd($request->all());
 
     }
+    
     public function destroy($id)
     {
         $lab_reports = LabReport::find($id)->delete();

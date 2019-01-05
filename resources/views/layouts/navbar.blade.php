@@ -60,7 +60,7 @@
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept/patients">PATIENTS</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
-                            <a class="nav-link" href="#">LAB REPORTS</a>
+                            <a class="nav-link" href="/doctor/labreports">LAB REPORTS</a>
                         @elseif(Request::is(['pharmacy', 'pharmacy/*']))
                             <a class="nav-link" href="/pharmacy/viewdrugs"><i class="ti-home"></i>DETAIL OF DRUGS</a>
                         @endif

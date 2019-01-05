@@ -124,11 +124,11 @@ Route::get('/nurse/appointment_list', function () {
     return view('./nurse/appointment_list');
 });
 
-Route::get('/nurse/appointment_list/show', 'AppointmentController@index');
+Route::get('/nurse/appointment_list/show', 'AppointmentController@show');
 
 Route::post('/nurse/make_appointment/add', 'AppointmentController@add');
 
-Route::get('/nurse/make_appointment/count', 'AppointmentController@getCountStatus');
+Route::get('/nurse/make_appointment/count/{date}', 'AppointmentController@getCountStatus');
 
 //
 // Nurse routes

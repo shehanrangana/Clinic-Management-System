@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Appointment;
+use App\Patient;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
 {
@@ -16,21 +18,39 @@ class AppointmentController extends Controller
     {
         $appointments = Appointment::all();
         return $appointments;
+        // $appointments = DB::table('appointments')
+        //     ->join('patients', 'appointments.patient_id', '=', 'patients.patient_id')
+        //     ->select('appointments.patient_id', 'patients.name')
+        //     ->get();
+        // return $appointments;
     }
 
-    public function getCountStatus(){
-        $count1=Appointment::where('timeslot','8-9')->count();
-        $count2=Appointment::where('timeslot','9-10')->count();
-        $count3=Appointment::where('timeslot','10-11')->count();
-        $count4=Appointment::where('timeslot','11-12')->count();
-        $status1= $this->getStatus($count1);
-        $status2= $this->getStatus($count2);
-        $status3= $this->getStatus($count3);
-        $status4= $this->getStatus($count4);
-        $count= array($count1,$status1,$count2,$status2,$count3,$status3,$count4,$status4);
+    public function getCountStatus($date){
+        $count1=Appointment::where('date',$date)->where('timeslot','08-09')->count();
+        $count2=Appointment::where('date',$date)->where('timeslot','09-10')->count();
+        $count3=Appointment::where('date',$date)->where('timeslot','10-11')->count();
+        $count4=Appointment::where('date',$date)->where('timeslot','11-12')->count();
+        // $status1= $this->getStatus($count1);
+        // $status2= $this->getStatus($count2);
+        // $status3= $this->getStatus($count3);
+        // $status4= $this->getStatus($count4);
+        $count= array('_0809'=>$count1,'_0910'=>$count2,'_1011'=>$count3,'_1112'=>$count4);
+        //$count= array($count1,$status1,$count2,$status2,$count3,$status3,$count4,$status4);
         return $count;
     }
-
+    // public function getCountStatus(){
+    //     $count1=Appointment::where('timeslot','08-09')->count();
+    //     $count2=Appointment::where('timeslot','09-10')->count();
+    //     $count3=Appointment::where('timeslot','10-11')->count();
+    //     $count4=Appointment::where('timeslot','11-12')->count();
+    //     // $status1= $this->getStatus($count1);
+    //     // $status2= $this->getStatus($count2);
+    //     // $status3= $this->getStatus($count3);
+    //     // $status4= $this->getStatus($count4);
+    //     $count= array($count1,$count2,$count3,$count4);
+    //     //$count= array($count1,$status1,$count2,$status2,$count3,$status3,$count4,$status4);
+    //     return $count;
+    // }
     public function getStatus($count){
         if($count>=20){
             $status="Full";
@@ -49,6 +69,7 @@ class AppointmentController extends Controller
         $appointment->timeslot = $request->timeslot;
         $appointment->patient_id = $request->patient_id;
         $appointment->save();
+        // dd($appointment);
         
         return $appointment;
     }
@@ -79,9 +100,15 @@ class AppointmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        // $appointments = Appointment::all();
+        // return $appointments;
+        $appointments = DB::table('appointments')
+            ->join('patients', 'appointments.patient_id', '=', 'patients.patient_id')
+            ->select('appointments.patient_id', 'patients.name')
+            ->get();
+        return $appointments;
     }
 
     /**

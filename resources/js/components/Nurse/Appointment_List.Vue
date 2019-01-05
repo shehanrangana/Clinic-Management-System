@@ -13,7 +13,7 @@
                 <tbody>
                     <tr v-for="appointment in appointments">
                         <td>{{ appointment.patient_id }}</td>
-                        <td></td>
+                        <td>{{ appointment.name}}</td>
                         <td></td>
                         <td><button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="">cancel</button></td>
                     </tr>
@@ -28,7 +28,8 @@
 
         data() {
             return {
-                appointments: [],
+                //appointments: [],
+                appointments: {'patient_id': '','name':''},
             }
         },
 
@@ -40,7 +41,7 @@
             getAppointments() {
                 axios.get('/nurse/appointment_list/show').then( (response)=>{
                     this.appointments = response.data;
-                    // console.log(response.data);
+                    console.log(response.data);
                 })
             }
 

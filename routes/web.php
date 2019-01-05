@@ -98,6 +98,11 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
+        Route::get('/labreports', function () {
+            return view('./doctor/reportview');
+        });
+        Route::get('/get_reports', 'LabReportController@index');
+        Route::get('/report/getReport', 'LabReportController@getReport');
     });
 });
 // Nurse routes

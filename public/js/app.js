@@ -31400,6 +31400,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('report', __webpack_requir
 
 // Components of doctor
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-dashboard', __webpack_require__(269));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-report', __webpack_require__(285));
 
 // Vue primary instant
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('dashboard', __webpack_require__(274));
@@ -88087,7 +88088,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       data.append('file', this.form.file);
       data.append('patient_id', this.form.patient_id);
       data.append('test', this.form.test);
-      // console.log(data, this.form.file)
+      console.log(data, this.form.file);
       axios.post('/lab/upload/store', data).then(function (res) {
         console.log(res);
       });
@@ -90176,6 +90177,367 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 284 */,
+/* 285 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(286)
+/* template */
+var __vue_template__ = __webpack_require__(287)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Doctor/View_Report.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-da368c6e", Component.options)
+  } else {
+    hotAPI.reload("data-v-da368c6e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 286 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(11);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table */]);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            lab_reports: [],
+
+            sortBy: 'date',
+            sortDesc: false,
+            currentPage: 1,
+            perPage: 10,
+            totalRows: 0,
+            pageOptions: [5, 10, 15],
+            filter: null,
+            fields: [{ key: 'patient_id', sortable: true }, { key: 'test', sortable: false }, { key: 'actions', sortable: false }],
+            url: ''
+        };
+    },
+    mounted: function mounted() {
+        this.getReport();
+    },
+
+
+    computed: {
+        sortOptions: function sortOptions() {
+            // Create an options list from our fields
+            return this.fields.filter(function (f) {
+                return f.sortable;
+            }).map(function (f) {
+                return { text: f.label, value: f.key };
+            });
+        }
+    },
+
+    methods: {
+        getReport: function getReport() {
+            var _this = this;
+
+            axios.get('/doctor/get_reports/').then(function (response) {
+                _this.lab_reports = response.data;
+                console.log(response.data);
+            });
+        },
+        getPdf: function getPdf(report_id) {
+
+            this.url = report_id;
+        },
+
+
+        // Filter appointment table
+        onFiltered: function onFiltered(filteredItems) {
+            // Trigger pagination to update the number of buttons/pages due to filtering
+            this.totalRows = filteredItems.length;
+            this.currentPage = 1;
+        }
+    }
+});
+
+/***/ }),
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "inner-div" },
+      [
+        _c(
+          "b-row",
+          [
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c(
+                  "b-form-group",
+                  {
+                    staticClass: "mb-0",
+                    attrs: { horizontal: "", label: "Filter" }
+                  },
+                  [
+                    _c(
+                      "b-input-group",
+                      [
+                        _c("b-form-input", {
+                          attrs: { placeholder: "Type to Search" },
+                          model: {
+                            value: _vm.filter,
+                            callback: function($$v) {
+                              _vm.filter = $$v
+                            },
+                            expression: "filter"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "b-input-group-append",
+                          [
+                            _c(
+                              "b-btn",
+                              {
+                                attrs: { disabled: !_vm.filter },
+                                on: {
+                                  click: function($event) {
+                                    _vm.filter = ""
+                                  }
+                                }
+                              },
+                              [_vm._v("Clear")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c(
+                  "b-form-group",
+                  {
+                    staticClass: "mb-0",
+                    attrs: { horizontal: "", label: "Per page" }
+                  },
+                  [
+                    _c("b-form-select", {
+                      attrs: { options: _vm.pageOptions },
+                      model: {
+                        value: _vm.perPage,
+                        callback: function($$v) {
+                          _vm.perPage = $$v
+                        },
+                        expression: "perPage"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("b-table", {
+          attrs: {
+            responsive: "",
+            hover: "",
+            "sort-by": _vm.sortBy,
+            "sort-desc": _vm.sortDesc,
+            items: _vm.lab_reports,
+            fields: _vm.fields,
+            "current-page": _vm.currentPage,
+            "per-page": _vm.perPage,
+            filter: _vm.filter
+          },
+          on: {
+            "update:sortBy": function($event) {
+              _vm.sortBy = $event
+            },
+            "update:sortDesc": function($event) {
+              _vm.sortDesc = $event
+            },
+            filtered: _vm.onFiltered
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "actions",
+              fn: function(row) {
+                return [
+                  _c(
+                    "b-button",
+                    {
+                      attrs: {
+                        type: "button",
+                        href: "/storage/" + row.item.file
+                      }
+                    },
+                    [_vm._v("View")]
+                  )
+                ]
+              }
+            }
+          ])
+        }),
+        _vm._v(" "),
+        _c(
+          "b-row",
+          [
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c("b-pagination", {
+                  staticClass: "my-0",
+                  attrs: {
+                    "total-rows": _vm.totalRows,
+                    "per-page": _vm.perPage
+                  },
+                  model: {
+                    value: _vm.currentPage,
+                    callback: function($$v) {
+                      _vm.currentPage = $$v
+                    },
+                    expression: "currentPage"
+                  }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("\n      Sorting By: "),
+          _c("b", [_vm._v(_vm._s(_vm.sortBy))]),
+          _vm._v(",\n      Sort Direction: "),
+          _c("b", [_vm._v(_vm._s(_vm.sortDesc ? "Descending" : "Ascending"))])
+        ])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-da368c6e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

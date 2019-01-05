@@ -73,7 +73,7 @@ export default {
       data.append('file', this.form.file)
       data.append('patient_id', this.form.patient_id)
       data.append('test', this.form.test)
-      // console.log(data, this.form.file)
+      console.log(data, this.form.file)
       axios.post('/lab/upload/store', data)
         .then(res => {
           console.log(res)

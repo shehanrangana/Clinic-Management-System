@@ -10,6 +10,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// use Vee-validate
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate, {
+    events: 'input|change|blur',
+    fieldsBagName: 'formFields' // to avoid 'field' prop conflict
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -48,13 +56,14 @@ Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
 
 // Components of doctor
 Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
+Vue.component('doctor-report' , require('./components/Doctor/View_Report.vue'));
 
 // Vue primary instant
 Vue.component('dashboard', require('./components/Pharmacy/Dashboard.vue'));
 Vue.component('add-drugs', require('./components/Pharmacy/Add_Drugs.vue'));
 Vue.component('view-prescription', require('./components/Pharmacy/View_Prescription.vue'));
 Vue.component('email-send', require('./components/Pharmacy/Email_send.vue'));
-Vue.component('over-drug', require('./components/Pharmacy/Over_Drugs.vue'));
+
 
 const app = new Vue({
     el: '#app',

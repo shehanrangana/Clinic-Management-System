@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Over Drug')
+@section('title', 'View Report')
 
 @section('content')
     <div>
-        <over-drug></over-drug>
+        <doctor-report></doctor-report>
     </div>
 @endsection

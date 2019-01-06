@@ -2996,4 +2996,13 @@ File: Responsive
     margin-left: 0 !important;
   }
 }
-/*# sourceMappingURL=style.css.map */
+
+/* Custom styles */
+input, select {
+  border-radius: 0px!important;
+}
+.error-feedback {
+  background: red;
+  color: white;
+  padding-left: 5px;
+}

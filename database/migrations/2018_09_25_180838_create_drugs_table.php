@@ -18,6 +18,7 @@ class CreateDrugsTable extends Migration
             $table->string('name', 50)->index();
             $table->string('brand', 30);
             $table->integer('quantity');
+            $table->boolean('isLiquid')->default(0); // 0-tablet 1-liquid
             $table->timestamps();
             $table->string('expire_date', 10);
             $table->string('supplier_email', 50);

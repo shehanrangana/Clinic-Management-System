@@ -1,5 +1,12 @@
 <template>
   <div>
+    <!-- Panel selection -->
+    <div>
+      <toggle-button class="toggle-start" v-model="value[0]"  name="queue2" v-bind:disabled="disable[0]" @change='changeState(0)' color="#82C7EB" :sync="true" :labels="{checked: 'ACTIVE', unchecked: 'PANEL 1'}" :width="80"/>
+      <toggle-button class="toggle-start" v-model="value[1]"  name="queue2" v-bind:disabled="disable[1]" @change='changeState(1)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
+      <toggle-button class="toggle-start" v-model="value[2]"  name="queue2" v-bind:disabled="disable[2]" @change='changeState(2)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
+      <toggle-button class="toggle-start" v-model="value[3]"  name="queue2" v-bind:disabled="disable[3]" @change='changeState(3)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
+    </div>
     <!-- Patient details -->
     <div v-if="this.selectedPatient != '' && this.currentPatient != 0">
       <h5><b>Current Patient</b></h5><hr>
@@ -105,9 +112,16 @@ Vue.use(ListGroup);
 import { Form } from "bootstrap-vue/es/components";
 Vue.use(Form);
 
+import ToggleButton from 'vue-js-toggle-button'
+Vue.use(ToggleButton)
+
 export default {
   data() {
     return {
+      // toggle button data 
+      disable: [false, false, false, false],
+      value: [false, false, false, false],
+      
       patientList: [],
       activeQueue: '',
       skippedPatientList: [],
@@ -151,7 +165,51 @@ export default {
     this.today = new Date();
   },
 
-  methods: {
+  methods: {// Change state of the queue
+    changeState(id) {
+      if(this.value[id]){
+        this.disable = [true, true, true, true];
+        this.disable[id] = false;
+
+        // Send queue data to the database
+        var total = 0;
+        switch (id) {
+          case 0:
+            total = this.list0809.length;
+            break;
+          case 1:
+            total = this.list0910.length;
+            break;
+          case 2:
+            total = this.list1011.length;
+            break;
+          case 3:
+            total = this.list1112.length;
+            break;
+          default:
+            break;
+        }
+
+        this.queueDetails = [id, total, 0, 1];
+        axios.post('/recept/queue/start', this.queueDetails).then((response) =>{
+          alert("Queue started");
+        }).catch(err => {
+          this.value = [false, false, false, false]; // if error occured all the switches reset
+          this.disable = [false, false, false, false]; 
+          alert("This queue has been completed");
+        });
+      }else{
+        this.disable = [false, false, false, false];
+        // this.disable[id] = true; // permenetly disable finished queue switch
+        axios.post('/recept/queue/stop', [id]).then((response) =>{
+          console.log(response.data);
+        }).catch(err => {
+            this.hasError = true;
+        });
+      }
+    },
+
+
 
     // Get patient list of current queue
     getQueueList() {

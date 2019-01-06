@@ -88,6 +88,7 @@ class UserController extends Controller
     // Check whether entered email exist or not
     public function checkEmail(Request $request)
     {   
+        // dd($request->all());
         if (User::where('email', $request->email)->exists()) {
             return 1;
         }else{

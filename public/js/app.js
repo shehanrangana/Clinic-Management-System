@@ -88713,6 +88713,15 @@ exports.push([module.i, "\n.inner-div {\r\n  padding: 10px 10px 10px 10px;\n}\n.
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button__ = __webpack_require__(260);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -88820,9 +88829,16 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["d" /* ListGro
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */]);
 
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      // toggle button data 
+      disable: [false, false, false, false],
+      value: [false, false, false, false],
+
       patientList: [],
       activeQueue: '',
       skippedPatientList: [],
@@ -88872,17 +88888,63 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */
 
 
   methods: {
+    // Change state of the queue
+    changeState: function changeState(id) {
+      var _this3 = this;
+
+      if (this.value[id]) {
+        this.disable = [true, true, true, true];
+        this.disable[id] = false;
+
+        // Send queue data to the database
+        var total = 0;
+        switch (id) {
+          case 0:
+            total = this.list0809.length;
+            break;
+          case 1:
+            total = this.list0910.length;
+            break;
+          case 2:
+            total = this.list1011.length;
+            break;
+          case 3:
+            total = this.list1112.length;
+            break;
+          default:
+            break;
+        }
+
+        this.queueDetails = [id, total, 0, 1];
+        axios.post('/recept/queue/start', this.queueDetails).then(function (response) {
+          alert("Queue started");
+        }).catch(function (err) {
+          _this3.value = [false, false, false, false]; // if error occured all the switches reset
+          _this3.disable = [false, false, false, false];
+          alert("This queue has been completed");
+        });
+      } else {
+        this.disable = [false, false, false, false];
+        // this.disable[id] = true; // permenetly disable finished queue switch
+        axios.post('/recept/queue/stop', [id]).then(function (response) {
+          console.log(response.data);
+        }).catch(function (err) {
+          _this3.hasError = true;
+        });
+      }
+    },
+
 
     // Get patient list of current queue
     getQueueList: function getQueueList() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("/doctor/dashboard/get_queue").then(function (response) {
         if (response.data != -1) {
-          _this3.patientList = response.data.queue; // set patient queue
-          _this3.currentPatient = response.data.active.current; // set current number of the queue
-          _this3.activeQueue = response.data.active.timeslot; // set active queue
-          _this3.selectedPatient = _this3.patientList[_this3.currentPatient - 1]; // set selected patient
+          _this4.patientList = response.data.queue; // set patient queue
+          _this4.currentPatient = response.data.active.current; // set current number of the queue
+          _this4.activeQueue = response.data.active.timeslot; // set active queue
+          _this4.selectedPatient = _this4.patientList[_this4.currentPatient - 1]; // set selected patient
           // this.patientHistory = this.patientList[this.currentPatient-1]; // to show hostory when page refreshed
         }
       });
@@ -88891,12 +88953,12 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */
 
     // Expand patient medical history
     expand: function expand(patient) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.selectedPatient = patient;
       axios.get("/doctor/dashboard/patient_history", { params: { patient_id: patient.patient_id } }).then(function (response) {
-        _this4.patientHistory = response.data.patient_history;
-        _this4.currentPatient = response.data.current;
+        _this5.patientHistory = response.data.patient_history;
+        _this5.currentPatient = response.data.current;
         // console.log(response.data.current);
       });
     },
@@ -88925,11 +88987,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */
 
     // Submit form
     onSubmit: function onSubmit() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.prescriptionText = '';
       axios.post('/doctor/dashboard/prescription_store', [this.selectedPatient.patient_id, this.prescription, this.comment, this.activeQueue]).then(function (response) {
-        _this5.patientHistory.unshift(response.data); // add new element beginning of the array
+        _this6.patientHistory.unshift(response.data); // add new element beginning of the array
       }).catch(function (err) {
         // console.log(err);
         alert("erro!");
@@ -88959,6 +89021,108 @@ var render = function() {
   return _c(
     "div",
     [
+      _c(
+        "div",
+        [
+          _c("toggle-button", {
+            staticClass: "toggle-start",
+            attrs: {
+              name: "queue2",
+              disabled: _vm.disable[0],
+              color: "#82C7EB",
+              sync: true,
+              labels: { checked: "ACTIVE", unchecked: "PANEL 1" },
+              width: 80
+            },
+            on: {
+              change: function($event) {
+                _vm.changeState(0)
+              }
+            },
+            model: {
+              value: _vm.value[0],
+              callback: function($$v) {
+                _vm.$set(_vm.value, 0, $$v)
+              },
+              expression: "value[0]"
+            }
+          }),
+          _vm._v(" "),
+          _c("toggle-button", {
+            staticClass: "toggle-start",
+            attrs: {
+              name: "queue2",
+              disabled: _vm.disable[1],
+              color: "#82C7EB",
+              sync: true,
+              labels: { checked: "Started", unchecked: "Stopped" },
+              width: 80
+            },
+            on: {
+              change: function($event) {
+                _vm.changeState(1)
+              }
+            },
+            model: {
+              value: _vm.value[1],
+              callback: function($$v) {
+                _vm.$set(_vm.value, 1, $$v)
+              },
+              expression: "value[1]"
+            }
+          }),
+          _vm._v(" "),
+          _c("toggle-button", {
+            staticClass: "toggle-start",
+            attrs: {
+              name: "queue2",
+              disabled: _vm.disable[2],
+              color: "#82C7EB",
+              sync: true,
+              labels: { checked: "Started", unchecked: "Stopped" },
+              width: 80
+            },
+            on: {
+              change: function($event) {
+                _vm.changeState(2)
+              }
+            },
+            model: {
+              value: _vm.value[2],
+              callback: function($$v) {
+                _vm.$set(_vm.value, 2, $$v)
+              },
+              expression: "value[2]"
+            }
+          }),
+          _vm._v(" "),
+          _c("toggle-button", {
+            staticClass: "toggle-start",
+            attrs: {
+              name: "queue2",
+              disabled: _vm.disable[3],
+              color: "#82C7EB",
+              sync: true,
+              labels: { checked: "Started", unchecked: "Stopped" },
+              width: 80
+            },
+            on: {
+              change: function($event) {
+                _vm.changeState(3)
+              }
+            },
+            model: {
+              value: _vm.value[3],
+              callback: function($$v) {
+                _vm.$set(_vm.value, 3, $$v)
+              },
+              expression: "value[3]"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
       this.selectedPatient != "" && this.currentPatient != 0
         ? _c(
             "div",

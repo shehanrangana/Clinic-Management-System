@@ -54,7 +54,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="nic">Patient id</label>
-                    <input type="text" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient id" v-model="newAppointment.patient_id" required>
+                    <input type="text" @blur="checkPatientID()" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient id" v-model="newAppointment.patient_id" required>
                 </div>
             </div>
             <!-- <div class="col">
@@ -77,7 +77,7 @@
             </div>
         </div>
         
-        <button type="submit" class="btn btn-primary">Add Appointment</button>
+        <button type="submit" class="btn btn-primary" >Add Appointment</button>
     </form>
 </div>
 </template> 
@@ -118,50 +118,49 @@ export default {
     methods: {
 
         makeAppointment() {
+            //this.checkPatientID();
             if(this.newAppointment.date){
-            this.newAppointment.date=this.formatDate(this.newAppointment.date);
-            var input = this.newAppointment;
-            axios.post('/nurse/make_appointment/add', input).then((response)=>{
-                //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
-                //console.log(response.data.timeslot);
-                switch (response.data.timeslot) {
-                        case '08-09':
-                            this.count._0809 += 1;
-                            this.status._0809=this.getStatus(this.count._0809);
-                            break;
-                        case '09-10':
-                            this.count._0910 += 1;
-                            this.status._0910=this.getStatus(this.count._0910);
-                            break;
-                        case '10-11':
-                            this.count._1011 += 1;
-                            this.status._1011=this.getStatus(this.count._1011);
-                            break;
-                        case '11-12':
-                            this.count._1112 += 1;
-                            this.status._1112=this.getStatus(this.count._1112);
-                            break;
+                if(this.checkPatientID()){
+                //if(this.checkMaximum()<2){
+                    this.newAppointment.date=this.formatDate(this.newAppointment.date);
+                    var input = this.newAppointment;
+                    axios.post('/nurse/make_appointment/add', input).then((response)=>{
+                        //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
+                        //console.log(response.data.timeslot);
+                        switch (response.data.timeslot) {
+                                case '08-09':
+                                    this.count._0809 += 1;
+                                    this.status._0809=this.getStatus(this.count._0809);
+                                    break;
+                                case '09-10':
+                                    this.count._0910 += 1;
+                                    this.status._0910=this.getStatus(this.count._0910);
+                                    break;
+                                case '10-11':
+                                    this.count._1011 += 1;
+                                    this.status._1011=this.getStatus(this.count._1011);
+                                    break;
+                                case '11-12':
+                                    this.count._1112 += 1;
+                                    this.status._1112=this.getStatus(this.count._1112);
+                                    break;
+                            }
+                            this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''};
+                            alert("Appointment added successfully");
+                    }).catch(err => {
+                        this.hasError = true;
+                        //alert("You already added the appointment");
+                    });
                     }
-                    this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
-                
-            }).catch(err => {
-                this.hasError = true;
-                alert("You already added the appointment");
-            });
-            
-            }else{
-                alert("Please select a date");
-            }
+                }else{
+                    alert("Please select a date");
+                }
         },
 
         getCountStatus() {
-            // alert("sdsds");
-            
-            //let unformated = new Date(this.newAppointment.date);
-            //let date = unformated.getYear() + '-' + unformated.getMonth() + '-' + unformated.getDate() 
+           
             let date=this.formatDate(this.newAppointment.date);
 
-           // console.log(unformated, date);
             axios.get('/nurse/make_appointment/count/'+date).then( (response)=>{
                 this.count = response.data;
                 console.log(this.count);
@@ -187,18 +186,25 @@ export default {
             }
             return status;
         },
-        // checkMaximamCount(){
-        //     let date=this.formatDate(this.newAppointment.date);
-        //     axios.get('/nurse/make_appointment/status/'+date+this.newAppointment.timeslot).then( (response)=>{
-        //         console.log(response.data);
-        //         // this.count = response.data;
-        //         // console.log(this.count);
-        //         // this.status._0809=this.getStatus(this.count._0809);
-        //         // this.status._0910=this.getStatus(this.count._0910);
-        //         // this.status._1011=this.getStatus(this.count._1011);
-        //         // this.status._1112=this.getStatus(this.count._1112);
-        //     })
-        // }
+        checkMaximum(){
+            let date=this.formatDate(this.newAppointment.date);
+            axios.get('/nurse/make_appointment/getcount', {params: {date:date,timeslot:this.newAppointment.timeslot}}).then( (response)=>{
+                return response.data;
+            });
+        },
+        checkPatientID(){
+            // console.log(this.newAppointment.patient_id);
+            if(this.newAppointment.patient_id){
+                axios.get('/nurse/make_appointment/checkid', {params: {patient_id: this.newAppointment.patient_id}}).then( (response)=>{
+                    console.log(response.data);
+                    if(response.data==0){
+                        alert("Invalid Patient ID");
+                    }
+                    return response.data;
+                   
+                });
+            }
+        }
     }
 }
 </script>

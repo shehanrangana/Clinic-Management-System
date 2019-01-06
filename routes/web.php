@@ -129,8 +129,8 @@ Route::get('/nurse/appointment_list/show', 'AppointmentController@show');
 Route::post('/nurse/make_appointment/add', 'AppointmentController@add');
 
 Route::get('/nurse/make_appointment/count/{date}', 'AppointmentController@getCountStatus');
-
-Route::get('/nurse/make_appointment/count/{date,timeslot}', 'AppointmentController@getCount');
+Route::get('/nurse/make_appointment/checkid', 'AppointmentController@checkID');
+Route::get('/nurse/make_appointment/getcount', 'AppointmentController@getCount');
 
 //
 // Nurse routes

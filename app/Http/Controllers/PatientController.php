@@ -25,6 +25,8 @@ class PatientController extends Controller
         return $patients;
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *

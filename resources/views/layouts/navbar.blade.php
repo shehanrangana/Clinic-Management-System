@@ -38,13 +38,15 @@
                             <a class="nav-link" href="/pharmacy/addDrugs"><i class="ti-home"></i>ADD DRUG</a>
                         @endif
                     </li>
-                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register' ,'lab/upload/view']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/users', 'recept/patient_register' ,'lab/upload/view' ,'pharmacy/emailSend']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/users"></i>USERS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="/recept/patient_register"><i class="ti-home"></i>PATIENT REGISTRATION</a>
                         @elseif(Request::is(['lab', 'lab/*']))
                             <a class="nav-link" href="/lab/upload/view"><i class="ti-home"></i>DETAILS OF REPORT</a>
+                        @elseif(Request::is(['pharmacy', 'pharmacy/*']))
+                            <a class="nav-link" href="/pharmacy/emailSend"><i class="ti-home"></i>Email Send</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="#"><i class="ti-home"></i>PHARMACY</a>
                         
@@ -64,11 +66,13 @@
                         @endif
                     </li>
 
-                    <li class="nav-item {{(Request::is(['admin/appointments']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin/appointments','pharmacy/overquantity']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin/appointments""></i>APPOINTMENTS</a>
                         @elseif(Request::is(['recept', 'recept/*']))
                             <a class="nav-link" href="#"><i class="ti-home"></i>APPOINTMENTS</a>
+                        @elseif(Request::is(['pharmacy', 'pharmacy/*']))
+                            <a class="nav-link" href="/pharmacy/overquantity"><i class="ti-home"></i>Warning Quantity</a>
                         @endif
                     </li>
 

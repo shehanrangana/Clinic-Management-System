@@ -139,13 +139,21 @@ Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], funct
         Route::get('/viewdrugs', function () {
             return view('./pharmacy/viewprescription');
         });
+        Route::get('/emailSend', function () {
+            return view('./pharmacy/emailsend');
+        });
+        Route::get('/overquantity', function () {
+            return view('./pharmacy/overDrugs');
+        });
         Route::get('/addDrugs/show', 'PharmacyController@index');
+        Route::get('/overDrug/show', 'PharmacyController@overDrug');
+        Route::get('/expireDrug/show', 'PharmacyController@expireDrug');
         Route::get('/dashboard/getPrescription' ,'PharmacyController@prescription');
         Route::get('/dashboard/patient_history', 'PatientController@getPatientHistory');
         Route::post('/dashboard/updateQuantity' ,'PharmacyController@updatequantity');
 
         Route::post('/addDrugs/remove/{drug_id}', 'PharmacyController@destroy');
-        Route::get('/abc','PharmacyController@query_date');
+        Route::get('/testmail' ,'HomeController@testMail');
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');

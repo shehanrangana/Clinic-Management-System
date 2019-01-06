@@ -53,6 +53,8 @@ Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
 Vue.component('dashboard', require('./components/Pharmacy/Dashboard.vue'));
 Vue.component('add-drugs', require('./components/Pharmacy/Add_Drugs.vue'));
 Vue.component('view-prescription', require('./components/Pharmacy/View_Prescription.vue'));
+Vue.component('email-send', require('./components/Pharmacy/Email_send.vue'));
+Vue.component('over-drug', require('./components/Pharmacy/Over_Drugs.vue'));
 
 const app = new Vue({
     el: '#app',

@@ -79076,6 +79076,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       // console.log(data, this.form.file)
       axios.post('/lab/upload/store', data).then(function (res) {
         console.log(res);
+        alert('Lab Report Upload Succsess!');
       });
       // alert(JSON.stringify(this.form));
     },
@@ -80498,8 +80499,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var input = this.newDrugs;
             axios.post('/pharmacy/addDrugs/store', input).then(function (response) {
                 _this.newDrugs = { 'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': '' };
+                alert('Success Upload!');
             }).catch(function (err) {
                 _this.hasError = true;
+                alert('Not Success Upload!');
             });
         }
     }

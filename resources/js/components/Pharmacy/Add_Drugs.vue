@@ -81,8 +81,10 @@ import DatePicker from 'vue2-datepicker';
                 var input = this.newDrugs;
                 axios.post('/pharmacy/addDrugs/store', input).then((response) =>{
                     this.newDrugs = {'name': '','quantity':'' , 'brand': 'NMRA', 'expire_date': '', 'supplier_email':''}
+                    alert('Success Upload!');
                 }).catch(err => {
                     this.hasError = true;
+                    alert('Not Success Upload!');
                 });
             }
         }

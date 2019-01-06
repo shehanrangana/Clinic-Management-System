@@ -77,6 +77,7 @@ export default {
       axios.post('/lab/upload/store', data)
         .then(res => {
           console.log(res)
+          alert('Lab Report Upload Succsess!');
         })
       // alert(JSON.stringify(this.form));
     },

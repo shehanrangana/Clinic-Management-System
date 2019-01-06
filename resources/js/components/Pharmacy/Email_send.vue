@@ -40,9 +40,7 @@
                 <div class="form-group">
                     <label for="email">Supplier email address</label>
                     <input type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter email" v-model="newDrugs.supplier_email" required>
-                    <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
-                        This email address is already in database
-                    </div>
+                    
                 </div>
 
                 <button type="submit" class="btn btn-primary">Send</button>

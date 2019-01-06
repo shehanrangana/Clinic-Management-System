@@ -35,7 +35,7 @@
       >
 
         <template slot="actions" slot-scope="row">
-          
+            <b-button size="sm" variant="primary" @click.stop="updateDrug(row.item)" class="mr-2">Update</b-button>
 
             <!-- Remove patient button -->
             <b-button size="sm" variant="danger" @click.stop="removeDrug(row.item)" class="mr-2">Remove</b-button>
@@ -68,7 +68,6 @@ export default{
     data () {
         return {
             drugs: [],
-            //user_role_name: '',
             sortBy: 'date',
             sortDesc: false,
             currentPage: 1,

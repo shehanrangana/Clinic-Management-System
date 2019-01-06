@@ -88,7 +88,7 @@ import DatePicker from 'vue2-datepicker';
                     alert('Not Success Upload!');
                 });
                }else{
-                  alert('Not Fill Date!');
+                  alert('Not Fill Date!')
                }
             }
         }

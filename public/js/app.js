@@ -79127,40 +79127,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         makeAppointment: function makeAppointment() {
             var _this = this;
 
-            //this.checkPatientID();
             if (this.newAppointment.date) {
-                if (this.checkPatientID()) {
-                    //if(this.checkMaximum()<2){
-                    this.newAppointment.date = this.formatDate(this.newAppointment.date);
-                    var input = this.newAppointment;
-                    axios.post('/nurse/make_appointment/add', input).then(function (response) {
-                        //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
-                        //console.log(response.data.timeslot);
-                        switch (response.data.timeslot) {
-                            case '08-09':
-                                _this.count._0809 += 1;
-                                _this.status._0809 = _this.getStatus(_this.count._0809);
-                                break;
-                            case '09-10':
-                                _this.count._0910 += 1;
-                                _this.status._0910 = _this.getStatus(_this.count._0910);
-                                break;
-                            case '10-11':
-                                _this.count._1011 += 1;
-                                _this.status._1011 = _this.getStatus(_this.count._1011);
-                                break;
-                            case '11-12':
-                                _this.count._1112 += 1;
-                                _this.status._1112 = _this.getStatus(_this.count._1112);
-                                break;
-                        }
-                        _this.newAppointment = { 'date': '', 'timeslot': '8-9', 'patient_id': '' };
-                        alert("Appointment added successfully");
-                    }).catch(function (err) {
-                        _this.hasError = true;
-                        //alert("You already added the appointment");
-                    });
-                }
+
+                //if(this.checkMaximum()<2){
+                this.newAppointment.date = this.formatDate(this.newAppointment.date);
+                var input = this.newAppointment;
+                axios.post('/nurse/make_appointment/add', input).then(function (response) {
+                    //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
+                    //console.log(response.data.timeslot);
+                    switch (response.data.timeslot) {
+                        case '08-09':
+                            _this.count._0809 += 1;
+                            _this.status._0809 = _this.getStatus(_this.count._0809);
+                            break;
+                        case '09-10':
+                            _this.count._0910 += 1;
+                            _this.status._0910 = _this.getStatus(_this.count._0910);
+                            break;
+                        case '10-11':
+                            _this.count._1011 += 1;
+                            _this.status._1011 = _this.getStatus(_this.count._1011);
+                            break;
+                        case '11-12':
+                            _this.count._1112 += 1;
+                            _this.status._1112 = _this.getStatus(_this.count._1112);
+                            break;
+                    }
+                    _this.newAppointment = { 'date': '', 'timeslot': '8-9', 'patient_id': '' };
+                    alert("Appointment added successfully");
+                }).catch(function (err) {
+                    _this.hasError = true;
+                    if (_this.checkPatientID() == 0) {
+                        alert("Invalid Patient ID");
+                    } else if (_this.checkAppointment() == 0) {
+                        alert("You already added the appointment");
+                    }
+                });
+                //}
             } else {
                 alert("Please select a date");
             }
@@ -79203,13 +79206,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // console.log(this.newAppointment.patient_id);
             if (this.newAppointment.patient_id) {
                 axios.get('/nurse/make_appointment/checkid', { params: { patient_id: this.newAppointment.patient_id } }).then(function (response) {
-                    console.log(response.data);
+                    //console.log(response.data);
                     if (response.data == 0) {
                         alert("Invalid Patient ID");
                     }
                     return response.data;
                 });
             }
+        },
+        checkAppointment: function checkAppointment() {
+            // console.log(this.newAppointment.patient_id);
+            var dat = this.formatDate(this.newAppointment.date);
+            axios.get('/nurse/make_appointment/checkappointment', { params: { date: dat, patient_id: this.newAppointment.patient_id } }).then(function (response) {
+                //console.log(response.data);
+                if (response.data == 0) {
+                    alert("You already added the appointment");
+                }
+                return response.data;
+            });
         }
     }
 });

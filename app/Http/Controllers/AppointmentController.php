@@ -60,6 +60,16 @@ class AppointmentController extends Controller
         }
     }
 
+    public function checkAppointment(Request $request){
+        //dd($request->all());
+        $appointment=Appointment::where('date',$request->date)->where('patient_id',$request->patient_id)->exists();
+        if($appointment){
+            return 0; //already added appointment
+        }else{
+            return 1;
+        }
+    }
+
     public function add(Request $request)
     {
         //$_date = substr($request->date, 0, -14);

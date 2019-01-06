@@ -118,9 +118,9 @@ export default {
     methods: {
 
         makeAppointment() {
-            //this.checkPatientID();
+            
             if(this.newAppointment.date){
-                if(this.checkPatientID()){
+               
                 //if(this.checkMaximum()<2){
                     this.newAppointment.date=this.formatDate(this.newAppointment.date);
                     var input = this.newAppointment;
@@ -149,9 +149,13 @@ export default {
                             alert("Appointment added successfully");
                     }).catch(err => {
                         this.hasError = true;
-                        //alert("You already added the appointment");
+                        if(this.checkPatientID()==0){
+                            alert("Invalid Patient ID");
+                        }else if(this.checkAppointment()==0){
+                            alert("You already added the appointment");
+                        }
                     });
-                    }
+                    //}
                 }else{
                     alert("Please select a date");
                 }
@@ -196,7 +200,7 @@ export default {
             // console.log(this.newAppointment.patient_id);
             if(this.newAppointment.patient_id){
                 axios.get('/nurse/make_appointment/checkid', {params: {patient_id: this.newAppointment.patient_id}}).then( (response)=>{
-                    console.log(response.data);
+                    //console.log(response.data);
                     if(response.data==0){
                         alert("Invalid Patient ID");
                     }
@@ -204,6 +208,19 @@ export default {
                    
                 });
             }
+        },
+        checkAppointment(){
+            // console.log(this.newAppointment.patient_id);
+                let dat=this.formatDate(this.newAppointment.date);
+                axios.get('/nurse/make_appointment/checkappointment', {params: {date:dat,patient_id: this.newAppointment.patient_id}}).then( (response)=>{
+                    //console.log(response.data);
+                    if(response.data==0){
+                        alert("You already added the appointment");
+                    }
+                    return response.data;
+                   
+                });
+            
         }
     }
 }

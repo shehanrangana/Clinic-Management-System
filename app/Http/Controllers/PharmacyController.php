@@ -19,7 +19,7 @@ class PharmacyController extends Controller
     public function prescription()
     {
         
-        $prescription = Prescription::where('date', date("Y-m-d"))->get();
+        $prescription = Prescription::where('date', date("Y-m-d"+1))->get();
         return $prescription;
     }
     public function overDrug()

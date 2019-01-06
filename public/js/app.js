@@ -89230,9 +89230,10 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            prescriptionsQue: [],
-            drugs: [],
-            expireDrugs: [],
+            prescriptionsQue: [], //patient precription list relavent current date
+            drugs: [], //Over Drugs list
+            expireDrugs: [], //expire Drugs list
+            //patient precription list relavent current date
             sortByQue: 'date',
             sortDescQue: false,
             currentPageQue: 1,
@@ -89241,6 +89242,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
             pageOptionsQue: [5, 10, 15],
             filterQue: null,
             fieldsQue: [{ key: 'patient_id', sortable: true }, { key: 'date', sortable: true }, { key: 'actions', sortable: false }],
+            //Over Drugs list
             sortBy: 'date',
             sortDesc: false,
             currentPage: 1,
@@ -89249,6 +89251,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
             pageOptions: [5, 10, 15],
             filter: null,
             fields: [{ key: 'name', sortable: true }, { key: 'brand', sortable: false }, { key: 'supplier_email', sortable: false }],
+            //expire Drugs list
             sortByEx: 'date',
             sortDescEx: false,
             currentPageEx: 1,
@@ -89300,10 +89303,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
 
             axios.get('/pharmacy/overDrug/show').then(function (response) {
                 console.log(response.data);
-                // for(var i=0; i<response.data.length; i++){
-                //     response.data[i];
 
-                // }
                 _this3.drugs = response.data;
             });
         },
@@ -89312,28 +89312,29 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
 
             axios.get('/pharmacy/expireDrug/show').then(function (response) {
                 console.log(response.data);
-                // for(var i=0; i<response.data.length; i++){
-                //     response.data[i];
 
-                // }
                 _this4.expireDrugs = response.data;
             });
         },
 
 
-        // Filter appointment table
+        //filter Prescription table relevent current date
         onFilteredQue: function onFilteredQue(filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
+
             this.totalRowsQue = filteredItems.length;
             this.currentPageQue = 1;
         },
+
+        //filter Over drugs table
         onFiltered: function onFiltered(filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
+
             this.totalRows = filteredItems.length;
             this.currentPage = 1;
         },
+
+        //filter expire drugs table
         onFilteredEx: function onFilteredEx(filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
+
             this.totalRowsEx = filteredItems.length;
             this.currentPageEx = 1;
         }

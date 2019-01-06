@@ -170,9 +170,10 @@ Vue.use(Table);
 export default{
     data () {
         return {
-            prescriptionsQue: [],
-            drugs: [],
-            expireDrugs:[],
+            prescriptionsQue: [],//patient precription list relavent current date
+            drugs: [],//Over Drugs list
+            expireDrugs:[],//expire Drugs list
+            //patient precription list relavent current date
             sortByQue: 'date',
             sortDescQue: false,
             currentPageQue: 1,
@@ -188,6 +189,7 @@ export default{
               { key: 'actions', sortable: false },
               
             ],
+            //Over Drugs list
             sortBy: 'date',
             sortDesc: false,
             currentPage: 1,
@@ -202,6 +204,7 @@ export default{
               
               
             ],
+            //expire Drugs list
             sortByEx: 'date',
             sortDescEx: false,
             currentPageEx: 1,
@@ -255,39 +258,35 @@ export default{
         getDrugs() {
             axios.get('/pharmacy/overDrug/show').then((response) =>{
                 console.log(response.data);
-                // for(var i=0; i<response.data.length; i++){
-                //     response.data[i];
-
-                // }
+                
                 this.drugs = response.data;  
             })
         },
         getDrugsEx() {
             axios.get('/pharmacy/expireDrug/show').then((response) =>{
                 console.log(response.data);
-                // for(var i=0; i<response.data.length; i++){
-                //     response.data[i];
-
-                // }
+                
                 this.expireDrugs = response.data;  
             })
         },
 
 
         
-        // Filter appointment table
+        //filter Prescription table relevent current date
         onFilteredQue (filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
+            
             this.totalRowsQue = filteredItems.length
             this.currentPageQue = 1
         },
+        //filter Over drugs table
         onFiltered (filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
+            
             this.totalRows = filteredItems.length
             this.currentPage = 1
         },
+        //filter expire drugs table
         onFilteredEx (filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
+            
             this.totalRowsEx = filteredItems.length
             this.currentPageEx = 1
         },

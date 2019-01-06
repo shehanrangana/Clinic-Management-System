@@ -121,7 +121,7 @@ class UserController extends Controller
         }
 
         $_birthday = substr($request->birthday, 0, -14);
-        $random_password = str_random(8);; // Generate random password
+        $random_password = str_random(8); // Generate random password
 
         $user = new User();
         $user->name = $request->name;

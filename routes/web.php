@@ -86,6 +86,9 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
 Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function() {
     Route::prefix('doctor')->group(function(){
         Route::get('/', 'UserController@doctor');
+        
+        Route::get('/dashboard/is_active_panel', 'QueueController@isActivePanel');
+        Route::post('/dashboard/active_panel', 'QueueController@activePanel');
 
         Route::get('/dashboard/get_queue', 'QueueController@getCurrentQueue');
 

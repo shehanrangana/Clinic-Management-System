@@ -62,10 +62,11 @@ class AppointmentController extends Controller
 
     public function add(Request $request)
     {
-        $_date = substr($request->date, 0, -14);
+        //$_date = substr($request->date, 0, -14);
 
         $appointment = new Appointment();
-        $appointment->date = $_date;
+        //$appointment->date = $_date;
+        $appointment->date = $request->date;
         $appointment->timeslot = $request->timeslot;
         $appointment->patient_id = $request->patient_id;
         $appointment->save();

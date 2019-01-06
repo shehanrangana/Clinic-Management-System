@@ -79127,41 +79127,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         makeAppointment: function makeAppointment() {
             var _this = this;
 
-            var input = this.newAppointment;
-            axios.post('/nurse/make_appointment/add', input).then(function (response) {
-                //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
-                //console.log(response.data.timeslot);
-                switch (response.data.timeslot) {
-                    case '08-09':
-                        _this.count._0809 += 1;
-                        _this.status._0809 = _this.getStatus(_this.count._0809);
-                        break;
-                    case '09-10':
-                        _this.count._0910 += 1;
-                        _this.status._0910 = _this.getStatus(_this.count._0910);
-                        break;
-                    case '10-11':
-                        _this.count._1011 += 1;
-                        _this.status._1011 = _this.getStatus(_this.count._1011);
-                        break;
-                    case '11-12':
-                        _this.count._1112 += 1;
-                        _this.status._1112 = _this.getStatus(_this.count._1112);
-                        break;
-                }
-            }).catch(function (err) {
-                _this.hasError = true;
-            });
-            this.newAppointment = { 'date': '', 'timeslot': '8-9', 'patient_id': '' };
+            if (this.newAppointment.date) {
+                this.newAppointment.date = this.formatDate(this.newAppointment.date);
+                var input = this.newAppointment;
+                axios.post('/nurse/make_appointment/add', input).then(function (response) {
+                    //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
+                    //console.log(response.data.timeslot);
+                    switch (response.data.timeslot) {
+                        case '08-09':
+                            _this.count._0809 += 1;
+                            _this.status._0809 = _this.getStatus(_this.count._0809);
+                            break;
+                        case '09-10':
+                            _this.count._0910 += 1;
+                            _this.status._0910 = _this.getStatus(_this.count._0910);
+                            break;
+                        case '10-11':
+                            _this.count._1011 += 1;
+                            _this.status._1011 = _this.getStatus(_this.count._1011);
+                            break;
+                        case '11-12':
+                            _this.count._1112 += 1;
+                            _this.status._1112 = _this.getStatus(_this.count._1112);
+                            break;
+                    }
+                    _this.newAppointment = { 'date': '', 'timeslot': '8-9', 'patient_id': '' };
+                }).catch(function (err) {
+                    _this.hasError = true;
+                    alert("You already added the appointment");
+                });
+            } else {
+                alert("Please select a date");
+            }
         },
         getCountStatus: function getCountStatus() {
             var _this2 = this;
 
-            var unformated = new Date(this.newAppointment.date);
+            // alert("sdsds");
+
+            //let unformated = new Date(this.newAppointment.date);
             //let date = unformated.getYear() + '-' + unformated.getMonth() + '-' + unformated.getDate() 
             var date = this.formatDate(this.newAppointment.date);
 
-            console.log(unformated, date);
+            // console.log(unformated, date);
             axios.get('/nurse/make_appointment/count/' + date).then(function (response) {
                 _this2.count = response.data;
                 console.log(_this2.count);
@@ -79213,6 +79221,11 @@ var render = function() {
                   id: "date",
                   required: true
                 },
+                on: {
+                  change: function($event) {
+                    _vm.getCountStatus()
+                  }
+                },
                 model: {
                   value: _vm.newAppointment.date,
                   callback: function($$v) {
@@ -79226,23 +79239,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c("br"),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "button" },
-              on: {
-                click: function($event) {
-                  _vm.getCountStatus()
-                }
-              }
-            },
-            [_vm._v("Search")]
-          )
-        ])
+        _c("div", { staticClass: "col" })
       ])
     ]),
     _vm._v(" "),
@@ -79396,7 +79393,7 @@ var render = function() {
         _c(
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Make Appointment")]
+          [_vm._v("Add Appointment")]
         )
       ]
     )

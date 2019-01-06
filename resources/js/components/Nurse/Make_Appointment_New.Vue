@@ -5,12 +5,12 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="date">Date </label>
-                        <date-picker :lang="lang" name="date" id="date" :required="true" v-model="newAppointment.date"></date-picker>
+                        <date-picker @change="getCountStatus()" :lang="lang" name="date" id="date" :required="true" v-model="newAppointment.date"></date-picker>
                     </div>  
                 </div>
                 <div class="col">   
-                <br> 
-                <button type="button" class="btn btn-primary" @click="getCountStatus()">Search</button>
+                <!-- <br> 
+                <button type="button" class="btn btn-primary" @click="getCountStatus()">Search</button> -->
                 </div>
             </div>   
                 </form>
@@ -77,7 +77,7 @@
             </div>
         </div>
         
-        <button type="submit" class="btn btn-primary">Make Appointment</button>
+        <button type="submit" class="btn btn-primary">Add Appointment</button>
     </form>
 </div>
 </template> 
@@ -118,6 +118,8 @@ export default {
     methods: {
 
         makeAppointment() {
+            if(this.newAppointment.date){
+            this.newAppointment.date=this.formatDate(this.newAppointment.date);
             var input = this.newAppointment;
             axios.post('/nurse/make_appointment/add', input).then((response)=>{
                 //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
@@ -140,19 +142,26 @@ export default {
                             this.status._1112=this.getStatus(this.count._1112);
                             break;
                     }
+                    this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
                 
             }).catch(err => {
                 this.hasError = true;
+                alert("You already added the appointment");
             });
-            this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
+            
+            }else{
+                alert("Please select a date");
+            }
         },
 
         getCountStatus() {
-            let unformated = new Date(this.newAppointment.date)
+            // alert("sdsds");
+            
+            //let unformated = new Date(this.newAppointment.date);
             //let date = unformated.getYear() + '-' + unformated.getMonth() + '-' + unformated.getDate() 
             let date=this.formatDate(this.newAppointment.date);
 
-            console.log(unformated, date);
+           // console.log(unformated, date);
             axios.get('/nurse/make_appointment/count/'+date).then( (response)=>{
                 this.count = response.data;
                 console.log(this.count);
@@ -177,7 +186,19 @@ export default {
                 status="Not Full";
             }
             return status;
-        }
+        },
+        // checkMaximamCount(){
+        //     let date=this.formatDate(this.newAppointment.date);
+        //     axios.get('/nurse/make_appointment/status/'+date+this.newAppointment.timeslot).then( (response)=>{
+        //         console.log(response.data);
+        //         // this.count = response.data;
+        //         // console.log(this.count);
+        //         // this.status._0809=this.getStatus(this.count._0809);
+        //         // this.status._0910=this.getStatus(this.count._0910);
+        //         // this.status._1011=this.getStatus(this.count._1011);
+        //         // this.status._1112=this.getStatus(this.count._1112);
+        //     })
+        // }
     }
 }
 </script>

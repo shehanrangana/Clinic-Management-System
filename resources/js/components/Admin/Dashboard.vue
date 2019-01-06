@@ -42,7 +42,20 @@
 </template>
 
 <script>
-    
+export default {
+    data() {
+        return {
+
+        }
+    },
+
+    created() {
+        // This will fire whenever a doctor call a patient
+        window.Echo.channel("number-update-channel").listen(".next-number-updated", event => {
+            console.log(event.next_number + " " + event.panel);
+        });
+    }
+}
 </script>
 
 <style>

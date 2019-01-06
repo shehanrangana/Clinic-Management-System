@@ -84211,8 +84211,10 @@ exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radiu
 
 /***/ }),
 /* 229 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -84256,6 +84258,18 @@ exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radiu
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
+    created: function created() {
+        // This will fire whenever a doctor call a patient
+        window.Echo.channel("number-update-channel").listen(".next-number-updated", function (event) {
+            console.log(event.next_number + " " + event.panel);
+        });
+    }
+});
 
 /***/ }),
 /* 230 */
@@ -88880,6 +88894,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
     // This will fire whenever receptionist update queue
     window.Echo.channel("queue-channel").listen(".queue-started", function (event) {
       _this2.getQueueList();
+    });
+
+    // This will fire whenever a doctor call a patient
+    window.Echo.channel("number-update-channel").listen(".next-number-updated", function (event) {
+      _this2.nextPatient = event.next_number;
     });
 
     // Show activated panel

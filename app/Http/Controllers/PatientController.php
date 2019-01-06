@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
+use Session;
 use App\Patient;
 use App\Prescription;
+use App\DoctorSession;
+use App\QueueSummary;
 
 class PatientController extends Controller
 {
@@ -145,12 +148,17 @@ class PatientController extends Controller
         foreach ($patientHistory as $oneDay) {
             array_push($categorizedArray, $oneDay);
         }
+        // Get relevant panel number using session id of logged doctor
+        $panel = DoctorSession::where('session', Session::getId())->get()->first()->panel;
+        // dd($panel);
 
-        // Update queue_summary table to update current number
-        DB::table('queue_summary')->where('status', 1)->update(['current'=> DB::raw('current+1')]);
-        // Get current number from the active queue
-        $current = DB::table('queue_summary')->where('status', 1)->select('current')->get();
+        // Update queue_summary table 
+        DB::table('queue_summary')->where('status', 1)->update(['current'=> $request->number, $panel=> $request->number]);
+        
+        // Get current number of overall progress
+        $currentNumber = QueueSummary::where('status', 1)->select('current')->get()->first();
+        // dd($currentNumber->current+1);
 
-        return ['patient_history'=>$categorizedArray, 'current'=> $current[0]->current];
+        return ['patient_history'=>$categorizedArray, 'next_number'=> $currentNumber->current+1];
     }
 }

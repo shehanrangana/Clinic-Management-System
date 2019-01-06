@@ -79081,15 +79081,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -79100,7 +79091,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             newAppointment: { 'date': '', 'timeslot': '8-9', 'patient_id': '' },
             appointments: [],
-            //count: [],
             count: { '_0809': '', '_0910': '', '_1011': '', '_1112': '' },
             status: { '_0809': '', '0910': '', '1011': '', '1112': '' },
 
@@ -79124,50 +79114,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     // },
 
     methods: {
+        //adding appointments
         makeAppointment: function makeAppointment() {
             var _this = this;
 
             if (this.newAppointment.date) {
 
-                //if(this.checkMaximum()<2){
-                this.newAppointment.date = this.formatDate(this.newAppointment.date);
-                var input = this.newAppointment;
-                axios.post('/nurse/make_appointment/add', input).then(function (response) {
-                    //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
-                    //console.log(response.data.timeslot);
-                    switch (response.data.timeslot) {
-                        case '08-09':
-                            _this.count._0809 += 1;
-                            _this.status._0809 = _this.getStatus(_this.count._0809);
-                            break;
-                        case '09-10':
-                            _this.count._0910 += 1;
-                            _this.status._0910 = _this.getStatus(_this.count._0910);
-                            break;
-                        case '10-11':
-                            _this.count._1011 += 1;
-                            _this.status._1011 = _this.getStatus(_this.count._1011);
-                            break;
-                        case '11-12':
-                            _this.count._1112 += 1;
-                            _this.status._1112 = _this.getStatus(_this.count._1112);
-                            break;
-                    }
-                    _this.newAppointment = { 'date': '', 'timeslot': '8-9', 'patient_id': '' };
-                    alert("Appointment added successfully");
-                }).catch(function (err) {
-                    _this.hasError = true;
-                    if (_this.checkPatientID() == 0) {
-                        alert("Invalid Patient ID");
-                    } else if (_this.checkAppointment() == 0) {
-                        alert("You already added the appointment");
-                    }
-                });
-                //}
+                if (this.getStatusForTimeslot(this.newAppointment.timeslot) == 'Not Full') {
+                    this.newAppointment.date = this.formatDate(this.newAppointment.date);
+                    var input = this.newAppointment;
+                    axios.post('/nurse/make_appointment/add', input).then(function (response) {
+                        //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
+                        //console.log(response.data.timeslot);
+                        switch (response.data.timeslot) {
+                            case '08-09':
+                                _this.count._0809 += 1;
+                                _this.status._0809 = _this.getStatus(_this.count._0809);
+                                break;
+                            case '09-10':
+                                _this.count._0910 += 1;
+                                _this.status._0910 = _this.getStatus(_this.count._0910);
+                                break;
+                            case '10-11':
+                                _this.count._1011 += 1;
+                                _this.status._1011 = _this.getStatus(_this.count._1011);
+                                break;
+                            case '11-12':
+                                _this.count._1112 += 1;
+                                _this.status._1112 = _this.getStatus(_this.count._1112);
+                                break;
+                        }
+                        _this.newAppointment = { 'date': '', 'timeslot': '8-9', 'patient_id': '' };
+                        alert("Appointment added successfully");
+                    }).catch(function (err) {
+                        _this.hasError = true;
+                        if (_this.checkPatientID() == 0) {
+                            console.log("Invalid Patient ID");
+                        } else if (_this.checkAppointment() == 0) {
+                            console.log("You already added the appointment");
+                        }
+                    });
+                } else {
+                    //console.log(this.getStatusForTimeslot(this.newAppointment.timeslot));
+                    alert("TImeslot is full. Select another timeslot or date");
+                }
             } else {
                 alert("Please select a date");
             }
         },
+
+
+        //get the no of appointments & state whether the timeslot full or not for particular date & timeslots
         getCountStatus: function getCountStatus() {
             var _this2 = this;
 
@@ -79182,12 +79179,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.status._1112 = _this2.getStatus(_this2.count._1112);
             });
         },
+
+
+        //convert the date from Thu Nov 28 2018 00:00:00 GMT+0530 (India Standard Time) format to 2018-11-28 format
         formatDate: function formatDate(str) {
             var date = new Date(str),
                 mnth = ("0" + (date.getMonth() + 1)).slice(-2),
                 day = ("0" + date.getDate()).slice(-2);
             return [date.getFullYear(), mnth, day].join("-");
         },
+
+
+        //check the count/no of appointsments for timeslots full or not 
         getStatus: function getStatus(count) {
             if (count >= 3) {
                 status = "Full";
@@ -79196,12 +79199,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             return status;
         },
-        checkMaximum: function checkMaximum() {
-            var date = this.formatDate(this.newAppointment.date);
-            axios.get('/nurse/make_appointment/getcount', { params: { date: date, timeslot: this.newAppointment.timeslot } }).then(function (response) {
-                return response.data;
-            });
+
+
+        //get the status for given timeslot
+        getStatusForTimeslot: function getStatusForTimeslot($timeslot) {
+            switch ($timeslot) {
+                case '08-09':
+                    return this.status._0809;
+                case '09-10':
+                    return this.status._0910;
+                case '10-11':
+                    return this.status._1011;
+                case '11-12':
+                    return this.status._1112;
+            }
         },
+
+
+        //check validity of the patient id 
         checkPatientID: function checkPatientID() {
             // console.log(this.newAppointment.patient_id);
             if (this.newAppointment.patient_id) {
@@ -79214,10 +79229,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
+
+
+        //check there is a appointment for given patient id & date already
         checkAppointment: function checkAppointment() {
             // console.log(this.newAppointment.patient_id);
-            var dat = this.formatDate(this.newAppointment.date);
-            axios.get('/nurse/make_appointment/checkappointment', { params: { date: dat, patient_id: this.newAppointment.patient_id } }).then(function (response) {
+            var date = this.formatDate(this.newAppointment.date);
+            axios.get('/nurse/make_appointment/checkappointment', { params: { date: date, patient_id: this.newAppointment.patient_id } }).then(function (response) {
                 //console.log(response.data);
                 if (response.data == 0) {
                     alert("You already added the appointment");

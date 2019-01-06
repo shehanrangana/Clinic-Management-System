@@ -160,6 +160,11 @@ export default {
       this.getQueueList();
     });
 
+    // This will fire whenever a doctor call a patient
+    window.Echo.channel("number-update-channel").listen(".next-number-updated", event => {
+      this.nextPatient = event.next_number;
+    });
+
     // Show activated panel
     axios.get('/doctor/dashboard/is_active_panel').then((response) =>{
       if(response.data != 0){

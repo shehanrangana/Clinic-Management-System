@@ -10,6 +10,7 @@ use App\Patient;
 use App\Prescription;
 use App\DoctorSession;
 use App\QueueSummary;
+use App\Events\Queue\NumberCalled;
 
 class PatientController extends Controller
 {
@@ -157,7 +158,8 @@ class PatientController extends Controller
         
         // Get current number of overall progress
         $currentNumber = QueueSummary::where('status', 1)->select('current')->get()->first();
-        // dd($currentNumber->current+1);
+        
+        event(new NumberCalled($currentNumber->current+1, $panel)); // update each doctor next number using pusher
 
         return ['patient_history'=>$categorizedArray, 'next_number'=> $currentNumber->current+1];
     }

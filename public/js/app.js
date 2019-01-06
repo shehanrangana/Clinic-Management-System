@@ -79815,6 +79815,35 @@ exports.push([module.i, "\n.table td, .table th {\n    vertical-align: inherit;\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -79841,27 +79870,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: { DatePicker: __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default.a },
+
     data: function data() {
         return {
             //appointments: [],
-            appointments: { 'patient_id': '', 'name': '' }
+            appointments: { 'patient_id': '', 'name': '', 'date': '', 'timeslot': '' },
+
+            // setup calander
+            lang: {
+                days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+                placeholder: {
+                    date: 'Select Date'
+                }
+            },
+
+            hasError: false
         };
     },
 
 
-    mounted: function mounted() {
-        this.getAppointments();
-    },
+    // mounted: function mounted() {
+    //     this.getAppointments();
+    // },
 
     methods: {
         getAppointments: function getAppointments() {
             var _this = this;
 
-            axios.get('/nurse/appointment_list/show').then(function (response) {
+            var date = this.formatDate(this.appointments.date);
+            axios.get('/nurse/appointment_list/show', { params: { date: date, timeslot: this.appointments.timeslot } }).then(function (response) {
                 _this.appointments = response.data;
                 console.log(response.data);
             });
+        },
+
+
+        //convert the date from Thu Nov 28 2018 00:00:00 GMT+0530 (India Standard Time) format to 2018-11-28 format
+        formatDate: function formatDate(str) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("-");
+        },
+        cancelAppointment: function cancelAppointment() {
+            var date = this.formatDate(this.appointments.date);
+            axios.post('/nurse/appointment_list/cancel', { date: date, patient_id: this.appointsments.patient_id }).then(function (response) {});
         }
     }
 });
@@ -79875,6 +79934,107 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "inner-div" }, [
+    _c("form", { staticClass: "form-inline" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "date" } }, [_vm._v("Date")]),
+                _vm._v(" "),
+                _c("date-picker", {
+                  attrs: {
+                    lang: _vm.lang,
+                    name: "date",
+                    id: "date",
+                    required: true
+                  },
+                  model: {
+                    value: _vm.appointments.date,
+                    callback: function($$v) {
+                      _vm.$set(_vm.appointments, "date", $$v)
+                    },
+                    expression: "appointments.date"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "timeslot" } }, [_vm._v("Time")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.appointments.timeslot,
+                      expression: "appointments.timeslot"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "timeslot", name: "timeslot", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.appointments,
+                        "timeslot",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", [_vm._v("08-09")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("09-10")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("10-11")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("11-12")])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.getAppointments()
+                  }
+                }
+              },
+              [_vm._v("Search")]
+            )
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
     _c("div", { staticClass: "table-responsive" }, [
       _c(
         "table",
@@ -79890,8 +80050,6 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(appointment.name))]),
                 _vm._v(" "),
-                _c("td"),
-                _vm._v(" "),
                 _c("td", [
                   _c(
                     "button",
@@ -79901,6 +80059,7 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
+                          _vm.cancelAppointment()
                         }
                       }
                     },
@@ -79925,8 +80084,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Patient Id")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
       ])

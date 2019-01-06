@@ -125,7 +125,7 @@ Route::get('/nurse/appointment_list', function () {
 });
 
 Route::get('/nurse/appointment_list/show', 'AppointmentController@show');
-
+Route::get('/nurse/appointment_list/cancel', 'AppointmentController@destroy');
 Route::post('/nurse/make_appointment/add', 'AppointmentController@add');
 
 Route::get('/nurse/make_appointment/count/{date}', 'AppointmentController@getCountStatus');

@@ -111,13 +111,14 @@ class AppointmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
-        // $appointments = Appointment::all();
-        // return $appointments;
+        //dd($request->all());
         $appointments = DB::table('appointments')
             ->join('patients', 'appointments.patient_id', '=', 'patients.patient_id')
-            ->select('appointments.patient_id', 'patients.name')
+            ->select('appointments.patient_id', 'patients.name','appointments.date','appointments.timeslot')
+            ->where('appointments.date',$request->date)
+            ->where('appointments.timeslot',$request->timeslot)
             ->get();
         return $appointments;
     }
@@ -151,9 +152,10 @@ class AppointmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        dd($request->all());
+        //DB::table('appointments')->where('date', $request->date)->where('pateint_id',$request->patient_id)->delete();
     }
 
     public function getTodayList()

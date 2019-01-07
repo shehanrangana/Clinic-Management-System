@@ -79081,6 +79081,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -79090,7 +79111,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             newAppointment: { 'date': '', 'timeslot': '8-9', 'patient_id': '' },
-            appointments: [],
+            appointments: { 'patient_id': '', 'name': '', 'date': '', 'timeslot': '' },
             count: { '_0809': '', '_0910': '', '_1011': '', '_1112': '' },
             status: { '_0809': '', '0910': '', '1011': '', '1112': '' },
 
@@ -79114,6 +79135,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     // },
 
     methods: {
+
         //adding appointments
         makeAppointment: function makeAppointment() {
             var _this = this;
@@ -79121,10 +79143,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.newAppointment.date) {
 
                 if (this.getStatusForTimeslot(this.newAppointment.timeslot) == 'Not Full') {
+
                     this.newAppointment.date = this.formatDate(this.newAppointment.date);
                     var input = this.newAppointment;
+
                     axios.post('/nurse/make_appointment/add', input).then(function (response) {
-                        //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
+
                         //console.log(response.data.timeslot);
                         switch (response.data.timeslot) {
                             case '08-09':
@@ -79144,6 +79168,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 _this.status._1112 = _this.getStatus(_this.count._1112);
                                 break;
                         }
+
                         _this.newAppointment = { 'date': _this.newAppointment.date, 'timeslot': '8-9', 'patient_id': '' };
                         alert("Appointment added successfully");
                     }).catch(function (err) {
@@ -79164,7 +79189,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
 
-        //get the no of appointments & state whether the timeslot full or not for particular date & timeslots
+        //get the no of appointments & state whether the timeslot full or not for relavant date & timeslots
         getCountStatus: function getCountStatus() {
             var _this2 = this;
 
@@ -79242,6 +79267,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 return response.data;
             });
+        },
+
+        //get appointments for relavant date & timeslot
+        getAppointments: function getAppointments($timeslot) {
+            var _this3 = this;
+
+            if (this.newAppointment.date) {
+                var date = this.formatDate(this.newAppointment.date);
+                console.log(date);
+                console.log($timeslot);
+                axios.get('/nurse/make_appointment/show', { params: { date: date, timeslot: $timeslot } }).then(function (response) {
+                    _this3.appointments = response.data;
+                    console.log(response.data);
+                });
+            } else {
+                alert("Please select a date");
+            }
         }
     }
 });
@@ -79303,41 +79345,87 @@ var render = function() {
           _vm._m(0),
           _vm._v(" "),
           _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("8-9")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.count._0809))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.status._0809))])
-            ]),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("08-09")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("8-9")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._0809))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._0809))])
+              ]
+            ),
             _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("9-10")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.count._0910))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.status._0910))])
-            ]),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("09-10")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("9-10")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._0910))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._0910))])
+              ]
+            ),
             _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("10-11")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.count._1011))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.status._1011))])
-            ]),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("10-11")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("10-11")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._1011))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._1011))])
+              ]
+            ),
             _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("11-12")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.count._1112))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.status._1112))])
-            ])
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("11-12")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("11-12")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._1112))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._1112))])
+              ]
+            )
           ])
         ]
       )
     ]),
+    _vm._v(" "),
+    _c("br"),
     _vm._v(" "),
     _c(
       "form",
@@ -79449,7 +79537,51 @@ var render = function() {
           [_vm._v("Add Appointment")]
         )
       ]
-    )
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Appointments")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-sm table-bordered" },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.appointments, function(appointment) {
+              return _c("tr", [
+                _c("td", [_vm._v(_vm._s(appointment.patient_id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(appointment.name))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-danger btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.cancelAppointment()
+                        }
+                      }
+                    },
+                    [_vm._v("cancel")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -79464,6 +79596,20 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("No of appointments")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Patient Id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
       ])
     ])
   }

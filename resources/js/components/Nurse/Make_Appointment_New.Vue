@@ -23,22 +23,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr class='clickable-row' @click="getAppointments('08-09')">
                             <td>8-9</td>
                             <td>{{ count._0809 }}</td>
                             <td>{{ status._0809 }}</td>    
                         </tr>
-                        <tr>
+                        <tr class='clickable-row' @click="getAppointments('09-10')">
                             <td>9-10</td>
                             <td>{{ count._0910 }}</td>
                             <td>{{ status._0910 }}</td>    
                         </tr>
-                        <tr>
+                        <tr class='clickable-row' @click="getAppointments('10-11')">
                             <td>10-11</td>
                             <td>{{ count._1011 }}</td>
                             <td>{{ status._1011 }}</td>    
                         </tr>
-                        <tr>
+                        <tr class='clickable-row' @click="getAppointments('11-12')">
                             <td>11-12</td>
                             <td>{{ count._1112 }}</td>
                             <td>{{ status._1112 }}</td>    
@@ -46,7 +46,7 @@
                     </tbody>
                 </table>
             </div>
-       
+    <br>
     <form @submit.prevent="makeAppointment()">
         <div class="row">
             <div class="col">
@@ -70,6 +70,27 @@
         
         <button type="submit" class="btn btn-primary" >Add Appointment</button>
     </form>
+    <br>
+    <br>
+    <h5>Appointments</h5>
+    <div class="table-responsive">
+        <table class="table table-hover table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Patient Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="appointment in appointments">
+                    <td>{{ appointment.patient_id }}</td>
+                    <td>{{ appointment.name}}</td>
+                    <td><button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="cancelAppointment()">cancel</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </template> 
 
@@ -82,7 +103,7 @@ export default {
     data() {
         return {
             newAppointment: {'date': '', 'timeslot': '8-9', 'patient_id': ''},
-            appointments: [],
+            appointments: {'patient_id': '','name':'','date':'','timeslot':''},
             count:{'_0809': '','_0910': '','_1011': '','_1112': ''},
             status:{'_0809': '', '0910': '', '1011': '', '1112': ''},
             
@@ -106,15 +127,18 @@ export default {
     // },
 
     methods: {
+
         //adding appointments
         makeAppointment() {
             if(this.newAppointment.date){
                
                 if(this.getStatusForTimeslot(this.newAppointment.timeslot)=='Not Full'){
+
                     this.newAppointment.date=this.formatDate(this.newAppointment.date);
                     var input = this.newAppointment;
+
                     axios.post('/nurse/make_appointment/add', input).then((response)=>{
-                        //this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''}
+                       
                         //console.log(response.data.timeslot);
                         switch (response.data.timeslot) {
                                 case '08-09':
@@ -134,8 +158,10 @@ export default {
                                     this.status._1112=this.getStatus(this.count._1112);
                                     break;
                             }
+
                             this.newAppointment = {'date': this.newAppointment.date, 'timeslot': '8-9', 'patient_id': ''};
                             alert("Appointment added successfully");
+
                     }).catch(err => {
                         this.hasError = true;
                         if(this.checkPatientID()==0){
@@ -144,16 +170,18 @@ export default {
                             console.log("You already added the appointment");
                         }
                     });
-                }else{
-                    //console.log(this.getStatusForTimeslot(this.newAppointment.timeslot));
-                    alert("TImeslot is full. Select another timeslot or date");
-                }
+                    
+                    }else{
+                        //console.log(this.getStatusForTimeslot(this.newAppointment.timeslot));
+                        alert("TImeslot is full. Select another timeslot or date");
+                    }
                 }else{
                     alert("Please select a date");
                 }
         },
 
-        //get the no of appointments & state whether the timeslot full or not for particular date & timeslots
+
+        //get the no of appointments & state whether the timeslot full or not for relavant date & timeslots
         getCountStatus() {
             let date=this.formatDate(this.newAppointment.date);
 
@@ -168,6 +196,7 @@ export default {
             
         },
 
+
         //convert the date from Thu Nov 28 2018 00:00:00 GMT+0530 (India Standard Time) format to 2018-11-28 format
         formatDate(str){
             var date = new Date(str),
@@ -175,6 +204,7 @@ export default {
                 day  = ("0" + date.getDate()).slice(-2);
             return [ date.getFullYear(), mnth, day ].join("-");
         },
+
 
         //check the count/no of appointsments for timeslots full or not 
         getStatus(count){
@@ -185,6 +215,7 @@ export default {
             }
             return status;
         },
+
 
         //get the status for given timeslot
         getStatusForTimeslot($timeslot){
@@ -199,6 +230,7 @@ export default {
                     return this.status._1112;
             }
         },
+
 
         //check validity of the patient id 
         checkPatientID(){
@@ -215,6 +247,7 @@ export default {
             }
         },
 
+
         //check there is a appointment for given patient id & date already
         checkAppointment(){
             // console.log(this.newAppointment.patient_id);
@@ -228,7 +261,22 @@ export default {
                    
                 });
             
-        }
+        },
+        //get appointments for relavant date & timeslot
+        getAppointments($timeslot){
+            if(this.newAppointment.date){
+                let date=this.formatDate(this.newAppointment.date);
+                console.log(date);
+                console.log($timeslot);
+                axios.get('/nurse/make_appointment/show', {params: {date: date,timeslot:$timeslot}}).then( (response)=>{
+                    this.appointments = response.data;
+                    console.log(response.data);
+                })
+            }else{
+                alert("Please select a date");
+            }
+        },
+        
     }
 }
 </script>

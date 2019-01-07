@@ -39,7 +39,7 @@
             </b-button>
 
             <!-- Remove patient button -->
-            <b-button size="sm" variant="danger" @click.stop="removeUser(row.item)" class="mr-2">Remove</b-button>
+            <!-- <b-button size="sm" variant="danger" @click.stop="removeUser(row.item)" class="mr-2">Remove</b-button> -->
         </template>
         <template slot="row-details" slot-scope="row">
             <b-card>
@@ -128,12 +128,29 @@ export default{
             })
         },
 
-        removeUser(user) {
-            // console.log(user);
-            axios.post('/admin/users/remove/' + user.user_id).then((response) =>{
-                this.getUsers();
-            })
-        },
+        // removeUser(user) {
+        //     swal({
+        //         title: "Are you sure?",
+        //         text:
+        //           "Once deleted, you will not be able to restore this user account!",
+        //         icon: "warning",
+        //         buttons: true,
+        //         dangerMode: true
+        //       }).then(willDelete => {
+        //         if (willDelete) {
+        //           axios.post('/admin/users/remove/' + user.user_id).then(response => {
+        //             swal("Selected user has been removed !", {
+        //               icon: "success"
+        //             });
+        //             this.getUsers();
+        //           }).catch(err => {
+        //             swal("Error!", "Cannot remove this user !", "error");
+        //           });
+        //         } else {
+        //           swal("User not removed !");
+        //         }
+        //     });
+        // },
 
         // Filter appointment table
         onFiltered (filteredItems) {

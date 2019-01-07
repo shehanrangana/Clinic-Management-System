@@ -38,6 +38,7 @@ class PrescriptionController extends Controller
     public function store(Request $request)
     {
         $patient_id = $request[0];
+        $recentComment = $request[2];
         $isFirstTime = true;
         $recentPrescription = array();
         foreach ($request[1] as $drug) {
@@ -76,6 +77,7 @@ class PrescriptionController extends Controller
                 break;
         }
         DB::table($queue_table)->where('patient_id', $patient_id)->update(['checked' => true]); 
+        // return ['recentPrescription'=>$recentPrescription, 'comment'=>$recentComment];
         return $recentPrescription;
         
     }

@@ -90899,8 +90899,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var input = this.newDrugs;
             axios.post('/pharmacy/testmail', input).then(function (response) {
                 _this.newDrugs = { 'name': '', 'quantity': '', 'brand': 'NMRA', 'date': '', 'supplier_email': '' };
+                alert('Send Email Successfully!');
             }).catch(function (err) {
                 _this.hasError = true;
+                alert('Not Sent email');
             });
         }
     }

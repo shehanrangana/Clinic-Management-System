@@ -32,11 +32,13 @@ class HomeController extends Controller
         $quantity = $request->quantity;
         $brand = $request->brand;
         $date = $request->date;
-        //$supplier_email = $request->supplier_email;
-        $supplier_email = 'asangisathsarani@gmail.com';
-        $msg = "Dear".$name." ".$quantity." ".$brand." ".$date;
+        $supplier_email = $request->supplier_email;
+        
+
+        $msg = "Dear ".$name." ".$quantity." ".$brand." ".$date;
+        //$msg = "Dear ".{{n12br(e("we want to ".$name." amount ".$quantity." and this barnd version is ".$brand." and before this date : ".$date))}};
         $data = array('msg'=>$msg);
-        //Mail::send('mail/reminder',$data ,function($massege) use($supplier_email){
+        
         Mail::send('mail/reminder',$data ,function($massege) use($supplier_email){
             $massege->to($supplier_email)->subject('Suwasetha Pharmacy');
             $massege->from('asangiucsc1995@gmail.com','Suwetha Pharmacy');

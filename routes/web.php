@@ -134,7 +134,7 @@ Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], fun
         Route::get('/upload/getReport', 'LabReportController@getReport');
 
         Route::post('/upload/remove/{report_id}', 'LabReportController@destroy');
-        //Route::post('/upload/store' , 'LabReportController@store')->name("hhh");
+        Route::post('/upload/store' , 'LabReportController@store')->name("hhh");
         
         Route::get('/profile/{id}', 'UserController@loadProfile');
 
@@ -175,7 +175,7 @@ Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], funct
 
         Route::post('/addDrugs/remove/{drug_id}', 'PharmacyController@destroy');
 
-        Route::get('/testmail' ,'HomeController@testMail');
+        Route::post('/testmail' ,'HomeController@testMail');
 
         Route::get('/profile/{id}', 'UserController@loadProfile');
 

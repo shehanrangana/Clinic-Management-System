@@ -79,8 +79,10 @@ import DatePicker from 'vue2-datepicker';
                 var input = this.newDrugs;
                 axios.post('/pharmacy/testmail', input).then((response) =>{
                     this.newDrugs = {'name': '','quantity':'' , 'brand': 'NMRA', 'date': '', 'supplier_email':''}
+                    alert('Send Email Successfully!');
                 }).catch(err => {
                     this.hasError = true;
+                    alert('Not Sent email');
                 });
             }
         }

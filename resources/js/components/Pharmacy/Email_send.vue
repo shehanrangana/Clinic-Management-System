@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" @blur ="checkEmail()">
                     <label for="email">Supplier email address</label>
                     <input type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter email" v-model="newDrugs.supplier_email" required>
                     
@@ -84,7 +84,24 @@ import DatePicker from 'vue2-datepicker';
                     this.hasError = true;
                     alert('Not Sent email');
                 });
+            },
+             //check validity of the supplier_email
+        checkEmail(){
+            // console.log(this.newDrugs.supplier_email);
+            if(this.newDrugs.supplier_email){
+                axios.get('/pharmacy/testmail/checksupplier_email', {params: {supplier_email: this.newDrugs.supplier_email}}).then( (response)=>{
+                    //console.log(response.data);
+                    if(response.data==0){
+                        alert("Invalid Supplier Email!");
+                    }
+                    else{
+                      getDetails();
+                    }
+                    return response.data;
+                   
+                });
             }
+        },
         }
     }
 </script>

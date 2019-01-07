@@ -32201,7 +32201,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('queue', __webpack_require
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('queue-tables', __webpack_require__(257));
 
 //Component of Lab Assistant
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('dashboard', __webpack_require__(262));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('dashboard-lab', __webpack_require__(262));
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('upload-report', __webpack_require__(263));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('report', __webpack_require__(266));
@@ -87427,6 +87427,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -87484,6 +87485,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$nextTick(function () {
         _this2.show = true;
       });
+    },
+
+    //check validity of the patient id 
+    checkPatientID: function checkPatientID() {
+      // console.log(this.newAppointment.patient_id);
+      if (this.form.patient_id) {
+        axios.get('/lab/upload/checkid', { params: { patient_id: this.form.patient_id } }).then(function (response) {
+          //console.log(response.data);
+          if (response.data == 0) {
+            alert("Invalid Patient ID");
+          } else {
+            onSubmit();
+          }
+          return response.data;
+        });
+      }
     }
   }
 });
@@ -87516,6 +87533,11 @@ var render = function() {
                       id: "patientId",
                       label: "Patient Id:",
                       "label-for": "patientId"
+                    },
+                    on: {
+                      blur: function($event) {
+                        _vm.checkPatientID()
+                      }
                     }
                   },
                   [
@@ -90504,21 +90526,7 @@ var render = function() {
                   _vm.$set(_vm.newDrugs, "supplier_email", $event.target.value)
                 }
               }
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "alert alert-danger",
-                class: { "d-none": !_vm.hasError },
-                attrs: { role: "alert" }
-              },
-              [
-                _vm._v(
-                  "\n                    This email address is already in database\n                "
-                )
-              ]
-            )
+            })
           ]),
           _vm._v(" "),
           _c(
@@ -90673,6 +90681,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -90690,9 +90705,9 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_bootstrap_vue_es_components__["e" /* Table *
             totalRows: 0,
             pageOptions: [5, 10, 15],
             filter: null,
-            fields: [{ key: 'name', sortable: true }, { key: 'brand', sortable: false }, { key: 'quantity', sortable: false }, { key: 'expire_date', sortable: true }, { key: 'supplier_email', sortable: false }, { key: 'actions', sortable: false }]
-            // updatelist: {'quantity': '', 'expire_date': ''},
-            // selected: '',
+            fields: [{ key: 'name', sortable: true }, { key: 'brand', sortable: false }, { key: 'quantity', sortable: false }, { key: 'expire_date', sortable: true }, { key: 'supplier_email', sortable: false }, { key: 'actions', sortable: false }],
+            updatelist: { 'quantity': '', 'expire_date': '' },
+            selected: ''
             // lang: {
             //         days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             //         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -90726,10 +90741,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_bootstrap_vue_es_components__["e" /* Table *
 
             axios.get('/pharmacy/addDrugs/show').then(function (response) {
                 console.log(response.data);
-                // for(var i=0; i<response.data.length; i++){
-                //     response.data[i];
 
-                // }
                 _this.drugs = response.data;
             });
         },
@@ -90743,23 +90755,30 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_bootstrap_vue_es_components__["e" /* Table *
         },
 
 
-        // openModal(item) {
+        // updateDrug(item) {
         //   // console.log(item);
-        //   this.queue.date = item.date;
-        //   this.queue.timeslot = item.timeslot;
-        //   this.queue.patient_id = item.patient_id;
-        //   this.getRecentNumber();
+        //   this.updatelist.quantity = item.quantity;
+        //   this.updatelist.expire_date = item.expire_date;
+
+        //   this.updateDru();
         // },
         // // Get recently added patient number
-        // getRecentNumber() {
-        //   axios.get('/recept/queue/get_recent', {params: {timeslot: this.queue.timeslot}}).then( (response)=>{
+        // updateDru() {
+        //   axios.get('/pharmacy/drusUpdate', {params: this.updatelist.quantity ,this.updatelist.expire_date}).then( (response)=>{
+        //     console.log(response.data);
+        //     this.updatelist = response.data;
 
-        //       if(response.data != -1){
-        //           this.queue.number = response.data + 1;
-        //       }else{
-        //           this.queue.number = 1;
-        //       }
         //   });
+        // },
+        // update(){
+        //   axios.post('/pharmacy/drusUpdate/store', this.updatelist).then((response) => {
+        //     // Event.$emit('queuePushed', response.data, this.updatelist.quantity ,this.updatelist.expire_date); 
+        //     console.log(response.data);
+        //     this.updatelist = response.data; 
+
+        //   });
+
+        //   this.$root.$emit('bv::hide::modal','modal-center');
         // },
 
         // Filter appointment table
@@ -91169,6 +91188,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.hasError = true;
                 alert('Not Sent email');
             });
+        },
+
+        //check validity of the supplier_email
+        checkEmail: function checkEmail() {
+            // console.log(this.newDrugs.supplier_email);
+            if (this.newDrugs.supplier_email) {
+                axios.get('/pharmacy/testmail/checksupplier_email', { params: { supplier_email: this.newDrugs.supplier_email } }).then(function (response) {
+                    //console.log(response.data);
+                    if (response.data == 0) {
+                        alert("Invalid Supplier Email!");
+                    } else {
+                        getDetails();
+                    }
+                    return response.data;
+                });
+            }
         }
     }
 });
@@ -91345,39 +91380,54 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "email" } }, [
-              _vm._v("Supplier email address")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.newDrugs.supplier_email,
-                  expression: "newDrugs.supplier_email"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "email",
-                id: "supplier_email",
-                name: "supplier_email",
-                placeholder: "Enter email",
-                required: ""
-              },
-              domProps: { value: _vm.newDrugs.supplier_email },
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
               on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.newDrugs, "supplier_email", $event.target.value)
+                blur: function($event) {
+                  _vm.checkEmail()
                 }
               }
-            })
-          ]),
+            },
+            [
+              _c("label", { attrs: { for: "email" } }, [
+                _vm._v("Supplier email address")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newDrugs.supplier_email,
+                    expression: "newDrugs.supplier_email"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "email",
+                  id: "supplier_email",
+                  name: "supplier_email",
+                  placeholder: "Enter email",
+                  required: ""
+                },
+                domProps: { value: _vm.newDrugs.supplier_email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.newDrugs,
+                      "supplier_email",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ]
+          ),
           _vm._v(" "),
           _c(
             "button",

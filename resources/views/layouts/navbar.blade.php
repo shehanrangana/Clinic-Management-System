@@ -10,7 +10,7 @@
 
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-pills nav-fill">
-                    <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor','lab' ,'pharmacy']) ? 'active' : '')}}">
+                    <li class="nav-item {{(Request::is(['admin', 'recept', 'doctor' ,'lab','pharmacy']) ? 'active' : '')}}">
                         @if(Request::is(['admin', 'admin/*']))
                             <a class="nav-link" href="/admin">DASHBOARD</a>
                         @elseif(Request::is(['recept', 'recept/*']))

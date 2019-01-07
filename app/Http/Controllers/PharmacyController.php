@@ -19,7 +19,7 @@ class PharmacyController extends Controller
     public function prescription()
     {
         
-        $prescription = Prescription::where('date', date("Y-m-d"+1))->get();
+        $prescription = Prescription::where('date', date("Y-m-d"))->get();
         return $prescription;
     }
     public function overDrug()
@@ -40,6 +40,7 @@ class PharmacyController extends Controller
         
     }
 
+    
     public function updatequantity(Request $request){
         $old = DB::table('drugs')->where('name',$request->drug_name)->first();
         $new = $old->quantity - $request->quantity;

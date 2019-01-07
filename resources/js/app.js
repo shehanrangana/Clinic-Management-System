@@ -44,8 +44,13 @@ Vue.component('patient-register', require('./components/Receptionist/Patient_Reg
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
 Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));
 
+// Components of nurse
+
+Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
+
+// Elements of admin
 //Component of Lab Assistant
-Vue.component('dashboard' , require('./components/LabAssistant/Dashboard.vue'));
+Vue.component('dashboard-lab' , require('./components/LabAssistant/Dashboard.vue'));
 
 Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Upload.vue'));
 Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
@@ -59,6 +64,8 @@ Vue.component('doctor-report' , require('./components/Doctor/View_Report.vue'));
 Vue.component('dashboard', require('./components/Pharmacy/Dashboard.vue'));
 Vue.component('add-drugs', require('./components/Pharmacy/Add_Drugs.vue'));
 Vue.component('view-prescription', require('./components/Pharmacy/View_Prescription.vue'));
+Vue.component('email-send', require('./components/Pharmacy/Email_send.vue'));
+
 
 const app = new Vue({
     el: '#app',

@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Dashboard')
+@section('title', 'Email Send')
 
 @section('content')
     <div>
-    	<dashboard-lab></dashboard-lab>
-
+        <email-send></email-send>
     </div>
 @endsection

@@ -1,7 +1,7 @@
 <template>
     <div class="inner-div">
         <div class="container">
-            <form @submit.prevent="addDrugs()">
+            <form @submit.prevent="getDetails()">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
@@ -31,21 +31,19 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="expire_date">Expire Date</label>
+                            <label for="date">Date</label>
                             <br>
-                            <date-picker :lang="lang" name="expire_date" v-model="newDrugs.expire_date" style="font-family: 'Roboto', sans-serif;"></date-picker>
+                            <date-picker :lang="lang" name="date" v-model="newDrugs.date" style="font-family: 'Roboto', sans-serif;"></date-picker>
                         </div>
                     </div>
                 </div>
-                <div class="form-group" >
+                <div class="form-group" @blur ="checkEmail()">
                     <label for="email">Supplier email address</label>
                     <input type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter email" v-model="newDrugs.supplier_email" required>
-                    <!-- <div class="alert alert-danger" role="alert" v-bind:class="{'d-none': !hasError}">
-                        This email address is already in database
-                    </div> -->
+                    
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>
     </div>
@@ -59,7 +57,7 @@ import DatePicker from 'vue2-datepicker';
 
         data() {
             return {
-                newDrugs: {'name': '', 'quantity': '', 'brand': 'NMRA', 'expire_date': '', 'supplier_email': ''},
+                newDrugs: {'name': '', 'quantity': '', 'brand': 'NMRA', 'date': '', 'supplier_email': ''},
                 drugs: [],
 
                 // setup calander
@@ -77,21 +75,33 @@ import DatePicker from 'vue2-datepicker';
         },
 
         methods: {
-            addDrugs() {
-                if(this.newDrugs.expire_date){
+            getDetails() {
                 var input = this.newDrugs;
-                axios.post('/pharmacy/addDrugs/store', input).then((response) =>{
-                    this.newDrugs = {'name': '','quantity':'' , 'brand': 'NMRA', 'expire_date': '', 'supplier_email':''}
-                    alert('Success Upload!');
+                axios.post('/pharmacy/testmail', input).then((response) =>{
+                    this.newDrugs = {'name': '','quantity':'' , 'brand': 'NMRA', 'date': '', 'supplier_email':''}
+                    alert('Send Email Successfully!');
                 }).catch(err => {
                     this.hasError = true;
-                    alert('Not Success Upload!');
+                    alert('Not Sent email');
                 });
-               }else{
-                  alert('Not Fill Date!')
-               }
             },
-           
+             //check validity of the supplier_email
+        checkEmail(){
+            // console.log(this.newDrugs.supplier_email);
+            if(this.newDrugs.supplier_email){
+                axios.get('/pharmacy/testmail/checksupplier_email', {params: {supplier_email: this.newDrugs.supplier_email}}).then( (response)=>{
+                    //console.log(response.data);
+                    if(response.data==0){
+                        alert("Invalid Supplier Email!");
+                    }
+                    else{
+                      getDetails();
+                    }
+                    return response.data;
+                   
+                });
+            }
+        },
         }
     }
 </script>

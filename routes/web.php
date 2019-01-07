@@ -119,6 +119,26 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
         Route::get('/report/getReport', 'LabReportController@getReport');
     });
 });
+//Nurse routes
+Route::get('/nurse/make_appointment', function () {
+    return view('./nurse/make_appointment');
+});
+
+Route::get('/nurse/appointment_list', function () {
+    return view('./nurse/appointment_list');
+});
+
+Route::get('/nurse/make_appointment/show', 'AppointmentController@show');
+Route::get('/nurse/make_appointment/showfordate', 'AppointmentController@showForDate');
+Route::post('/nurse/make_appointment/cancel', 'AppointmentController@destroy');
+Route::post('/nurse/make_appointment/add', 'AppointmentController@add');
+
+Route::get('/nurse/make_appointment/count/{date}', 'AppointmentController@getCountStatus');
+Route::get('/nurse/make_appointment/checkid', 'AppointmentController@checkID');
+Route::get('/nurse/make_appointment/checkappointment', 'AppointmentController@checkAppointment');
+
+
+//
 // Nurse routes
 Route::group(['middleware' => 'App\Http\Middleware\NurseMiddleware'], function() {
     Route::prefix('nurse')->group(function(){
@@ -144,15 +164,18 @@ Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], fun
             return view('./lab/reportview');
         });
         Route::get('/upload/show', 'LabReportController@index');
+
         Route::get('/upload/getReport', 'LabReportController@getReport');
+
         Route::post('/upload/remove/{report_id}', 'LabReportController@destroy');
         Route::post('/upload/store' , 'LabReportController@store')->name("hhh");
-        Route::get('/test', function () {
-            return asset('uploads/1MztetsHpGOO6AgB1mvxaQNxKZBTmGz3EthpuU3K.pdf');
-        });
-
+        
         Route::get('/profile/{id}', 'UserController@loadProfile');
-        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
+
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); 
+
+        Route::post('/upload/checkid','LabReportController@checkID');
+        // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });
@@ -169,11 +192,32 @@ Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], funct
         Route::get('/viewdrugs', function () {
             return view('./pharmacy/viewprescription');
         });
+        Route::get('/emailSend', function () {
+            return view('./pharmacy/emailsend');
+        });
+        
         Route::get('/addDrugs/show', 'PharmacyController@index');
+
+        Route::get('/overDrug/show', 'PharmacyController@overDrug');
+
+        Route::get('/expireDrug/show', 'PharmacyController@expireDrug');
+
+        Route::get('/dashboard/getPrescription' ,'PharmacyController@prescription');
+
+        Route::get('/dashboard/patient_history', 'PatientController@getPatientHistory');
+
+        Route::post('/dashboard/updateQuantity' ,'PharmacyController@updatequantity');
+
         Route::post('/addDrugs/remove/{drug_id}', 'PharmacyController@destroy');
 
+        Route::post('/testmail' ,'HomeController@testMail');
+
+        Route::post('/testmail/checksupplier_email' ,'HomeController@checkEmail' );
+
         Route::get('/profile/{id}', 'UserController@loadProfile');
-        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
+
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); 
+        // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });

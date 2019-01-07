@@ -1,15 +1,12 @@
 <div class="topbar" id="clock">
     <div class="row">
         <div class="col-sm" id="left-col">
-            System Logo
-        </div>
-        <div class="col-sm" id="middle-col">
             <clock></clock>
         </div>
         <div class="col-sm" id="right-col">
             <div class="dropdown float-right">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                    <img src="/images/menu.png" alt="user" >
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                     <!-- Dynamically set route to profile and logout -->
@@ -58,10 +55,8 @@
 }
 #left-col {
     margin-left: 30px;
-}
-#middle-col {
-    text-align: center;
-    font-size: 28px;
+    text-align: left;
+    font-size: 32px;
     font-family: 'Roboto Condensed';
 }
 #right-col {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\LabReport;
 // use Illuminate\Support\Facades\Input;
 // use Input;
+use App\Patient;
 use DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Routing\Controller as BaseController;
@@ -26,6 +27,7 @@ class LabReportController extends BaseController
 
         $file = new LabReport;
         $file->patient_id = $request->patient_id;
+        
         $file->test = $request->test;
         $file->file =  $request->file('file')->store('/uploads', 'public');
         $file->save();
@@ -53,6 +55,18 @@ class LabReportController extends BaseController
     {
         $lab_reports = LabReport::find($id)->delete();
     }
+
+    //check the patient id exits in the patient table
+    public function checkID(Request $request){
+        // dd($request->all());
+        $patients=Patient::where('patient_id',$request->patient_id)->exists();
+        if($patients){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
 
  
 }

@@ -115,6 +115,8 @@ Vue.use(Form);
 import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
 
+import swal from 'sweetalert';
+
 export default {
   data() {
     return {
@@ -211,13 +213,14 @@ export default {
       this.value[id] = true;
 
       axios.post('/doctor/dashboard/active_panel', {'activated_panel': id}).then((response) =>{
+        swal("PANEL "+ (id+1) + " IS STARTED", "", "info");
         this.activatedPanel = response.data;
       }).catch(err => {
         console.log(err);
       });
     },
 
-    // Get patient list of current queue
+    // Get patient list of current queue and selected patient 
     getQueueList() {
       axios.get("/doctor/dashboard/get_queue").then(response => {
         if (response.data != -1) {
@@ -247,7 +250,7 @@ export default {
       axios.get("/doctor/dashboard/patient_history", {params: { patient_id: this.selectedPatient.patient_id, number: this.selectedPatient.number }}).then(response => {
         this.patientHistory = response.data.patient_history;
         this.nextPatient = response.data.next_number;
-        // console.log(response.data.patient_history);
+        // console.log(this.patientHistory);
       });
     },
 
@@ -274,10 +277,11 @@ export default {
     onSubmit() {
       this.prescriptionText = '';
       axios.post('/doctor/dashboard/prescription_store', [this.selectedPatient.patient_id, this.prescription, this.comment, this.activeQueue]).then((response) =>{
+        swal("Done", "Prescription successfully uploaded", "success");
         this.patientHistory.unshift(response.data); // add new element beginning of the array
-      }).catch(err => {
-        // console.log(err);
-        alert("erro!");
+        this.recentComment = response.data.comment;
+      }).catch(err => { // alert("Prescription is already uploaded!");
+        swal("Error!", "Prescription is already uploaded!", "error");
       });
       this.prescription = [];
       this.comment = '';

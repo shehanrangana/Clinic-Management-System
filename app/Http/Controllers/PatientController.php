@@ -30,6 +30,8 @@ class PatientController extends Controller
         return $patients;
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -142,25 +144,28 @@ class PatientController extends Controller
 
     // Get patient medical history
     public function getPatientHistory(Request $request)
-    {
+    {   
         // Get particular patient's medical history
         $categorizedArray = array();
         $patientHistory = Prescription::where('patient_id', $request->patient_id)->orderBy('date', 'desc')->get()->groupBy('date');
         foreach ($patientHistory as $oneDay) {
             array_push($categorizedArray, $oneDay);
         }
+
         // Get relevant panel number using session id of logged doctor
         $panel = DoctorSession::where('session', Session::getId())->get()->first()->panel;
         // dd($panel);
 
         // Update queue_summary table 
         DB::table('queue_summary')->where('status', 1)->update(['current'=> $request->number, $panel=> $request->number]);
-        
+
         // Get current number of overall progress
         $currentNumber = QueueSummary::where('status', 1)->select('current')->get()->first();
-        
+
         event(new NumberCalled($currentNumber->current+1, $panel)); // update each doctor next number using pusher
 
         return ['patient_history'=>$categorizedArray, 'next_number'=> $currentNumber->current+1];
     }
+    
+
 }

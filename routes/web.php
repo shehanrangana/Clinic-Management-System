@@ -102,9 +102,16 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
 
         Route::post('/dashboard/prescription_store', 'PrescriptionController@store');
 
+        Route::get('/patients', function () {
+            return view('./doctor/patients');
+        });
+
+        Route::get('/patients/show', 'PatientController@index');
+
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
+        
         Route::get('/labreports', function () {
             return view('./doctor/reportview');
         });
@@ -157,15 +164,18 @@ Route::group(['middleware' => 'App\Http\Middleware\LabAssistantMiddleware'], fun
             return view('./lab/reportview');
         });
         Route::get('/upload/show', 'LabReportController@index');
+
         Route::get('/upload/getReport', 'LabReportController@getReport');
+
         Route::post('/upload/remove/{report_id}', 'LabReportController@destroy');
         Route::post('/upload/store' , 'LabReportController@store')->name("hhh");
-        Route::get('/test', function () {
-            return asset('uploads/1MztetsHpGOO6AgB1mvxaQNxKZBTmGz3EthpuU3K.pdf');
-        });
-
+        
         Route::get('/profile/{id}', 'UserController@loadProfile');
-        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
+
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); 
+
+        Route::post('/upload/checkid','LabReportController@checkID');
+        // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });
@@ -182,11 +192,32 @@ Route::group(['middleware' => 'App\Http\Middleware\PharmacistMiddleware'], funct
         Route::get('/viewdrugs', function () {
             return view('./pharmacy/viewprescription');
         });
+        Route::get('/emailSend', function () {
+            return view('./pharmacy/emailsend');
+        });
+        
         Route::get('/addDrugs/show', 'PharmacyController@index');
+
+        Route::get('/overDrug/show', 'PharmacyController@overDrug');
+
+        Route::get('/expireDrug/show', 'PharmacyController@expireDrug');
+
+        Route::get('/dashboard/getPrescription' ,'PharmacyController@prescription');
+
+        Route::get('/dashboard/patient_history', 'PatientController@getPatientHistory');
+
+        Route::post('/dashboard/updateQuantity' ,'PharmacyController@updatequantity');
+
         Route::post('/addDrugs/remove/{drug_id}', 'PharmacyController@destroy');
 
+        Route::post('/testmail' ,'HomeController@testMail');
+
+        Route::post('/testmail/checksupplier_email' ,'HomeController@checkEmail' );
+
         Route::get('/profile/{id}', 'UserController@loadProfile');
-        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
+
+        Route::post('/profile/{id}/update', 'UserController@updateProfile'); 
+        // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
     });
 });

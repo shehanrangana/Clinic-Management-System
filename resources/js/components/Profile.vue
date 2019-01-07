@@ -120,8 +120,9 @@ export default {
             axios.post(window.location.href + "/update", [this.user.user_id, this.user.email, this.user.contact_number, this.user.qualification]).then((response) =>{
                 if(response.data == 1){
                     alert("Your profile successfully updated !");
+                    swal("Done", "Your profile has been successfully updated !", "success");
                 }else{
-                    alert("Nothing updated !");
+                    swal("Ooops !", "Nothing updated !", "info");
                 }
             });
             this.isDisabled = true;

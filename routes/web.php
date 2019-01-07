@@ -119,6 +119,26 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
         Route::get('/report/getReport', 'LabReportController@getReport');
     });
 });
+//Nurse routes
+Route::get('/nurse/make_appointment', function () {
+    return view('./nurse/make_appointment');
+});
+
+Route::get('/nurse/appointment_list', function () {
+    return view('./nurse/appointment_list');
+});
+
+Route::get('/nurse/make_appointment/show', 'AppointmentController@show');
+Route::get('/nurse/make_appointment/showfordate', 'AppointmentController@showForDate');
+Route::post('/nurse/make_appointment/cancel', 'AppointmentController@destroy');
+Route::post('/nurse/make_appointment/add', 'AppointmentController@add');
+
+Route::get('/nurse/make_appointment/count/{date}', 'AppointmentController@getCountStatus');
+Route::get('/nurse/make_appointment/checkid', 'AppointmentController@checkID');
+Route::get('/nurse/make_appointment/checkappointment', 'AppointmentController@checkAppointment');
+
+
+//
 // Nurse routes
 Route::group(['middleware' => 'App\Http\Middleware\NurseMiddleware'], function() {
     Route::prefix('nurse')->group(function(){

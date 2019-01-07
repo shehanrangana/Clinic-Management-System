@@ -44,6 +44,11 @@ Vue.component('patient-register', require('./components/Receptionist/Patient_Reg
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
 Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));
 
+// Components of nurse
+
+Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
+
+// Elements of admin
 //Component of Lab Assistant
 Vue.component('dashboard-lab' , require('./components/LabAssistant/Dashboard.vue'));
 

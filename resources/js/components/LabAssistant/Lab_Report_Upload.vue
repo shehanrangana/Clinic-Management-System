@@ -5,6 +5,7 @@
       
       <b-form-group id="patientId"
                     label="Patient Id:"
+                    @blur ="checkPatientID()"
                     label-for="patientId">
         <b-form-input id="patientId"
                       type="text"
@@ -77,6 +78,7 @@ export default {
       axios.post('/lab/upload/store', data)
         .then(res => {
           console.log(res)
+          alert('Lab Report Upload Succsess!');
         })
       // alert(JSON.stringify(this.form));
     },
@@ -90,7 +92,24 @@ export default {
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
       this.$nextTick(() => { this.show = true });
-    }
+    },
+     //check validity of the patient id 
+        checkPatientID(){
+            // console.log(this.newAppointment.patient_id);
+            if(this.form.patient_id){
+                axios.get('/lab/upload/checkid', {params: {patient_id: this.form.patient_id}}).then( (response)=>{
+                    //console.log(response.data);
+                    if(response.data==0){
+                        alert("Invalid Patient ID");
+                    }
+                    else{
+                      onSubmit();
+                    }
+                    return response.data;
+                   
+                });
+            }
+        },
   }
 }
 </script>

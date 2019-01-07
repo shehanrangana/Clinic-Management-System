@@ -30,6 +30,8 @@ class PatientController extends Controller
         return $patients;
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -164,4 +166,6 @@ class PatientController extends Controller
 
         return ['patient_history'=>$categorizedArray, 'next_number'=> $currentNumber->current+1];
     }
+    
+
 }

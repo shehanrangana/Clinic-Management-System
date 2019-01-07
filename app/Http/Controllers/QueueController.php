@@ -116,6 +116,18 @@ class QueueController extends Controller
         //
     }
 
+    // This method will return current queue status to admin/receptionist dashboard
+    public function getStatus(){
+        // Get relevant panel number using session id of logged doctor
+        // $panel = DoctorSession::where('session', Session::getId())->get()->first()->panel;
+
+        // Get current number of overall progress
+        $currentQueue = QueueSummary::where('status', 1)->get()->first();
+
+        // return to admin/receptionist
+        return $currentQueue;
+    }
+
     // This method will return the recent number of a specific queue
     public function getRecentNumber(Request $request)
     {

@@ -84204,7 +84204,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radius: 0;\r\n    font-family: 'Roboto', sans-serif!important;\n}\n.card-deck .card-body, .card-header {\r\n    background: #0086c3;\r\n    font-size: 18px;\n}\n.card-deck h1 {\r\n    font-size: 78px;\r\n    font-family: 'Yantramanav', sans-serif;\r\n    color: #fff;\n}\n.card-deck p {\r\n    font-size: 20px;\r\n    border: #42a5f5 solid;\r\n    border-width: 0.05rem;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-text {\r\n  font-size: xx-large;\n}\n.card-text-next {\r\n  font-size: 48px;\n}\n.card {\r\n  border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -84254,21 +84254,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {};
-    },
-    created: function created() {
-        // This will fire whenever a doctor call a patient
-        window.Echo.channel("number-update-channel").listen(".next-number-updated", function (event) {
-            console.log(event.next_number + " " + event.panel);
-        });
+  data: function data() {
+    return {
+      panel1: { 'current': 0 },
+      panel2: { 'current': 0 },
+      panel3: { 'current': 0 },
+      panel4: { 'current': 0 },
+      nextNumber: 0
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    // This will fire whenever a doctor call a patient
+    window.Echo.channel("number-update-channel").listen(".next-number-updated", function (event) {
+      // console.log(event.next_number + " " + event.panel);
+      switch (event.panel) {
+        case 'panel_1':
+          _this.panel1 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_2':
+          _this.panel2 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_3':
+          _this.panel3 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_4':
+          _this.panel4 = { 'current': event.next_number - 1 };
+          break;
+      }
+      _this.nextNumber = event.next_number;
+    });
+  },
+  mounted: function mounted() {
+    this.getStatus();
+  },
+
+
+  methods: {
+    getStatus: function getStatus() {
+      var _this2 = this;
+
+      axios.get("/admin/dashboard/get_status").then(function (response) {
+        _this2.panel1 = { 'current': response.data.panel_1 };
+        _this2.panel2 = { 'current': response.data.panel_2 };
+        _this2.panel3 = { 'current': response.data.panel_3 };
+        _this2.panel4 = { 'current': response.data.panel_4 };
+        _this2.nextNumber = response.data.current == 0 ? 0 : response.data.current + 1;
+      });
     }
+  }
 });
 
 /***/ }),
@@ -84279,89 +84317,152 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "inner-div" },
+    [
+      _c(
+        "b-row",
+        [
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel1.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel2.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel3.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel4.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner-div" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v("Queue Progress")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "progress" }, [
-            _c(
-              "div",
-              {
-                staticClass: "progress-bar",
-                staticStyle: { width: "25%" },
-                attrs: {
-                  role: "progressbar",
-                  "aria-valuenow": "25",
-                  "aria-valuemin": "0",
-                  "aria-valuemax": "100"
-                }
-              },
-              [_vm._v("25%")]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-deck text-center" }, [
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("1")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("2")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("3")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("4")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -86050,15 +86151,17 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radius: 0;\r\n    font-family: 'Roboto', sans-serif!important;\n}\n.card-deck .card-body, .card-header {\r\n    background: #0086c3;\r\n    font-size: 18px;\n}\n.card-deck h1 {\r\n    font-size: 78px;\r\n    font-family: 'Yantramanav', sans-serif;\r\n    color: #fff;\n}\n.card-deck p {\r\n    font-size: 20px;\r\n    border: #42a5f5 solid;\r\n    border-width: 0.05rem;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-text {\r\n  font-size: xx-large;\n}\n.card-text-next {\r\n  font-size: 48px;\n}\n.card {\r\n  border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 245 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -86098,10 +86201,60 @@ exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radiu
 //
 //
 //
-//
-//
-//
-//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      panel1: { 'current': 0 },
+      panel2: { 'current': 0 },
+      panel3: { 'current': 0 },
+      panel4: { 'current': 0 },
+      nextNumber: 0
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    // This will fire whenever a doctor call a patient
+    window.Echo.channel("number-update-channel").listen(".next-number-updated", function (event) {
+      // console.log(event.next_number + " " + event.panel);
+      switch (event.panel) {
+        case 'panel_1':
+          _this.panel1 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_2':
+          _this.panel2 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_3':
+          _this.panel3 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_4':
+          _this.panel4 = { 'current': event.next_number - 1 };
+          break;
+      }
+      _this.nextNumber = event.next_number;
+    });
+  },
+  mounted: function mounted() {
+    this.getStatus();
+  },
+
+
+  methods: {
+    getStatus: function getStatus() {
+      var _this2 = this;
+
+      axios.get("/recept/dashboard/get_status").then(function (response) {
+        _this2.panel1 = { 'current': response.data.panel_1 };
+        _this2.panel2 = { 'current': response.data.panel_2 };
+        _this2.panel3 = { 'current': response.data.panel_3 };
+        _this2.panel4 = { 'current': response.data.panel_4 };
+        _this2.nextNumber = response.data.current == 0 ? 0 : response.data.current + 1;
+      });
+    }
+  }
+});
 
 /***/ }),
 /* 246 */
@@ -86111,89 +86264,152 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "inner-div" },
+    [
+      _c(
+        "b-row",
+        [
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel1.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel2.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel3.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel4.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner-div" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v("Queue Progress")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "progress" }, [
-            _c(
-              "div",
-              {
-                staticClass: "progress-bar",
-                staticStyle: { width: "25%" },
-                attrs: {
-                  role: "progressbar",
-                  "aria-valuenow": "25",
-                  "aria-valuemin": "0",
-                  "aria-valuemax": "100"
-                }
-              },
-              [_vm._v("25%")]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-deck text-center" }, [
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("1")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("2")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("3")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("4")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

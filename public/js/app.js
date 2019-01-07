@@ -83349,15 +83349,17 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radius: 0;\r\n    font-family: 'Roboto', sans-serif!important;\n}\n.card-deck .card-body, .card-header {\r\n    background: #0086c3;\r\n    font-size: 18px;\n}\n.card-deck h1 {\r\n    font-size: 78px;\r\n    font-family: 'Yantramanav', sans-serif;\r\n    color: #fff;\n}\n.card-deck p {\r\n    font-size: 20px;\r\n    border: #42a5f5 solid;\r\n    border-width: 0.05rem;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-text {\r\n  font-size: xx-large;\n}\n.card-text-next {\r\n  font-size: 48px;\n}\n.card {\r\n  border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 229 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -83397,10 +83399,60 @@ exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radiu
 //
 //
 //
-//
-//
-//
-//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      panel1: { 'current': 0 },
+      panel2: { 'current': 0 },
+      panel3: { 'current': 0 },
+      panel4: { 'current': 0 },
+      nextNumber: 0
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    // This will fire whenever a doctor call a patient
+    window.Echo.channel("number-update-channel").listen(".next-number-updated", function (event) {
+      // console.log(event.next_number + " " + event.panel);
+      switch (event.panel) {
+        case 'panel_1':
+          _this.panel1 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_2':
+          _this.panel2 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_3':
+          _this.panel3 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_4':
+          _this.panel4 = { 'current': event.next_number - 1 };
+          break;
+      }
+      _this.nextNumber = event.next_number;
+    });
+  },
+  mounted: function mounted() {
+    this.getStatus();
+  },
+
+
+  methods: {
+    getStatus: function getStatus() {
+      var _this2 = this;
+
+      axios.get("/admin/dashboard/get_status").then(function (response) {
+        _this2.panel1 = { 'current': response.data.panel_1 };
+        _this2.panel2 = { 'current': response.data.panel_2 };
+        _this2.panel3 = { 'current': response.data.panel_3 };
+        _this2.panel4 = { 'current': response.data.panel_4 };
+        _this2.nextNumber = response.data.current == 0 ? 0 : response.data.current + 1;
+      });
+    }
+  }
+});
 
 /***/ }),
 /* 230 */
@@ -83410,89 +83462,152 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "inner-div" },
+    [
+      _c(
+        "b-row",
+        [
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel1.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel2.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel3.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel4.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner-div" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v("Queue Progress")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "progress" }, [
-            _c(
-              "div",
-              {
-                staticClass: "progress-bar",
-                staticStyle: { width: "25%" },
-                attrs: {
-                  role: "progressbar",
-                  "aria-valuenow": "25",
-                  "aria-valuemin": "0",
-                  "aria-valuemax": "100"
-                }
-              },
-              [_vm._v("25%")]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-deck text-center" }, [
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("1")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("2")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("3")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("4")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -85181,15 +85296,17 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radius: 0;\r\n    font-family: 'Roboto', sans-serif!important;\n}\n.card-deck .card-body, .card-header {\r\n    background: #0086c3;\r\n    font-size: 18px;\n}\n.card-deck h1 {\r\n    font-size: 78px;\r\n    font-family: 'Yantramanav', sans-serif;\r\n    color: #fff;\n}\n.card-deck p {\r\n    font-size: 20px;\r\n    border: #42a5f5 solid;\r\n    border-width: 0.05rem;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-text {\r\n  font-size: xx-large;\n}\n.card-text-next {\r\n  font-size: 48px;\n}\n.card {\r\n  border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 245 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -85229,10 +85346,60 @@ exports.push([module.i, "\n.card {\r\n    margin: 20px auto;\r\n    border-radiu
 //
 //
 //
-//
-//
-//
-//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      panel1: { 'current': 0 },
+      panel2: { 'current': 0 },
+      panel3: { 'current': 0 },
+      panel4: { 'current': 0 },
+      nextNumber: 0
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    // This will fire whenever a doctor call a patient
+    window.Echo.channel("number-update-channel").listen(".next-number-updated", function (event) {
+      // console.log(event.next_number + " " + event.panel);
+      switch (event.panel) {
+        case 'panel_1':
+          _this.panel1 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_2':
+          _this.panel2 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_3':
+          _this.panel3 = { 'current': event.next_number - 1 };
+          break;
+        case 'panel_4':
+          _this.panel4 = { 'current': event.next_number - 1 };
+          break;
+      }
+      _this.nextNumber = event.next_number;
+    });
+  },
+  mounted: function mounted() {
+    this.getStatus();
+  },
+
+
+  methods: {
+    getStatus: function getStatus() {
+      var _this2 = this;
+
+      axios.get("/recept/dashboard/get_status").then(function (response) {
+        _this2.panel1 = { 'current': response.data.panel_1 };
+        _this2.panel2 = { 'current': response.data.panel_2 };
+        _this2.panel3 = { 'current': response.data.panel_3 };
+        _this2.panel4 = { 'current': response.data.panel_4 };
+        _this2.nextNumber = response.data.current == 0 ? 0 : response.data.current + 1;
+      });
+    }
+  }
+});
 
 /***/ }),
 /* 246 */
@@ -85242,89 +85409,152 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "inner-div" },
+    [
+      _c(
+        "b-row",
+        [
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel1.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel2.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel3.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            [
+              _c(
+                "b-card-group",
+                { staticClass: "mb-3", attrs: { deck: "" } },
+                [
+                  _c(
+                    "b-card",
+                    {
+                      staticClass: "text-center",
+                      attrs: {
+                        "bg-variant": "primary",
+                        "text-variant": "white"
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("Now : " + _vm._s(_vm.panel4.current))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text-next" }, [
+                        _vm._v("Next : " + _vm._s(_vm.nextNumber))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner-div" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [_vm._v("Queue Progress")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "progress" }, [
-            _c(
-              "div",
-              {
-                staticClass: "progress-bar",
-                staticStyle: { width: "25%" },
-                attrs: {
-                  role: "progressbar",
-                  "aria-valuenow": "25",
-                  "aria-valuemin": "0",
-                  "aria-valuemax": "100"
-                }
-              },
-              [_vm._v("25%")]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-deck text-center" }, [
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("1")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("2")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("3")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card text-white bg-info mb-3" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("PANEL 1")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [_vm._v("4")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("Dr. R.A. Samaranayake")
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -87984,12 +88214,14 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
       // toggle button data 
       disable: [false, false, false, false],
       value: [false, false, false, false],
+      activatedPanel: '',
 
       patientList: [],
       activeQueue: '',
       skippedPatientList: [],
       selectedPatient: [],
       currentPatient: 0,
+      nexttPatient: 0,
       patientHistory: [],
       drugList: [{ text: 'Select One', value: null }],
       form: {
@@ -88025,6 +88257,41 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
     window.Echo.channel("queue-channel").listen(".queue-started", function (event) {
       _this2.getQueueList();
     });
+
+    // This will fire whenever a doctor call a patient
+    window.Echo.channel("number-update-channel").listen(".next-number-updated", function (event) {
+      _this2.nextPatient = event.next_number;
+    });
+
+    // Show activated panel
+    axios.get('/doctor/dashboard/is_active_panel').then(function (response) {
+      if (response.data != 0) {
+        // disable all switches
+        _this2.disable = [true, true, true, true];
+
+        // switch on relevant switch
+        if (response.data.isActive) {
+          switch (response.data.panel) {
+            case 'panel_1':
+              _this2.value[0] = true;
+              _this2.activatedPanel = 'panel_1';
+              break;
+            case 'panel_2':
+              _this2.value[1] = true;
+              _this2.activatedPanel = 'panel_2';
+              break;
+            case 'panel_3':
+              _this2.value[2] = true;
+              _this2.activatedPanel = 'panel_3';
+              break;
+            case 'panel_4':
+              _this2.value[3] = true;
+              _this2.activatedPanel = 'panel_4';
+              break;
+          }
+        }
+      }
+    });
   },
   mounted: function mounted() {
     this.getQueueList();
@@ -88034,50 +88301,20 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
 
 
   methods: {
-    // Change state of the queue
-    changeState: function changeState(id) {
+
+    // notify relevant panel's activation
+    activePanel: function activePanel(id) {
       var _this3 = this;
 
-      if (this.value[id]) {
-        this.disable = [true, true, true, true];
-        this.disable[id] = false;
+      // disable all the switches
+      this.disable = [true, true, true, true];
+      this.value[id] = true;
 
-        // Send queue data to the database
-        var total = 0;
-        switch (id) {
-          case 0:
-            total = this.list0809.length;
-            break;
-          case 1:
-            total = this.list0910.length;
-            break;
-          case 2:
-            total = this.list1011.length;
-            break;
-          case 3:
-            total = this.list1112.length;
-            break;
-          default:
-            break;
-        }
-
-        this.queueDetails = [id, total, 0, 1];
-        axios.post('/recept/queue/start', this.queueDetails).then(function (response) {
-          alert("Queue started");
-        }).catch(function (err) {
-          _this3.value = [false, false, false, false]; // if error occured all the switches reset
-          _this3.disable = [false, false, false, false];
-          alert("This queue has been completed");
-        });
-      } else {
-        this.disable = [false, false, false, false];
-        // this.disable[id] = true; // permenetly disable finished queue switch
-        axios.post('/recept/queue/stop', [id]).then(function (response) {
-          console.log(response.data);
-        }).catch(function (err) {
-          _this3.hasError = true;
-        });
-      }
+      axios.post('/doctor/dashboard/active_panel', { 'activated_panel': id }).then(function (response) {
+        _this3.activatedPanel = response.data;
+      }).catch(function (err) {
+        console.log(err);
+      });
     },
 
 
@@ -88088,24 +88325,35 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
       axios.get("/doctor/dashboard/get_queue").then(function (response) {
         if (response.data != -1) {
           _this4.patientList = response.data.queue; // set patient queue
-          _this4.currentPatient = response.data.active.current; // set current number of the queue
+          if (response.data.panel == _this4.activatedPanel) {
+            _this4.currentPatient = response.data.active[_this4.activatedPanel]; // set current number of the queue
+          }
+          _this4.nextPatient = response.data.active.current + 1; // set next number of the queue
           _this4.activeQueue = response.data.active.timeslot; // set active queue
-          _this4.selectedPatient = _this4.patientList[_this4.currentPatient - 1]; // set selected patient
-          // this.patientHistory = this.patientList[this.currentPatient-1]; // to show hostory when page refreshed
+          _this4.patientList.forEach(function (element) {
+            if (_this4.currentPatient == element.number) {
+              _this4.selectedPatient = element;
+            }
+          });
         }
       });
     },
 
 
     // Expand patient medical history
-    expand: function expand(patient) {
+    expand: function expand() {
       var _this5 = this;
 
-      this.selectedPatient = patient;
-      axios.get("/doctor/dashboard/patient_history", { params: { patient_id: patient.patient_id } }).then(function (response) {
+      this.patientList.forEach(function (element) {
+        if (_this5.nextPatient == element.number) {
+          _this5.selectedPatient = element;
+        }
+      });
+
+      axios.get("/doctor/dashboard/patient_history", { params: { patient_id: this.selectedPatient.patient_id, number: this.selectedPatient.number } }).then(function (response) {
         _this5.patientHistory = response.data.patient_history;
-        _this5.currentPatient = response.data.current;
-        // console.log(response.data.current);
+        _this5.nextPatient = response.data.next_number;
+        // console.log(response.data.patient_history);
       });
     },
 
@@ -88182,7 +88430,7 @@ var render = function() {
             },
             on: {
               change: function($event) {
-                _vm.changeState(0)
+                _vm.activePanel(0)
               }
             },
             model: {
@@ -88206,7 +88454,7 @@ var render = function() {
             },
             on: {
               change: function($event) {
-                _vm.changeState(1)
+                _vm.activePanel(1)
               }
             },
             model: {
@@ -88230,7 +88478,7 @@ var render = function() {
             },
             on: {
               change: function($event) {
-                _vm.changeState(2)
+                _vm.activePanel(2)
               }
             },
             model: {
@@ -88254,7 +88502,7 @@ var render = function() {
             },
             on: {
               change: function($event) {
-                _vm.changeState(3)
+                _vm.activePanel(3)
               }
             },
             model: {
@@ -88269,7 +88517,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      this.selectedPatient != "" && this.currentPatient != 0
+      this.selectedPatient != ""
         ? _c(
             "div",
             [
@@ -88315,69 +88563,38 @@ var render = function() {
                 _c("h5", [_c("b", [_vm._v("Queue List")])]),
                 _c("hr"),
                 _vm._v(" "),
-                _vm.patientList[_vm.currentPatient]
-                  ? _c(
-                      "div",
+                _c(
+                  "div",
+                  [
+                    _c(
+                      "b-row",
                       [
                         _c(
-                          "b-row",
+                          "b-col",
                           [
                             _c(
-                              "b-col",
-                              [
-                                _c(
-                                  "b-button",
-                                  {
-                                    attrs: {
-                                      id: "btn-queue-start",
-                                      size: "sm"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.expand(
-                                          _vm.patientList[_vm.currentPatient]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Call")]
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-col",
-                              [
-                                _c(
-                                  "b-button",
-                                  {
-                                    attrs: {
-                                      id: "btn-queue-start",
-                                      size: "sm"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.skip(
-                                          _vm.patientList[_vm.currentPatient]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Skip")]
-                                )
-                              ],
-                              1
+                              "b-button",
+                              {
+                                attrs: { id: "btn-queue-start", size: "sm" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.expand()
+                                  }
+                                }
+                              },
+                              [_vm._v("Call")]
                             )
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        _c("hr")
+                        )
                       ],
                       1
-                    )
-                  : _vm._e(),
+                    ),
+                    _vm._v(" "),
+                    _c("hr")
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c(
                   "div",

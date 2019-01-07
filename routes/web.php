@@ -18,7 +18,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function() {
     Route::prefix('admin')->group(function(){
         Route::get('/', 'UserController@admin');
-    
+
+        Route::get('/dashboard/get_status', 'QueueController@getStatus');
+
         Route::get('/user_register', function () {
             return view('./admin/user_register');
         });
@@ -48,6 +50,8 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], function() {
     Route::prefix('recept')->group(function(){
         Route::get('/', 'UserController@receptionist');
+
+        Route::get('/dashboard/get_status', 'QueueController@getStatus');
     
         Route::get('/queue', function() {
             return view('./recept/queue');
@@ -86,6 +90,9 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
 Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function() {
     Route::prefix('doctor')->group(function(){
         Route::get('/', 'UserController@doctor');
+        
+        Route::get('/dashboard/is_active_panel', 'QueueController@isActivePanel');
+        Route::post('/dashboard/active_panel', 'QueueController@activePanel');
 
         Route::get('/dashboard/get_queue', 'QueueController@getCurrentQueue');
 

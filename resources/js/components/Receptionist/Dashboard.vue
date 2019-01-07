@@ -1,68 +1,104 @@
 <template>
-    <div class="inner-div">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Queue Progress</h5>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                </div>
-            </div>
-        </div>
-        <div class="card-deck text-center">
-            <div class="card text-white bg-info mb-3">
-                <div class="card-header">PANEL 1</div>
-                <div class="card-body">
-                    <h1>1</h1>
-                    <p class="card-text">Dr. R.A. Samaranayake</p>
-                </div>
-            </div>
-            <div class="card text-white bg-info mb-3">
-                <div class="card-header">PANEL 1</div>
-                <div class="card-body">
-                    <h1>2</h1>
-                    <p class="card-text">Dr. R.A. Samaranayake</p>
-                </div>
-            </div>
-            <div class="card text-white bg-info mb-3">
-                <div class="card-header">PANEL 1</div>
-                <div class="card-body">
-                    <h1>3</h1>
-                    <p class="card-text">Dr. R.A. Samaranayake</p>
-                </div>
-            </div>
-            <div class="card text-white bg-info mb-3">
-                <div class="card-header">PANEL 1</div>
-                <div class="card-body">
-                    <h1>4</h1>
-                    <p class="card-text">Dr. R.A. Samaranayake</p>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="inner-div">
+    <b-row>
+      <b-col>
+        <b-card-group deck class="mb-3">
+          <b-card bg-variant="primary" text-variant="white" class="text-center">
+            <p class="card-text">Now : {{ panel1.current }}</p>
+            <p class="card-text-next">Next : {{ nextNumber }}</p>
+          </b-card>
+        </b-card-group>
+      </b-col>
+      <b-col>
+        <b-card-group deck class="mb-3">
+          <b-card bg-variant="primary" text-variant="white" class="text-center">
+            <p class="card-text">Now : {{ panel2.current }}</p>
+            <p class="card-text-next">Next : {{ nextNumber }}</p>
+          </b-card>
+        </b-card-group>
+      </b-col>
+      <b-col>
+        <b-card-group deck class="mb-3">
+          <b-card bg-variant="primary" text-variant="white" class="text-center">
+            <p class="card-text">Now : {{ panel3.current }}</p>
+            <p class="card-text-next">Next : {{ nextNumber }}</p>
+          </b-card>
+        </b-card-group>
+      </b-col>
+      <b-col>
+        <b-card-group deck class="mb-3">
+          <b-card bg-variant="primary" text-variant="white" class="text-center">
+            <p class="card-text">Now : {{ panel4.current }}</p>
+            <p class="card-text-next">Next : {{ nextNumber }}</p>
+          </b-card>
+        </b-card-group>
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <script>
-    
+
+export default {
+  data() {
+    return {
+      panel1: {'current': 0},
+      panel2: {'current': 0},
+      panel3: {'current': 0},
+      panel4: {'current': 0},
+      nextNumber: 0,
+    };
+  },
+
+  created() {
+    // This will fire whenever a doctor call a patient
+    window.Echo.channel("number-update-channel").listen(".next-number-updated",event => {
+        // console.log(event.next_number + " " + event.panel);
+        switch (event.panel) {
+          case 'panel_1':
+            this.panel1 = {'current': event.next_number-1};
+            break;
+          case 'panel_2':
+            this.panel2 = {'current': event.next_number-1};
+            break;
+          case 'panel_3':
+            this.panel3 = {'current': event.next_number-1};
+            break;
+          case 'panel_4':
+            this.panel4 = {'current': event.next_number-1};
+            break;  
+        }
+        this.nextNumber = event.next_number;
+      }
+    );
+  },
+
+  mounted() {
+    this.getStatus();
+  },
+
+  methods: {
+    getStatus() {
+      axios.get("/recept/dashboard/get_status").then(response => {
+        this.panel1 = {'current': response.data.panel_1};
+        this.panel2 = {'current': response.data.panel_2};
+        this.panel3 = {'current': response.data.panel_3};
+        this.panel4 = {'current': response.data.panel_4};
+        this.nextNumber = (response.data.current == 0 ? 0:response.data.current+1);
+      });
+    }
+  }
+};
 </script>
 
 <style>
+.card-text {
+  font-size: xx-large;
+}
+.card-text-next {
+  font-size: 48px;
+}
 .card {
-    margin: 20px auto;
-    border-radius: 0;
-    font-family: 'Roboto', sans-serif!important;
-}
-.card-deck .card-body, .card-header {
-    background: #0086c3;
-    font-size: 18px;
-}
-.card-deck h1 {
-    font-size: 78px;
-    font-family: 'Yantramanav', sans-serif;
-    color: #fff;
-}
-.card-deck p {
-    font-size: 20px;
-    border: #42a5f5 solid;
-    border-width: 0.05rem;
+  border-radius: 0px;
 }
 </style>

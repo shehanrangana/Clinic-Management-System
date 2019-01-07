@@ -32,7 +32,6 @@ Vue.component('welcome', require('./components/Welcome.vue'));
 Vue.component('clock',require('./components/Clock.vue'));
 Vue.component('profile',require('./components/Profile.vue'));
 
-
 // Components of admin
 Vue.component('admin-dashboard', require('./components/Admin/Dashboard.vue'));
 Vue.component('user-register', require('./components/Admin/User_Register.vue'));
@@ -51,11 +50,9 @@ Vue.component('dashboard' , require('./components/LabAssistant/Dashboard.vue'));
 Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Upload.vue'));
 Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
 
-
-// Elements of admin
-
 // Components of doctor
 Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
+Vue.component('doctor-patients', require('./components/Doctor/Patients.vue'));
 Vue.component('doctor-report' , require('./components/Doctor/View_Report.vue'));
 
 // Vue primary instant

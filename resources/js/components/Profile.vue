@@ -4,7 +4,7 @@
             <!-- Users' data -->
             <b-row>
                 <b-col class="inner-div" id="left-pane">
-                    <b-img center thumbnail fluid src="https://picsum.photos/250/250/?image=52" alt="Thumbnail" />
+                    <b-img center thumbnail fluid src="../../images/profile-picture.png" alt="Thumbnail" />
                     <b-row>
                         <b-col class="id-name" cols="12">
                             <label for="id">ID : {{ user.user_id }}</label>

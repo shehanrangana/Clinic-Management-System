@@ -102,9 +102,16 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
 
         Route::post('/dashboard/prescription_store', 'PrescriptionController@store');
 
+        Route::get('/patients', function () {
+            return view('./doctor/patients');
+        });
+
+        Route::get('/patients/show', 'PatientController@index');
+
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
+        
         Route::get('/labreports', function () {
             return view('./doctor/reportview');
         });

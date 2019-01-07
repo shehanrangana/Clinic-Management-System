@@ -134,7 +134,7 @@ export default {
                                     this.status._1112=this.getStatus(this.count._1112);
                                     break;
                             }
-                            this.newAppointment = {'date': '', 'timeslot': '8-9', 'patient_id': ''};
+                            this.newAppointment = {'date': this.newAppointment.date, 'timeslot': '8-9', 'patient_id': ''};
                             alert("Appointment added successfully");
                     }).catch(err => {
                         this.hasError = true;

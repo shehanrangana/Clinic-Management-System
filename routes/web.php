@@ -11,7 +11,7 @@
 */
 Auth::routes();
 Route::get('/', function() { 
-    return view('welcome2');  // this is default welcome page
+    return view('/auth/login');  // this is default welcome page
 });
 Route::get('/home', 'HomeController@index')->name('home');
 // Admin routes

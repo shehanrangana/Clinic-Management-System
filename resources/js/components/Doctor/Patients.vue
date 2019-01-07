@@ -123,7 +123,7 @@ export default {
 
   methods: {
     getPatients() {
-      axios.get("/admin/patients/show").then(response => {
+      axios.get("/doctor/patients/show").then(response => {
         this.patients = response.data;
         // console.log(response.data);
       });

@@ -32206,10 +32206,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('dashboard-lab', __webpack
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('upload-report', __webpack_require__(263));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('report', __webpack_require__(266));
 
-// Elements of admin
-
 // Components of doctor
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-dashboard', __webpack_require__(269));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-patients', __webpack_require__(295));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-report', __webpack_require__(274));
 
 // Vue primary instant
@@ -73097,8 +73096,9 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["b" /* FormTex
             axios.post(window.location.href + "/update", [this.user.user_id, this.user.email, this.user.contact_number, this.user.qualification]).then(function (response) {
                 if (response.data == 1) {
                     alert("Your profile successfully updated !");
+                    swal("Done", "Your profile has been successfully updated !", "success");
                 } else {
-                    alert("Nothing updated !");
+                    swal("Ooops !", "Nothing updated !", "info");
                 }
             });
             this.isDisabled = true;
@@ -82974,7 +82974,7 @@ var render = function() {
                     center: "",
                     thumbnail: "",
                     fluid: "",
-                    src: "https://picsum.photos/250/250/?image=52",
+                    src: "../../images/profile-picture.png",
                     alt: "Thumbnail"
                   }
                 }),
@@ -83349,7 +83349,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.card-text {\r\n  font-size: xx-large;\n}\n.card-text-next {\r\n  font-size: 48px;\n}\n.card {\r\n  border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-text {\r\n  font-size: xx-large;\n}\n.card-text-next {\r\n  font-size: 40px;\n}\n.card {\r\n  border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -83482,7 +83482,8 @@ var render = function() {
                       staticClass: "text-center",
                       attrs: {
                         "bg-variant": "primary",
-                        "text-variant": "white"
+                        "text-variant": "white",
+                        footer: "PANEL 1"
                       }
                     },
                     [
@@ -83515,7 +83516,8 @@ var render = function() {
                       staticClass: "text-center",
                       attrs: {
                         "bg-variant": "primary",
-                        "text-variant": "white"
+                        "text-variant": "white",
+                        footer: "PANEL 2"
                       }
                     },
                     [
@@ -83548,7 +83550,8 @@ var render = function() {
                       staticClass: "text-center",
                       attrs: {
                         "bg-variant": "primary",
-                        "text-variant": "white"
+                        "text-variant": "white",
+                        footer: "PANEL 3"
                       }
                     },
                     [
@@ -83581,7 +83584,8 @@ var render = function() {
                       staticClass: "text-center",
                       attrs: {
                         "bg-variant": "primary",
-                        "text-variant": "white"
+                        "text-variant": "white",
+                        footer: "PANEL 4"
                       }
                     },
                     [
@@ -84527,15 +84531,31 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
                 _this.users = response.data;
             });
         },
-        removeUser: function removeUser(user) {
-            var _this2 = this;
 
-            // console.log(user);
-            axios.post('/admin/users/remove/' + user.user_id).then(function (response) {
-                _this2.getUsers();
-            });
-        },
 
+        // removeUser(user) {
+        //     swal({
+        //         title: "Are you sure?",
+        //         text:
+        //           "Once deleted, you will not be able to restore this user account!",
+        //         icon: "warning",
+        //         buttons: true,
+        //         dangerMode: true
+        //       }).then(willDelete => {
+        //         if (willDelete) {
+        //           axios.post('/admin/users/remove/' + user.user_id).then(response => {
+        //             swal("Selected user has been removed !", {
+        //               icon: "success"
+        //             });
+        //             this.getUsers();
+        //           }).catch(err => {
+        //             swal("Error!", "Cannot remove this user !", "error");
+        //           });
+        //         } else {
+        //           swal("User not removed !");
+        //         }
+        //     });
+        // },
 
         // Filter appointment table
         onFiltered: function onFiltered(filteredItems) {
@@ -84690,21 +84710,6 @@ var render = function() {
                           " Details\n          "
                       )
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-button",
-                    {
-                      staticClass: "mr-2",
-                      attrs: { size: "sm", variant: "danger" },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.removeUser(row.item)
-                        }
-                      }
-                    },
-                    [_vm._v("Remove")]
                   )
                 ]
               }
@@ -84906,65 +84911,93 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table */]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            patients: [],
-            sortBy: 'date',
-            sortDesc: false,
-            currentPage: 1,
-            perPage: 10,
-            totalRows: 0,
-            pageOptions: [5, 10, 15],
-            filter: null,
-            fields: [{ key: 'patient_id', sortable: true }, { key: 'name', sortable: true }, { key: 'gender', sortable: false }, { key: 'birthday', sortable: true }, { key: 'contact_number', sortable: false }, { key: 'guardian_number', sortable: false }, { key: 'actions', sortable: false }]
-        };
-    },
+  data: function data() {
+    return {
+      patients: [],
+      sortBy: "date",
+      sortDesc: false,
+      currentPage: 1,
+      perPage: 10,
+      totalRows: 0,
+      pageOptions: [5, 10, 15],
+      filter: null,
+      fields: [{ key: "patient_id", sortable: true }, { key: "name", sortable: true }, { key: "gender", sortable: false }, { key: "birthday", sortable: true }, { key: "contact_number", sortable: false }, { key: "guardian_number", sortable: false }, { key: "actions", sortable: false }]
+    };
+  },
 
 
-    mounted: function mounted() {
-        this.getPatients();
-    },
+  mounted: function mounted() {
+    this.getPatients();
+  },
 
-    computed: {
-        sortOptions: function sortOptions() {
-            // Create an options list from our fields
-            return this.fields.filter(function (f) {
-                return f.sortable;
-            }).map(function (f) {
-                return { text: f.label, value: f.key };
-            });
-        }
-    },
-
-    methods: {
-        getPatients: function getPatients() {
-            var _this = this;
-
-            axios.get('/admin/patients/show').then(function (response) {
-                _this.patients = response.data;
-                // console.log(response.data);
-            });
-        },
-        removePatient: function removePatient(patient) {
-            var _this2 = this;
-
-            axios.post('/admin/patients/remove/' + patient.patient_id).then(function (response) {
-                _this2.getPatients();
-            });
-        },
-
-        // Filter appointment table
-        onFiltered: function onFiltered(filteredItems) {
-            // Trigger pagination to update the number of buttons/pages due to filtering
-            this.totalRows = filteredItems.length;
-            this.currentPage = 1;
-        }
+  computed: {
+    sortOptions: function sortOptions() {
+      // Create an options list from our fields
+      return this.fields.filter(function (f) {
+        return f.sortable;
+      }).map(function (f) {
+        return { text: f.label, value: f.key };
+      });
     }
+  },
+
+  methods: {
+    getPatients: function getPatients() {
+      var _this = this;
+
+      axios.get("/admin/patients/show").then(function (response) {
+        _this.patients = response.data;
+        // console.log(response.data);
+      });
+    },
+
+    // removePatient(patient) {
+    //   swal({
+    //     title: "Are you sure?",
+    //     text:
+    //       "Once deleted, you will not be able to restore this patient details!",
+    //     icon: "warning",
+    //     buttons: true,
+    //     dangerMode: true
+    //   }).then(willDelete => {
+    //     if (willDelete) {
+    //       axios.post("/admin/patients/remove/" + patient.patient_id).then(response => {
+    //         swal("Selected patient has been removed !", {
+    //           icon: "success"
+    //         });
+    //         this.getPatients();
+    //       }).catch(err => {
+    //         swal("Error!", "This patient has an appointment", "error");
+    //       });
+    //     } else {
+    //       swal("Patient not removed !");
+    //     }
+    //   });
+    // },
+    // Filter appointment table
+    onFiltered: function onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length;
+      this.currentPage = 1;
+    }
+  }
 });
 
 /***/ }),
@@ -85106,26 +85139,10 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n              " +
-                          _vm._s(row.detailsShowing ? "Hide" : "Show") +
-                          " Details\n          "
+                        _vm._s(row.detailsShowing ? "Hide" : "Show") +
+                          " Details"
                       )
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-button",
-                    {
-                      staticClass: "mr-2",
-                      attrs: { size: "sm", variant: "danger" },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.removePatient(row.item)
-                        }
-                      }
-                    },
-                    [_vm._v("Remove")]
                   )
                 ]
               }
@@ -85190,9 +85207,9 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("p", [
-          _vm._v("\n      Sorting By: "),
+          _vm._v("\n      Sorting By:\n      "),
           _c("b", [_vm._v(_vm._s(_vm.sortBy))]),
-          _vm._v(",\n      Sort Direction: "),
+          _vm._v(",\n      Sort Direction:\n      "),
           _c("b", [_vm._v(_vm._s(_vm.sortDesc ? "Descending" : "Ascending"))])
         ])
       ],
@@ -87061,17 +87078,18 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_js_toggle_button___default.a);
 
         this.queueDetails = [id, total, 0, 1];
         axios.post('/recept/queue/start', this.queueDetails).then(function (response) {
-          alert("Queue started");
+          swal("Done", "Queue " + (id + 1) + " started !", "success");
         }).catch(function (err) {
           _this3.value = [false, false, false, false]; // if error occured all the switches reset
           _this3.disable = [false, false, false, false];
-          alert("This queue has been completed");
+          swal("Error !", "This queue has been already completed !", "error");
         });
       } else {
         this.disable = [false, false, false, false];
         // this.disable[id] = true; // permenetly disable finished queue switch
         axios.post('/recept/queue/stop', [id]).then(function (response) {
-          console.log(response.data);
+          swal("Done", "Queue " + (id + 1) + " stopped !", "info");
+          // console.log(response.data);
         }).catch(function (err) {
           _this3.hasError = true;
         });
@@ -88113,6 +88131,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button__);
+throw new Error("Cannot find module \"sweetalert\"");
 //
 //
 //
@@ -88230,6 +88249,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["a" /* Form */
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -88333,6 +88354,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
       this.value[id] = true;
 
       axios.post('/doctor/dashboard/active_panel', { 'activated_panel': id }).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_2_sweetalert___default()("PANEL " + (id + 1) + " IS STARTED", "", "info");
         _this3.activatedPanel = response.data;
       }).catch(function (err) {
         console.log(err);
@@ -88340,7 +88362,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
     },
 
 
-    // Get patient list of current queue
+    // Get patient list of current queue and selected patient 
     getQueueList: function getQueueList() {
       var _this4 = this;
 
@@ -88375,7 +88397,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
       axios.get("/doctor/dashboard/patient_history", { params: { patient_id: this.selectedPatient.patient_id, number: this.selectedPatient.number } }).then(function (response) {
         _this5.patientHistory = response.data.patient_history;
         _this5.nextPatient = response.data.next_number;
-        // console.log(response.data.patient_history);
+        // console.log(this.patientHistory);
       });
     },
 
@@ -88407,10 +88429,12 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
 
       this.prescriptionText = '';
       axios.post('/doctor/dashboard/prescription_store', [this.selectedPatient.patient_id, this.prescription, this.comment, this.activeQueue]).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_2_sweetalert___default()("Done", "Prescription successfully uploaded", "success");
         _this6.patientHistory.unshift(response.data); // add new element beginning of the array
+        _this6.recentComment = response.data.comment;
       }).catch(function (err) {
-        // console.log(err);
-        alert("erro!");
+        // alert("Prescription is already uploaded!");
+        __WEBPACK_IMPORTED_MODULE_2_sweetalert___default()("Error!", "Prescription is already uploaded!", "error");
       });
       this.prescription = [];
       this.comment = '';
@@ -91454,6 +91478,446 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 294 */,
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(296)
+/* template */
+var __vue_template__ = __webpack_require__(297)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Doctor/Patients.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-568e6afa", Component.options)
+  } else {
+    hotAPI.reload("data-v-568e6afa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 296 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(9);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table */]);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      patients: [],
+      sortBy: "date",
+      sortDesc: false,
+      currentPage: 1,
+      perPage: 10,
+      totalRows: 0,
+      pageOptions: [5, 10, 15],
+      filter: null,
+      fields: [{ key: "patient_id", sortable: true }, { key: "name", sortable: true }, { key: "gender", sortable: false }, { key: "birthday", sortable: true }, { key: "contact_number", sortable: false }, { key: "guardian_number", sortable: false }, { key: "actions", sortable: false }]
+    };
+  },
+
+
+  mounted: function mounted() {
+    this.getPatients();
+  },
+
+  computed: {
+    sortOptions: function sortOptions() {
+      // Create an options list from our fields
+      return this.fields.filter(function (f) {
+        return f.sortable;
+      }).map(function (f) {
+        return { text: f.label, value: f.key };
+      });
+    }
+  },
+
+  methods: {
+    getPatients: function getPatients() {
+      var _this = this;
+
+      axios.get("/doctor/patients/show").then(function (response) {
+        _this.patients = response.data;
+        // console.log(response.data);
+      });
+    },
+
+    // removePatient(patient) {
+    //   swal({
+    //     title: "Are you sure?",
+    //     text:
+    //       "Once deleted, you will not be able to restore this patient details!",
+    //     icon: "warning",
+    //     buttons: true,
+    //     dangerMode: true
+    //   }).then(willDelete => {
+    //     if (willDelete) {
+    //       axios.post("/admin/patients/remove/" + patient.patient_id).then(response => {
+    //         swal("Selected patient has been removed !", {
+    //           icon: "success"
+    //         });
+    //         this.getPatients();
+    //       }).catch(err => {
+    //         swal("Error!", "This patient has an appointment", "error");
+    //       });
+    //     } else {
+    //       swal("Patient not removed !");
+    //     }
+    //   });
+    // },
+    // Filter appointment table
+    onFiltered: function onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length;
+      this.currentPage = 1;
+    }
+  }
+});
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "inner-div" },
+      [
+        _c(
+          "b-row",
+          [
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c(
+                  "b-form-group",
+                  {
+                    staticClass: "mb-0",
+                    attrs: { horizontal: "", label: "Filter" }
+                  },
+                  [
+                    _c(
+                      "b-input-group",
+                      [
+                        _c("b-form-input", {
+                          attrs: { placeholder: "Type to Search" },
+                          model: {
+                            value: _vm.filter,
+                            callback: function($$v) {
+                              _vm.filter = $$v
+                            },
+                            expression: "filter"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "b-input-group-append",
+                          [
+                            _c(
+                              "b-btn",
+                              {
+                                attrs: { disabled: !_vm.filter },
+                                on: {
+                                  click: function($event) {
+                                    _vm.filter = ""
+                                  }
+                                }
+                              },
+                              [_vm._v("Clear")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c(
+                  "b-form-group",
+                  {
+                    staticClass: "mb-0",
+                    attrs: { horizontal: "", label: "Per page" }
+                  },
+                  [
+                    _c("b-form-select", {
+                      attrs: { options: _vm.pageOptions },
+                      model: {
+                        value: _vm.perPage,
+                        callback: function($$v) {
+                          _vm.perPage = $$v
+                        },
+                        expression: "perPage"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("b-table", {
+          attrs: {
+            responsive: "",
+            hover: "",
+            "sort-by": _vm.sortBy,
+            "sort-desc": _vm.sortDesc,
+            items: _vm.patients,
+            fields: _vm.fields,
+            "current-page": _vm.currentPage,
+            "per-page": _vm.perPage,
+            filter: _vm.filter
+          },
+          on: {
+            "update:sortBy": function($event) {
+              _vm.sortBy = $event
+            },
+            "update:sortDesc": function($event) {
+              _vm.sortDesc = $event
+            },
+            filtered: _vm.onFiltered
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "actions",
+              fn: function(row) {
+                return [
+                  _c(
+                    "b-button",
+                    {
+                      attrs: { size: "sm" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          return row.toggleDetails($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(row.detailsShowing ? "Hide" : "Show") +
+                          " Details"
+                      )
+                    ]
+                  )
+                ]
+              }
+            },
+            {
+              key: "row-details",
+              fn: function(row) {
+                return [
+                  _c("b-card", [
+                    _c("li", [_vm._v("NIC : " + _vm._s(row.item.nic))]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _vm._v(
+                        "Address Line 1 : " + _vm._s(row.item.address_line_1)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _vm._v(
+                        "Address Line 2 : " + _vm._s(row.item.address_line_2)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _vm._v(
+                        "Address Line 3 : " + _vm._s(row.item.address_line_3)
+                      )
+                    ])
+                  ])
+                ]
+              }
+            }
+          ])
+        }),
+        _vm._v(" "),
+        _c(
+          "b-row",
+          [
+            _c(
+              "b-col",
+              { staticClass: "my-1", attrs: { md: "6" } },
+              [
+                _c("b-pagination", {
+                  staticClass: "my-0",
+                  attrs: {
+                    "total-rows": _vm.totalRows,
+                    "per-page": _vm.perPage
+                  },
+                  model: {
+                    value: _vm.currentPage,
+                    callback: function($$v) {
+                      _vm.currentPage = $$v
+                    },
+                    expression: "currentPage"
+                  }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("\n      Sorting By:\n      "),
+          _c("b", [_vm._v(_vm._s(_vm.sortBy))]),
+          _vm._v(",\n      Sort Direction:\n      "),
+          _c("b", [_vm._v(_vm._s(_vm.sortDesc ? "Descending" : "Ascending"))])
+        ])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-568e6afa", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

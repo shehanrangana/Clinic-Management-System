@@ -128,17 +128,18 @@ export default {
 
         this.queueDetails = [id, total, 0, 1];
         axios.post('/recept/queue/start', this.queueDetails).then((response) =>{
-          alert("Queue started");
+          swal("Done", "Queue " + (id+1) + " started !", "success");
         }).catch(err => {
           this.value = [false, false, false, false]; // if error occured all the switches reset
           this.disable = [false, false, false, false]; 
-          alert("This queue has been completed");
+          swal("Error !", "This queue has been already completed !", "error");
         });
       }else{
         this.disable = [false, false, false, false];
         // this.disable[id] = true; // permenetly disable finished queue switch
         axios.post('/recept/queue/stop', [id]).then((response) =>{
-          console.log(response.data);
+          swal("Done", "Queue " + (id+1) + " stopped !", "info");
+          // console.log(response.data);
         }).catch(err => {
             this.hasError = true;
         });

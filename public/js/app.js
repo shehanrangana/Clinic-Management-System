@@ -90377,7 +90377,23 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap_vue_es_components__ = __webpack_require__(9);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -90442,9 +90458,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table */]);
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_bootstrap_vue_es_components__["e" /* Table */]);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: { DatePicker: __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default.a },
     data: function data() {
         return {
             drugs: [],
@@ -90456,6 +90474,17 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
             pageOptions: [5, 10, 15],
             filter: null,
             fields: [{ key: 'name', sortable: true }, { key: 'brand', sortable: false }, { key: 'quantity', sortable: false }, { key: 'expire_date', sortable: true }, { key: 'supplier_email', sortable: false }, { key: 'actions', sortable: false }]
+            // updatelist: {'quantity': '', 'expire_date': ''},
+            // selected: '',
+            // lang: {
+            //         days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            //         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            //         pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+            //         placeholder: {
+            //             date: 'Select Date',
+            //         }
+            // },
+
         };
     },
     mounted: function mounted() {
@@ -90496,6 +90525,25 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
             });
         },
 
+
+        // openModal(item) {
+        //   // console.log(item);
+        //   this.queue.date = item.date;
+        //   this.queue.timeslot = item.timeslot;
+        //   this.queue.patient_id = item.patient_id;
+        //   this.getRecentNumber();
+        // },
+        // // Get recently added patient number
+        // getRecentNumber() {
+        //   axios.get('/recept/queue/get_recent', {params: {timeslot: this.queue.timeslot}}).then( (response)=>{
+
+        //       if(response.data != -1){
+        //           this.queue.number = response.data + 1;
+        //       }else{
+        //           this.queue.number = 1;
+        //       }
+        //   });
+        // },
 
         // Filter appointment table
         onFiltered: function onFiltered(filteredItems) {

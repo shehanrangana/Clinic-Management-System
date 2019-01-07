@@ -43,6 +43,20 @@
         
 
       </b-table>
+      <!-- <b-modal id="modal-center" centered title= "Update Drugs" hide-footer >
+        <b-form inline>
+          <b-form-input v-model="updatelist.quantity" type="number" placeholder="Quantity"></b-form-input>
+           
+          
+                        <b-form-input>
+                            
+                            <date-picker :lang="lang" name="expire_date" v-model="updatelist.expire_date" style="font-family: 'Roboto', sans-serif;"></date-picker>
+                        </b-form-input>
+                    
+          
+          <b-button variant="primary" @click.stop="update()" :value="updatelist.quantity">Save</b-button>
+        </b-form>
+      </b-modal> -->
 
       <!-- pagination -->
       <b-row>
@@ -61,10 +75,12 @@
 </template>
 
 <script>
+import DatePicker from 'vue2-datepicker';
 import { Table } from 'bootstrap-vue/es/components';
 Vue.use(Table);
 
 export default{
+  components: { DatePicker },
     data () {
         return {
             drugs: [],
@@ -84,6 +100,17 @@ export default{
               { key: 'actions', sortable: false },
               
             ],
+            // updatelist: {'quantity': '', 'expire_date': ''},
+            // selected: '',
+            // lang: {
+            //         days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            //         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            //         pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+            //         placeholder: {
+            //             date: 'Select Date',
+            //         }
+            // },
+
         }
     },
   
@@ -118,6 +145,25 @@ export default{
                 this.getDrugs();
             })
         },
+
+          // openModal(item) {
+          //   // console.log(item);
+          //   this.queue.date = item.date;
+          //   this.queue.timeslot = item.timeslot;
+          //   this.queue.patient_id = item.patient_id;
+          //   this.getRecentNumber();
+          // },
+          // // Get recently added patient number
+          // getRecentNumber() {
+          //   axios.get('/recept/queue/get_recent', {params: {timeslot: this.queue.timeslot}}).then( (response)=>{
+              
+          //       if(response.data != -1){
+          //           this.queue.number = response.data + 1;
+          //       }else{
+          //           this.queue.number = 1;
+          //       }
+          //   });
+          // },
 
         // Filter appointment table
         onFiltered (filteredItems) {

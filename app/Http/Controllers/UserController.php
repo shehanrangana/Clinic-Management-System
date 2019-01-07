@@ -85,6 +85,17 @@ class UserController extends Controller
         //
     }
 
+    // Check whether entered email exist or not
+    public function checkEmail(Request $request)
+    {   
+        // dd($request->all());
+        if (User::where('email', $request->email)->exists()) {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -110,7 +121,7 @@ class UserController extends Controller
         }
 
         $_birthday = substr($request->birthday, 0, -14);
-        $random_password = str_random(8);; // Generate random password
+        $random_password = str_random(8); // Generate random password
 
         $user = new User();
         $user->name = $request->name;
@@ -126,8 +137,6 @@ class UserController extends Controller
 
         // Sent password to registered user by an email
         \Mail::to($user)->send(new Password($user, $random_password));
-
-        return $user;
     }
 
     /**

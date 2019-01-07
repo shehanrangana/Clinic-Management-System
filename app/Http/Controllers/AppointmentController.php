@@ -31,6 +31,7 @@ class AppointmentController extends Controller
         
         return $count;
     }
+
     //add appointment to the appointment table
     public function add(Request $request){
          
@@ -44,15 +45,6 @@ class AppointmentController extends Controller
         
         return $appointment;
     }
-    //check the no of appointment greater than the linit
-    // public function getStatus($count){
-    //     if($count>=20){
-    //         $status="Full";
-    //     }else{
-    //         $status="Not Full";
-    //     }
-    //     return $status;
-    // }
 
     
     //check the patient id exits in the patient table
@@ -88,6 +80,7 @@ class AppointmentController extends Controller
             ->get();
         return $appointments;
     }
+    
     //get appointment with the patient id according to the date
     public function showForDate(Request $request){
         //dd($request->all());
@@ -99,12 +92,7 @@ class AppointmentController extends Controller
         return $appointments;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //delete appointment
     public function destroy(Request $request)
     {
         //dd($request->all());

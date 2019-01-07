@@ -10,6 +10,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// use Vee-validate
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate, {
+    events: 'input|change|blur',
+    fieldsBagName: 'formFields' // to avoid 'field' prop conflict
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -38,16 +46,28 @@ Vue.component('queue', require('./components/Receptionist/Queue.vue'));
 Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));
 
 // Components of nurse
-//Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
-Vue.component('make-appointment', require('./components/Nurse/Make_Appointment_New.vue'));
-Vue.component('appointment-count', require('./components/Nurse/Appointment_Count.vue'));
-Vue.component('appointment-list', require('./components/Nurse/Appointment_List.vue'));
+
+Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
 
 // Elements of admin
+//Component of Lab Assistant
+Vue.component('dashboard' , require('./components/LabAssistant/Dashboard.vue'));
+
+Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Upload.vue'));
+Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
+
+
+// Elements of admin
+
 // Components of doctor
 Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
+Vue.component('doctor-report' , require('./components/Doctor/View_Report.vue'));
 
 // Vue primary instant
+Vue.component('dashboard', require('./components/Pharmacy/Dashboard.vue'));
+Vue.component('add-drugs', require('./components/Pharmacy/Add_Drugs.vue'));
+Vue.component('view-prescription', require('./components/Pharmacy/View_Prescription.vue'));
+
 const app = new Vue({
     el: '#app',
 });

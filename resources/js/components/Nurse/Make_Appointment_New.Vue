@@ -5,7 +5,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="date">Date </label>
-                        <date-picker @change="getCountStatus()" :lang="lang" name="date" id="date" :required="true" v-model="newAppointment.date"></date-picker>
+                        <date-picker @change="getCountStatus(); getAppointmentforDate();" :lang="lang" name="date" id="date" :required="true" v-model="newAppointment.date"></date-picker>
                     </div>  
                 </div>
                 <div class="col">   
@@ -86,7 +86,7 @@
                 <tr v-for="appointment in appointments">
                     <td>{{ appointment.patient_id }}</td>
                     <td>{{ appointment.name}}</td>
-                    <td><button type="button" class="btn btn-outline-danger btn-sm" @click.prevent="cancelAppointment()">cancel</button></td>
+                    <td><button type="button" class="btn btn-danger btn-sm" @click.prevent="cancelAppointment(appointment)">cancel</button></td>
                 </tr>
             </tbody>
         </table>
@@ -158,7 +158,7 @@ export default {
                                     this.status._1112=this.getStatus(this.count._1112);
                                     break;
                             }
-
+                            this.getAppointments(response.data.timeslot);
                             this.newAppointment = {'date': this.newAppointment.date, 'timeslot': '8-9', 'patient_id': ''};
                             alert("Appointment added successfully");
 
@@ -262,6 +262,20 @@ export default {
                 });
             
         },
+        //get appointments for relavant date 
+        getAppointmentforDate(){
+            if(this.newAppointment.date){
+                let date=this.formatDate(this.newAppointment.date);
+                console.log(date);
+                
+                axios.get('/nurse/make_appointment/showfordate', {params: {date: date}}).then( (response)=>{
+                    this.appointments = response.data;
+                    console.log(response.data);
+                })
+            }else{
+                alert("Please select a date");
+            }
+        },
         //get appointments for relavant date & timeslot
         getAppointments($timeslot){
             if(this.newAppointment.date){
@@ -276,6 +290,34 @@ export default {
                 alert("Please select a date");
             }
         },
+
+        cancelAppointment(appointment){
+                let date=this.formatDate(this.newAppointment.date);
+                console.log(date);
+                console.log(appointment.patient_id);
+                axios.post('/nurse/make_appointment/cancel', {date: date,patient_id: appointment.patient_id}).then( (response)=>{
+                    this.getAppointments(appointment.timeslot);
+                    switch (appointment.timeslot) {
+                                case '08-09':
+                                    this.count._0809 -= 1;
+                                    this.status._0809=this.getStatus(this.count._0809);
+                                    break;
+                                case '09-10':
+                                    this.count._0910 -= 1;
+                                    this.status._0910=this.getStatus(this.count._0910);
+                                    break;
+                                case '10-11':
+                                    this.count._1011 -= 1;
+                                    this.status._1011=this.getStatus(this.count._1011);
+                                    break;
+                                case '11-12':
+                                    this.count._1112 -= 1;
+                                    this.status._1112=this.getStatus(this.count._1112);
+                                    break;
+                    }
+                    alert("Appointment canceled")
+                });
+            }
         
     }
 }

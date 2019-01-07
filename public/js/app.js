@@ -79168,7 +79168,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 _this.status._1112 = _this.getStatus(_this.count._1112);
                                 break;
                         }
-
+                        _this.getAppointments(response.data.timeslot);
                         _this.newAppointment = { 'date': _this.newAppointment.date, 'timeslot': '8-9', 'patient_id': '' };
                         alert("Appointment added successfully");
                     }).catch(function (err) {
@@ -79269,21 +79269,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
-        //get appointments for relavant date & timeslot
-        getAppointments: function getAppointments($timeslot) {
+        //get appointments for relavant date 
+        getAppointmentforDate: function getAppointmentforDate() {
             var _this3 = this;
 
             if (this.newAppointment.date) {
                 var date = this.formatDate(this.newAppointment.date);
                 console.log(date);
-                console.log($timeslot);
-                axios.get('/nurse/make_appointment/show', { params: { date: date, timeslot: $timeslot } }).then(function (response) {
+
+                axios.get('/nurse/make_appointment/showfordate', { params: { date: date } }).then(function (response) {
                     _this3.appointments = response.data;
                     console.log(response.data);
                 });
             } else {
                 alert("Please select a date");
             }
+        },
+
+        //get appointments for relavant date & timeslot
+        getAppointments: function getAppointments($timeslot) {
+            var _this4 = this;
+
+            if (this.newAppointment.date) {
+                var date = this.formatDate(this.newAppointment.date);
+                console.log(date);
+                console.log($timeslot);
+                axios.get('/nurse/make_appointment/show', { params: { date: date, timeslot: $timeslot } }).then(function (response) {
+                    _this4.appointments = response.data;
+                    console.log(response.data);
+                });
+            } else {
+                alert("Please select a date");
+            }
+        },
+        cancelAppointment: function cancelAppointment(appointment) {
+            var _this5 = this;
+
+            var date = this.formatDate(this.newAppointment.date);
+            console.log(date);
+            console.log(appointment.patient_id);
+            axios.post('/nurse/make_appointment/cancel', { date: date, patient_id: appointment.patient_id }).then(function (response) {
+                _this5.getAppointments(appointment.timeslot);
+                switch (appointment.timeslot) {
+                    case '08-09':
+                        _this5.count._0809 -= 1;
+                        _this5.status._0809 = _this5.getStatus(_this5.count._0809);
+                        break;
+                    case '09-10':
+                        _this5.count._0910 -= 1;
+                        _this5.status._0910 = _this5.getStatus(_this5.count._0910);
+                        break;
+                    case '10-11':
+                        _this5.count._1011 -= 1;
+                        _this5.status._1011 = _this5.getStatus(_this5.count._1011);
+                        break;
+                    case '11-12':
+                        _this5.count._1112 -= 1;
+                        _this5.status._1112 = _this5.getStatus(_this5.count._1112);
+                        break;
+                }
+                alert("Appointment canceled");
+            });
         }
     }
 });
@@ -79316,6 +79362,7 @@ var render = function() {
                 on: {
                   change: function($event) {
                     _vm.getCountStatus()
+                    _vm.getAppointmentforDate()
                   }
                 },
                 model: {
@@ -79564,12 +79611,12 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-outline-danger btn-sm",
+                      staticClass: "btn btn-danger btn-sm",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          _vm.cancelAppointment()
+                          _vm.cancelAppointment(appointment)
                         }
                       }
                     },

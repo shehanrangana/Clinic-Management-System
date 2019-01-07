@@ -125,13 +125,14 @@ Route::get('/nurse/appointment_list', function () {
 });
 
 Route::get('/nurse/make_appointment/show', 'AppointmentController@show');
-Route::get('/nurse/appointment_list/cancel', 'AppointmentController@destroy');
+Route::get('/nurse/make_appointment/showfordate', 'AppointmentController@showForDate');
+Route::post('/nurse/make_appointment/cancel', 'AppointmentController@destroy');
 Route::post('/nurse/make_appointment/add', 'AppointmentController@add');
 
 Route::get('/nurse/make_appointment/count/{date}', 'AppointmentController@getCountStatus');
 Route::get('/nurse/make_appointment/checkid', 'AppointmentController@checkID');
 Route::get('/nurse/make_appointment/checkappointment', 'AppointmentController@checkAppointment');
-//Route::get('/nurse/make_appointment/getcount', 'AppointmentController@getCount');
+
 
 //
 // Nurse routes

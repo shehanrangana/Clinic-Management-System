@@ -88,7 +88,16 @@ class AppointmentController extends Controller
             ->get();
         return $appointments;
     }
-    
+    //get appointment with the patient id according to the date
+    public function showForDate(Request $request){
+        //dd($request->all());
+        $appointments = DB::table('appointments')
+            ->join('patients', 'appointments.patient_id', '=', 'patients.patient_id')
+            ->select('appointments.patient_id', 'patients.name','appointments.date','appointments.timeslot')
+            ->where('appointments.date',$request->date)
+            ->get();
+        return $appointments;
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -98,8 +107,8 @@ class AppointmentController extends Controller
      */
     public function destroy(Request $request)
     {
-        dd($request->all());
-        //DB::table('appointments')->where('date', $request->date)->where('pateint_id',$request->patient_id)->delete();
+        //dd($request->all());
+        DB::table('appointments')->where('date', $request->date)->where('patient_id',$request->patient_id)->delete();
     }
 
     public function getTodayList()

@@ -43,15 +43,13 @@ Vue.component('recept-dashboard', require('./components/Receptionist/Dashboard.v
 Vue.component('patient-register', require('./components/Receptionist/Patient_Register.vue'));
 Vue.component('queue', require('./components/Receptionist/Queue.vue'));
 Vue.component('queue-tables', require('./components/Receptionist/Queue_tables.vue'));
+Vue.component('receptionist-appointment', require('./components/Receptionist/Appointment.vue'));
 
 // Components of nurse
+// Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
 
-Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
-
-// Elements of admin
 //Component of Lab Assistant
 Vue.component('dashboard-lab' , require('./components/LabAssistant/Dashboard.vue'));
-
 Vue.component('upload-report' , require('./components/LabAssistant/Lab_Report_Upload.vue'));
 Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
 
@@ -59,6 +57,7 @@ Vue.component('report' , require('./components/LabAssistant/View_Report.vue'));
 Vue.component('doctor-dashboard', require('./components/Doctor/Dashboard.vue'));
 Vue.component('doctor-patients', require('./components/Doctor/Patients.vue'));
 Vue.component('doctor-report' , require('./components/Doctor/View_Report.vue'));
+Vue.component('doctor-appointment', require('./components/Doctor/Appointment.vue'));
 
 // Vue primary instant
 Vue.component('dashboard', require('./components/Pharmacy/Dashboard.vue'));

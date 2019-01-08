@@ -3,25 +3,25 @@
     <b-container class="bv-example-row">
       <b-row>
         <b-col class="b-col">
-          <label for="queue1">08 - 09</label>
+          <label for="queue1">8 AM - 9 AM</label>
           <!-- Toggle button for start/stop queue1 -->
           <toggle-button class="toggle-start" v-model="value[0]"  name="queue1" v-bind:disabled="disable[0]" @change='changeState(0)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
           <b-table responsive small :fields="fields" @row-dblclicked="myRowClickHandler" striped hover :items="list0809"></b-table>
         </b-col>
         <b-col class="b-col">
-          <label for="queue2">09 - 10</label>
+          <label for="queue2">9 AM - 10 AM</label>
           <!-- Toggle button for start/stop queue2 -->
           <toggle-button class="toggle-start" v-model="value[1]"  name="queue2" v-bind:disabled="disable[1]" @change='changeState(1)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
           <b-table responsive small :fields="fields" @row-dblclicked="myRowClickHandler" striped hover :items="list0910"></b-table>
         </b-col>
         <b-col class="b-col">
-          <label for="queue3">10 - 11</label>
+          <label for="queue3">10 AM - 11 AM</label>
           <!-- Toggle button for start/stop queue3 -->
           <toggle-button class="toggle-start" v-model="value[2]"  name="queue3" v-bind:disabled="disable[2]" @change='changeState(2)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
           <b-table responsive small :fields="fields" @row-dblclicked="myRowClickHandler" striped hover :items="list1011"></b-table>
         </b-col>
         <b-col class="b-col-end">
-          <label for="queue4">11 - 12</label>
+          <label for="queue4">11 AM - 12 PM</label>
           <!-- Toggle button for start/stop queue4 -->
           <toggle-button class="toggle-start" v-model="value[3]"  name="queue4" v-bind:disabled="disable[3]" @change='changeState(3)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
           <b-table responsive small :fields="fields" @row-dblclicked="myRowClickHandler" striped hover :items="list1112"></b-table>
@@ -165,7 +165,7 @@ export default {
 label {
   display: block;
   /* background-color:#0064b7; */
-  font-size: 24px;
+  font-size: 20px;
   color: #13aa4d;
   text-align: center;
   margin-top: 10px;

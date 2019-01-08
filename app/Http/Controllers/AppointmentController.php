@@ -101,7 +101,8 @@ class AppointmentController extends Controller
 
     public function getTodayList()
     {
-        $appointment = Appointment::where('flag', 0)->get();
+        date_default_timezone_set("Asia/Colombo");
+        $appointment = Appointment::where('flag', 0)->where('date', date('Y-m-d'))->get();
         return $appointment;
     }
 }

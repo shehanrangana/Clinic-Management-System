@@ -71,7 +71,7 @@
                 </div>
                 <div class="form-group">
                   <label for="guardian_number">Guardian's contact number</label>
-                  <input v-validate="'required|digits:10'" autofocus type="tel" class="form-control" id="guardian_number" name="guardian_number" placeholder="Enter guardian's contact number" v-model="newPatient.guardian_number">
+                  <input type="tel" class="form-control" id="guardian_number" name="guardian_number" placeholder="Enter guardian's contact number" v-model="newPatient.guardian_number">
                   <div class="error-feedback">
                     <span>{{ errors.first('guardian_number') }}</span>
                   </div>

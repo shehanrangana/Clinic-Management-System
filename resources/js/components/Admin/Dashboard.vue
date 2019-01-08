@@ -1,7 +1,7 @@
 <template>
   <div class="inner-div">
     <b-row>
-      <b-col>
+      <b-col sm="3">
         <b-card-group deck class="mb-3">
           <b-card bg-variant="primary" text-variant="white" class="text-center" footer="PANEL 1">
             <p class="card-text">Now : {{ panel1.current }}</p>
@@ -9,7 +9,7 @@
           </b-card>
         </b-card-group>
       </b-col>
-      <b-col>
+      <b-col sm="3">
         <b-card-group deck class="mb-3">
           <b-card bg-variant="primary" text-variant="white" class="text-center" footer="PANEL 2">
             <p class="card-text">Now : {{ panel2.current }}</p>
@@ -17,7 +17,7 @@
           </b-card>
         </b-card-group>
       </b-col>
-      <b-col>
+      <b-col sm="3">
         <b-card-group deck class="mb-3">
           <b-card bg-variant="primary" text-variant="white" class="text-center" footer="PANEL 3">
             <p class="card-text">Now : {{ panel3.current }}</p>
@@ -25,7 +25,7 @@
           </b-card>
         </b-card-group>
       </b-col>
-      <b-col>
+      <b-col sm="3">
         <b-card-group deck class="mb-3">
           <b-card bg-variant="primary" text-variant="white" class="text-center" footer="PANEL 4">
             <p class="card-text">Now : {{ panel4.current }}</p>

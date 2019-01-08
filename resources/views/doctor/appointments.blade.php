@@ -4,6 +4,6 @@
 
 @section('content')
     <div>
-        <receptionist-appointment></receptionist-appointment>
+        <doctor-appointment></doctor-appointment>
     </div>
 @endsection

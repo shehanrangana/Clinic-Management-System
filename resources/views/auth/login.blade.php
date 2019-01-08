@@ -69,3 +69,12 @@
     </div>
 </div>
 @endsection
+
+<style>
+body {
+    /* background-image: url("../../../images/background2.jpg"); */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+    /* height: 500px; */
+}
+</style>

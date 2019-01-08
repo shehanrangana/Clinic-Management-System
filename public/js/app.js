@@ -32269,10 +32269,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('recept-dashboard', __webp
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('patient-register', __webpack_require__(247));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('queue', __webpack_require__(252));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('queue-tables', __webpack_require__(257));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('receptionist-appointment', __webpack_require__(299));
+
+// Components of nurse
+// Vue.component('make-appointment', require('./components/Nurse/Make_Appointment.vue'));
 
 //Component of Lab Assistant
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('dashboard-lab', __webpack_require__(262));
-
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('upload-report', __webpack_require__(263));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('report', __webpack_require__(266));
 
@@ -32280,6 +32283,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('report', __webpack_requir
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-dashboard', __webpack_require__(269));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-patients', __webpack_require__(275));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-report', __webpack_require__(278));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('doctor-appointment', __webpack_require__(304));
 
 // Vue primary instant
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('dashboard', __webpack_require__(281));
@@ -84327,6 +84331,7 @@ var render = function() {
         [
           _c(
             "b-col",
+            { attrs: { sm: "3" } },
             [
               _c(
                 "b-card-group",
@@ -84361,6 +84366,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-col",
+            { attrs: { sm: "3" } },
             [
               _c(
                 "b-card-group",
@@ -84395,6 +84401,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-col",
+            { attrs: { sm: "3" } },
             [
               _c(
                 "b-card-group",
@@ -84429,6 +84436,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-col",
+            { attrs: { sm: "3" } },
             [
               _c(
                 "b-card-group",
@@ -84576,6 +84584,9 @@ exports.push([module.i, "\n@media (min-width: 1200px) {\n.container{\n        ma
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__);
+//
+//
+//
 //
 //
 //
@@ -85046,8 +85057,8 @@ var render = function() {
                         {
                           name: "validate",
                           rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
+                          value: "required|max:5",
+                          expression: "'required|max:5'"
                         },
                         {
                           name: "model",
@@ -85141,43 +85152,37 @@ var render = function() {
                 _vm.newUser.user_role == "Admin" ||
                 _vm.newUser.user_role == "Doctor"
                   ? [
-                      _c("option", [_vm._v("MBBS")]),
+                      _c("option", [_vm._v("MBBS [COLOMBO]")]),
                       _vm._v(" "),
-                      _c("option", [_vm._v("MD")])
+                      _c("option", [_vm._v("MBBS [PERADENIYA]")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("MBBS [RUHUNA]")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("MBBS [KELANIYA]")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("MBBS [RAJARATA]")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("MD ")])
                     ]
                   : _vm.newUser.user_role == "Receptionist"
                     ? [
-                        _c("option", [_vm._v("Receptionist qualification 1")]),
+                        _c("option", [_vm._v("BSN")]),
                         _vm._v(" "),
-                        _c("option", [_vm._v("Receptionist qualification 2")])
+                        _c("option", [_vm._v("MSN")])
                       ]
-                    : _vm.newUser.user_role == "Nurse"
+                    : _vm.newUser.user_role == "Lab Assistant"
                       ? [
-                          _c("option", [_vm._v("Nurse qualification 1")]),
+                          _c("option", [
+                            _vm._v("Lab Assistant qualification 1")
+                          ]),
                           _vm._v(" "),
-                          _c("option", [_vm._v("Nurse qualification 2")])
+                          _c("option", [
+                            _vm._v("Lab Assistant qualification 2")
+                          ])
                         ]
-                      : _vm.newUser.user_role == "Lab Assistant"
-                        ? [
-                            _c("option", [
-                              _vm._v("Lab Assistant qualification 1")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", [
-                              _vm._v("Lab Assistant qualification 2")
-                            ])
-                          ]
-                        : _vm.newUser.user_role == "Pharmacist"
-                          ? [
-                              _c("option", [
-                                _vm._v("Pharmacist qualification 1")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", [
-                                _vm._v("Pharmacist qualification 2")
-                              ])
-                            ]
-                          : _vm._e()
+                      : _vm.newUser.user_role == "Pharmacist"
+                        ? [_c("option", [_vm._v("Pharm.D.")])]
+                        : _vm._e()
               ],
               2
             ),
@@ -86169,7 +86174,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.card-text {\r\n  font-size: xx-large;\n}\n.card-text-next {\r\n  font-size: 48px;\n}\n.card {\r\n  border-radius: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.card-text {\r\n  font-size: xx-large;\n}\n.card-text-next {\r\n  font-size: 40px;\n}\n.card {\r\n  border-radius: 0px;\n}\r\n", ""]);
 
 // exports
 
@@ -86291,6 +86296,7 @@ var render = function() {
         [
           _c(
             "b-col",
+            { attrs: { sm: "3" } },
             [
               _c(
                 "b-card-group",
@@ -86302,7 +86308,8 @@ var render = function() {
                       staticClass: "text-center",
                       attrs: {
                         "bg-variant": "primary",
-                        "text-variant": "white"
+                        "text-variant": "white",
+                        footer: "PANEL 1"
                       }
                     },
                     [
@@ -86324,6 +86331,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-col",
+            { attrs: { sm: "3" } },
             [
               _c(
                 "b-card-group",
@@ -86335,7 +86343,8 @@ var render = function() {
                       staticClass: "text-center",
                       attrs: {
                         "bg-variant": "primary",
-                        "text-variant": "white"
+                        "text-variant": "white",
+                        footer: "PANEL 2"
                       }
                     },
                     [
@@ -86357,6 +86366,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-col",
+            { attrs: { sm: "3" } },
             [
               _c(
                 "b-card-group",
@@ -86368,7 +86378,8 @@ var render = function() {
                       staticClass: "text-center",
                       attrs: {
                         "bg-variant": "primary",
-                        "text-variant": "white"
+                        "text-variant": "white",
+                        footer: "PANEL 3"
                       }
                     },
                     [
@@ -86390,6 +86401,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-col",
+            { attrs: { sm: "3" } },
             [
               _c(
                 "b-card-group",
@@ -86401,7 +86413,8 @@ var render = function() {
                       staticClass: "text-center",
                       attrs: {
                         "bg-variant": "primary",
-                        "text-variant": "white"
+                        "text-variant": "white",
+                        footer: "PANEL 4"
                       }
                     },
                     [
@@ -87128,12 +87141,6 @@ var render = function() {
             _c("input", {
               directives: [
                 {
-                  name: "validate",
-                  rawName: "v-validate",
-                  value: "required|digits:10",
-                  expression: "'required|digits:10'"
-                },
-                {
                   name: "model",
                   rawName: "v-model",
                   value: _vm.newPatient.guardian_number,
@@ -87142,7 +87149,6 @@ var render = function() {
               ],
               staticClass: "form-control",
               attrs: {
-                autofocus: "",
                 type: "tel",
                 id: "guardian_number",
                 name: "guardian_number",
@@ -87392,7 +87398,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue_es_components__["e" /* Table *
 
       axios.get('/recept/queue/today-list').then(function (response) {
         _this.items = response.data;
-        // console.log(response.data);
       });
     },
 
@@ -87787,7 +87792,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.b-col {\r\n  margin: 5px 5px 5px 0px;\r\n  background: #fafafa;\r\n  border-radius: 10px;\r\n  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\r\n          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\n}\n.b-col-end {\r\n  margin: 5px 0px 5px 0px;\r\n  background: #fafafa;\r\n  border-radius: 10px;\r\n  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\r\n          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\n}\nlabel {\r\n  display: block;\r\n  /* background-color:#0064b7; */\r\n  font-size: 24px;\r\n  color: #13aa4d;\r\n  text-align: center;\r\n  margin-top: 10px;\r\n  /* border-radius: 8px; */\r\n  /* border: 2px solid red; */\n}\n.toggle-start {\r\n  display: table!important;\r\n  margin-left: auto;\r\n  margin-right: auto;\n}\r\n", ""]);
+exports.push([module.i, "\n.b-col {\r\n  margin: 5px 5px 5px 0px;\r\n  background: #fafafa;\r\n  border-radius: 10px;\r\n  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\r\n          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\n}\n.b-col-end {\r\n  margin: 5px 0px 5px 0px;\r\n  background: #fafafa;\r\n  border-radius: 10px;\r\n  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\r\n          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);\n}\nlabel {\r\n  display: block;\r\n  /* background-color:#0064b7; */\r\n  font-size: 20px;\r\n  color: #13aa4d;\r\n  text-align: center;\r\n  margin-top: 10px;\r\n  /* border-radius: 8px; */\r\n  /* border: 2px solid red; */\n}\n.toggle-start {\r\n  display: table!important;\r\n  margin-left: auto;\r\n  margin-right: auto;\n}\r\n", ""]);
 
 // exports
 
@@ -87977,7 +87982,7 @@ var render = function() {
                 { staticClass: "b-col" },
                 [
                   _c("label", { attrs: { for: "queue1" } }, [
-                    _vm._v("08 - 09")
+                    _vm._v("8 AM - 9 AM")
                   ]),
                   _vm._v(" "),
                   _c("toggle-button", {
@@ -88024,7 +88029,7 @@ var render = function() {
                 { staticClass: "b-col" },
                 [
                   _c("label", { attrs: { for: "queue2" } }, [
-                    _vm._v("09 - 10")
+                    _vm._v("9 AM - 10 AM")
                   ]),
                   _vm._v(" "),
                   _c("toggle-button", {
@@ -88071,7 +88076,7 @@ var render = function() {
                 { staticClass: "b-col" },
                 [
                   _c("label", { attrs: { for: "queue3" } }, [
-                    _vm._v("10 - 11")
+                    _vm._v("10 AM - 11 AM")
                   ]),
                   _vm._v(" "),
                   _c("toggle-button", {
@@ -88118,7 +88123,7 @@ var render = function() {
                 { staticClass: "b-col-end" },
                 [
                   _c("label", { attrs: { for: "queue4" } }, [
-                    _vm._v("11 - 12")
+                    _vm._v("11 AM - 12 PM")
                   ]),
                   _vm._v(" "),
                   _c("toggle-button", {
@@ -88962,7 +88967,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.inner-div {\r\n  padding: 10px 10px 10px 10px;\n}\n.col-4 {\r\n  padding-left: 0px;\r\n  padding-right: 0px;\n}\n.col-8 {\r\n  padding-right: 0px;\n}\n.card {\r\n  margin-bottom: 10px;\n}\n.badge {\r\n  /* padding: 0.75em; */\r\n  border-radius: 1rem;\r\n  margin-right: 1em;\n}\n.list-group-item {\r\n  padding: 5px 10px 5px 10px !important;\n}\nselect {\r\n  width: 50%!important;\r\n  margin-right: auto;\n}\ninput {\r\n  width: 20%!important;\r\n  margin-right: auto;\n}\n.custom-control {\r\n  margin-right: auto;\n}\ntextarea {\r\n  width: 100%!important;\r\n  margin: 5px 0px 5px 0px;\n}\n#btn-submit {\r\n  width: 20%;\r\n  margin-right: auto;\n}\n#btn-reset {\r\n  width: 20%;\n}\n.p-id-name {\r\n  background:deepskyblue;\r\n  padding: 10px;\n}\n.text-center {\r\n  margin-bottom: 50px!important;\n}\n#btn-queue-start {\r\n  width: 100%;\r\n  background: steelblue;\r\n  border-color: steelblue;\n}\r\n", ""]);
+exports.push([module.i, "\n.inner-div {\r\n  padding: 10px 10px 10px 10px;\n}\n.col-4 {\r\n  padding-left: 0px;\r\n  padding-right: 0px;\n}\n.col-8 {\r\n  padding-right: 0px;\n}\n.card {\r\n  margin-bottom: 10px;\n}\n.badge {\r\n  /* padding: 0.75em; */\r\n  border-radius: 1rem;\r\n  margin-right: 1em;\n}\n.list-group-item {\r\n  padding: 5px 10px 5px 10px !important;\n}\nselect {\r\n  width: 50%!important;\r\n  margin-right: auto;\n}\ninput {\r\n  width: 20%!important;\r\n  margin-right: auto;\n}\n.custom-control {\r\n  margin-right: auto;\n}\ntextarea {\r\n  width: 100%!important;\r\n  margin: 5px 0px 5px 0px;\n}\n#btn-submit {\r\n  width: 20%;\r\n  margin-right: auto;\n}\n#btn-reset {\r\n  width: 20%;\n}\n.p-id-name {\r\n  background:white;\r\n  padding: 10px;\n}\n.text-center {\r\n  margin-bottom: 50px!important;\n}\n#btn-queue-start {\r\n  width: 100%;\r\n  background: steelblue;\r\n  border-color: steelblue;\n}\n.switch {\r\n  text-align: center;\n}\r\n", ""]);
 
 // exports
 
@@ -88978,6 +88983,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_sweetalert__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -89115,7 +89133,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_js_toggle_button___default.a);
       drugList: [{ text: 'Select One', value: null }],
       form: {
         drug: "",
-        quantity: 0,
+        quantity: '',
         isLiquid: false
       },
       prescriptionText: '',
@@ -89316,6 +89334,7 @@ var render = function() {
     [
       _c(
         "div",
+        { staticClass: "switch" },
         [
           _c("toggle-button", {
             staticClass: "toggle-start",
@@ -89324,8 +89343,9 @@ var render = function() {
               disabled: _vm.disable[0],
               color: "#82C7EB",
               sync: true,
-              labels: { checked: "ACTIVE", unchecked: "PANEL 1" },
-              width: 80
+              labels: { checked: "Started", unchecked: "PANEL 1" },
+              width: 150,
+              height: 30
             },
             on: {
               change: function($event) {
@@ -89348,8 +89368,9 @@ var render = function() {
               disabled: _vm.disable[1],
               color: "#82C7EB",
               sync: true,
-              labels: { checked: "Started", unchecked: "Stopped" },
-              width: 80
+              labels: { checked: "Started", unchecked: "PANEL 2" },
+              width: 150,
+              height: 30
             },
             on: {
               change: function($event) {
@@ -89372,8 +89393,9 @@ var render = function() {
               disabled: _vm.disable[2],
               color: "#82C7EB",
               sync: true,
-              labels: { checked: "Started", unchecked: "Stopped" },
-              width: 80
+              labels: { checked: "Started", unchecked: "PANEL 3" },
+              width: 150,
+              height: 30
             },
             on: {
               change: function($event) {
@@ -89396,8 +89418,9 @@ var render = function() {
               disabled: _vm.disable[3],
               color: "#82C7EB",
               sync: true,
-              labels: { checked: "Started", unchecked: "Stopped" },
-              width: 80
+              labels: { checked: "Started", unchecked: "PANEL 4" },
+              width: 150,
+              height: 30
             },
             on: {
               change: function($event) {
@@ -89415,6 +89438,8 @@ var render = function() {
         ],
         1
       ),
+      _vm._v(" "),
+      _c("hr"),
       _vm._v(" "),
       this.selectedPatient != ""
         ? _c(
@@ -89474,7 +89499,11 @@ var render = function() {
                             _c(
                               "b-button",
                               {
-                                attrs: { id: "btn-queue-start", size: "sm" },
+                                attrs: {
+                                  variant: "info",
+                                  id: "btn-queue-start",
+                                  size: "sm"
+                                },
                                 on: {
                                   click: function($event) {
                                     _vm.expand()
@@ -89535,7 +89564,7 @@ var render = function() {
                     "b-row",
                     [
                       _c("b-col", [
-                        _c("h5", [_c("b", [_vm._v("Form")])]),
+                        _c("h5", [_c("b", [_vm._v("Prescription")])]),
                         _vm._v(" "),
                         _c("hr"),
                         _vm._v(" "),
@@ -89543,6 +89572,8 @@ var render = function() {
                           "div",
                           { staticClass: "inner-div" },
                           [
+                            _c("label", [_vm._v("Drug selection")]),
+                            _vm._v(" "),
                             _c(
                               "b-form",
                               {
@@ -89573,7 +89604,7 @@ var render = function() {
                                 _c("b-input", {
                                   attrs: {
                                     type: "number",
-                                    placeholder: "Quantity"
+                                    placeholder: "Dose"
                                   },
                                   model: {
                                     value: _vm.form.quantity,
@@ -89684,14 +89715,13 @@ var render = function() {
                     [
                       _c("b-col", [
                         this.patientHistory != ""
-                          ? _c(
-                              "div",
-                              { staticClass: "inner-div" },
-                              [
-                                _c("h5", [
-                                  _c("b", [_vm._v("Patient Medical History")])
-                                ]),
-                                _vm._v(" "),
+                          ? _c("div", { staticClass: "inner-div" }, [
+                              _c("h5", [
+                                _c("b", [_vm._v("Patient Medical History")])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
                                 _vm._l(_vm.patientHistory, function(oneDay) {
                                   return _c(
                                     "div",
@@ -89724,10 +89754,9 @@ var render = function() {
                                     1
                                   )
                                 })
-                              ],
-                              2
-                            )
-                          : _vm._e()
+                              )
+                            ])
+                          : _c("div")
                       ])
                     ],
                     1
@@ -89738,7 +89767,7 @@ var render = function() {
             ],
             1
           )
-        : _c("b-row", [_vm._v("THERE ARE NO ACTIVE QUEUE")])
+        : _c("b-row", [_c("h5", [_c("strong")])])
     ],
     1
   )
@@ -92774,6 +92803,1565 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 298 */,
+/* 299 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(300)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(302)
+/* template */
+var __vue_template__ = __webpack_require__(303)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Receptionist/Appointment.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-38689694", Component.options)
+  } else {
+    hotAPI.reload("data-v-38689694", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 300 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(301);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(10)("00775434", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38689694\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Appointment.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38689694\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Appointment.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 301 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n@media (min-width: 1200px) {\n.container{\r\n        max-width: 750px;\n}\n}\n.mx-datepicker {\r\n    width: 100%;\n}\n.mx-datepicker-popup {\r\n    z-index: 2000; /*bring datepicker to the front*/\n}\n.mx-input {\r\n    -webkit-box-shadow:none;\r\n    box-shadow: none;\r\n    height: 38px;\n}\n.table td, .table th {\r\n    vertical-align: inherit;\n}\n.date-picker {\r\n    width: 100%;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 302 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { DatePicker: __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default.a },
+
+    data: function data() {
+        return {
+            newAppointment: { 'date': '', 'timeslot': '8-9', 'patient_id': '' },
+            appointments: { 'patient_id': '', 'name': '', 'date': '', 'timeslot': '' },
+            count: { '_0809': '', '_0910': '', '_1011': '', '_1112': '' },
+            status: { '_0809': '', '0910': '', '1011': '', '1112': '' },
+
+            // setup calander
+            lang: {
+                days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+                placeholder: {
+                    date: 'Select Date'
+                }
+            },
+
+            hasError: false
+        };
+    },
+
+
+    // mounted: function mounted() {
+    //     this.getCountStatus();
+    // },
+
+    methods: {
+
+        //adding appointments
+        makeAppointment: function makeAppointment() {
+            var _this = this;
+
+            if (this.newAppointment.date) {
+
+                if (this.getStatusForTimeslot(this.newAppointment.timeslot) == 'Not Full') {
+
+                    this.newAppointment.date = this.formatDate(this.newAppointment.date);
+                    var input = this.newAppointment;
+
+                    axios.post('/recept/appointments/add', input).then(function (response) {
+
+                        switch (response.data.timeslot) {
+                            case '08-09':
+                                _this.count._0809 += 1;
+                                _this.status._0809 = _this.getStatus(_this.count._0809);
+                                break;
+                            case '09-10':
+                                _this.count._0910 += 1;
+                                _this.status._0910 = _this.getStatus(_this.count._0910);
+                                break;
+                            case '10-11':
+                                _this.count._1011 += 1;
+                                _this.status._1011 = _this.getStatus(_this.count._1011);
+                                break;
+                            case '11-12':
+                                _this.count._1112 += 1;
+                                _this.status._1112 = _this.getStatus(_this.count._1112);
+                                break;
+                        }
+                        _this.getAppointments(response.data.timeslot);
+                        _this.newAppointment = { 'date': _this.newAppointment.date, 'timeslot': '8-9', 'patient_id': '' };
+                        // alert("Appointment added successfully");
+                        __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Done", "Appointment added successfully ", "success");
+                    }).catch(function (err) {
+                        _this.hasError = true;
+                        if (_this.checkPatientID() == 0) {
+                            console.log("Invalid Patient ID");
+                        } else if (_this.checkAppointment() == 0) {
+                            console.log("You already added the appointment");
+                        }
+                    });
+                } else {
+                    //console.log(this.getStatusForTimeslot(this.newAppointment.timeslot));
+                    // alert("TImeslot is full. Select another timeslot or date");\
+                    __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Error !", "Timeslot is full. Select another timeslot or date ", "error");
+                }
+            } else {
+                // alert("Please select a date");
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Warning !", "Please select a date ", "warning");
+            }
+        },
+
+
+        //get the no of appointments & state whether the timeslot full or not for relavant date & timeslots
+        getCountStatus: function getCountStatus() {
+            var _this2 = this;
+
+            var date = this.formatDate(this.newAppointment.date);
+
+            axios.get('/recept/appointments/count/' + date).then(function (response) {
+                _this2.count = response.data;
+                console.log(_this2.count);
+                _this2.status._0809 = _this2.getStatus(_this2.count._0809);
+                _this2.status._0910 = _this2.getStatus(_this2.count._0910);
+                _this2.status._1011 = _this2.getStatus(_this2.count._1011);
+                _this2.status._1112 = _this2.getStatus(_this2.count._1112);
+            });
+        },
+
+
+        //convert the date from Thu Nov 28 2018 00:00:00 GMT+0530 (India Standard Time) format to 2018-11-28 format
+        formatDate: function formatDate(str) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("-");
+        },
+
+
+        //check the count/no of appointsments for timeslots full or not 
+        getStatus: function getStatus(count) {
+            if (count >= 20) {
+                status = "Full";
+            } else {
+                status = "Not Full";
+            }
+            return status;
+        },
+
+
+        //get the status for given timeslot
+        getStatusForTimeslot: function getStatusForTimeslot($timeslot) {
+            switch ($timeslot) {
+                case '08-09':
+                    return this.status._0809;
+                case '09-10':
+                    return this.status._0910;
+                case '10-11':
+                    return this.status._1011;
+                case '11-12':
+                    return this.status._1112;
+            }
+        },
+
+
+        //check validity of the patient id 
+        checkPatientID: function checkPatientID() {
+            // console.log(this.newAppointment.patient_id);
+            if (this.newAppointment.patient_id) {
+                axios.get('/recept/appointments/checkid', { params: { patient_id: this.newAppointment.patient_id } }).then(function (response) {
+                    //console.log(response.data);
+                    if (response.data == 0) {
+                        // alert("Invalid Patient ID");
+                        __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Error !", "Invalid Patient ID !", "error");
+                    }
+                    return response.data;
+                });
+            }
+        },
+
+
+        //check there is a appointment for given patient id & date already
+        checkAppointment: function checkAppointment() {
+            // console.log(this.newAppointment.patient_id);
+            var date = this.formatDate(this.newAppointment.date);
+            axios.get('/recept/appointments/checkappointment', { params: { date: date, patient_id: this.newAppointment.patient_id } }).then(function (response) {
+                //console.log(response.data);
+                if (response.data == 0) {
+                    // alert("You already added the appointment");
+                    __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("You already added the appointment !", " ", "info");
+                }
+                return response.data;
+            });
+        },
+
+        //get appointments for relavant date 
+        getAppointmentforDate: function getAppointmentforDate() {
+            var _this3 = this;
+
+            if (this.newAppointment.date) {
+                var date = this.formatDate(this.newAppointment.date);
+                console.log(date);
+
+                axios.get('/recept/appointments/showfordate', { params: { date: date } }).then(function (response) {
+                    _this3.appointments = response.data;
+                    console.log(response.data);
+                });
+            } else {
+                // alert("Please select a date");
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Please select a date ", " ", "info");
+            }
+        },
+
+
+        //get appointments for relavant date & timeslot
+        getAppointments: function getAppointments($timeslot) {
+            var _this4 = this;
+
+            if (this.newAppointment.date) {
+                var date = this.formatDate(this.newAppointment.date);
+                console.log(date);
+                console.log($timeslot);
+                axios.get('/recept/appointments/show', { params: { date: date, timeslot: $timeslot } }).then(function (response) {
+                    _this4.appointments = response.data;
+                    console.log(response.data);
+                });
+            } else {
+                // alert("Please select a date");
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Please select a date ", " ", "info");
+            }
+        },
+
+
+        //cancel appointments
+        cancelAppointment: function cancelAppointment(appointment) {
+            var _this5 = this;
+
+            var date = this.formatDate(this.newAppointment.date);
+            console.log(date);
+            console.log(appointment.patient_id);
+            axios.post('/recept/appointments/cancel', { date: date, patient_id: appointment.patient_id }).then(function (response) {
+                _this5.getAppointments(appointment.timeslot);
+                switch (appointment.timeslot) {
+                    case '08-09':
+                        _this5.count._0809 -= 1;
+                        _this5.status._0809 = _this5.getStatus(_this5.count._0809);
+                        break;
+                    case '09-10':
+                        _this5.count._0910 -= 1;
+                        _this5.status._0910 = _this5.getStatus(_this5.count._0910);
+                        break;
+                    case '10-11':
+                        _this5.count._1011 -= 1;
+                        _this5.status._1011 = _this5.getStatus(_this5.count._1011);
+                        break;
+                    case '11-12':
+                        _this5.count._1112 -= 1;
+                        _this5.status._1112 = _this5.getStatus(_this5.count._1112);
+                        break;
+                }
+                // alert("Appointment canceled")
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Done", "Appointment canceled ", "success");
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "inner-div" }, [
+    _c("form", { staticClass: "form-inline" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "date" } }, [_vm._v("Date ")]),
+              _vm._v(" "),
+              _c("date-picker", {
+                staticClass: "date-picker",
+                attrs: {
+                  lang: _vm.lang,
+                  name: "date",
+                  id: "date",
+                  required: true
+                },
+                on: {
+                  change: function($event) {
+                    _vm.getCountStatus()
+                    _vm.getAppointmentforDate()
+                  }
+                },
+                model: {
+                  value: _vm.newAppointment.date,
+                  callback: function($$v) {
+                    _vm.$set(_vm.newAppointment, "date", $$v)
+                  },
+                  expression: "newAppointment.date"
+                }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col" })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-sm table-bordered" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("tbody", [
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("08-09")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("8-9")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._0809))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._0809))])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("09-10")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("9-10")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._0910))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._0910))])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("10-11")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("10-11")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._1011))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._1011))])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("11-12")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("11-12")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._1112))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._1112))])
+              ]
+            )
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.makeAppointment()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "nic" } }, [_vm._v("Patient id")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newAppointment.patient_id,
+                    expression: "newAppointment.patient_id"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "patient_id",
+                  name: "patient_id",
+                  placeholder: "Enter patient id",
+                  required: ""
+                },
+                domProps: { value: _vm.newAppointment.patient_id },
+                on: {
+                  blur: function($event) {
+                    _vm.checkPatientID()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.newAppointment,
+                      "patient_id",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "timeslot" } }, [_vm._v("Time")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newAppointment.timeslot,
+                      expression: "newAppointment.timeslot"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "timeslot", name: "timeslot", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.newAppointment,
+                        "timeslot",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", [_vm._v("08-09")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("09-10")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("10-11")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("11-12")])
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Add Appointment")]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Appointments")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-sm table-bordered" },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.appointments, function(appointment) {
+              return _c("tr", [
+                _c("td", [_vm._v(_vm._s(appointment.patient_id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(appointment.name))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.cancelAppointment(appointment)
+                        }
+                      }
+                    },
+                    [_vm._v("cancel")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No of appointments")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Patient Id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-38689694", module.exports)
+  }
+}
+
+/***/ }),
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(305)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(307)
+/* template */
+var __vue_template__ = __webpack_require__(308)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Doctor/Appointment.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4c8e44ba", Component.options)
+  } else {
+    hotAPI.reload("data-v-4c8e44ba", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(306);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(10)("34d7bc18", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4c8e44ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Appointment.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4c8e44ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Appointment.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n@media (min-width: 1200px) {\n.container{\r\n        max-width: 750px;\n}\n}\n.mx-datepicker {\r\n    width: 100%;\n}\n.mx-datepicker-popup {\r\n    z-index: 2000; /*bring datepicker to the front*/\n}\n.mx-input {\r\n    -webkit-box-shadow:none;\r\n    box-shadow: none;\r\n    height: 38px;\n}\n.table td, .table th {\r\n    vertical-align: inherit;\n}\n.date-picker {\r\n    width: 100%;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 307 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { DatePicker: __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default.a },
+
+    data: function data() {
+        return {
+            newAppointment: { 'date': '', 'timeslot': '8-9', 'patient_id': '' },
+            appointments: { 'patient_id': '', 'name': '', 'date': '', 'timeslot': '' },
+            count: { '_0809': '', '_0910': '', '_1011': '', '_1112': '' },
+            status: { '_0809': '', '0910': '', '1011': '', '1112': '' },
+
+            // setup calander
+            lang: {
+                days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+                placeholder: {
+                    date: 'Select Date'
+                }
+            },
+
+            hasError: false
+        };
+    },
+
+
+    // mounted: function mounted() {
+    //     this.getCountStatus();
+    // },
+
+    methods: {
+
+        //adding appointments
+        makeAppointment: function makeAppointment() {
+            var _this = this;
+
+            if (this.newAppointment.date) {
+
+                if (this.getStatusForTimeslot(this.newAppointment.timeslot) == 'Not Full') {
+
+                    this.newAppointment.date = this.formatDate(this.newAppointment.date);
+                    var input = this.newAppointment;
+
+                    axios.post('/doctor/appointments/add', input).then(function (response) {
+
+                        switch (response.data.timeslot) {
+                            case '08-09':
+                                _this.count._0809 += 1;
+                                _this.status._0809 = _this.getStatus(_this.count._0809);
+                                break;
+                            case '09-10':
+                                _this.count._0910 += 1;
+                                _this.status._0910 = _this.getStatus(_this.count._0910);
+                                break;
+                            case '10-11':
+                                _this.count._1011 += 1;
+                                _this.status._1011 = _this.getStatus(_this.count._1011);
+                                break;
+                            case '11-12':
+                                _this.count._1112 += 1;
+                                _this.status._1112 = _this.getStatus(_this.count._1112);
+                                break;
+                        }
+                        _this.getAppointments(response.data.timeslot);
+                        _this.newAppointment = { 'date': _this.newAppointment.date, 'timeslot': '8-9', 'patient_id': '' };
+                        // alert("Appointment added successfully");
+                        __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Done", "Appointment added successfully ", "success");
+                    }).catch(function (err) {
+                        _this.hasError = true;
+                        if (_this.checkPatientID() == 0) {
+                            console.log("Invalid Patient ID");
+                        } else if (_this.checkAppointment() == 0) {
+                            console.log("You already added the appointment");
+                        }
+                    });
+                } else {
+                    //console.log(this.getStatusForTimeslot(this.newAppointment.timeslot));
+                    // alert("TImeslot is full. Select another timeslot or date");
+                    __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Error !", "Timeslot is full. Select another timeslot or date ", "error");
+                }
+            } else {
+                // alert("Please select a date");
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Warning !", "Please select a date ", "warning");
+            }
+        },
+
+
+        //get the no of appointments & state whether the timeslot full or not for relavant date & timeslots
+        getCountStatus: function getCountStatus() {
+            var _this2 = this;
+
+            var date = this.formatDate(this.newAppointment.date);
+
+            axios.get('/doctor/appointments/count/' + date).then(function (response) {
+                _this2.count = response.data;
+                console.log(_this2.count);
+                _this2.status._0809 = _this2.getStatus(_this2.count._0809);
+                _this2.status._0910 = _this2.getStatus(_this2.count._0910);
+                _this2.status._1011 = _this2.getStatus(_this2.count._1011);
+                _this2.status._1112 = _this2.getStatus(_this2.count._1112);
+            });
+        },
+
+
+        //convert the date from Thu Nov 28 2018 00:00:00 GMT+0530 (India Standard Time) format to 2018-11-28 format
+        formatDate: function formatDate(str) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("-");
+        },
+
+
+        //check the count/no of appointsments for timeslots full or not 
+        getStatus: function getStatus(count) {
+            if (count >= 20) {
+                status = "Full";
+            } else {
+                status = "Not Full";
+            }
+            return status;
+        },
+
+
+        //get the status for given timeslot
+        getStatusForTimeslot: function getStatusForTimeslot($timeslot) {
+            switch ($timeslot) {
+                case '08-09':
+                    return this.status._0809;
+                case '09-10':
+                    return this.status._0910;
+                case '10-11':
+                    return this.status._1011;
+                case '11-12':
+                    return this.status._1112;
+            }
+        },
+
+
+        //check validity of the patient id 
+        checkPatientID: function checkPatientID() {
+            // console.log(this.newAppointment.patient_id);
+            if (this.newAppointment.patient_id) {
+                axios.get('/doctor/appointments/checkid', { params: { patient_id: this.newAppointment.patient_id } }).then(function (response) {
+                    //console.log(response.data);
+                    if (response.data == 0) {
+                        // alert("Invalid Patient ID");
+                        __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Error !", "Invalid Patient ID !", "error");
+                    }
+                    return response.data;
+                });
+            }
+        },
+
+
+        //check there is a appointment for given patient id & date already
+        checkAppointment: function checkAppointment() {
+            // console.log(this.newAppointment.patient_id);
+            var date = this.formatDate(this.newAppointment.date);
+            axios.get('/doctor/appointments/checkappointment', { params: { date: date, patient_id: this.newAppointment.patient_id } }).then(function (response) {
+                //console.log(response.data);
+                if (response.data == 0) {
+                    // alert("You already added the appointment");
+                    __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("You already added the appointment !", " ", "info");
+                }
+                return response.data;
+            });
+        },
+
+        //get appointments for relavant date 
+        getAppointmentforDate: function getAppointmentforDate() {
+            var _this3 = this;
+
+            if (this.newAppointment.date) {
+                var date = this.formatDate(this.newAppointment.date);
+                console.log(date);
+
+                axios.get('/doctor/appointments/showfordate', { params: { date: date } }).then(function (response) {
+                    _this3.appointments = response.data;
+                    console.log(response.data);
+                });
+            } else {
+                // alert("Please select a date");
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Please select a date ", " ", "info");
+            }
+        },
+
+
+        //get appointments for relavant date & timeslot
+        getAppointments: function getAppointments($timeslot) {
+            var _this4 = this;
+
+            if (this.newAppointment.date) {
+                var date = this.formatDate(this.newAppointment.date);
+                console.log(date);
+                console.log($timeslot);
+                axios.get('/doctor/appointments/show', { params: { date: date, timeslot: $timeslot } }).then(function (response) {
+                    _this4.appointments = response.data;
+                    console.log(response.data);
+                });
+            } else {
+                // alert("Please select a date");
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Please select a date ", " ", "info");
+            }
+        },
+
+
+        //cancel appointments
+        cancelAppointment: function cancelAppointment(appointment) {
+            var _this5 = this;
+
+            var date = this.formatDate(this.newAppointment.date);
+            console.log(date);
+            console.log(appointment.patient_id);
+            axios.post('/doctor/appointments/cancel', { date: date, patient_id: appointment.patient_id }).then(function (response) {
+                _this5.getAppointments(appointment.timeslot);
+                switch (appointment.timeslot) {
+                    case '08-09':
+                        _this5.count._0809 -= 1;
+                        _this5.status._0809 = _this5.getStatus(_this5.count._0809);
+                        break;
+                    case '09-10':
+                        _this5.count._0910 -= 1;
+                        _this5.status._0910 = _this5.getStatus(_this5.count._0910);
+                        break;
+                    case '10-11':
+                        _this5.count._1011 -= 1;
+                        _this5.status._1011 = _this5.getStatus(_this5.count._1011);
+                        break;
+                    case '11-12':
+                        _this5.count._1112 -= 1;
+                        _this5.status._1112 = _this5.getStatus(_this5.count._1112);
+                        break;
+                }
+                // alert("Appointment canceled")
+                __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()("Done", "Appointment canceled ", "success");
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "inner-div" }, [
+    _c("form", { staticClass: "form-inline" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "date" } }, [_vm._v("Date ")]),
+              _vm._v(" "),
+              _c("date-picker", {
+                staticClass: "date-picker",
+                attrs: {
+                  lang: _vm.lang,
+                  name: "date",
+                  id: "date",
+                  required: true
+                },
+                on: {
+                  change: function($event) {
+                    _vm.getCountStatus()
+                    _vm.getAppointmentforDate()
+                  }
+                },
+                model: {
+                  value: _vm.newAppointment.date,
+                  callback: function($$v) {
+                    _vm.$set(_vm.newAppointment, "date", $$v)
+                  },
+                  expression: "newAppointment.date"
+                }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col" })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-sm table-bordered" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("tbody", [
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("08-09")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("8-9")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._0809))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._0809))])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("09-10")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("9-10")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._0910))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._0910))])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("10-11")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("10-11")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._1011))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._1011))])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "tr",
+              {
+                staticClass: "clickable-row",
+                on: {
+                  click: function($event) {
+                    _vm.getAppointments("11-12")
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v("11-12")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.count._1112))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.status._1112))])
+              ]
+            )
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.makeAppointment()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "nic" } }, [_vm._v("Patient id")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newAppointment.patient_id,
+                    expression: "newAppointment.patient_id"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "patient_id",
+                  name: "patient_id",
+                  placeholder: "Enter patient id",
+                  required: ""
+                },
+                domProps: { value: _vm.newAppointment.patient_id },
+                on: {
+                  blur: function($event) {
+                    _vm.checkPatientID()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.newAppointment,
+                      "patient_id",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "timeslot" } }, [_vm._v("Time")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newAppointment.timeslot,
+                      expression: "newAppointment.timeslot"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "timeslot", name: "timeslot", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.newAppointment,
+                        "timeslot",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", [_vm._v("08-09")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("09-10")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("10-11")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("11-12")])
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Add Appointment")]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Appointments")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        { staticClass: "table table-hover table-sm table-bordered" },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.appointments, function(appointment) {
+              return _c("tr", [
+                _c("td", [_vm._v(_vm._s(appointment.patient_id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(appointment.name))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.cancelAppointment(appointment)
+                        }
+                      }
+                    },
+                    [_vm._v("cancel")]
+                  )
+                ])
+              ])
+            })
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("No of appointments")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Patient Id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4c8e44ba", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

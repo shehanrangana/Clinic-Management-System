@@ -11,7 +11,7 @@
 */
 Auth::routes();
 Route::get('/', function() { 
-    return view('welcome2');  // this is default welcome page
+    return view('/auth/login');  // this is default welcome page
 });
 Route::get('/home', 'HomeController@index')->name('home');
 // Admin routes
@@ -81,6 +81,15 @@ Route::group(['middleware' => 'App\Http\Middleware\ReceptionistMiddleware'], fun
             return view('./recept/appointments');
         });
 
+        Route::post('/appointments/add', 'AppointmentController@add');
+        Route::get('/appointments/count/{date}', 'AppointmentController@getCountStatus');
+        Route::get('/appointments/show', 'AppointmentController@show');
+        Route::get('/appointments/showfordate', 'AppointmentController@showForDate');
+        Route::post('/appointments/cancel', 'AppointmentController@destroy');
+        Route::post('/appointments/add', 'AppointmentController@add');
+        Route::get('/appointments/checkid', 'AppointmentController@checkID');
+        Route::get('/appointments/checkappointment', 'AppointmentController@checkAppointment');
+
         Route::get('/profile/{id}', 'UserController@loadProfile');
         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
         Route::get('/logout', 'Auth\LoginController@logout');
@@ -115,20 +124,35 @@ Route::group(['middleware' => 'App\Http\Middleware\DoctorMiddleware'], function(
         Route::get('/labreports', function () {
             return view('./doctor/reportview');
         });
+
+        Route::get('/appointments', function () {
+            return view('./doctor/appointments');
+        });
+
+        Route::post('/appointments/add', 'AppointmentController@add');
+        Route::get('/appointments/count/{date}', 'AppointmentController@getCountStatus');
+        Route::get('/appointments/show', 'AppointmentController@show');
+        Route::get('/appointments/showfordate', 'AppointmentController@showForDate');
+        Route::post('/appointments/cancel', 'AppointmentController@destroy');
+        Route::post('/appointments/add', 'AppointmentController@add');
+        Route::get('/appointments/checkid', 'AppointmentController@checkID');
+        Route::get('/appointments/checkappointment', 'AppointmentController@checkAppointment');
+
         Route::get('/get_reports', 'LabReportController@index');
         Route::get('/report/getReport', 'LabReportController@getReport');
     });
 });
-// Nurse routes
-Route::group(['middleware' => 'App\Http\Middleware\NurseMiddleware'], function() {
-    Route::prefix('nurse')->group(function(){
-        Route::get('/', 'UserController@nurse');
 
-        Route::get('/profile/{id}', 'UserController@loadProfile');
-        Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
-        Route::get('/logout', 'Auth\LoginController@logout');
-    });
-});
+// Nurse routes
+// Route::group(['middleware' => 'App\Http\Middleware\NurseMiddleware'], function() {
+//     Route::prefix('nurse')->group(function(){
+//         Route::get('/', 'UserController@nurse');
+
+//         Route::get('/profile/{id}', 'UserController@loadProfile');
+//         Route::post('/profile/{id}/update', 'UserController@updateProfile'); // update profile
+//         Route::get('/logout', 'Auth\LoginController@logout');
+//     });
+// });
 
 // Lab assistant routes
 

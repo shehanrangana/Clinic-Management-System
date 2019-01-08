@@ -1,12 +1,13 @@
 <template>
   <div>
     <!-- Panel selection -->
-    <div>
-      <toggle-button class="toggle-start" v-model="value[0]"  name="queue2" v-bind:disabled="disable[0]" @change='activePanel(0)' color="#82C7EB" :sync="true" :labels="{checked: 'ACTIVE', unchecked: 'PANEL 1'}" :width="80"/>
-      <toggle-button class="toggle-start" v-model="value[1]"  name="queue2" v-bind:disabled="disable[1]" @change='activePanel(1)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
-      <toggle-button class="toggle-start" v-model="value[2]"  name="queue2" v-bind:disabled="disable[2]" @change='activePanel(2)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
-      <toggle-button class="toggle-start" v-model="value[3]"  name="queue2" v-bind:disabled="disable[3]" @change='activePanel(3)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'Stopped'}" :width="80"/>
+    <div class="switch">
+      <toggle-button class="toggle-start" v-model="value[0]"  name="queue2" v-bind:disabled="disable[0]" @change='activePanel(0)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'PANEL 1'}" :width="150" :height="30"/>
+      <toggle-button class="toggle-start" v-model="value[1]"  name="queue2" v-bind:disabled="disable[1]" @change='activePanel(1)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'PANEL 2'}" :width="150" :height="30"/>
+      <toggle-button class="toggle-start" v-model="value[2]"  name="queue2" v-bind:disabled="disable[2]" @change='activePanel(2)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'PANEL 3'}" :width="150" :height="30"/>
+      <toggle-button class="toggle-start" v-model="value[3]"  name="queue2" v-bind:disabled="disable[3]" @change='activePanel(3)' color="#82C7EB" :sync="true" :labels="{checked: 'Started', unchecked: 'PANEL 4'}" :width="150" :height="30"/>
     </div>
+    <hr>
     <!-- Patient details -->
     <div v-if="this.selectedPatient != ''">
       <h5><b>Current Patient</b></h5><hr>
@@ -29,7 +30,7 @@
         <div>
           <b-row>
             <b-col>
-              <b-button id="btn-queue-start" @click="expand()" size="sm">Call</b-button>  <!-- queue calling button -->
+              <b-button variant="info" id="btn-queue-start" @click="expand()" size="sm">Call</b-button>  <!-- queue calling button -->
             </b-col>
             <!-- <b-col>
               <b-button id="btn-queue-start" @click="skip(patientList[currentPatient])" size="sm">Skip</b-button>  
@@ -56,13 +57,14 @@
       <b-col cols="9">
         <b-row>
           <b-col>
-            <h5><b>Form</b></h5>
+            <h5><b>Prescription</b></h5>
             <hr>
             <div class="inner-div">
               <!-- Prescription entering form -->
+              <label>Drug selection</label>
               <b-form inline @submit.prevent="onSubmit()" @reset.prevent="onReset()">
                 <b-form-select :options="drugList" v-model="form.drug"></b-form-select>
-                <b-input type="number" placeholder="Quantity" v-model="form.quantity"/>
+                <b-input type="number" placeholder="Dose" v-model="form.quantity"/>
                 <b-form-checkbox v-model="form.isLiquid">Liquid</b-form-checkbox>
                 <b-button variant="info" size="sm" @click="addDrug()">Add</b-button>
                 <b-form-textarea disabled
@@ -87,21 +89,32 @@
           <b-col>
             <div class="inner-div" v-if="this.patientHistory != ''">
               <h5><b>Patient Medical History</b></h5>
-              <div v-for="oneDay in patientHistory" :key="oneDay.index">
-                <b-card :sub-title="oneDay[0].date">
-                  <p v-for="item in oneDay" :key="item.index">
-                    <b>{{item.drug_name}} : {{item.quantity}}</b>
-                    <br>
-                    <i>{{item.comments}}</i>
-                  </p>
-                </b-card>
+              <div>
+                <div v-for="oneDay in patientHistory" :key="oneDay.index">
+                  <b-card :sub-title="oneDay[0].date">
+                    <p v-for="item in oneDay" :key="item.index">
+                      <b>{{item.drug_name}} : {{item.quantity}}</b>
+                      <br>
+                      <i>{{item.comments}}</i>
+                    </p>
+                  </b-card>
+                </div>
               </div>
+            </div>
+            <div v-else>
+              <!-- <b-card :sub-title="">
+                    <p v-for="item in oneDay" :key="item.index">
+                      <b>{{item.drug_name}} : {{item.quantity}}</b>
+                      <br>
+                      <i>{{item.comments}}</i>
+                    </p>
+                </b-card> -->
             </div>
           </b-col>
         </b-row>
       </b-col>
     </b-row>
-    <b-row v-else>THERE ARE NO ACTIVE QUEUE</b-row>
+    <b-row v-else><h5><strong></strong></h5></b-row>
   </div>
 </template>
 
@@ -135,7 +148,7 @@ export default {
       drugList: [{ text: 'Select One', value: null },],
       form: {
         drug: "",
-        quantity: 0,
+        quantity: '',
         isLiquid: false,
       },
       prescriptionText: '',
@@ -342,7 +355,7 @@ textarea {
   width: 20%;
 }
 .p-id-name {
-  background:deepskyblue;
+  background:white;
   padding: 10px;
 }
 .text-center {
@@ -352,5 +365,8 @@ textarea {
   width: 100%;
   background: steelblue;
   border-color: steelblue;
+}
+.switch {
+  text-align: center;
 }
 </style>

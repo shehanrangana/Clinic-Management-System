@@ -110,7 +110,6 @@ export default {
     fetch() {
       axios.get('/recept/queue/today-list').then((response) => {
         this.items = response.data;
-        // console.log(response.data);
       })
     },
     // Filter appointment table

@@ -4,8 +4,6 @@
 
 @section('content')
     <div>
-        
         <make-appointment></make-appointment>
-        
     </div>
 @endsection

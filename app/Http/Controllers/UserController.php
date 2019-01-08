@@ -42,7 +42,7 @@ class UserController extends Controller
 
     public function lab_assistant()
     {
-        return view('./lab/dashboard');
+        return view('./lab/reportupload');
     }
 
     public function pharmacist()

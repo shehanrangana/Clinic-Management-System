@@ -63,7 +63,7 @@
                     <div class="col" v-if="newUser.user_role=='Admin' || newUser.user_role=='Doctor'">
                         <div class="form-group">
                             <label for="slmc_number">SLMC Registration number</label>
-                            <input v-validate="'required'" autofocus type="text" class="form-control" id="slmc_number" name="slmc_number" placeholder="Enter SLMC reg. no" v-model="newUser.slmc_number" required>
+                            <input v-validate="'required|max:5'" autofocus type="text" class="form-control" id="slmc_number" name="slmc_number" placeholder="Enter SLMC reg. no" v-model="newUser.slmc_number" required>
                             <div class="error-feedback">
                               <span>{{ errors.first('slmc_number') }}</span>
                             </div>
@@ -74,24 +74,27 @@
                     <label for="qualification">Qualification</label>
                     <select v-validate="'required'" autofocus class="form-control" id="qualification" name="qualification" v-model="newUser.qualification" required>
                         <template v-if="newUser.user_role=='Admin' || newUser.user_role=='Doctor'">
-                            <option>MBBS</option>
-                            <option>MD</option>
+                            <option>MBBS [COLOMBO]</option>
+                            <option>MBBS [PERADENIYA]</option>
+                            <option>MBBS [RUHUNA]</option>
+                            <option>MBBS [KELANIYA]</option>
+                            <option>MBBS [RAJARATA]</option>
+                            <option>MD </option>
                         </template>
                         <template v-else-if="newUser.user_role=='Receptionist'">
-                            <option>Receptionist qualification 1</option>
-                            <option>Receptionist qualification 2</option>
+                            <option>BSN</option>
+                            <option>MSN</option>
                         </template>
-                        <template v-else-if="newUser.user_role=='Nurse'">
+                        <!-- <template v-else-if="newUser.user_role=='Nurse'">
                             <option>Nurse qualification 1</option>
                             <option>Nurse qualification 2</option>
-                        </template>
+                        </template> -->
                         <template v-else-if="newUser.user_role=='Lab Assistant'">
                             <option>Lab Assistant qualification 1</option>
                             <option>Lab Assistant qualification 2</option>
                         </template>
                         <template v-else-if="newUser.user_role=='Pharmacist'">
-                            <option>Pharmacist qualification 1</option>
-                            <option>Pharmacist qualification 2</option>
+                            <option>Pharm.D.</option>
                         </template>
                     </select>
                     <div class="error-feedback">

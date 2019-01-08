@@ -51,10 +51,10 @@ class LabReportController extends BaseController
 
     }
     
-    public function destroy($id)
-    {
-        $lab_reports = LabReport::find($id)->delete();
-    }
+    // public function destroy($id)
+    // {
+    //     $lab_reports = LabReport::find($id)->delete();
+    // }
 
     //check the patient id exits in the patient table
     public function checkID(Request $request){

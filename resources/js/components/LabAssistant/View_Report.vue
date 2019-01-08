@@ -35,7 +35,7 @@
         <template slot="actions" slot-scope="row">
             
             <b-button type="button" :href="'/storage/' + row.item.file">View</b-button>
-            <b-button size="sm" variant="danger" @click.stop="removeReport(row.item)" class="mr-2">Remove</b-button>
+            <!-- <b-button size="sm" variant="danger" @click.stop="removeReport(row.item)" class="mr-2">Remove</b-button> -->
         </template>
         
       </b-table>
@@ -103,12 +103,12 @@ export default{
             })
         },
 
-        removeReport(lab_reports) {
-            // console.log(user);
-            axios.post('/lab/upload/remove/' + lab_reports.report_id).then((response) =>{
-                this.getReport();
-            })
-        },
+        // removeReport(lab_reports) {
+        //     // console.log(user);
+        //     axios.post('/lab/upload/remove/' + lab_reports.report_id).then((response) =>{
+        //         this.getReport();
+        //     })
+        // },
 
         getPdf(report_id) {
            

@@ -34,7 +34,7 @@ class HomeController extends Controller
         $brand = $request->brand;
         $date = $request->date;
         $supplier_email = $request->supplier_email;
-        $msg =  "Please Supplie This Drugs."."   "."Drug name :".$name."  "."Drug Brand:".$brand."   "."Drug Quantity:".$quantity."   "."Please suplie before that date ".$date."  "."Thank you"
+        $msg =  "Please Supplie This Drugs."."   "."Drug name :".$name."  "."Drug Brand:".$brand."   "."Drug Quantity:".$quantity."   "."Please suplie before that date ".$date."  "."Thank you";
 
         //$msg = "Dear ".$name." ".$quantity." ".$brand." ".$date;
         

@@ -44,9 +44,13 @@ class PharmacyController extends Controller
     public function updatequantity(Request $request){
         $old = DB::table('drugs')->where('name',$request->drug_name)->first();
         $new = $old->quantity - $request->quantity;
+        if($new>0){
         DB::table('drugs')->where('name',$request->drug_name)->update(['quantity'=>$new]);
         $a=$request->drug_name;
-
+        }else{
+            //alert('Can not issue, Insuffisent drugs');
+            return 0;
+        }
         if($new<=950){
             // return view('pharmacy/View_Prescription',compact('a','new'));
             return true;

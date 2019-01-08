@@ -79,7 +79,10 @@ export default {
         .then(res => {
           console.log(res)
           alert('Lab Report Upload Succsess!');
-        })
+        }).catch(err => {
+                    //this.hasError = true;
+                    alert('Not Success Upload!');
+                });
       // alert(JSON.stringify(this.form));
     },
     onReset (evt) {

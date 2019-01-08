@@ -68,7 +68,7 @@
       </p>
     </div>
 
-    <h2>Over Drugs</h2>
+    <h2>Medicine to be finished</h2>
     <div class="inner-div">
       <b-row>
         <b-col md="6" class="my-1">
@@ -183,7 +183,7 @@ export default{
             filterQue: null,
             fieldsQue: [
               { key: 'patient_id', sortable: true },
-              { key: 'date', sortable: true },
+              { key: 'date', sortable: false },
               
               
               { key: 'actions', sortable: false },
@@ -251,7 +251,11 @@ export default{
           axios.post('pharmacy/dashboard/updateQuantity', {'drug_name': prescription.drug_name, 'quantity':prescription.quantity}).then((response) =>{
         
                 this.prescriptionQue = response.data;  
-            })
+            }).catch(err => {
+                    if(response.data ==0)
+                    alert('Can not issue , not sufficent Drugs!');
+                });
+      // alert(JSON.st
           
 
         },

@@ -48,7 +48,7 @@
                         @elseif(Request::is(['lab', 'lab/*']))
                             <a class="nav-link" href="/lab/upload/view"><i class="ti-home"></i>DETAILS OF REPORT</a>
                         @elseif(Request::is(['pharmacy', 'pharmacy/*']))
-                            <a class="nav-link" href="/pharmacy/emailSend"><i class="ti-home"></i>Email Send</a>
+                            <a class="nav-link" href="/pharmacy/emailSend"><i class="ti-home"></i>Supplier</a>
                         @elseif(Request::is(['doctor', 'doctor/*']))
                             <a class="nav-link" href="#"><i class="ti-home"></i>PHARMACY</a>
                         @elseif(Request::is(['lab', 'lab/*']))

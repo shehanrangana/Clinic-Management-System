@@ -34,7 +34,7 @@ class HomeController extends Controller
         $brand = $request->brand;
         $date = $request->date;
         $supplier_email = $request->supplier_email;
-        $msg =  "Please Supplie This Drugs."."   "."Drug name :".$name."  "."Drug Brand:".$brand."   "."Drug Quantity:".$quantity."   "."Please suplie before that date ".$date."  "."Thank you"
+        $msg =  "Please Supplie This Drugs."."   "."Drug name :".$name."  "."Drug Brand:".$brand."   "."Drug Quantity:".$quantity."   "."Please suplie before that date ".$date."  "."Thank you";
 
         //$msg = "Dear ".$name." ".$quantity." ".$brand." ".$date;
         
@@ -51,7 +51,8 @@ class HomeController extends Controller
     //check the suppiler email exits in the drugs table
     public function checkEmail(Request $request){
         // dd($request->all());
-        $supplier_email=Drugs::where('supplier_email',$request->supplier_email)->exists();
+        $supplier_email=Drug::where('supplier_email',$request->supplier_email)->exists();
+        // dd($request->supplier_email);
         if($supplier_email){
             return 1;
         }else{

@@ -35,35 +35,27 @@
       >
 
         <template slot="actions" slot-scope="row">
-            <b-button size="sm" variant="primary" @click.stop="updateDrug(row.item)" class="mr-2">Update</b-button>
+            <b-button v-b-modal.modal-center size="sm" variant="primary" @click.stop="previousDrug(row.item)" class="mr-2">Update</b-button>
 
             <!-- Remove patient button -->
             <b-button size="sm" variant="danger" @click.stop="removeDrug(row.item)" class="mr-2">Remove</b-button>
+            
         </template>
         
 
       </b-table>
-      <!-- <b-modal id="modal-center" centered title= "Update Drugs" hide-footer >
+      
+
+      <b-modal id="modal-center" centered title= "Update Drugs" hide-footer >
         <b-form inline>
           <b-form-input v-model="updatelist.quantity" type="number" placeholder="Quantity"></b-form-input>
-          <b-form-input v-model="updatelist.expire_date" type="text" placeholder="Date"></b-form-input>
-           
           
-                        <b-form-input>
-                            
-                            <date-picker :lang="lang" name="expire_date" v-model="updatelist.expire_date" style="font-family: 'Roboto', sans-serif;"></date-picker>
-                        </b-form-input>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="expire_date">Expire Date</label>
-                            <br>
-                            <date-picker :lang="lang" name="expire_date" v-model="updatelist.expire_date" style="font-family: 'Roboto', sans-serif;"></date-picker>
-                        </div>
-                    </div>
           
-          <b-button variant="primary" @click.stop="update()" :value="updatelist.quantity">Save</b-button>
+          <date-picker :lang="lang" name="expire_date" v-model="updatelist.expire_date" style="font-family: 'Roboto', sans-serif;"></date-picker>
+          
+          <b-button variant="primary" @click.stop="updateDrugs()" :value="updatelist.expire_date">Save</b-button>
         </b-form>
-      </b-modal> -->
+      </b-modal>
 
       <!-- pagination -->
       <b-row>
@@ -82,6 +74,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import DatePicker from 'vue2-datepicker';
 import { Table } from 'bootstrap-vue/es/components';
 Vue.use(Table);
@@ -107,16 +100,16 @@ export default{
               { key: 'actions', sortable: false },
               
             ],
-            updatelist: {'quantity': '', 'expire_date': ''},
+            updatelist: {'drug_id':'','quantity': '', 'expire_date': ''},
             selected: '',
-            // lang: {
-            //         days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            //         months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            //         pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
-            //         placeholder: {
-            //             date: 'Select Date',
-            //         }
-            // },
+            lang: {
+                    days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                    months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+                    placeholder: {
+                        date: 'Select Date',
+                    }
+            },
 
         }
     },
@@ -136,7 +129,7 @@ export default{
 
     methods: {
         getDrugs() {
-            axios.get('/pharmacy/addDrugs/show').then((response) =>{
+            axios.get('/pharmacy/getDrugs/show').then((response) =>{
                 console.log(response.data);
                 
                 this.drugs = response.data;  
@@ -145,36 +138,32 @@ export default{
 
         removeDrug(drugs) {
             // console.log(user);
-            axios.post('/pharmacy/addDrugs/remove/' + drugs.drug_id).then((response) =>{
+            swal("Are you sure Delete");
+            axios.post('/pharmacy/Drugs/remove/' + drugs.drug_id).then((response) =>{
+
                 this.getDrugs();
             })
         },
 
-          // updateDrug(item) {
-          //   // console.log(item);
-          //   this.updatelist.quantity = item.quantity;
-          //   this.updatelist.expire_date = item.expire_date;
+          previousDrug(item) {
+            // console.log(item);
+            this.updatelist.drug_id = item.drug_id;
+            this.updatelist.quantity = item.quantity;
+            this.updatelist.expire_date = item.expire_date;
             
-          //   this.updateDru();
-          // },
-          // // Get recently added patient number
-          // updateDru() {
-          //   axios.get('/pharmacy/drusUpdate', {params: this.updatelist.quantity ,this.updatelist.expire_date}).then( (response)=>{
-          //     console.log(response.data);
-          //     this.updatelist = response.data;
-                
-          //   });
-          // },
-          // update(){
-          //   axios.post('/pharmacy/drusUpdate/store', this.updatelist).then((response) => {
-          //     // Event.$emit('queuePushed', response.data, this.updatelist.quantity ,this.updatelist.expire_date); 
-          //     console.log(response.data);
-          //     this.updatelist = response.data; 
+            this.updateDrugs();
+          },
+          
+          updateDrugs(){
+            axios.post('/pharmacy/drugUpdate/store', this.updatelist).then((response) => {
               
-          //   });
+              console.log(response.data);
+              //this.updatelist = response.data; 
+              
+            });
       
-          //   this.$root.$emit('bv::hide::modal','modal-center');
-          // },
+            this.$root.$emit('bv::hide::modal','modal-center');
+          },
 
         // Filter appointment table
         onFiltered (filteredItems) {

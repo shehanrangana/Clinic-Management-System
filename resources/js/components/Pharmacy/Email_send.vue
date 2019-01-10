@@ -37,9 +37,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group" @blur ="checkEmail()">
+                <div class="form-group">
                     <label for="email">Supplier email address</label>
-                    <input type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter email" v-model="newDrugs.supplier_email" required>
+                    <input @blur ="checkEmail()" type="email" class="form-control" id="supplier_email" name="supplier_email" placeholder="Enter email" v-model="newDrugs.supplier_email" required>
                     
                 </div>
 
@@ -50,6 +50,7 @@
 </template> 
 
 <script>
+import swal from 'sweetalert';
 import DatePicker from 'vue2-datepicker';
 
     export default {
@@ -79,10 +80,10 @@ import DatePicker from 'vue2-datepicker';
                 var input = this.newDrugs;
                 axios.post('/pharmacy/testmail', input).then((response) =>{
                     this.newDrugs = {'name': '','quantity':'' , 'brand': 'NMRA', 'date': '', 'supplier_email':''}
-                    alert('Send Email Successfully!');
+                    swal('Send Email Successfully!');
                 }).catch(err => {
                     this.hasError = true;
-                    alert('Not Sent email');
+                    swal('Not Sent email');
                 });
             },
              //check validity of the supplier_email
@@ -92,12 +93,13 @@ import DatePicker from 'vue2-datepicker';
                 axios.get('/pharmacy/testmail/checksupplier_email', {params: {supplier_email: this.newDrugs.supplier_email}}).then( (response)=>{
                     //console.log(response.data);
                     if(response.data==0){
-                        alert("Invalid Supplier Email!");
+                        swal("Invalid Supplier Email!");
                     }
                     else{
-                      getDetails();
+                      this.getDetails();
+                      //console.log("gfhgf");
                     }
-                    return response.data;
+                    //return response.data;
                    
                 });
             }

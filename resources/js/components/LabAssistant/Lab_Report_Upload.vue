@@ -1,47 +1,41 @@
 <template>
   <div class="inner-div">
     <div class="container">
-    <b-form   @reset="onReset" v-if="show" enctype="multipart/form-data">
-      
-      <b-form-group id="patientId"
-                    label="Patient Id:"
-                    @blur ="checkPatientID()"
-                    label-for="patientId">
-        <b-form-input id="patientId"
-                      type="text"
-                      v-model="form.patient_id"
-                      required
-                      >
-        </b-form-input>
-      </b-form-group>
-      <b-form-group  id="file"
-                    label="Choose a file :"
-                    label-for="filename">
-        <b-form-select name="file" id="file"
-                      :options="reports"
-                      
-                      v-model="form.test">
-        </b-form-select>
-      </b-form-group>
+      <b-form   @reset="onReset" v-if="show" enctype="multipart/form-data">
+        <!-- label of Patient Id -->
+        <b-form-group id="patientId" label="Patient Id:" @blur ="checkPatientID()" label-for="patientId">
+            <!-- Text field of Patient Id -->
+            <b-form-input id="patientId" type="text" v-model="form.patient_id" required></b-form-input>
 
-      <div>
+        </b-form-group>
 
-  <!-- Plain mode -->
-              <b-form-file @change="onFileLoaded" class="mt-3" plain></b-form-file>
-              <!-- <div class="mt-3">Selected file: {{file && file.name}}</div> -->
-      </div>
-      <b-button type="submit" @click.prevent="onSubmit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-  </div>
-  
+        <!-- Label Choose a test name -->
+        <b-form-group  id="file" label="Choose a test :" label-for="filename">
+            <!-- Select field of test name -->
+            <b-form-select name="file" id="file" :options="reports" v-model="form.test"></b-form-select>
+
+        </b-form-group>
+        <!-- Choose File Form -->
+        <div>
+
+            <b-form-file @change="onFileLoaded" class="mt-3" plain></b-form-file>
+
+        </div>
+        <!-- Submit Button -->
+        <b-button type="submit" @click.prevent="onSubmit" variant="primary">Submit</b-button>
+        <!-- Reset Button -->
+        <b-button type="reset" variant="danger">Reset</b-button>
+      </b-form>
+    </div>
   </div>
 </template>
 
 <script>
+import swal from 'sweetalert';
 export default {
   data () {
     return {
+
       form: {
         
         patient_id: '',
@@ -74,16 +68,16 @@ export default {
       data.append('file', this.form.file)
       data.append('patient_id', this.form.patient_id)
       data.append('test', this.form.test)
-      console.log(data, this.form.file)
+      //console.log(data, this.form.file)
       axios.post('/lab/upload/store', data)
         .then(res => {
           console.log(res)
-          alert('Lab Report Upload Succsess!');
+          swal('Lab Report Upload Succsess!');
         }).catch(err => {
-                    //this.hasError = true;
-                    alert('Not Success Upload!');
-                });
-      // alert(JSON.stringify(this.form));
+                    
+          swal('Not Success Upload!');
+        });
+      
     },
     onReset (evt) {
       evt.preventDefault();
@@ -94,25 +88,25 @@ export default {
       this.form.file = '';
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
-      this.$nextTick(() => { this.show = true });
+      //this.$nextTick(() => { this.show = true });
     },
      //check validity of the patient id 
-        checkPatientID(){
-            // console.log(this.newAppointment.patient_id);
-            if(this.form.patient_id){
-                axios.get('/lab/upload/checkid', {params: {patient_id: this.form.patient_id}}).then( (response)=>{
-                    //console.log(response.data);
-                    if(response.data==0){
-                        alert("Invalid Patient ID");
-                    }
-                    else{
-                      onSubmit();
-                    }
+    checkPatientID(){
+            
+        if(this.form.patient_id){
+            axios.get('/lab/upload/checkid', {params: {patient_id: this.form.patient_id}}).then( (response)=>{
+                //console.log(response.data);
+                if(response.data==0){
+                    swal("Invalid Patient ID");
+                }
+                else{
+                    onSubmit();
+                }
                     return response.data;
                    
                 });
-            }
-        },
+        }
+    },
   }
 }
 </script>

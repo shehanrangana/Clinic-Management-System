@@ -35,7 +35,7 @@
         <template slot="actions" slot-scope="row">
             
             <b-button type="button" :href="'/storage/' + row.item.file">View</b-button>
-            <!-- <b-button size="sm" variant="danger" @click.stop="removeReport(row.item)" class="mr-2">Remove</b-button> -->
+            
         </template>
         
       </b-table>
@@ -73,12 +73,10 @@ export default{
             fields: [
               { key: 'patient_id', sortable: true },
               { key: 'test', sortable: false },
-              
-
               { key: 'actions', sortable: false },
               
             ],
-            url: '',
+            //url: '',
         }
     },
   
@@ -110,10 +108,10 @@ export default{
         //     })
         // },
 
-        getPdf(report_id) {
+        // getPdf(report_id) {
            
-            this.url = report_id;
-        },
+        //     this.url = report_id;
+        // },
 
         // Filter appointment table
         onFiltered (filteredItems) {

@@ -51,7 +51,8 @@ class HomeController extends Controller
     //check the suppiler email exits in the drugs table
     public function checkEmail(Request $request){
         // dd($request->all());
-        $supplier_email=Drugs::where('supplier_email',$request->supplier_email)->exists();
+        $supplier_email=Drug::where('supplier_email',$request->supplier_email)->exists();
+        // dd($request->supplier_email);
         if($supplier_email){
             return 1;
         }else{

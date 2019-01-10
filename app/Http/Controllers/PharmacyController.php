@@ -21,6 +21,7 @@ class PharmacyController extends Controller
         
         $prescription = Prescription::where('date', date("Y-m-d"))->get();
         return $prescription;
+        // dd($prescription);
     }
     public function overDrug()
     {
@@ -41,20 +42,26 @@ class PharmacyController extends Controller
     }
 
     
-    public function updatequantity(Request $request){
+    public function reduseQuantity(Request $request){
         $old = DB::table('drugs')->where('name',$request->drug_name)->first();
         $new = $old->quantity - $request->quantity;
-        if($new>0){
+        //if($new>0){
         DB::table('drugs')->where('name',$request->drug_name)->update(['quantity'=>$new]);
         $a=$request->drug_name;
-        }else{
+        //}else{
             //alert('Can not issue, Insuffisent drugs');
-            return 0;
-        }
+            //return 0;
+        //}
         if($new<=950){
             // return view('pharmacy/View_Prescription',compact('a','new'));
             return true;
         }
+    }
+
+    public function update(Request $request){
+        $_expiredate = substr($request->expire_date, 0, -14);
+       DB::table('drugs')->where('drug_id',$request->drug_id)->update(['quantity'=>$request->quantity ,'expire_date'=>$_expiredate]); 
+       
     }
 
     public function store(Request $request)
@@ -70,10 +77,7 @@ class PharmacyController extends Controller
         $drug->expire_date = $_expiredate;
         $drug->supplier_email = $request->supplier_email;
         
-        $drug->save();
-
-        
-
+        $drug->save();  
         return $drug;
         return redirect('/pharmacy/addingdrugs');
     }
@@ -81,5 +85,7 @@ class PharmacyController extends Controller
     {
         $drugs = Drug::find($id)->delete();
     }
+    
+    
 
 }

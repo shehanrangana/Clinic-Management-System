@@ -40,7 +40,7 @@
             <b-button size="sm" @click.stop="row.toggleDetails">
                 {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
             </b-button>
-            <b-button size="sm" variant="primary" @click.stop="updateQuantity(row.item)" class="mr-2">Issued </b-button>
+            <b-button size="sm" variant="primary" @click.stop="reduseQuantity(row.item)" class="mr-2">Issued </b-button>
             
             
         </template>
@@ -67,6 +67,9 @@
         Sort Direction: <b>{{ sortDescQue ? 'Descending' : 'Ascending' }}</b>
       </p>
     </div>
+
+
+
 
     <h2>Medicine to be finished</h2>
     <div class="inner-div">
@@ -114,6 +117,9 @@
         Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
       </p>
     </div>
+
+
+
     <h2>Expire Drugs</h2>
     <div class="inner-div">
       <b-row>
@@ -165,6 +171,7 @@
 
 <script>
 import { Table } from 'bootstrap-vue/es/components';
+import swal from 'sweetalert';
 Vue.use(Table);
 
 export default{
@@ -240,35 +247,39 @@ export default{
 
     methods: {
         getPrescriptions() {
-            axios.get('pharmacy/dashboard/getPrescription').then((response) =>{
+            axios.get('pharmacy/getPrescription').then((response) =>{
                 console.log(response.data);
                 
-                this.prescriptionsQue = response.data;  
+                this.prescriptionsQue = response.data; 
+                
             })
         },
 
-        updateQuantity(prescription) {
-          axios.post('pharmacy/dashboard/updateQuantity', {'drug_name': prescription.drug_name, 'quantity':prescription.quantity}).then((response) =>{
+        reduseQuantity(prescription) {
+          axios.post('pharmacy/reduseQuantity', {'drug_name': prescription.drug_name, 'quantity':prescription.quantity}).then((response) =>{
         
-                this.prescriptionQue = response.data;  
+                this.prescriptionQue = response.data; 
+                swal("Are you sure Issue"); 
             }).catch(err => {
-                    if(response.data ==0)
-                    alert('Can not issue , not sufficent Drugs!');
+                    if(response.data ==0){
+                        swal("Error ! This drug is insuffcient");
+                    }
+                    
                 });
-      // alert(JSON.st
+      
           
 
         },
         getDrugs() {
             axios.get('/pharmacy/overDrug/show').then((response) =>{
-                console.log(response.data);
+                // console.log(response.data);
                 
                 this.drugs = response.data;  
             })
         },
         getDrugsEx() {
             axios.get('/pharmacy/expireDrug/show').then((response) =>{
-                console.log(response.data);
+                // console.log(response.data);
                 
                 this.expireDrugs = response.data;  
             })

@@ -20,41 +20,23 @@ class LabReportController extends BaseController
 
     public function store(Request $request)
     {  
-        
-
-        
-
-
         $file = new LabReport;
         $file->patient_id = $request->patient_id;
         
         $file->test = $request->test;
         $file->file =  $request->file('file')->store('/uploads', 'public');
         $file->save();
-
         return $file;
 
-
-
-
-            return redirect('/lab');
-
-       
     }
     public function getReport(Request $request) 
     {
     
         $roles = DB::table('lab_reports')->where('report_id','file')->get();
-        
         return $roles;
-        dd($request->all());
+        //dd($request->all());
 
     }
-    
-    // public function destroy($id)
-    // {
-    //     $lab_reports = LabReport::find($id)->delete();
-    // }
 
     //check the patient id exits in the patient table
     public function checkID(Request $request){
